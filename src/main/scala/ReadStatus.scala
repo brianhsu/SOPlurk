@@ -9,10 +9,6 @@ import org.bone.splurk2.exceptions._
  */
 sealed abstract class ReadStatus(val code: Byte)
 
-case object Read extends ReadStatus(0)
-case object Unread extends ReadStatus(1)
-case object Muted extends ReadStatus(2)
-
 object ReadStatus
 {
   /**
@@ -26,4 +22,9 @@ object ReadStatus
     case 2 => Muted
     case _ => throw new NoSuchReadStatusException(code)
   }
+
+  case object Read extends ReadStatus(0)
+  case object Unread extends ReadStatus(1)
+  case object Muted extends ReadStatus(2)
+
 }

@@ -5,6 +5,7 @@ import org.scalatest.matchers.ShouldMatchers
 
 import org.bone.splurk2.exceptions.NoSuchQualifierException
 import org.bone.splurk2.model._
+import org.bone.splurk2.model.Qualifier._
 
 class QualifierSpec extends FunSpec with ShouldMatchers {
 

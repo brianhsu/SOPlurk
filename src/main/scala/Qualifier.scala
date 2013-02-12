@@ -12,26 +12,6 @@ import org.bone.splurk2.exceptions._
  *  @param  name    English name of this qualifier
  */
 sealed abstract class Qualifier(val name: String)
-case object :: extends Qualifier(":")
-case object Loves extends Qualifier("loves")
-case object Likes extends Qualifier("likes")
-case object Shares extends Qualifier("shares")
-case object Gives extends Qualifier("gives")
-case object Hates extends Qualifier("hates")
-case object Wants extends Qualifier("wants")
-case object Has extends Qualifier("has")
-case object Will extends Qualifier("will")
-case object Asks extends Qualifier("asks")
-case object Wishes extends Qualifier("wishes")
-case object Was extends Qualifier("was")
-case object Feels extends Qualifier("feels")
-case object Thinks extends Qualifier("thinks")
-case object Says extends Qualifier("says")
-case object Is extends Qualifier("is")
-case object FreeStyle extends Qualifier("freestyle")
-case object Hopes extends Qualifier("hopes")
-case object Needs extends Qualifier("needs")
-case object Wonders extends Qualifier("wonders")
 
 /** *
  *  We could parse the qualifier string returned from Plurk's
@@ -67,5 +47,26 @@ object Qualifier {
     case "freestyle" => FreeStyle
     case _ => throw new NoSuchQualifierException(name)
   }
+
+  case object :: extends Qualifier(":")
+  case object Loves extends Qualifier("loves")
+  case object Likes extends Qualifier("likes")
+  case object Shares extends Qualifier("shares")
+  case object Gives extends Qualifier("gives")
+  case object Hates extends Qualifier("hates")
+  case object Wants extends Qualifier("wants")
+  case object Has extends Qualifier("has")
+  case object Will extends Qualifier("will")
+  case object Asks extends Qualifier("asks")
+  case object Wishes extends Qualifier("wishes")
+  case object Was extends Qualifier("was")
+  case object Feels extends Qualifier("feels")
+  case object Thinks extends Qualifier("thinks")
+  case object Says extends Qualifier("says")
+  case object Is extends Qualifier("is")
+  case object FreeStyle extends Qualifier("freestyle")
+  case object Hopes extends Qualifier("hopes")
+  case object Needs extends Qualifier("needs")
+  case object Wonders extends Qualifier("wonders")
 
 }

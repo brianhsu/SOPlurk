@@ -5,6 +5,7 @@ import org.scalatest.matchers.ShouldMatchers
 
 import org.bone.splurk2.exceptions._
 import org.bone.splurk2.model._
+import org.bone.splurk2.model.ReadStatus._
 
 class ReadStatusSpec extends FunSpec with ShouldMatchers {
 
