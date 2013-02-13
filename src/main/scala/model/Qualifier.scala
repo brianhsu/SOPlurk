@@ -45,6 +45,7 @@ object Qualifier {
     case "needs"     => Needs
     case "wonders"   => Wonders
     case "freestyle" => FreeStyle
+    case "whispers"  => Whispers
     case _ => throw new NoSuchQualifierException(name)
   }
 
@@ -68,5 +69,5 @@ object Qualifier {
   case object Hopes extends Qualifier("hopes")
   case object Needs extends Qualifier("needs")
   case object Wonders extends Qualifier("wonders")
-
+  case object Whispers extends Qualifier("whispers")
 }

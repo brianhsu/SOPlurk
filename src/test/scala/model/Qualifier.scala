@@ -1,4 +1,4 @@
-package org.bone.splurk2.test.model
+package org.bone.splurk2.model
 
 import org.scalatest.FunSpec
 import org.scalatest.matchers.ShouldMatchers
@@ -23,6 +23,7 @@ class QualifierSpec extends FunSpec with ShouldMatchers {
       List(Is, ::).map(_.name) should be === List("is", ":")
       List(FreeStyle, Hopes).map(_.name) should be === List("freestyle", "hopes")
       List(Needs, Wonders).map(_.name) should be === List("needs", "wonders")
+      List(Whispers).map(_.name) should be === List("whispers")
 
     }
 
@@ -40,6 +41,7 @@ class QualifierSpec extends FunSpec with ShouldMatchers {
       List("is", ":").map(create) should be === List(Is, ::)
       List("freestyle", "hopes").map(create) should be === List(FreeStyle, Hopes)
       List("needs", "wonders").map(create) should be === List(Needs, Wonders)
+      List("whispers").map(create) should be === List(Whispers)
 
     }
 

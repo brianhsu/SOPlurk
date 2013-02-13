@@ -1,4 +1,4 @@
-package org.bone.splurk2.test.model
+package org.bone.splurk2.model
 
 import org.scalatest.FunSpec
 import org.scalatest.matchers.ShouldMatchers
