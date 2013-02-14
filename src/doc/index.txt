@@ -1,0 +1,6 @@
+
+== SPlurk2 API Document ==
+
+{{{
+  val x: Int = 10
+}}}

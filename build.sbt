@@ -4,6 +4,11 @@ version := "0.1"
 
 scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature")
 
+scalacOptions in (Compile, doc) ++= Seq(
+  "-doc-root-content", "src/doc/index.txt",
+  "-doc-title", "SPlurk2 API document"
+)
+
 scalaVersion := "2.10.0"
 
 libraryDependencies ++= Seq(

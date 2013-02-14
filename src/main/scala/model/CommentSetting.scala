@@ -33,6 +33,10 @@ object CommentSetting {
 
   /**
    *  Generate CommentSetting from the code returned by Plurk.
+   *
+   *  @param    code    no_comment code returned by Plurk's JSON API.
+   *  @return           Corresponding case object.
+   *  @throws           NoSuchCommentSettingException if no matched code.
    */
   def apply(code: Byte) = code match {
     case 0 => Everyone

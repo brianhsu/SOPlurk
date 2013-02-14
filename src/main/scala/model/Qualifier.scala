@@ -20,7 +20,8 @@ object Qualifier {
   /**
    *  Convert english qualifier string to case object that represented the qualifier.
    *  
-   *  throws NoNuchQualifierException if there is no qualifier have that name.
+   *  @param    name    qualifier field in Plurk JSON.
+   *  @return           The corresponding case object.
    */
   def apply(name: String) = name match {
     case ":"         => ::
