@@ -1,7 +1,5 @@
 package org.bone.splurk2.model
 
-import org.bone.splurk2.exceptions._
-
 /**
  *  This class represented a plurk's type, which currently are:
  *
@@ -9,7 +7,8 @@ import org.bone.splurk2.exceptions._
  *   - 1 = Private Plurk
  *   - 2 = Public Plurk (responded by the logged in user)
  *   - 3 = Private Plurk (responded by the logged in user)
- *   - 4 = Anonymous
+ *   - 4 = Anonymous Plurk
+ *   - 6 = Anonymous Plurk (reponded by the logged in user)
  *
  *  Each status has a case object that represtend it.
  */
@@ -23,17 +22,20 @@ object PlurkType
    *  @param    code    Plurk's type code returned from Plurk's API.
    */
   def apply(code: Byte) = code match {
-    case 0 => PublicPlurk
-    case 1 => PrivatePlurk
+    case 0 => Public
+    case 1 => Private
     case 2 => PublicResponded
     case 3 => PrivateResponded
-    case 4 => AnonymousPlurk
-    case _ => throw new NoSuchPlurkTypeException(code)
+    case 4 => Anonymous
+    case 6 => AnonymousResponded
+    case _ => new PlurkType(code) {}
   }
 
-  case object PublicPlurk extends PlurkType(0)
-  case object PrivatePlurk extends PlurkType(1)
+  case object Public extends PlurkType(0)
+  case object Private extends PlurkType(1)
   case object PublicResponded extends PlurkType(2)
   case object PrivateResponded extends PlurkType(3)
-  case object AnonymousPlurk extends PlurkType(4)
+  case object Anonymous extends PlurkType(4)
+  case object AnonymousResponded extends PlurkType(6)
+
 }

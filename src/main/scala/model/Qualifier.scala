@@ -1,7 +1,5 @@
 package org.bone.splurk2.model
 
-import org.bone.splurk2.exceptions._
-
 /**
  *  This object corresponding to Plurk's qualifier.
  *
@@ -46,7 +44,7 @@ object Qualifier {
     case "wonders"   => Wonders
     case "freestyle" => FreeStyle
     case "whispers"  => Whispers
-    case _ => throw new NoSuchQualifierException(name)
+    case _ => new Qualifier(name) {}
   }
 
   case object :: extends Qualifier(":")

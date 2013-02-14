@@ -12,26 +12,26 @@ class PlurkTypeSpec extends FunSpec with ShouldMatchers {
   describe("A PlurkType") {
 
     it ("should have correct type code") {
-      PublicPlurk.code should be === 0
-      PrivatePlurk.code should be === 1
+      Public.code should be === 0
+      Private.code should be === 1
       PublicResponded.code should be === 2
       PrivateResponded.code should be === 3
-      AnonymousPlurk.code should be === 4
+      Anonymous.code should be === 4
+      AnonymousResponded.code should be === 6
+
     }
 
     it ("should able to prase status code to case object") {
-      PlurkType(0) should be === PublicPlurk
-      PlurkType(1) should be === PrivatePlurk
+      PlurkType(0) should be === Public
+      PlurkType(1) should be === Private
       PlurkType(2) should be === PublicResponded
       PlurkType(3) should be === PrivateResponded
-      PlurkType(4) should be === AnonymousPlurk
+      PlurkType(4) should be === Anonymous
+      PlurkType(6) should be === AnonymousResponded
     }
 
-    it ("should throw NoSuchReadStatusException exception when no such code") {
-      val exception = intercept[NoSuchPlurkTypeException] {
-        PlurkType(7)
-      }
-      exception.code should be === 7
+    it ("should get PlurkType(code) object when occurs unknown code") {
+      PlurkType(7).code should be === 7
     }
   }
 }

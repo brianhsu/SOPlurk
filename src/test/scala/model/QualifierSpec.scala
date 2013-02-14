@@ -3,7 +3,6 @@ package org.bone.splurk2.model
 import org.scalatest.FunSpec
 import org.scalatest.matchers.ShouldMatchers
 
-import org.bone.splurk2.exceptions.NoSuchQualifierException
 import org.bone.splurk2.model._
 import org.bone.splurk2.model.Qualifier._
 
@@ -45,11 +44,8 @@ class QualifierSpec extends FunSpec with ShouldMatchers {
 
     }
 
-    it ("should throw NoSuchQualifier exception when no such english qualifier") {
-      val exception = intercept[NoSuchQualifierException] {
-        Qualifier("NoSuchQualifierInPlurk")
-      }
-      exception.qualifier should be === "NoSuchQualifierInPlurk"
+    it ("should get Qualifier(name) subclass when there is unknown qualifier") {
+      Qualifier("NoSuchQualifierInPlurk").name should be === "NoSuchQualifierInPlurk"
     }
   }
 }
