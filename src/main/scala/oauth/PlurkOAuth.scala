@@ -13,7 +13,9 @@ import net.liftweb.json.JsonParser
 
 import scala.util.{Try, Success, Failure}
 
-class PlurkOAuth(val plurkService: OAuthService)  {
+trait MockOAuth extends PlurkOAuth
+
+class PlurkOAuth(val service: OAuthService)  {
 
   var accessToken: Option[Token] = None
 
@@ -28,7 +30,7 @@ class PlurkOAuth(val plurkService: OAuthService)  {
     val request = buildRequest(url, method, params: _*)
 
     accessToken.foreach {
-      plurkService.signRequest(_, request)
+      service.signRequest(_, request)
     }
 
     Try {
