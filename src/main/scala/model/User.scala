@@ -71,8 +71,10 @@ object User {
   import java.text.SimpleDateFormat
   import java.util.Locale
 
-  private lazy val dateFormatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.US)
-  private def toDate(dateString: String): Date = dateFormatter.parse(dateString)
+  private def toDate(dateString: String): Date = {
+    val dateFormatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.US)
+    dateFormatter.parse(dateString)
+  }
   
   /**
    *  Create BasicUser object from Plurk's user data JSON.

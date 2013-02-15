@@ -53,8 +53,11 @@ object Plurk {
   import java.text.SimpleDateFormat
   import java.util.Locale
 
-  private lazy val dateFormatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.US)
-  private def toDate(dateString: String): Date = dateFormatter.parse(dateString)
+  private def toDate(dateString: String): Date = {
+    val dateFormatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.US)
+    dateFormatter.parse(dateString)
+  }
+
   private def urlFromID(plurkID: Long) = raw"http://www.plurk.com/p/${JLong.toString(plurkID, 36)}"
 
   /**
