@@ -67,23 +67,23 @@ object Plurk {
    *  @return           Plurk object corresponded to JSON data.
    */
   def apply(plurk: JValue): Plurk = new Plurk (
-    plurkID = plurk.get[BigInt]("plurk_id").toLong,
-    ownerID = plurk.get[BigInt]("owner_id").toLong,
-    userID = plurk.get[BigInt]("user_id").toLong,
+    plurkID = plurk.get("plurk_id"),
+    ownerID = plurk.get("owner_id"),
+    userID = plurk.get("user_id"),
     qualifier = Qualifier(plurk.get("qualifier")),
     content = plurk.get[String]("content"),
-    plurkType = PlurkType(plurk.get[BigInt]("plurk_type").toByte),
-    readStatus = ReadStatus(plurk.get[BigInt]("is_unread").toByte),
-    whoIsCommentable = CommentSetting(plurk.get[BigInt]("no_comments").toByte),
+    plurkType = PlurkType(plurk.get[Int]("plurk_type").toByte),
+    readStatus = ReadStatus(plurk.get[Int]("is_unread").toByte),
+    whoIsCommentable = CommentSetting(plurk.get[Int]("no_comments").toByte),
     posted = toDate(plurk.get("posted")),
     language = plurk.get[String]("lang"),
-    responseCount = plurk.get[BigInt]("response_count").toInt,
+    responseCount = plurk.get("response_count"),
     replurkInfo = ReplurkInfo(plurk),
     favoriteInfo = FavoriteInfo(plurk),
     qualifierTranslated = plurk.getOption[String]("qualifier_translated"),
     limitedTo = plurk.getOption[List[Long]]("limited_to").filterNot(_.isEmpty),
-    responsesSeen = plurk.getOption[BigInt]("responses_seen").map(_.toInt),
-    contentRaw = plurk.getOption[String]("content_raw")
+    responsesSeen = plurk.getOption("responses_seen"),
+    contentRaw = plurk.getOption("content_raw")
   )
 
 }

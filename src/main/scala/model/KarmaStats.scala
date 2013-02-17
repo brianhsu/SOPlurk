@@ -42,7 +42,7 @@ object KarmaStats {
    *  @return                   KarmaStats object corresponding to JSON data.
    */
   def apply(karmaStats: JValue) = new KarmaStats (
-    current = karmaStats.get[Double]("current_karma"),
+    current = karmaStats.get("current_karma"),
     fallReason = karmaStats.getOption[String]("karma_fall_reason").filterNot(_.isEmpty),
     graphURL = karmaStats.get("karma_graph"),
     trend = karmaStats.get[List[String]]("karma_trend")

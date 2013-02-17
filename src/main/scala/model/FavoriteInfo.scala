@@ -24,9 +24,9 @@ object FavoriteInfo {
    *  Create FavoriteInfo from Plurk JSON object
    */
   def apply(plurk: JValue) = new FavoriteInfo (
-    isFavorite = (plurk \ "favorite").get[Boolean],
-    favoriteCount = (plurk \ "favorite_count").get[BigInt].toInt,
-    favorers = (plurk \ "favorers").getOpt[List[Long]].filterNot(_.isEmpty)
+    isFavorite = plurk.get("favorite"),
+    favoriteCount = plurk.get("favorite_count"),
+    favorers = plurk.getOption[List[Long]]("favorers").filterNot(_.isEmpty)
   )
 }
 

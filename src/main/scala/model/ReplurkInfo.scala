@@ -28,11 +28,11 @@ object ReplurkInfo {
    *  Create ReplurkInfo from Plurk JSON object
    */
   def apply(plurk: JValue) = new ReplurkInfo (
-    isReplurkable = (plurk \ "replurkable").get[Boolean],
-    isReplurked = (plurk \ "replurked").get[Boolean],
-    replurkersCount = (plurk \ "replurkers_count").get[BigInt].toInt,
-    replurkerID = (plurk \ "replurker_id").getOpt[BigInt].map(_.toLong),
-    replurkers = (plurk \ "replurkers").getOpt[List[Long]].filterNot(_.isEmpty)
+    isReplurkable = plurk.get("replurkable"),
+    isReplurked = plurk.get("replurked"),
+    replurkersCount = plurk.get("replurkers_count"),
+    replurkerID = plurk.getOption("replurker_id"),
+    replurkers = plurk.getOption[List[Long]]("replurkers").filterNot(_.isEmpty)
   )
 }
 

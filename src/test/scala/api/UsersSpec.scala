@@ -18,10 +18,6 @@ import org.scalatest.PrivateMethodTester
 object UserAPIMock extends PlurkOAuth(null) with MockOAuth {
 
 
-  val CurrUser = "http://www.plurk.com/APP/Users/currUser"
-  val Update = "http://www.plurk.com/APP/Users/update"
-  val KarmaStats = "http://www.plurk.com/APP/Users/getKarmaStats"
-
   val currUserResponse = JsonParser.parse("""{
     "verified_account": false,
     "page_title": "PageTitle",
@@ -64,9 +60,9 @@ object UserAPIMock extends PlurkOAuth(null) with MockOAuth {
                            params: (String, String)*): Try[JValue] = {
 
     (url, method) match {
-      case (CurrUser, Verb.GET)   => Success(currUserResponse)
-      case (Update, Verb.POST)    => Success(updateResponse)
-      case (KarmaStats, Verb.GET) => Success(karmaStatsResponse)
+      case ("/APP/Users/currUser", Verb.GET)     => Success(currUserResponse)
+      case ("/APP/Users/update", Verb.POST)      => Success(updateResponse)
+      case ("/APP/Users/getKarmaStats", Verb.GET) => Success(karmaStatsResponse)
       case _ => Failure(throw new Exception("Not implemented"))
     }
 

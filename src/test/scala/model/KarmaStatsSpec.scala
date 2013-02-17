@@ -18,7 +18,7 @@ class KarmaStatsSpec extends FunSpec with ShouldMatchers {
 
     it ("should able to parse plurk's karma data that without fall reason") {
       val correctStats = new KarmaStats (
-        current = 121.02,
+        current = 121,
         fallReason = None,
         graphURL = "http://image.example/graph1",
         trend = List(
@@ -53,7 +53,7 @@ object KarmaStatsSpec {
 
   val withoutReason = JsonParser.parse("""{
     "karma_fall_reason": "",
-    "current_karma": 121.02,
+    "current_karma": 121,
     "karma_graph": "http://image.example/graph1",
     "karma_trend": [
         "1360080759-120.75",

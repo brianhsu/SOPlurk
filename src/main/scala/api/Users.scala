@@ -49,7 +49,7 @@ trait Users {
         "date_of_birth" -> birthday.map(toBirthdayString)
       ).filter(isValueDefined).mapValues(_.get).toSeq
 
-      val jsonData = plurkOAuth.sendRequest("http://www.plurk.com/APP/Users/update", Verb.POST, params:_*)
+      val jsonData = plurkOAuth.sendRequest("/APP/Users/update", Verb.POST, params:_*)
 
       jsonData.map { data =>
         data.get[String]("success_text") == "ok" 
@@ -74,7 +74,7 @@ trait Users {
      */
     def currUser: Try[(ExtendedUser, String, String)]  = {
 
-      val response = plurkOAuth.sendRequest("http://www.plurk.com/APP/Users/currUser", Verb.GET)
+      val response = plurkOAuth.sendRequest("/APP/Users/currUser", Verb.GET)
 
       response.map { jsonData =>
         val extendedUser = ExtendedUser(jsonData)
@@ -92,7 +92,7 @@ trait Users {
      *  @return     Current user's karma stats if successful.
      */
     def getKarmaStats: Try[KarmaStats] = {
-      val response = plurkOAuth.sendRequest("http://www.plurk.com/APP/Users/getKarmaStats", Verb.GET)
+      val response = plurkOAuth.sendRequest("/APP/Users/getKarmaStats", Verb.GET)
       response.map( jsonData => KarmaStats(jsonData))
     }
   }

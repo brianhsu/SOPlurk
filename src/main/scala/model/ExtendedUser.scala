@@ -24,8 +24,8 @@ object ExtendedUser {
    */
   def apply(user: JValue) = new ExtendedUser(
     basicInfo = User(user),
-    relationship = Relationship(user.get[String]("relationship")),
-    recruited = user.get[BigInt]("recruited").toInt
+    relationship = Relationship(user.get("relationship")),
+    recruited = user.get("recruited")
   )
 
 }

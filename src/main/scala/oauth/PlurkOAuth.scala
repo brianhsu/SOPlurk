@@ -17,6 +17,7 @@ trait MockOAuth extends PlurkOAuth
 
 class PlurkOAuth(val service: OAuthService)  {
 
+  private val plurkAPIPrefix = "http://www.plurk.com"
   var accessToken: Option[Token] = None
 
   /**
@@ -27,7 +28,8 @@ class PlurkOAuth(val service: OAuthService)  {
    *  @param    params      Parameters to send.
    */
   def sendRequest(url: String, method: Verb, params: (String, String)*): Try[JValue] = {
-    val request = buildRequest(url, method, params: _*)
+
+    val request = buildRequest(plurkAPIPrefix + url, method, params: _*)
 
     accessToken.foreach {
       service.signRequest(_, request)
