@@ -1,8 +1,8 @@
-package org.bone.splurk2.api
+package org.bone.soplurk.api
 
-import org.bone.splurk2.model._
-import org.bone.splurk2.oauth.PlurkOAuth
-import org.bone.splurk2.oauth.MockOAuth
+import org.bone.soplurk.model._
+import org.bone.soplurk.oauth.PlurkOAuth
+import org.bone.soplurk.oauth.MockOAuth
 
 import org.scribe.model.Verb
 

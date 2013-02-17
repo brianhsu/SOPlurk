@@ -1,7 +1,7 @@
-package org.bone.splurk2.oauth
+package org.bone.soplurk.oauth
 
-import org.bone.splurk2.exceptions.RequestException
-import org.bone.splurk2.model.MyJValueImplicits
+import org.bone.soplurk.exceptions.RequestException
+import org.bone.soplurk.model.MyJValueImplicits
 
 import org.scribe.oauth.OAuthService
 import org.scribe.model.Verb

@@ -1,4 +1,4 @@
-package org.bone.splurk2.model
+package org.bone.soplurk.model
 
 import net.liftweb.json.JsonAST._
 

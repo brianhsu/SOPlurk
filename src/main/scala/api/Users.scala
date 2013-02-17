@@ -1,6 +1,6 @@
-package org.bone.splurk2.api
+package org.bone.soplurk.api
 
-import org.bone.splurk2.model._
+import org.bone.soplurk.model._
 
 import java.util.Date
 import org.scribe.model.Verb

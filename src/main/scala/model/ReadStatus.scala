@@ -1,6 +1,6 @@
-package org.bone.splurk2.model
+package org.bone.soplurk.model
 
-import org.bone.splurk2.exceptions._
+import org.bone.soplurk.exceptions._
 
 /**
  *  This class represented a plurk's status, either read, unread, or muted.

@@ -1,11 +1,11 @@
-package org.bone.splurk2.model
+package org.bone.soplurk.model
 
 import org.scalatest.FunSpec
 import org.scalatest.matchers.ShouldMatchers
 
-import org.bone.splurk2.exceptions._
-import org.bone.splurk2.model._
-import org.bone.splurk2.model.BirthdayPrivacy._
+import org.bone.soplurk.exceptions._
+import org.bone.soplurk.model._
+import org.bone.soplurk.model.BirthdayPrivacy._
 
 class BirthdayPrivacySpec extends FunSpec with ShouldMatchers {
 

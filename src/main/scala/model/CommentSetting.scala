@@ -1,7 +1,7 @@
-package org.bone.splurk2.model
+package org.bone.soplurk.model
 
 import scala.annotation._
-import org.bone.splurk2.exceptions._
+import org.bone.soplurk.exceptions._
 
 /**
  *  This class represented who can comment on the Plurks.

@@ -1,4 +1,4 @@
-package org.bone.splurk2.model
+package org.bone.soplurk.model
 
 import java.util.Date
 import java.lang.{Long => JLong}

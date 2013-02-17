@@ -1,10 +1,10 @@
-package org.bone.splurk2.model
+package org.bone.soplurk.model
 
 import org.scalatest.FunSpec
 import org.scalatest.matchers.ShouldMatchers
 
-import org.bone.splurk2.model._
-import org.bone.splurk2.model.Qualifier._
+import org.bone.soplurk.model._
+import org.bone.soplurk.model.Qualifier._
 
 class QualifierSpec extends FunSpec with ShouldMatchers {
 

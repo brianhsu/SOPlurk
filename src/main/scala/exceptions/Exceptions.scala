@@ -1,4 +1,4 @@
-package org.bone.splurk2.exceptions
+package org.bone.soplurk.exceptions
 
 class NoSuchReadStatusException(val code: Byte) extends Exception(s"$code")
 class NoSuchCommentSettingException(val code: Byte) extends Exception(s"$code")

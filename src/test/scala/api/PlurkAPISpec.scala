@@ -1,4 +1,4 @@
-package org.bone.splurk2.api
+package org.bone.soplurk.api
 
 import org.scalatest.FunSpec
 import org.scalatest.matchers.ShouldMatchers

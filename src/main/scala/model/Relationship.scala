@@ -1,6 +1,6 @@
-package org.bone.splurk2.model
+package org.bone.soplurk.model
 
-import org.bone.splurk2.exceptions._
+import org.bone.soplurk.exceptions._
 
 /**
  *  Represtend a user's relationship.
