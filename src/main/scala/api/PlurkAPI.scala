@@ -1,5 +1,6 @@
 package org.bone.soplurk.api
 
+import org.bone.soplurk.model._
 import org.bone.soplurk.oauth.PlurkOAuth
 import org.bone.soplurk.oauth.MockOAuth
 
@@ -12,6 +13,15 @@ import scala.util.Try
 class PlurkAPI private (val plurkOAuth: PlurkOAuth) extends Users with Profile with Polling {
 
   private var requestToken: Option[Token] = None
+
+  /**
+   *  Represented data that need to render user's timeline
+   *
+   *  @param    users     A Map[userID, basicUserData], which key is user's ID.
+   *  @param    plurks    Plurks on that timeline.
+   */
+  case class Timeline(users: Map[Long, User], plurks: List[Plurk])
+
 
   /**
    *  Get authorization URL.

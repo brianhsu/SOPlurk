@@ -55,6 +55,17 @@ trait Polling {
       }
     }
 
+    /*
+    def getPlurks(offset: Date, limit: Int = 20, 
+                  favoersDetail: Boolean = false, 
+                  limitedDetail: Boolean = false,
+                  replurkersDetail: Boolean = false,
+                  minimalData: Boolean = false): Try[Timeline] = {
+
+      null
+    }
+    */
+
   }
 
 }

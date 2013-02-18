@@ -321,7 +321,7 @@ class ProfileSpec extends FunSpec with ShouldMatchers {
       profile.privacy should be === TimelinePrivacy.World
       profile.userInfo.basicInfo.id should be === 1367985
 
-      val (users, plurks) = profile.timeline
+      val plurkAPI.Timeline(users, plurks) = profile.timeline
       users.size should be === 2
       plurks.size should be === 3
     }

@@ -13,14 +13,6 @@ trait Profile {
   import MyJValueImplicits._
 
   /**
-   *  Represented data that need to render user's timeline
-   *
-   *  The first element in Tuple is Map[userID, basicUserData]
-   *  The second element is List[Plurk] where the elements are plurks on that timeline.
-   */
-  type Timeline = (Map[Long, User], List[Plurk])
-
-  /**
    *  Current user's profile.
    *
    *  @param  userInfo        User's information.
@@ -83,7 +75,7 @@ trait Profile {
         
         OwnProfile(
           userInfo = userInfo,
-          timeline = (plurksUsers, plurks),
+          timeline = Timeline(plurksUsers, plurks),
           fansCount = jsonData.get("fans_count"),
           friendsCount = jsonData.get("friends_count"),
           unreadCount = jsonData.get("unread_count"),
