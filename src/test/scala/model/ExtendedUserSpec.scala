@@ -35,7 +35,14 @@ class ExtendedUserSpec extends FunSpec with ShouldMatchers {
         nameColor = None
       )
 
-      ExtendedUser(userJSON) should be === ExtendedUser(basicInfo, Relationship.NotSaying, 32)
+      val correctUserInfo = new ExtendedUser(
+        basicInfo = basicInfo, 
+        relationship = Relationship.NotSaying, 
+        recruited = 32, 
+        about = Some("AboutContent")
+      )
+
+      ExtendedUser(userJSON) should be === correctUserInfo
     }
   }
 }

@@ -12,7 +12,8 @@ import net.liftweb.json.JsonAST._
 case class ExtendedUser(
   basicInfo: User, 
   relationship: Relationship,
-  recruited: Int
+  recruited: Int,
+  about: Option[String]
 )
 
 object ExtendedUser {
@@ -25,7 +26,8 @@ object ExtendedUser {
   def apply(user: JValue) = new ExtendedUser(
     basicInfo = User(user),
     relationship = Relationship(user.get("relationship")),
-    recruited = user.get("recruited")
+    recruited = user.get("recruited"),
+    about = user.getOption("about")
   )
 
 }

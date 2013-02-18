@@ -74,7 +74,7 @@ object ProfileAPIMock extends PlurkOAuth(null) with MockOAuth {
         "has_profile_image": 1,
         "location": "Taipei, Taiwan",
         "bday_privacy": 2,
-        "about": "不要問我為什麼我叫墳墓，因為我自己也不知道！\r\n\r\n生命：\r\n - http://0rz.tw/XDL7N  (我的部落格)\r\n - http://0rz.tw/uGiqD (充滿宅味的相簿)\r\n\r\n\r\n興趣：\r\n - 動漫、遊戲、輕小說、相聲、舞台劇、寫程式、上台演講（無誤）、女僕喫茶萬歲！\r\n\r\n現職：\r\n - 中研院http://0rz.tw/jOzE5 (數位典藏計劃)打工仔。\r\n\r\n廣告：CC Collection 要出第四集了！",
+        "about": "AboutContent",
         "date_of_birth": "Tue, 02 Jan 1990 00:01:00 GMT",
         "karma": 121.05,
         "full_name": "BrianHsu",
