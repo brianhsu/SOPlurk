@@ -17,8 +17,25 @@ trait Profile {
   import MyJValueImplicits._
   import java.text.SimpleDateFormat
 
+  /**
+   *  Represented data that need to render user's timeline
+   *
+   *  The first element in Tuple is Map[userID, basicUserData]
+   *  The second element is List[Plurk] where the elements are plurks on that timeline.
+   */
   type Timeline = (Map[Long, User], List[Plurk])
 
+  /**
+   *  Current user's profile.
+   *
+   *  @param  userInfo        User's information.
+   *  @param  timeline        User's timeline and plurk posts.
+   *  @param  fansCount       How many fans do you have.
+   *  @param  friendsCount    How many friends do you have.
+   *  @param  unreadCount     Number of unread plurks.
+   *  @param  alertsCount     Number of unread alerts.
+   *  @param  privacy         Your timeline privacy setting.
+   */
   case class OwnProfile(
     userInfo: ExtendedUser, timeline: Timeline, 
     fansCount: Int, friendsCount: Int, 
@@ -26,6 +43,19 @@ trait Profile {
     privacy: TimelinePrivacy
   )
 
+  /**
+   *  User's public profile.
+   *
+   *  @param  userInfo            User's information
+   *  @param  plurks              Plurks that posted by the user.
+   *  @param  fansCount           How many fans does this user has.
+   *  @param  friendsCount        How many friends does this user has.
+   *  @param  privacy             This user's privacy setting.
+   *  @param  hasReadPermission   Do you have permission to read this user's plurk.
+   *  @param  isFan               Are you a fan of this user? Only set if logged in.
+   *  @param  areFriends          Are you a friend of this user? Only set if logged in.
+   *  @param  isFollowing         Are you following this user? Only set if logged in.
+   */
   case class PublicProfile(
     userInfo: ExtendedUser, plurks: List[Plurk],
     fansCount: Int, friendsCount: Int, 
@@ -35,17 +65,25 @@ trait Profile {
     isFollowing: Option[Boolean]
   )
 
+  /**
+   *  API of /APP/Profile/
+   */
   object Profile {
 
     import scala.language.implicitConversions
 
-    implicit def toJField(x: JValue) = x.asInstanceOf[JField]
+    implicit private def toJField(x: JValue) = x.asInstanceOf[JField]
 
     private def parsePlurks(plurks: JValue) = plurks.children.map(Plurk.apply)
     private def parseUsersMap(users: JValue) = users.children.map { user =>
       (user.name.toLong, User(user))
     }.toMap
 
+    /**
+     *  Get current user's profile.
+     *
+     *  @return   Success[OwnProfile] is it get data from Plurk correctly.
+     */
     def getOwnProfile: Try[OwnProfile] = {
       val response = plurkOAuth.sendRequest("/APP/Profile/getOwnProfile", Verb.GET)
 

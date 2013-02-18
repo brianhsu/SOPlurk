@@ -13,7 +13,9 @@ trait Users {
   import MyJValueImplicits._
   import java.text.SimpleDateFormat
 
-
+  /**
+   *  API of /APP/Users/
+   */
   object Users {
 
     private def isValueDefined[T](tuple: (String, Option[T])) = tuple._2.isDefined
