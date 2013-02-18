@@ -24,7 +24,7 @@ class PlurkSpec extends FunSpec with ShouldMatchers {
         qualifier = Qualifier.Says, 
         content = "NormalPlurkPost",
         plurkType = PlurkType.Public, 
-        readStatus = ReadStatus.Read,
+        readStatus = Some(ReadStatus.Read),
         whoIsCommentable = CommentSetting.Everyone,
         posted = new Date(1360752727000L), // 2013-02-13T10:52:07 GMT
         language = "tr_ch",
@@ -49,7 +49,7 @@ class PlurkSpec extends FunSpec with ShouldMatchers {
         qualifier = Qualifier.Says, 
         content = "NormalPlurkPostMinimal",
         plurkType = PlurkType.Public, 
-        readStatus = ReadStatus.Read,
+        readStatus = Some(ReadStatus.Read),
         whoIsCommentable = CommentSetting.Everyone,
         posted = new Date(1360752727000L), // 2013-02-13T10:52:07 GMT
         language = "tr_ch",
@@ -74,7 +74,7 @@ class PlurkSpec extends FunSpec with ShouldMatchers {
         qualifier = Qualifier.Whispers,
         content = "偷偷說的 API 測試……",
         plurkType = PlurkType.AnonymousResponded,
-        readStatus = ReadStatus.Read,
+        readStatus = Some(ReadStatus.Read),
         whoIsCommentable = CommentSetting.Everyone,
         posted = new Date(1360743094000L), // 2013-02-13T08:11:34 GMT
         language = "tr_ch",
@@ -101,7 +101,7 @@ class PlurkSpec extends FunSpec with ShouldMatchers {
         qualifier = Qualifier.Whispers,
         content = "偷偷說的 API 測試……",
         plurkType = PlurkType.AnonymousResponded,
-        readStatus = ReadStatus.Read,
+        readStatus = Some(ReadStatus.Read),
         whoIsCommentable = CommentSetting.Everyone,
         posted = new Date(1360743094000L), // 2013-02-13T08:11:34 GMT
         language = "tr_ch",

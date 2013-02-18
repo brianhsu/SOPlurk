@@ -28,7 +28,7 @@ import net.liftweb.json.JsonAST._
 case class Plurk(
   plurkID: Long, ownerID: Long, userID: Long, 
   qualifier: Qualifier, content: String,
-  plurkType: PlurkType, readStatus: ReadStatus, 
+  plurkType: PlurkType, readStatus: Option[ReadStatus],
   whoIsCommentable: CommentSetting, 
   posted: Date, 
   language: String,
@@ -73,7 +73,7 @@ object Plurk {
     qualifier = Qualifier(plurk.get("qualifier")),
     content = plurk.get[String]("content"),
     plurkType = PlurkType(plurk.get[Int]("plurk_type").toByte),
-    readStatus = ReadStatus(plurk.get[Int]("is_unread").toByte),
+    readStatus = plurk.getOption[Int]("is_unread").map(code => ReadStatus(code.toByte)),
     whoIsCommentable = CommentSetting(plurk.get[Int]("no_comments").toByte),
     posted = toDate(plurk.get("posted")),
     language = plurk.get[String]("lang"),

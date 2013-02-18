@@ -18,7 +18,11 @@ trait MockOAuth extends PlurkOAuth
 class PlurkOAuth(val service: OAuthService)  {
 
   private val plurkAPIPrefix = "http://www.plurk.com"
-  var accessToken: Option[Token] = None
+
+  /**
+   *  Default's to empty token, so we can use two-legged OAuth API.
+   */
+  private[soplurk] var accessToken: Option[Token] = Some(new Token("", ""))
 
   /**
    *  Send request to Plurk OAuth API

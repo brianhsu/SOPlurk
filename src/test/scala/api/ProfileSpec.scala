@@ -165,11 +165,138 @@ object ProfileAPIMock extends PlurkOAuth(null) with MockOAuth {
     ]
   }""")
 
+  val publicProfileResponse = JsonParser.parse("""{
+    "is_fan": true,
+    "fans_count": 191,
+    "friends_count": 190,
+    "privacy": "world",
+    "has_read_permission": true,
+    "are_friends": false,
+    "is_following": true,
+    "user_info": {
+        "verified_account": false,
+        "default_lang": "ja",
+        "display_name": "觀月麻呂",
+        "uid": 4426947,
+        "relationship": "not_saying",
+        "dateformat": 0,
+        "nick_name": "maro0126",
+        "has_profile_image": 1,
+        "location": "Taipei, Taiwan",
+        "bday_privacy": 0,
+        "about": "About",
+        "date_of_birth": null,
+        "karma": 100.22,
+        "full_name": "觀月麻呂",
+        "gender": 0,
+        "name_color": "E41227",
+        "timezone": null,
+        "recruited": 23,
+        "id": 4426947,
+        "email_confirmed": true,
+        "avatar": 26
+    },
+    "plurks": [
+        {
+            "replurkers_count": 0,
+            "replurkable": true,
+            "favorite_count": 0,
+            "favorers": [],
+            "user_id": 4426947,
+            "plurk_type": 0,
+            "qualifier_translated": "喜歡",
+            "replurked": null,
+            "content": "五月生日快樂！！*\\(^o^)/*",
+            "replurker_id": null,
+            "owner_id": 4426947,
+            "responses_seen": 0,
+            "qualifier": "likes",
+            "plurk_id": 1098814172,
+            "response_count": 1,
+            "limited_to": null,
+            "no_comments": 0,
+            "posted": "Sun, 17 Feb 2013 17:08:09 GMT",
+            "lang": "tr_ch",
+            "content_raw": "五月生日快樂！！*\\(^o^)/*",
+            "replurkers": []
+        },
+        {
+            "replurkers_count": 0,
+            "replurkable": true,
+            "favorite_count": 2,
+            "favorers": [
+                5042068,
+                5658139
+            ],
+            "user_id": 4426947,
+            "plurk_type": 0,
+            "qualifier_translated": "喜歡",
+            "replurked": null,
+            "content": "Content2",
+            "replurker_id": null,
+            "owner_id": 4426947,
+            "responses_seen": 0,
+            "qualifier": "likes",
+            "plurk_id": 1098813971,
+            "response_count": 13,
+            "limited_to": null,
+            "no_comments": 0,
+            "posted": "Sun, 17 Feb 2013 17:07:27 GMT",
+            "lang": "tr_ch",
+            "content_raw": "Content2Raw",
+            "replurkers": []
+        },
+    ]
+  }""")
+
+  val privateProfileResponse = JsonParser.parse("""{
+    "is_fan": false,
+    "fans_count": 1,
+    "friends_count": 200,
+    "privacy": "only_friends",
+    "has_read_permission": false,
+    "user_info": {
+        "verified_account": false,
+        "default_lang": "tr_ch",
+        "display_name": "tttt",
+        "uid": 3290730,
+        "relationship": "single",
+        "dateformat": 0,
+        "nick_name": "Dannvix",
+        "has_profile_image": 1,
+        "location": "Taipei, Taiwan",
+        "bday_privacy": 2,
+        "about": "Users' about",
+        "date_of_birth": "Wed, 25 Oct 1989 00:01:00 GMT",
+        "karma": 100.1,
+        "full_name": "qqqqq",
+        "gender": 1,
+        "name_color": null,
+        "timezone": "Asia/Taipei",
+        "recruited": 1,
+        "id": 3290730,
+        "email_confirmed": true,
+        "avatar": 44
+    },
+    "are_friends": false,
+    "is_following": false,
+    "plurks": []
+  }""")
+
   override def sendRequest(url: String, method: Verb, 
                            params: (String, String)*): Try[JValue] = {
 
+    def isUser(nickname: String) = params contains ("user_id", nickname)
+
     (url, method) match {
-      case ("/APP/Profile/getOwnProfile", Verb.GET) => Success(ownProfileResponse)
+      case ("/APP/Profile/getOwnProfile", Verb.GET) => 
+        Success(ownProfileResponse)
+
+      case ("/APP/Profile/getPublicProfile", Verb.GET) if isUser("public") => 
+        Success(publicProfileResponse)
+
+      case ("/APP/Profile/getPublicProfile", Verb.GET) if isUser("private") => 
+        Success(privateProfileResponse)
 
       case _ => Failure(throw new Exception("Not implemented"))
     }
@@ -184,7 +311,7 @@ class ProfileSpec extends FunSpec with ShouldMatchers {
 
     val plurkAPI = PlurkAPI.withMock(ProfileAPIMock)
 
-    it ("call /APP/Profile/getOwnProfile correctly") {
+    it ("call getOwnProfile correctly") {
       val profile = plurkAPI.Profile.getOwnProfile.get
 
       profile.fansCount should be === 280
@@ -197,6 +324,37 @@ class ProfileSpec extends FunSpec with ShouldMatchers {
       val (users, plurks) = profile.timeline
       users.size should be === 2
       plurks.size should be === 3
+    }
+
+    it ("call getPublicProfile to a public timeline") {
+      val profile = plurkAPI.Profile.getPublicProfile("public").get
+      
+      profile.userInfo.basicInfo.id should be === 4426947
+      profile.userInfo.basicInfo.defaultLanguage should be === "ja"
+      profile.userInfo.relationship should be === Relationship.NotSaying
+      profile.fansCount should be === 191
+      profile.friendsCount should be === 190
+      profile.privacy should be === TimelinePrivacy.World
+      profile.hasReadPermission should be === true
+      profile.isFan should be === Some(true)
+      profile.isFollowing should be === Some(true)
+      profile.areFriends should be === Some(false)
+      profile.plurks.size should be === 2
+    }
+
+    it ("call getPublicProfile to a private timeline") {
+
+      val profile = plurkAPI.Profile.getPublicProfile("private").get
+      
+      profile.userInfo.basicInfo.id should be === 3290730
+      profile.fansCount should be === 1
+      profile.friendsCount should be === 200
+      profile.privacy should be === TimelinePrivacy.OnlyFriends
+      profile.hasReadPermission should be === false
+      profile.isFan should be === Some(false)
+      profile.isFollowing should be === Some(false)
+      profile.areFriends should be === Some(false)
+      profile.plurks should be === Nil
     }
 
   }
