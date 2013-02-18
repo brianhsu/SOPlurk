@@ -2,20 +2,15 @@ package org.bone.soplurk.api
 
 import org.bone.soplurk.model._
 
-import net.liftweb.json.JsonAST._
 import org.scribe.model.Verb
 
-import java.util.Date
-
 import scala.util.Try
-import scala.util.Failure
 
 trait Profile {
 
   this: PlurkAPI =>
 
   import MyJValueImplicits._
-  import java.text.SimpleDateFormat
 
   /**
    *  Represented data that need to render user's timeline
@@ -70,14 +65,7 @@ trait Profile {
    */
   object Profile {
 
-    import scala.language.implicitConversions
-
-    implicit private def toJField(x: JValue) = x.asInstanceOf[JField]
-
-    private def parsePlurks(plurks: JValue) = plurks.children.map(Plurk.apply)
-    private def parseUsersMap(users: JValue) = users.children.map { user =>
-      (user.name.toLong, User(user))
-    }.toMap
+    import TimelineParser._
 
     /**
      *  Get current user's profile.
