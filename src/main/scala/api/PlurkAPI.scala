@@ -9,7 +9,7 @@ import org.scribe.builder.api._
 
 import scala.util.Try
 
-class PlurkAPI private (val plurkOAuth: PlurkOAuth) extends Users with Profile {
+class PlurkAPI private (val plurkOAuth: PlurkOAuth) extends Users with Profile with Polling {
 
   private var requestToken: Option[Token] = None
 
