@@ -8,7 +8,7 @@ object TimelinePrivacy {
 
   def apply(word: String) = word match {
     case "world" => World
-    case "OnlyFriends" => OnlyFriends
+    case "only_friends" => OnlyFriends
   }
 }
 
