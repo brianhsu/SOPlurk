@@ -33,7 +33,7 @@ trait Polling {
      *  @return         The date time string formatted as Plurk expected.
      */
     private def toPlurkOffset(date: Date): String = {
-      val formatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss")
+      val formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
       formatter.setTimeZone(TimeZone.getTimeZone("GMT"))
       formatter.format(date)
     }

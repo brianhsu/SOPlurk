@@ -15,8 +15,10 @@ import net.liftweb.json.JsonAST._
 import net.liftweb.json.JsonParser
 
 import scala.util.{Try, Success, Failure}
-import java.util.Date
 
+import java.util.Date
+import java.util.TimeZone
+import java.text.SimpleDateFormat
 
 object PollingAPIMock extends PlurkOAuth(null) with MockOAuth {
 
@@ -159,9 +161,15 @@ object PollingAPIMock extends PlurkOAuth(null) with MockOAuth {
   override def sendRequest(url: String, method: Verb, 
                            params: (String, String)*): Try[JValue] = {
 
+    def isOffset(offset: String) = params contains ("offset", offset)
+
     (url, method) match {
-      case ("/APP/Polling/getUnreadCount", Verb.GET) => Success(unreadCountResponse)
-      case ("/APP/Polling/getPlurks", Verb.GET) => Success(plurksResponse)
+      case ("/APP/Polling/getUnreadCount", Verb.GET) => 
+        Success(unreadCountResponse)
+
+      case ("/APP/Polling/getPlurks", Verb.GET) if isOffset("2013-01-01T00:00:00") => 
+        Success(plurksResponse)
+
       case _ => Failure(throw new Exception("Not implemented"))
     }
 
@@ -190,7 +198,9 @@ class PollingSpec extends FunSpec with ShouldMatchers {
 
     it ("get plurks by /APP/Polling/getPlurks correctly") {
 
-      val Timeline(users, plurks) = plurkAPI.Polling.getPlurks(new Date).get
+      val dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss Z")
+      val offset = dateFormatter.parse("2013-01-01T00:00:00 GMT")
+      val Timeline(users, plurks) = plurkAPI.Polling.getPlurks(offset).get
 
       users.size should be === 2
       plurks.size should be === 3
