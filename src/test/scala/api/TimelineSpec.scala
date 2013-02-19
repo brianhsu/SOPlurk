@@ -217,6 +217,135 @@ object TimelineAPIMock extends PlurkOAuth(null) with MockOAuth {
     ]
   }""")
 
+  val getUnreadPlurksResponse = JsonParser.parse("""{
+    "plurk_users": {
+        "5530231": {
+            "verified_account": true,
+            "default_lang": "tr_ch",
+            "display_name": "跳洞王．賊毛子",
+            "dateformat": 0,
+            "nick_name": "johnnydoki",
+            "has_profile_image": 1,
+            "location": "Taipei, Taiwan",
+            "bday_privacy": 2,
+            "date_of_birth": "Mon, 14 Jul 1986 00:01:00 GMT",
+            "karma": 96.07,
+            "full_name": "城門城門睫毛糕",
+            "gender": 1,
+            "name_color": null,
+            "timezone": null,
+            "id": 5530231,
+            "avatar": 10
+        },
+        "5563305": {
+            "verified_account": false,
+            "default_lang": "tr_ch",
+            "display_name": "Prydz狂熱份子♥紫戀戀",
+            "dateformat": 0,
+            "nick_name": "shlian",
+            "has_profile_image": 1,
+            "location": "變態怪姊姊流放區, Taiwan",
+            "bday_privacy": 2,
+            "date_of_birth": "Thu, 09 Apr 1992 00:01:00 GMT",
+            "karma": 117.64,
+            "full_name": "四条 紫恋(Ren)",
+            "gender": 0,
+            "name_color": "0A9C17",
+            "timezone": null,
+            "id": 5563305,
+            "avatar": 100
+        },
+        "8290019": {
+            "verified_account": false,
+            "default_lang": "tr_ch",
+            "display_name": "YUME",
+            "dateformat": 0,
+            "nick_name": "likerm6",
+            "has_profile_image": 1,
+            "location": "Tapei, Taiwan",
+            "bday_privacy": 2,
+            "date_of_birth": "Fri, 14 Jun 1996 00:01:00 GMT",
+            "karma": 100.43,
+            "full_name": "Yume 夢夢",
+            "gender": 0,
+            "name_color": "0A9C17",
+            "timezone": null,
+            "id": 8290019,
+            "avatar": 54
+        },
+        "4065129": {
+            "verified_account": false,
+            "default_lang": "tr_ch",
+            "display_name": "lordmi",
+            "dateformat": 0,
+            "nick_name": "lordmi",
+            "has_profile_image": 1,
+            "location": "Chungho, Taiwan",
+            "bday_privacy": 2,
+            "date_of_birth": "Fri, 11 May 1973 00:01:00 GMT",
+            "karma": 132.97,
+            "full_name": "星宿喵",
+            "gender": 1,
+            "name_color": "2264D6",
+            "timezone": "Asia/Taipei",
+            "id": 4065129,
+            "avatar": 2
+        }
+    },
+    "plurks": [
+        {
+            "replurkers_count": 0,
+            "replurkable": false,
+            "favorite_count": 0,
+            "is_unread": 1,
+            "favorers": [],
+            "user_id": 1367985,
+            "plurk_type": 0,
+            "qualifier_translated": "說",
+            "replurked": false,
+            "content": "[仙劍]<br />可惡我對前傳的愛要超過五代了 <img class=\"emoticon_my\" src=\"http://emos.plurk.com/9fa6a3506ed34e918de7094d1f13d838_w48_h47.jpeg\" width=\"48\" height=\"47\" />",
+            "replurker_id": null,
+            "owner_id": 5563305,
+            "responses_seen": 3,
+            "qualifier": "says",
+            "plurk_id": 1099278440,
+            "response_count": 4,
+            "limited_to": null,
+            "no_comments": 0,
+            "posted": "Tue, 19 Feb 2013 07:01:45 GMT",
+            "lang": "tr_ch",
+            "content_raw": "[仙劍]\n可惡我對前傳的愛要超過五代了[表情_37]",
+            "replurkers": [],
+            "favorite": false
+        },
+        {
+            "replurkers_count": 0,
+            "replurkable": true,
+            "favorite_count": 0,
+            "is_unread": 1,
+            "content": "放假放太久回去餐車就一直做出好笑的事情XDDDD",
+            "user_id": 1367985,
+            "plurk_type": 0,
+            "qualifier_translated": "說",
+            "replurked": false,
+            "favorers": [],
+            "replurker_id": null,
+            "owner_id": 8290019,
+            "responses_seen": 7,
+            "qualifier": "says",
+            "plurk_id": 1099146091,
+            "response_count": 8,
+            "limited_to": null,
+            "no_comments": 0,
+            "posted": "Mon, 18 Feb 2013 17:19:53 GMT",
+            "lang": "tr_ch",
+            "content_raw": "放假放太久回去餐車就一直做出好笑的事情XDDDD",
+            "replurkers": [],
+            "favorite": false
+        }
+    ]
+  }""")
+
 
   override def sendRequest(url: String, method: Verb, 
                            params: (String, String)*): Try[JValue] = {
@@ -230,6 +359,9 @@ object TimelineAPIMock extends PlurkOAuth(null) with MockOAuth {
 
       case ("/APP/Timeline/getPlurks", Verb.GET) => 
         Success(getPlurksResponse)
+
+      case ("/APP/Timeline/getUnreadPlurks", Verb.GET) => 
+        Success(getUnreadPlurksResponse)
 
       case _ => 
         Failure(throw new Exception("Not implemented"))
@@ -262,6 +394,15 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
 
       users.size should be === 2
       plurks.size should be === 3
+
+    }
+
+    it ("get unread plurks by /APP/Polling/getUnreadPlurks correctly") {
+
+      val Timeline(users, plurks) = plurkAPI.Timeline.getUnreadPlurks().get
+
+      users.size should be === 4
+      plurks.size should be === 2
 
     }
 

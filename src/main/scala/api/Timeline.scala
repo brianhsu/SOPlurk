@@ -63,7 +63,7 @@ trait Timeline {
     }
 
     /**
-     *  Get plurks on users timeline.
+     *  Get plurks on current user's timeline.
      *
      *  If `favoeresDetail` / `limitedDetail` / `replurkersDetail` is set to true, the users detail
      *  data will be stored at returned [[org.bone.soplurk.api.PlurkAPI.PlurkData]]'s users field.
@@ -104,9 +104,55 @@ trait Timeline {
         )
 
       }
-
     }
 
+    /**
+     *  Get unread plurks on current user's timeline.
+     *
+     *  If `favoeresDetail` / `limitedDetail` / `replurkersDetail` is set to true, the users detail
+     *  data will be stored at returned [[org.bone.soplurk.api.PlurkAPI.PlurkData]]'s users field.
+     *
+     *  @param  offset            Only return plurks newer than this date time.
+     *  @param  limit             How many plurks should be returned.
+     *  @param  filter            Return only plurks of specific types.
+     *  @param  favorersDatail    Include favorers detail in returned data?
+     *  @param  limitedDetail     Include user data of private plurk receivers in returned data?
+     *  @param  replurkersDetail  Include replurkers detail data in returned data?
+     *  @param  minimalData       Only fetch minimal data of plurk.
+     */
+    def getUnreadPlurks(offset: Option[Date] = None, 
+                        limit: Int = 20,
+                        filter: Option[Filter] = None,
+                        favorersDetail: Boolean = false,
+                        limitedDetail: Boolean = false,
+                        replurkersDetail: Boolean = false,
+                        minimalData: Boolean = false): Try[PlurkAPI.Timeline] = {
+      
+      val params = List(
+        "offset" -> offset.map(toPlurkOffset).getOrElse(""),
+        "limit"  -> limit.toString,
+        "filter" -> filter.map(_.word).getOrElse(""),
+        "favorers_detail" -> favorersDetail.toString,
+        "limited_detail" -> limitedDetail.toString,
+        "replurkers_detail" -> replurkersDetail.toString,
+        "minimal_data" -> minimalData.toString
+      ).filterNot(x => x._2 == "" || x._2 == "false")
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/Timeline/getUnreadPlurks", Verb.GET, 
+        params = params: _*
+      )
+
+      response.map { jsonData =>
+
+        PlurkAPI.Timeline(
+          users  = parseUsersMap(jsonData \ "plurk_users"),
+          plurks = parsePlurks(jsonData \ "plurks")
+        )
+
+      }
+
+    }
 
 
   }
