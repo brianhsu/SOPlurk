@@ -346,12 +346,142 @@ object TimelineAPIMock extends PlurkOAuth(null) with MockOAuth {
     ]
   }""")
 
+  val getPublicPlurksResponse = JsonParser.parse("""{
+    "plurk_users": {
+        "1367985": {
+            "verified_account": false,
+            "default_lang": "tr_ch",
+            "display_name": "墳墓（Brian Hsu）",
+            "dateformat": 0,
+            "nick_name": "brianhsu",
+            "has_profile_image": 1,
+            "location": "Taipei, Taiwan",
+            "bday_privacy": 2,
+            "date_of_birth": "Tue, 02 Jan 1990 00:01:00 GMT",
+            "karma": 121.1,
+            "full_name": "BrianHsu",
+            "gender": 1,
+            "name_color": null,
+            "timezone": "Asia/Taipei",
+            "id": 1367985,
+            "avatar": 0
+        },
+        "3352030": {
+            "verified_account": false,
+            "default_lang": "fr",
+            "display_name": "L69桃子*",
+            "dateformat": 0,
+            "nick_name": "community666",
+            "has_profile_image": 1,
+            "location": "élysée, France",
+            "bday_privacy": 0,
+            "date_of_birth": null,
+            "karma": 104.08,
+            "full_name": "降靈科☆午後九時Don't be late",
+            "gender": 2,
+            "name_color": "2264D6",
+            "timezone": null,
+            "id": 3352030,
+            "avatar": 64
+        }
+    },
+    "plurks": [
+        {
+            "responses_seen": 0,
+            "qualifier": "says",
+            "replurkers": [],
+            "plurk_id": 1099225928,
+            "response_count": 0,
+            "replurkers_count": 0,
+            "replurkable": true,
+            "limited_to": null,
+            "no_comments": 0,
+            "favorite_count": 0,
+            "is_unread": 0,
+            "lang": "tr_ch",
+            "favorers": [],
+            "content_raw": "[Note] 噗浪的 API 回傳的 limited_to 有陷阱，他的格式是 \"limited_to\": \"|1367985||8814877||4373060|\" 而不是普通的 json 陣列啊……",
+            "user_id": 1367985,
+            "plurk_type": 0,
+            "qualifier_translated": "說",
+            "replurked": false,
+            "favorite": false,
+            "content": "[Note] 噗浪的 API 回傳的 limited_to 有陷阱，他的格式是 \"limited_to\": \"|1367985||8814877||4373060|\" 而不是普通的 json 陣列啊……",
+            "replurker_id": null,
+            "posted": "Tue, 19 Feb 2013 02:57:14 GMT",
+            "owner_id": 1367985
+        },
+        {
+            "responses_seen": 0,
+            "qualifier": "says",
+            "replurkers": [
+                3350806
+            ],
+            "plurk_id": 1099207287,
+            "response_count": 2,
+            "replurkers_count": 1,
+            "replurkable": true,
+            "limited_to": null,
+            "no_comments": 0,
+            "favorite_count": 2,
+            "is_unread": 0,
+            "lang": "tr_ch",
+            "favorers": [
+                4268269,
+                8038475
+            ],
+            "content_raw": "http://shouhei-blog.blogspot.tw/2013/02/blog-post_7.html 我覺得這比之前小叮噹那個還好笑 XDDDD",
+            "user_id": 1367985,
+            "plurk_type": 2,
+            "qualifier_translated": "說",
+            "replurked": false,
+            "favorite": false,
+            "content": "<a href=\"http://shouhei-blog.blogspot.tw/2013/02/blog-post_7.html\" class=\"ex_link meta\" rel=\"nofollow\"><img src=\"http://3.bp.blogspot.com/-lD0tQOktF-4/UPI3dqZNH3I/AAAAAAAAHbw/FLafcEcjMx8/s72-c/7e66ff36.jpg\" height=\"40px\" />新注音新聞: &#12304;用安價來讓這兩個人變成幸福的情侶吧&#12305;</a> 我覺得這比之前小叮噹那個還好笑 XDDDD",
+            "replurker_id": null,
+            "posted": "Tue, 19 Feb 2013 01:29:52 GMT",
+            "owner_id": 1367985
+        },
+        {
+            "responses_seen": 0,
+            "qualifier": "says",
+            "replurkers": [
+                3350806
+            ],
+            "plurk_id": 1099207287,
+            "response_count": 2,
+            "replurkers_count": 1,
+            "replurkable": true,
+            "limited_to": null,
+            "no_comments": 0,
+            "favorite_count": 2,
+            "is_unread": 0,
+            "lang": "tr_ch",
+            "favorers": [
+                4268269,
+                8038475
+            ],
+            "content_raw": "http://shouhei-blog.blogspot.tw/2013/02/blog-post_7.html 我覺得這比之前小叮噹那個還好笑 XDDDD",
+            "user_id": 1367985,
+            "plurk_type": 2,
+            "qualifier_translated": "說",
+            "replurked": false,
+            "favorite": false,
+            "content": "<a href=\"http://shouhei-blog.blogspot.tw/2013/02/blog-post_7.html\" class=\"ex_link meta\" rel=\"nofollow\"><img src=\"http://3.bp.blogspot.com/-lD0tQOktF-4/UPI3dqZNH3I/AAAAAAAAHbw/FLafcEcjMx8/s72-c/7e66ff36.jpg\" height=\"40px\" />新注音新聞: &#12304;用安價來讓這兩個人變成幸福的情侶吧&#12305;</a> 我覺得這比之前小叮噹那個還好笑 XDDDD",
+            "replurker_id": null,
+            "posted": "Tue, 19 Feb 2013 01:29:52 GMT",
+            "owner_id": 1367985
+        }
+
+    ]
+  }""")
+
 
   override def sendRequest(url: String, method: Verb, 
                            params: (String, String)*): Try[JValue] = {
 
 
     def isPlurkID(id: Long) = params.contains("plurk_id" -> id.toString)
+    def isNickname(nickname: String) = params.contains("user_id" -> nickname)
 
     (url, method) match {
       case ("/APP/Timeline/getPlurk", Verb.GET) if isPlurkID(1099209841L) => 
@@ -362,6 +492,9 @@ object TimelineAPIMock extends PlurkOAuth(null) with MockOAuth {
 
       case ("/APP/Timeline/getUnreadPlurks", Verb.GET) => 
         Success(getUnreadPlurksResponse)
+
+      case ("/APP/Timeline/getPublicPlurks", Verb.GET) if isNickname("brianhsu") => 
+        Success(getPublicPlurksResponse)
 
       case _ => 
         Failure(throw new Exception("Not implemented"))
@@ -403,6 +536,15 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
 
       users.size should be === 4
       plurks.size should be === 2
+
+    }
+
+    it ("get public plurks by /APP/Polling/getPublicPlurks correctly") {
+
+      val Timeline(users, plurks) = plurkAPI.Timeline.getPublicPlurks("brianhsu").get
+
+      users.size should be === 2
+      plurks.size should be === 3
 
     }
 

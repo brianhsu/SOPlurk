@@ -66,7 +66,7 @@ trait Timeline {
      *  Get plurks on current user's timeline.
      *
      *  If `favoeresDetail` / `limitedDetail` / `replurkersDetail` is set to true, the users detail
-     *  data will be stored at returned [[org.bone.soplurk.api.PlurkAPI.PlurkData]]'s users field.
+     *  data will be stored at returned [[org.bone.soplurk.api.PlurkAPI.Timeline]]'s users field.
      *
      *  @param  offset            Only return plurks newer than this date time.
      *  @param  limit             How many plurks should be returned.
@@ -110,7 +110,7 @@ trait Timeline {
      *  Get unread plurks on current user's timeline.
      *
      *  If `favoeresDetail` / `limitedDetail` / `replurkersDetail` is set to true, the users detail
-     *  data will be stored at returned [[org.bone.soplurk.api.PlurkAPI.PlurkData]]'s users field.
+     *  data will be stored at returned [[org.bone.soplurk.api.PlurkAPI.Timeline]]'s users field.
      *
      *  @param  offset            Only return plurks newer than this date time.
      *  @param  limit             How many plurks should be returned.
@@ -132,10 +132,10 @@ trait Timeline {
         "offset" -> offset.map(toPlurkOffset).getOrElse(""),
         "limit"  -> limit.toString,
         "filter" -> filter.map(_.word).getOrElse(""),
-        "favorers_detail" -> favorersDetail.toString,
-        "limited_detail" -> limitedDetail.toString,
+        "favorers_detail"   -> favorersDetail.toString,
+        "limited_detail"    -> limitedDetail.toString,
         "replurkers_detail" -> replurkersDetail.toString,
-        "minimal_data" -> minimalData.toString
+        "minimal_data"      -> minimalData.toString
       ).filterNot(x => x._2 == "" || x._2 == "false")
 
       val response = plurkOAuth.sendRequest(
@@ -154,6 +154,58 @@ trait Timeline {
 
     }
 
+
+    /**
+     *  Get public plurks on specific user's timeline.
+     *
+     *  If `favoeresDetail` / `limitedDetail` / `replurkersDetail` is set to true, the users detail
+     *  data will be stored at returned [[org.bone.soplurk.api.PlurkAPI.Timeline]]'s users field.
+     *
+     *
+     *  @param  nicknameOrID      The nickname or userID of user that you want to fetch.
+     *  @param  limit             How many plurks should be returned.
+     *  @param  offset            Only return plurks newer than this date time.
+     *  @param  filter            Return only plurks of specific types.
+     *  @param  favorersDatail    Include favorers detail in returned data?
+     *  @param  limitedDetail     Include user data of private plurk receivers in returned data?
+     *  @param  replurkersDetail  Include replurkers detail data in returned data?
+     *  @param  minimalData       Only fetch minimal data of plurk.
+     */
+    def getPublicPlurks(nicknameOrID: String,
+                        limit: Int = 20,
+                        offset: Option[Date] = None, 
+                        filter: Option[Filter] = None,
+                        favorersDetail: Boolean = false,
+                        limitedDetail: Boolean = false,
+                        replurkersDetail: Boolean = false,
+                        minimalData: Boolean = false): Try[PlurkAPI.Timeline] = {
+      
+      val params = List(
+        "user_id" -> nicknameOrID,
+        "offset"  -> offset.map(toPlurkOffset).getOrElse(""),
+        "limit"   -> limit.toString,
+        "filter"  -> filter.map(_.word).getOrElse(""),
+        "favorers_detail"   -> favorersDetail.toString,
+        "limited_detail"    -> limitedDetail.toString,
+        "replurkers_detail" -> replurkersDetail.toString,
+        "minimal_data"      -> minimalData.toString
+      ).filterNot(x => x._2 == "" || x._2 == "false")
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/Timeline/getPublicPlurks", Verb.GET, 
+        params = params: _*
+      )
+
+      response.map { jsonData =>
+
+        PlurkAPI.Timeline(
+          users  = parseUsersMap(jsonData \ "plurk_users"),
+          plurks = parsePlurks(jsonData \ "plurks")
+        )
+
+      }
+
+    }
 
   }
 
