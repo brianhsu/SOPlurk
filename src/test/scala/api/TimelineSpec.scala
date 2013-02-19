@@ -475,6 +475,32 @@ object TimelineAPIMock extends PlurkOAuth(null) with MockOAuth {
     ]
   }""")
 
+  val plurkAddResponse = JsonParser.parse("""{
+    "replurkers": [],
+    "responses_seen": 0,
+    "qualifier": "thinks",
+    "replurkers_count": 0,
+    "plurk_id": 1099313284,
+    "response_count": 0,
+    "anonymous": false,
+    "replurkable": true,
+    "limited_to": null,
+    "favorite_count": 0,
+    "is_unread": 0,
+    "lang": "en",
+    "favorers": [],
+    "content_raw": "plurkAddTest",
+    "user_id": 1367985,
+    "plurk_type": 0,
+    "replurked": false,
+    "favorite": false,
+    "no_comments": 0,
+    "content": "plurkAddTest",
+    "replurker_id": null,
+    "posted": "Tue, 19 Feb 2013 09:38:22 GMT",
+    "owner_id": 1367985
+  }""")
+
 
   override def sendRequest(url: String, method: Verb, 
                            params: (String, String)*): Try[JValue] = {
@@ -482,6 +508,10 @@ object TimelineAPIMock extends PlurkOAuth(null) with MockOAuth {
 
     def isPlurkID(id: Long) = params.contains("plurk_id" -> id.toString)
     def isNickname(nickname: String) = params.contains("user_id" -> nickname)
+    def isAdd(content: String, qualifier: String) = {
+      params.contains("content" -> content) &&
+      params.contains("qualifier" -> qualifier)
+    }
 
     (url, method) match {
       case ("/APP/Timeline/getPlurk", Verb.GET) if isPlurkID(1099209841L) => 
@@ -495,6 +525,9 @@ object TimelineAPIMock extends PlurkOAuth(null) with MockOAuth {
 
       case ("/APP/Timeline/getPublicPlurks", Verb.GET) if isNickname("brianhsu") => 
         Success(getPublicPlurksResponse)
+
+      case ("/APP/Timeline/plurkAdd", Verb.POST) if isAdd("plurkAddTest", "thinks") =>
+        Success(plurkAddResponse)
 
       case _ => 
         Failure(throw new Exception("Not implemented"))
@@ -545,6 +578,16 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
 
       users.size should be === 2
       plurks.size should be === 3
+
+    }
+
+    it ("add plurks by /APP/Polling/plurkAdd correctly") {
+
+      val plurk = plurkAPI.Timeline.plurkAdd("plurkAddTest", Qualifier.Thinks).get
+      
+      plurk.plurkID should be === 1099313284
+      plurk.content should be === "plurkAddTest"
+      plurk.qualifier should be === Qualifier.Thinks
 
     }
 

@@ -207,6 +207,47 @@ trait Timeline {
 
     }
 
+    /**
+     *  Add plurk to current user's timeline.
+     *
+     *  @param  content     The Plurk's text.
+     *  @param  qualifier   The Plurk's qualifier.
+     *  @param  limitedTo   Who can see this plurk? 
+     *                      `Nil` for everyone, `List(0)` for only friends, 
+     *                      `List(123, 379)` for those whoes user id is in the list.
+     *  @param  noComment   Only users set by this field can comment on this plurk.
+     *  @param  language    The plurk's language two-character code. 
+     *                      See [[http://www.plurk.com/API/2#/APP/Timeline/plurkAdd PlurkAPI Document]]
+     */
+    def plurkAdd(content: String, 
+                 qualifier: Qualifier, 
+                 limitedTo: List[Long] = Nil, 
+                 commentSetting: Option[WritableCommentSetting] = None,
+                 language: Option[String] = None): Try[Plurk] = {
+
+      
+      def formatLimitedTo: String = limitedTo match {
+        case Nil => ""
+        case xs  => xs.mkString("[", ",", "]")
+      }
+
+      val params = List(
+        "content" -> content,
+        "qualifier" -> qualifier.name,
+        "limitedTo" -> formatLimitedTo,
+        "noComment" -> commentSetting.map(_.code.toString).getOrElse(""),
+        "language"  -> language.getOrElse("")
+      ).filterNot(_._2.isEmpty)
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/Timeline/plurkAdd", Verb.POST, 
+        params = params: _*
+      )
+
+      response.map { jsonData => Plurk(jsonData) }
+
+    }
+
   }
 
 }

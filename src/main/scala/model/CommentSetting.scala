@@ -14,6 +14,8 @@ import org.bone.soplurk.exceptions._
  */
 sealed abstract class CommentSetting(val code: Byte)
 
+abstract class WritableCommentSetting(code: Byte) extends CommentSetting(code)
+
 object CommentSetting {
 
   /**
@@ -24,12 +26,12 @@ object CommentSetting {
   /**
    *  Comment is disabled.
    */
-  case object Disabled extends CommentSetting(1)
+  case object Disabled extends WritableCommentSetting(1)
 
   /**
    *  Only friends can comment on it.
    */
-  case object OnlyFriends extends CommentSetting(2)
+  case object OnlyFriends extends WritableCommentSetting(2)
 
   /**
    *  Generate CommentSetting from the code returned by Plurk.
