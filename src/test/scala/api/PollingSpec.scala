@@ -1,8 +1,13 @@
 package org.bone.soplurk.api
 
-import org.bone.soplurk.model._
+import org.bone.soplurk.api.PlurkAPI._
 import org.bone.soplurk.oauth.PlurkOAuth
 import org.bone.soplurk.oauth.MockOAuth
+import org.bone.soplurk.model._
+
+import org.scalatest.FunSpec
+import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.PrivateMethodTester 
 
 import org.scribe.model.Verb
 
@@ -10,10 +15,8 @@ import net.liftweb.json.JsonAST._
 import net.liftweb.json.JsonParser
 
 import scala.util.{Try, Success, Failure}
+import java.util.Date
 
-import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
-import org.scalatest.PrivateMethodTester 
 
 object PollingAPIMock extends PlurkOAuth(null) with MockOAuth {
 
@@ -175,7 +178,7 @@ class PollingSpec extends FunSpec with ShouldMatchers {
     it ("get unread count by /APP/Polling/getUnreadCount correctly") {
       val unreadCount = plurkAPI.Polling.getUnreadCount.get
 
-      unreadCount should be === plurkAPI.UnreadCount(
+      unreadCount should be === UnreadCount(
         all = 6,
         my = 3,
         privatePlurks = 5,
@@ -186,7 +189,12 @@ class PollingSpec extends FunSpec with ShouldMatchers {
     }
 
     it ("get plurks by /APP/Polling/getPlurks correctly") {
-      pending
+
+      val Timeline(users, plurks) = plurkAPI.Polling.getPlurks(new Date).get
+
+      users.size should be === 2
+      plurks.size should be === 3
+
     }
 
   }

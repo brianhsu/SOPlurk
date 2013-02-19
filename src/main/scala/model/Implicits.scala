@@ -7,12 +7,14 @@ object MyJValueImplicits
   
   implicit val jsToList: JValue => List[String] = (x: JValue) => x match {
     case JArray(xs) => xs.toList.map(jsToString)
-    case _ => throw new Exception("Not list")
+    case JString(s) => s.drop(1).dropRight(1).split("\\|\\|").toList
+    case _ => throw new Exception("Not list:" + x)
   }
 
   implicit val jsToList2: JValue => List[Long] = (x: JValue) => x match {
     case JArray(xs) => xs.toList.map(jsToLong)
-    case _ => throw new Exception("Not list")
+    case JString(s) => s.drop(1).dropRight(1).split("\\|\\|").map(_.toLong).toList
+    case _ => throw new Exception("Not list" + x)
   }
 
   implicit val jsToInt: JValue => Int = (x: JValue) => x match {
@@ -43,9 +45,10 @@ object MyJValueImplicits
 
   implicit class MyJValue(jValue: JValue) {
 
-
     def get[T](name: String)(implicit converter: JValue => T) = converter((jValue \ name))
-    def getOption[T](name: String)(implicit converter: JValue => T) = (jValue \ name).toOpt.filter(_ != JNull).map(x => converter(x))
+    def getOption[T](name: String)(implicit converter: JValue => T) = {
+      (jValue \ name).toOpt.filter(_ != JNull).map(x => converter(x))
+    }
   }
 }
 

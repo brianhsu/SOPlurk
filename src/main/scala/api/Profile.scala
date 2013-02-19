@@ -1,5 +1,6 @@
 package org.bone.soplurk.api
 
+import org.bone.soplurk.api.PlurkAPI._
 import org.bone.soplurk.model._
 
 import org.scribe.model.Verb
@@ -12,45 +13,6 @@ trait Profile {
 
   import MyJValueImplicits._
 
-  /**
-   *  Current user's profile.
-   *
-   *  @param  userInfo        User's information.
-   *  @param  timeline        User's timeline and plurk posts.
-   *  @param  fansCount       How many fans do you have.
-   *  @param  friendsCount    How many friends do you have.
-   *  @param  unreadCount     Number of unread plurks.
-   *  @param  alertsCount     Number of unread alerts.
-   *  @param  privacy         Your timeline privacy setting.
-   */
-  case class OwnProfile(
-    userInfo: ExtendedUser, timeline: Timeline, 
-    fansCount: Int, friendsCount: Int, 
-    unreadCount: Int, alertsCount: Int,
-    privacy: TimelinePrivacy
-  )
-
-  /**
-   *  User's public profile.
-   *
-   *  @param  userInfo            User's information
-   *  @param  plurks              Plurks that posted by the user.
-   *  @param  fansCount           How many fans does this user has.
-   *  @param  friendsCount        How many friends does this user has.
-   *  @param  privacy             This user's privacy setting.
-   *  @param  hasReadPermission   Do you have permission to read this user's plurk.
-   *  @param  isFan               Are you a fan of this user? Only set if logged in.
-   *  @param  areFriends          Are you a friend of this user? Only set if logged in.
-   *  @param  isFollowing         Are you following this user? Only set if logged in.
-   */
-  case class PublicProfile(
-    userInfo: ExtendedUser, plurks: List[Plurk],
-    fansCount: Int, friendsCount: Int, 
-    privacy: TimelinePrivacy, hasReadPermission: Boolean,
-    isFan: Option[Boolean],
-    areFriends: Option[Boolean],
-    isFollowing: Option[Boolean]
-  )
 
   /**
    *  API of /APP/Profile/

@@ -15,15 +15,6 @@ class PlurkAPI private (val plurkOAuth: PlurkOAuth) extends Users with Profile w
   private var requestToken: Option[Token] = None
 
   /**
-   *  Represented data that need to render user's timeline
-   *
-   *  @param    users     A Map[userID, basicUserData], which key is user's ID.
-   *  @param    plurks    Plurks on that timeline.
-   */
-  case class Timeline(users: Map[Long, User], plurks: List[Plurk])
-
-
-  /**
    *  Get authorization URL.
    *
    *  @return   Success(url: String) if success, otherwise Failure[Exception].
@@ -107,7 +98,70 @@ object PlurkAPI {
     new PlurkAPI(new PlurkOAuth(service))
   }
 
-  def withMock(mockOAuth: PlurkOAuth with MockOAuth) = new PlurkAPI(mockOAuth)
+  private[soplurk] def withMock(mockOAuth: PlurkOAuth with MockOAuth) = new PlurkAPI(mockOAuth)
+
+
+  /**
+   *  Represented data that need to render user's timeline
+   *
+   *  @param    users     A Map[userID, basicUserData], which key is user's ID.
+   *  @param    plurks    Plurks on that timeline.
+   */
+  case class Timeline(users: Map[Long, User], plurks: List[Plurk])
+
+  /**
+   *  Unread plurks count
+   *
+   *  @param  all             Number of all unread plurks.
+   *  @param  my              Number of unread plurks that is posted by current user.
+   *  @param  privatePlurks   Number of unread plurks that is private plurk.
+   *  @param  responded       Number of unread plurks that is responded by current user.
+   *  @param  favorite        Number of unread favorite plurks that is favorited by user.
+   */
+  case class UnreadCount(
+    all: Int, my: Int, privatePlurks: Int, 
+    responded: Int, favorite: Int
+  )
+
+  /**
+   *  Current user's profile.
+   *
+   *  @param  userInfo        User's information.
+   *  @param  timeline        User's timeline and plurk posts.
+   *  @param  fansCount       How many fans do you have.
+   *  @param  friendsCount    How many friends do you have.
+   *  @param  unreadCount     Number of unread plurks.
+   *  @param  alertsCount     Number of unread alerts.
+   *  @param  privacy         Your timeline privacy setting.
+   */
+  case class OwnProfile(
+    userInfo: ExtendedUser, timeline: Timeline, 
+    fansCount: Int, friendsCount: Int, 
+    unreadCount: Int, alertsCount: Int,
+    privacy: TimelinePrivacy
+  )
+
+  /**
+   *  User's public profile.
+   *
+   *  @param  userInfo            User's information
+   *  @param  plurks              Plurks that posted by the user.
+   *  @param  fansCount           How many fans does this user has.
+   *  @param  friendsCount        How many friends does this user has.
+   *  @param  privacy             This user's privacy setting.
+   *  @param  hasReadPermission   Do you have permission to read this user's plurk.
+   *  @param  isFan               Are you a fan of this user? Only set if logged in.
+   *  @param  areFriends          Are you a friend of this user? Only set if logged in.
+   *  @param  isFollowing         Are you following this user? Only set if logged in.
+   */
+  case class PublicProfile(
+    userInfo: ExtendedUser, plurks: List[Plurk],
+    fansCount: Int, friendsCount: Int, 
+    privacy: TimelinePrivacy, hasReadPermission: Boolean,
+    isFan: Option[Boolean],
+    areFriends: Option[Boolean],
+    isFollowing: Option[Boolean]
+  )
 
 }
 

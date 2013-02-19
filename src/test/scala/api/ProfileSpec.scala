@@ -1,8 +1,13 @@
 package org.bone.soplurk.api
 
-import org.bone.soplurk.model._
+import org.bone.soplurk.api.PlurkAPI._
 import org.bone.soplurk.oauth.PlurkOAuth
 import org.bone.soplurk.oauth.MockOAuth
+import org.bone.soplurk.model._
+
+import org.scalatest.FunSpec
+import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.PrivateMethodTester 
 
 import org.scribe.model.Verb
 
@@ -10,10 +15,6 @@ import net.liftweb.json.JsonAST._
 import net.liftweb.json.JsonParser
 
 import scala.util.{Try, Success, Failure}
-
-import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
-import org.scalatest.PrivateMethodTester 
 
 object ProfileAPIMock extends PlurkOAuth(null) with MockOAuth {
 
@@ -321,7 +322,7 @@ class ProfileSpec extends FunSpec with ShouldMatchers {
       profile.privacy should be === TimelinePrivacy.World
       profile.userInfo.basicInfo.id should be === 1367985
 
-      val plurkAPI.Timeline(users, plurks) = profile.timeline
+      val Timeline(users, plurks) = profile.timeline
       users.size should be === 2
       plurks.size should be === 3
     }

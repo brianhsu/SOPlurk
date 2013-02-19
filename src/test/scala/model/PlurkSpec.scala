@@ -57,7 +57,7 @@ class PlurkSpec extends FunSpec with ShouldMatchers {
         replurkInfo = replurkInfo,
         favoriteInfo = favoriteInfo,
         qualifierTranslated = Some("說"),
-        limitedTo = None,
+        limitedTo = Some(List(1367985, 8814877, 4373060)),
         responsesSeen = None,
         contentRaw = None
       )
@@ -169,7 +169,7 @@ object PlurkSpec {
     "qualifier": "says",
     "plurk_id": 1097524102,
     "response_count": 21,
-    "limited_to": null,
+    "limited_to": "|1367985||8814877||4373060|",
     "no_comments": 0,
     "posted": "Wed, 13 Feb 2013 10:52:07 GMT",
     "lang": "tr_ch",
