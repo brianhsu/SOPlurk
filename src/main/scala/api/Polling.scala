@@ -27,19 +27,6 @@ trait Polling {
     import TimelineParser._
 
     /**
-     *  Format java.lang.Date object to `2009-6-20T21:55:34` in GMT timezone.
-     *
-     *  @param    date  Date object
-     *  @return         The date time string formatted as Plurk expected.
-     */
-    private def toPlurkOffset(date: Date): String = {
-      val formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-      formatter.setTimeZone(TimeZone.getTimeZone("GMT"))
-      formatter.format(date)
-    }
-
-
-    /**
      *  Get unread count on a user's timeline.
      *
      *  @return   Success[UnreadCount] if get data correctly.

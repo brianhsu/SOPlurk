@@ -10,6 +10,10 @@ import org.scribe.builder.api._
 
 import scala.util.Try
 
+import java.util.Date
+import java.util.TimeZone
+import java.text.SimpleDateFormat
+
 class PlurkAPI private (val plurkOAuth: PlurkOAuth) extends Users with Profile with Polling with Timeline {
 
   private var requestToken: Option[Token] = None
@@ -99,6 +103,18 @@ object PlurkAPI {
   }
 
   private[soplurk] def withMock(mockOAuth: PlurkOAuth with MockOAuth) = new PlurkAPI(mockOAuth)
+
+  /**
+   *  Format java.lang.Date object to `2009-6-20T21:55:34` in GMT timezone.
+   *
+   *  @param    date  Date object
+   *  @return         The date time string formatted as Plurk expected.
+   */
+  private[soplurk] def toPlurkOffset(date: Date): String = {
+    val formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+    formatter.setTimeZone(TimeZone.getTimeZone("GMT"))
+    formatter.format(date)
+  }
 
 
   case class PlurkData(author: User, users: Map[Long, User], plurk: Plurk)
