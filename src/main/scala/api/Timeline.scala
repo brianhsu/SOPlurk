@@ -34,6 +34,8 @@ trait Timeline {
      *  @param  limitedDetail     Include user data of private plurk receivers in returned data?
      *  @param  replurkersDetail  Include replurkers detail data in returned data?
      *  @param  minimalData       Only fetch minimal data of plurk.
+     *
+     *  @return                   Success[PlurkData] if get data from Plurk correctly.
      */
     def getPlurk(plurkID: Long, 
                  favorersDetail: Boolean = false, 
@@ -75,6 +77,8 @@ trait Timeline {
      *  @param  limitedDetail     Include user data of private plurk receivers in returned data?
      *  @param  replurkersDetail  Include replurkers detail data in returned data?
      *  @param  minimalData       Only fetch minimal data of plurk.
+     *
+     *  @return                   Success[Timeline] if get data from Plurk correctly.
      */
     def getPlurks(offset: Option[Date] = None, 
                   limit: Int = 20,
@@ -119,6 +123,8 @@ trait Timeline {
      *  @param  limitedDetail     Include user data of private plurk receivers in returned data?
      *  @param  replurkersDetail  Include replurkers detail data in returned data?
      *  @param  minimalData       Only fetch minimal data of plurk.
+     *
+     *  @return                   Success[Timeline] if get data from Plurk correctly.
      */
     def getUnreadPlurks(offset: Option[Date] = None, 
                         limit: Int = 20,
@@ -170,6 +176,8 @@ trait Timeline {
      *  @param  limitedDetail     Include user data of private plurk receivers in returned data?
      *  @param  replurkersDetail  Include replurkers detail data in returned data?
      *  @param  minimalData       Only fetch minimal data of plurk.
+     *
+     *  @return                   Success[Timeline] if get data from Plurk correctly.
      */
     def getPublicPlurks(nicknameOrID: String,
                         limit: Int = 20,
@@ -218,6 +226,8 @@ trait Timeline {
      *  @param  noComment   Only users set by this field can comment on this plurk.
      *  @param  language    The plurk's language two-character code. 
      *                      See [[http://www.plurk.com/API/2#/APP/Timeline/plurkAdd PlurkAPI Document]]
+     *
+     *  @return             Success[Plurk] if get data from Plurk correctly.
      */
     def plurkAdd(content: String, 
                  qualifier: Qualifier, 
@@ -245,6 +255,25 @@ trait Timeline {
       )
 
       response.map { jsonData => Plurk(jsonData) }
+
+    }
+
+    /**
+     *  Delete Plurk
+     *
+     *  @param      plurkID     Plurk's unique id that you want to delete.
+     *  @return                 Success[Boolean](true) if delete successfuly.
+     */
+    def plurkDelete(plurkID: Long): Try[Boolean] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/Timeline/plurkDelete", Verb.POST, 
+        "plurk_id" -> plurkID.toString
+      )
+
+      response.map { jsonData => 
+        jsonData.get[String]("success_text") == "ok"
+      }
 
     }
 

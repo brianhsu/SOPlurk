@@ -501,6 +501,10 @@ object TimelineAPIMock extends PlurkOAuth(null) with MockOAuth {
     "owner_id": 1367985
   }""")
 
+  val plurkDeleteResponse = JsonParser.parse("""{
+    "success_text": "ok"
+  }""")
+
 
   override def sendRequest(url: String, method: Verb, 
                            params: (String, String)*): Try[JValue] = {
@@ -529,6 +533,9 @@ object TimelineAPIMock extends PlurkOAuth(null) with MockOAuth {
       case ("/APP/Timeline/plurkAdd", Verb.POST) if isAdd("plurkAddTest", "thinks") =>
         Success(plurkAddResponse)
 
+      case ("/APP/Timeline/plurkDelete", Verb.POST) if isPlurkID(1234L) =>
+        Success(plurkDeleteResponse)
+
       case _ => 
         Failure(throw new Exception("Not implemented"))
     }
@@ -543,7 +550,7 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
 
     val plurkAPI = PlurkAPI.withMock(TimelineAPIMock)
 
-    it ("get specific plurk by /APP/Polling/getPlurk correctly") {
+    it ("get specific plurk by /APP/Timeline/getPlurk correctly") {
 
       val PlurkData(author, users, plurk) = 
         plurkAPI.Timeline.getPlurk(1099209841L).get
@@ -554,7 +561,7 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
       plurk.contentRaw should be === Some("RawContent")
     }
 
-    it ("get plurks by /APP/Polling/getPlurks correctly") {
+    it ("get plurks by /APP/Timeline/getPlurks correctly") {
 
       val Timeline(users, plurks) = plurkAPI.Timeline.getPlurks().get
 
@@ -563,7 +570,7 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
 
     }
 
-    it ("get unread plurks by /APP/Polling/getUnreadPlurks correctly") {
+    it ("get unread plurks by /APP/Timeline/getUnreadPlurks correctly") {
 
       val Timeline(users, plurks) = plurkAPI.Timeline.getUnreadPlurks().get
 
@@ -572,7 +579,7 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
 
     }
 
-    it ("get public plurks by /APP/Polling/getPublicPlurks correctly") {
+    it ("get public plurks by /APP/Timelin/getPublicPlurks correctly") {
 
       val Timeline(users, plurks) = plurkAPI.Timeline.getPublicPlurks("brianhsu").get
 
@@ -581,13 +588,20 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
 
     }
 
-    it ("add plurks by /APP/Polling/plurkAdd correctly") {
+    it ("add plurks by /APP/Timeline/plurkAdd correctly") {
 
       val plurk = plurkAPI.Timeline.plurkAdd("plurkAddTest", Qualifier.Thinks).get
       
       plurk.plurkID should be === 1099313284
       plurk.content should be === "plurkAddTest"
       plurk.qualifier should be === Qualifier.Thinks
+
+    }
+
+    it ("delete plurk by /APP/Timeline/plurkDelete correctly") {
+
+      val isOK = plurkAPI.Timeline.plurkDelete(1234L).get
+      isOK should be === true
 
     }
 
