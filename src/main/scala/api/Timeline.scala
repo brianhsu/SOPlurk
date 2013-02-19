@@ -337,7 +337,7 @@ trait Timeline {
     /**
      *  Favorite plurks.
      *
-     *  @param      plurkIDs    List of Plurk's id that you want to unmute.
+     *  @param      plurkIDs    List of Plurk's id that you want to favorite.
      *  @return                 Success[Boolean](true) if delete successfuly.
      */
     def favoritePlurks(plurkIDs: List[Long]): Try[Boolean] = {
@@ -355,13 +355,31 @@ trait Timeline {
     /**
      *  Unfavorite plurks.
      *
-     *  @param      plurkIDs    List of Plurk's id that you want to unmute.
+     *  @param      plurkIDs    List of Plurk's id that you want to unfavorite.
      *  @return                 Success[Boolean](true) if delete successfuly.
      */
     def unfavoritePlurks(plurkIDs: List[Long]): Try[Boolean] = {
 
       val response = plurkOAuth.sendRequest(
         "/APP/Timeline/unfavoritePlurks", Verb.POST, 
+        "ids" -> plurkIDs.mkString("[", ",", "]")
+      )
+
+      response.map { jsonData => 
+        jsonData.get[String]("success_text") == "ok"
+      }
+    }
+
+    /**
+     *  Mark plurks as read.
+     *
+     *  @param      plurkIDs    List of Plurk's id that you want to mark as read.
+     *  @return                 Success[Boolean](true) if delete successfuly.
+     */
+    def markAsRead(plurkIDs: List[Long]): Try[Boolean] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/Timeline/markAsRead", Verb.POST, 
         "ids" -> plurkIDs.mkString("[", ",", "]")
       )
 

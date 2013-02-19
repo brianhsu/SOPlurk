@@ -532,6 +532,7 @@ object TimelineAPIMock extends PlurkOAuth(null) with MockOAuth {
   val unmutePlurksResponse = JsonParser.parse("""{"success_text": "ok"}""")
   val favoritePlurksResponse = JsonParser.parse("""{"success_text": "ok"}""")
   val unfavoritePlurksResponse = JsonParser.parse("""{"success_text": "ok"}""")
+  val markAsReadResponse = JsonParser.parse("""{"success_text": "ok"}""")
 
   override def sendRequest(url: String, method: Verb, 
                            params: (String, String)*): Try[JValue] = {
@@ -579,6 +580,9 @@ object TimelineAPIMock extends PlurkOAuth(null) with MockOAuth {
 
       case ("/APP/Timeline/unfavoritePlurks", Verb.POST) if hasPlurkIDs(List(324L, 23242L, 2323L)) =>
         Success(unfavoritePlurksResponse)
+
+      case ("/APP/Timeline/markAsRead", Verb.POST) if hasPlurkIDs(List(324L, 23242L, 2323L)) =>
+        Success(markAsReadResponse)
 
       case _ => 
         Failure(throw new Exception("Not implemented"))
@@ -686,6 +690,14 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
 
       val plurkIDs = List(324L, 23242L, 2323L)
       val isOK = plurkAPI.Timeline.unfavoritePlurks(plurkIDs).get
+      isOK should be === true
+
+    }
+
+    it ("mark plurks as read by /APP/Timeline/markAsRead correctly") {
+
+      val plurkIDs = List(324L, 23242L, 2323L)
+      val isOK = plurkAPI.Timeline.markAsRead(plurkIDs).get
       isOK should be === true
 
     }
