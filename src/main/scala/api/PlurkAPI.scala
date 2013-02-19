@@ -10,7 +10,7 @@ import org.scribe.builder.api._
 
 import scala.util.Try
 
-class PlurkAPI private (val plurkOAuth: PlurkOAuth) extends Users with Profile with Polling {
+class PlurkAPI private (val plurkOAuth: PlurkOAuth) extends Users with Profile with Polling with Timeline {
 
   private var requestToken: Option[Token] = None
 
@@ -99,6 +99,9 @@ object PlurkAPI {
   }
 
   private[soplurk] def withMock(mockOAuth: PlurkOAuth with MockOAuth) = new PlurkAPI(mockOAuth)
+
+
+  case class PlurkData(author: User, users: Map[Long, User], plurk: Plurk)
 
 
   /**

@@ -37,7 +37,7 @@ trait Profile {
         
         OwnProfile(
           userInfo = userInfo,
-          timeline = Timeline(plurksUsers, plurks),
+          timeline = PlurkAPI.Timeline(plurksUsers, plurks),
           fansCount = jsonData.get("fans_count"),
           friendsCount = jsonData.get("friends_count"),
           unreadCount = jsonData.get("unread_count"),

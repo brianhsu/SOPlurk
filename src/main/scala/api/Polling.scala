@@ -65,7 +65,7 @@ trait Polling {
      *  so you should this to find out if there is new plurk post on your Timeline.
      *
      *  If `favoeresDetail` / `limitedDetail` / `replurkersDetail` is set to true, the users detail
-     *  data will be stored at returned Timeline.users map.
+     *  data will be stored at returned [[org.bone.soplurk.api.PlurkAPI.Timeline]]'s users field.
      *
      *  For example, if you want to fetch all favorers user info at first plurk, you could do
      *  the following.
@@ -94,12 +94,13 @@ trait Polling {
      *  @param  favorersDatail    Include favorers detail in returned data?
      *  @param  limitedDetail     Include user data of private plurk receivers in returned data?
      *  @param  replurkersDetail  Include replurkers detail data in returned data?
+     *  @param  minimalData       Only fetch minimal data of plurk.
      */
     def getPlurks(offset: Date, limit: Int = 20, 
                   favorersDetail: Boolean = false, 
                   limitedDetail: Boolean = false,
                   replurkersDetail: Boolean = false,
-                  minimalData: Boolean = false): Try[Timeline] = {
+                  minimalData: Boolean = false): Try[PlurkAPI.Timeline] = {
 
       val getPlurkParams = List(
         "offset"            -> toPlurkOffset(offset),
@@ -116,7 +117,7 @@ trait Polling {
 
       response.map { jsonData =>
         
-        Timeline(
+        PlurkAPI.Timeline(
           users = parseUsersMap(jsonData \ "plurk_users"),
           plurks = parsePlurks(jsonData \ "plurks")
         )
