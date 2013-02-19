@@ -1,5 +1,6 @@
 package org.bone.soplurk.model
 
+import scala.util.Try
 import net.liftweb.json.JsonAST._
 
 /**
@@ -31,7 +32,7 @@ object ReplurkInfo {
     isReplurkable = plurk.get("replurkable"),
     isReplurked = plurk.get("replurked"),
     replurkersCount = plurk.get("replurkers_count"),
-    replurkerID = plurk.getOption("replurker_id"),
+    replurkerID = Try(plurk.getOption[Long]("replurker_id")).getOrElse(None),
     replurkers = plurk.getOption[List[Long]]("replurkers").filterNot(_.isEmpty)
   )
 }

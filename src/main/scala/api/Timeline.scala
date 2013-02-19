@@ -6,6 +6,8 @@ import org.bone.soplurk.api.TimelineParser._
 
 import org.scribe.model.Verb
 
+import net.liftweb.json.JsonAST._
+
 import scala.util.Try
 import java.util.Date
 
@@ -371,6 +373,80 @@ trait Timeline {
     }
 
     /**
+     *  Replurk plurks.
+     *
+     *  Returned data will be a `Success` with `(isSuccess, Map[Long, ReplurkStatus])`,
+     *  which `isSuccess` in the first element is a Boolean value, will be `true` if all
+     *  `plurkIds` has been replurked correctly.
+     *
+     *  The second element is `Map[Long, ReplurkStatus]`, where the key is the plurk id
+     *  you asked to replurk at `plurkIDs`, the value is status about whether replurk on 
+     *  this id is success, and information about that plurk itself.
+     *
+     *  @param      plurkIDs    List of Plurk's id that you want to replurk.
+     *  @return                 Success[(isSuccess, Map[Long, ReplurkStatus])] if everything is fine.
+     */
+    def replurk(plurkIDs: List[Long]): Try[(Boolean, Map[Long, ReplurkStatus])] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/Timeline/replurk", Verb.POST, 
+        "ids" -> plurkIDs.mkString("[", ",", "]")
+      )
+
+      response.map { jsonData => 
+        val isSuccess = jsonData.get[Boolean]("success")
+        val statusMap = (jsonData \ "results").children.map { result =>
+
+          val plurkID = result.asInstanceOf[JField].name.toLong
+          val plurk = Plurk(result \ "plurk")
+          val error = result.getOption[String]("error").filterNot(_.isEmpty)
+
+          (plurkID, ReplurkStatus(error, plurk))
+
+        }.toMap
+
+        (isSuccess, statusMap)
+      }
+    }
+
+    /**
+     *  Unreplurk plurks.
+     *
+     *  Returned data will be a `Success` with `(isSuccess, Map[Long, ReplurkStatus])`,
+     *  which `isSuccess` in the first element is a Boolean value, will be `true` if all
+     *  `plurkIds` has been unreplurked correctly.
+     *
+     *  The second element is `Map[Long, ReplurkStatus]`, where the key is the plurk id
+     *  you asked to replurk at `plurkIDs`, the value is status about whether unreplurk on 
+     *  this id is success, and information about that plurk itself.
+     *
+     *  @param      plurkIDs    List of Plurk's id that you want to unreplurk.
+     *  @return                 Success[(isSuccess, Map[Long, ReplurkStatus])] if everything is fine.
+     */
+    def unreplurk(plurkIDs: List[Long]): Try[(Boolean, Map[Long, ReplurkStatus])] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/Timeline/unreplurk", Verb.POST, 
+        "ids" -> plurkIDs.mkString("[", ",", "]")
+      )
+
+      response.map { jsonData => 
+        val isSuccess = jsonData.get[Boolean]("success")
+        val statusMap = (jsonData \ "results").children.map { result =>
+
+          val plurkID = result.asInstanceOf[JField].name.toLong
+          val plurk = Plurk(result \ "plurk")
+          val error = result.getOption[String]("error").filterNot(_.isEmpty)
+
+          (plurkID, ReplurkStatus(error, plurk))
+
+        }.toMap
+
+        (isSuccess, statusMap)
+      }
+    }
+
+    /**
      *  Mark plurks as read.
      *
      *  @param      plurkIDs    List of Plurk's id that you want to mark as read.
@@ -387,8 +463,6 @@ trait Timeline {
         jsonData.get[String]("success_text") == "ok"
       }
     }
-
   }
-
 }
 

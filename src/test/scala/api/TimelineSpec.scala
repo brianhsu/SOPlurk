@@ -527,6 +527,79 @@ object TimelineAPIMock extends PlurkOAuth(null) with MockOAuth {
     "owner_id": 1367985
   }""")
 
+  val replurkResponse = JsonParser.parse("""{
+    "results": {
+        "1098776249": {
+            "plurk": {
+                "replurkers": [
+                    1367985
+                ],
+                "responses_seen": 0,
+                "qualifier": "shares",
+                "replurkers_count": 1,
+                "replurker_id": null,
+                "response_count": 1,
+                "replurkable": true,
+                "limited_to": null,
+                "id": 1098776249,
+                "favorite_count": 0,
+                "is_unread": 0,
+                "lang": "tr_ch",
+                "content": "Content",
+                "content_raw": "ContentRaw",
+                "user_id": 8120915,
+                "plurk_type": 0,
+                "replurked": true,
+                "longitude": null,
+                "no_comments": 0,
+                "favorers": [],
+                "plurk_id": 1098776249,
+                "latitude": null,
+                "posted": "Sun, 17 Feb 2013 15:20:30 GMT",
+                "owner_id": 8120915
+            },
+            "success": true,
+            "error": ""
+        },
+        "1098983626": {
+            "plurk": {
+                "replurkers": [
+                    9342645,
+                    1367985
+                ],
+                "responses_seen": 0,
+                "qualifier": "shares",
+                "replurkers_count": 51,
+                "replurker_id": "",
+                "response_count": 1255,
+                "replurkable": true,
+                "limited_to": null,
+                "id": 1098983626,
+                "favorite_count": 85,
+                "is_unread": 0,
+                "lang": "tr_ch",
+                "favorers": [9325158, 9342645],
+                "content_raw": "Content",
+                "user_id": 5530231,
+                "plurk_type": 0,
+                "replurked": true,
+                "longitude": null,
+                "no_comments": 0,
+                "content": "Content",
+                "plurk_id": 1098983626,
+                "latitude": null,
+                "posted": "Mon, 18 Feb 2013 09:05:30 GMT",
+                "owner_id": 5530231
+            },
+            "success": true,
+            "error": ""
+        }
+    },
+    "success": true
+  }""")
+
+  val unreplurkResponse = replurkResponse
+
   val plurkDeleteResponse = JsonParser.parse("""{"success_text": "ok"}""")
   val mutePlurksResponse = JsonParser.parse("""{"success_text": "ok"}""")
   val unmutePlurksResponse = JsonParser.parse("""{"success_text": "ok"}""")
@@ -583,6 +656,12 @@ object TimelineAPIMock extends PlurkOAuth(null) with MockOAuth {
 
       case ("/APP/Timeline/markAsRead", Verb.POST) if hasPlurkIDs(List(324L, 23242L, 2323L)) =>
         Success(markAsReadResponse)
+
+      case ("/APP/Timeline/replurk", Verb.POST) if hasPlurkIDs(List(1098776249L, 1098983626L)) =>
+        Success(replurkResponse)
+
+      case ("/APP/Timeline/unreplurk", Verb.POST) if hasPlurkIDs(List(1098776249L, 1098983626L)) =>
+        Success(unreplurkResponse)
 
       case _ => 
         Failure(throw new Exception("Not implemented"))
@@ -700,6 +779,31 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
       val isOK = plurkAPI.Timeline.markAsRead(plurkIDs).get
       isOK should be === true
 
+    }
+
+    it ("should replurk by /APP/Timeline/replurk correctly") {
+
+      val (isSuccess, replurkStatus) = plurkAPI.Timeline.replurk(1098776249L :: 1098983626L :: Nil).get
+
+      isSuccess should be === true
+      replurkStatus.size should be === 2
+      replurkStatus(1098776249L).isSuccess should be === true
+      replurkStatus(1098983626L).isSuccess should be === true
+      replurkStatus(1098983626L).plurk.plurkID should be === 1098983626L
+      replurkStatus(1098776249L).plurk.plurkID should be === 1098776249L
+    }
+
+
+    it ("should unreplurk by /APP/Timeline/replurk correctly") {
+
+      val (isSuccess, replurkStatus) = plurkAPI.Timeline.unreplurk(1098776249L :: 1098983626L :: Nil).get
+
+      isSuccess should be === true
+      replurkStatus.size should be === 2
+      replurkStatus(1098776249L).isSuccess should be === true
+      replurkStatus(1098983626L).isSuccess should be === true
+      replurkStatus(1098983626L).plurk.plurkID should be === 1098983626L
+      replurkStatus(1098776249L).plurk.plurkID should be === 1098776249L
     }
 
   }

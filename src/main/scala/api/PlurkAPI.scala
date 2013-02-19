@@ -116,9 +116,24 @@ object PlurkAPI {
     formatter.format(date)
   }
 
-
+  /**
+   *  Represented data about specific Plurk.
+   *
+   *  @param    author  Information of this plurk's author.
+   *  @param    users   Information of user that mentiond on this plurk.
+   *  @param    plurk   Detail of this plurk.
+   */
   case class PlurkData(author: User, users: Map[Long, User], plurk: Plurk)
 
+  /**
+   *  Represented whether replurk / unreplurk is success or failed.
+   *
+   *  @param    error   Error message if there is an error.
+   *  @param    plurk   Data about this plurk.
+   */
+  case class ReplurkStatus(error: Option[String], plurk: Plurk) {
+    val isSuccess = error.isEmpty
+  }
 
   /**
    *  Represented data that need to render user's timeline
