@@ -527,24 +527,26 @@ object TimelineAPIMock extends PlurkOAuth(null) with MockOAuth {
     "owner_id": 1367985
   }""")
 
-  val plurkDeleteResponse = JsonParser.parse("""{
-    "success_text": "ok"
-  }""")
-
+  val plurkDeleteResponse = JsonParser.parse("""{"success_text": "ok"}""")
+  val mutePlurksResponse = JsonParser.parse("""{"success_text": "ok"}""")
+  val unmutePlurksResponse = JsonParser.parse("""{"success_text": "ok"}""")
+  val favoritePlurksResponse = JsonParser.parse("""{"success_text": "ok"}""")
+  val unfavoritePlurksResponse = JsonParser.parse("""{"success_text": "ok"}""")
 
   override def sendRequest(url: String, method: Verb, 
                            params: (String, String)*): Try[JValue] = {
 
-    def isContent(content: String) = params.contains("content" -> "plurkEditContent")
-    def isPlurkID(id: Long) = params.contains("plurk_id" -> id.toString)
-    def isNickname(nickname: String) = params.contains("user_id" -> nickname)
-    def isAdd(content: String, qualifier: String) = {
+    def hasPlurkIDs(ids: List[Long]) = params.contains("ids" -> ids.mkString("[", ",", "]"))
+    def hasContent(content: String) = params.contains("content" -> "plurkEditContent")
+    def hasPlurkID(id: Long) = params.contains("plurk_id" -> id.toString)
+    def hasNickname(nickname: String) = params.contains("user_id" -> nickname)
+    def hasAdd(content: String, qualifier: String) = {
       params.contains("content" -> content) &&
       params.contains("qualifier" -> qualifier)
     }
 
     (url, method) match {
-      case ("/APP/Timeline/getPlurk", Verb.GET) if isPlurkID(1099209841L) => 
+      case ("/APP/Timeline/getPlurk", Verb.GET) if hasPlurkID(1099209841L) => 
         Success(getPlurkResponse)
 
       case ("/APP/Timeline/getPlurks", Verb.GET) => 
@@ -553,18 +555,30 @@ object TimelineAPIMock extends PlurkOAuth(null) with MockOAuth {
       case ("/APP/Timeline/getUnreadPlurks", Verb.GET) => 
         Success(getUnreadPlurksResponse)
 
-      case ("/APP/Timeline/getPublicPlurks", Verb.GET) if isNickname("brianhsu") => 
+      case ("/APP/Timeline/getPublicPlurks", Verb.GET) if hasNickname("brianhsu") => 
         Success(getPublicPlurksResponse)
 
-      case ("/APP/Timeline/plurkAdd", Verb.POST) if isAdd("plurkAddTest", "thinks") =>
+      case ("/APP/Timeline/plurkAdd", Verb.POST) if hasAdd("plurkAddTest", "thinks") =>
         Success(plurkAddResponse)
 
-      case ("/APP/Timeline/plurkDelete", Verb.POST) if isPlurkID(1234L) =>
+      case ("/APP/Timeline/plurkDelete", Verb.POST) if hasPlurkID(1234L) =>
         Success(plurkDeleteResponse)
 
-      case ("/APP/Timeline/plurkEdit", Verb.POST) if isPlurkID(1099313284L) && 
-                                                     isContent("plurkEditContent") =>
+      case ("/APP/Timeline/plurkEdit", Verb.POST) if hasPlurkID(1099313284L) && 
+                                                     hasContent("plurkEditContent") =>
         Success(plurkEditResponse)
+
+      case ("/APP/Timeline/mutePlurks", Verb.POST) if hasPlurkIDs(List(324L, 23242L, 2323L)) =>
+        Success(mutePlurksResponse)
+
+      case ("/APP/Timeline/unmutePlurks", Verb.POST) if hasPlurkIDs(List(324L, 23242L, 2323L)) =>
+        Success(unmutePlurksResponse)
+
+      case ("/APP/Timeline/favoritePlurks", Verb.POST) if hasPlurkIDs(List(324L, 23242L, 2323L)) =>
+        Success(favoritePlurksResponse)
+
+      case ("/APP/Timeline/unfavoritePlurks", Verb.POST) if hasPlurkIDs(List(324L, 23242L, 2323L)) =>
+        Success(unfavoritePlurksResponse)
 
       case _ => 
         Failure(throw new Exception("Not implemented"))
@@ -641,6 +655,38 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
       
       plurk.plurkID should be === 1099313284L
       plurk.content should be === "plurkEditContent"
+
+    }
+
+    it ("mute plurks by /APP/Timeline/mutePlurks correctly") {
+
+      val plurkIDs = List(324L, 23242L, 2323L)
+      val isOK = plurkAPI.Timeline.mutePlurks(plurkIDs).get
+      isOK should be === true
+
+    }
+
+    it ("unmute plurks by /APP/Timeline/unmutePlurks correctly") {
+
+      val plurkIDs = List(324L, 23242L, 2323L)
+      val isOK = plurkAPI.Timeline.unmutePlurks(plurkIDs).get
+      isOK should be === true
+
+    }
+
+    it ("favorite plurks by /APP/Timeline/favoritePlurks correctly") {
+
+      val plurkIDs = List(324L, 23242L, 2323L)
+      val isOK = plurkAPI.Timeline.favoritePlurks(plurkIDs).get
+      isOK should be === true
+
+    }
+
+    it ("unfavorite plurks by /APP/Timeline/unfavoritePlurks correctly") {
+
+      val plurkIDs = List(324L, 23242L, 2323L)
+      val isOK = plurkAPI.Timeline.unfavoritePlurks(plurkIDs).get
+      isOK should be === true
 
     }
 

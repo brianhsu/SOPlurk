@@ -283,7 +283,6 @@ trait Timeline {
      *
      *  @param      plurkID     Plurk's unique id that you want to delete.
      *  @param      content     New content of this plurk.
-     *
      *  @return                 Success[Plurk] which contains new plurk data if edit successfully.
      */
     def plurkEdit(plurkID: Long, content: String): Try[Plurk] = {
@@ -296,6 +295,79 @@ trait Timeline {
 
       response.map { jsonData => Plurk(jsonData) }
 
+    }
+
+    /**
+     *  Mute plurks.
+     *
+     *  @param      plurkIDs    List of Plurk's id that you want to mute.
+     *  @return                 Success[Boolean](true) if delete successfuly.
+     */
+    def mutePlurks(plurkIDs: List[Long]): Try[Boolean] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/Timeline/mutePlurks", Verb.POST, 
+        "ids" -> plurkIDs.mkString("[", ",", "]")
+      )
+
+      response.map { jsonData => 
+        jsonData.get[String]("success_text") == "ok"
+      }
+    }
+
+    /**
+     *  Unmute plurks.
+     *
+     *  @param      plurkIDs    List of Plurk's id that you want to unmute.
+     *  @return                 Success[Boolean](true) if delete successfuly.
+     */
+    def unmutePlurks(plurkIDs: List[Long]): Try[Boolean] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/Timeline/unmutePlurks", Verb.POST, 
+        "ids" -> plurkIDs.mkString("[", ",", "]")
+      )
+
+      response.map { jsonData => 
+        jsonData.get[String]("success_text") == "ok"
+      }
+
+    }
+
+    /**
+     *  Favorite plurks.
+     *
+     *  @param      plurkIDs    List of Plurk's id that you want to unmute.
+     *  @return                 Success[Boolean](true) if delete successfuly.
+     */
+    def favoritePlurks(plurkIDs: List[Long]): Try[Boolean] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/Timeline/favoritePlurks", Verb.POST, 
+        "ids" -> plurkIDs.mkString("[", ",", "]")
+      )
+
+      response.map { jsonData => 
+        jsonData.get[String]("success_text") == "ok"
+      }
+    }
+
+    /**
+     *  Unfavorite plurks.
+     *
+     *  @param      plurkIDs    List of Plurk's id that you want to unmute.
+     *  @return                 Success[Boolean](true) if delete successfuly.
+     */
+    def unfavoritePlurks(plurkIDs: List[Long]): Try[Boolean] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/Timeline/unfavoritePlurks", Verb.POST, 
+        "ids" -> plurkIDs.mkString("[", ",", "]")
+      )
+
+      response.map { jsonData => 
+        jsonData.get[String]("success_text") == "ok"
+      }
     }
 
   }
