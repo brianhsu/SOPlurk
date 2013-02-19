@@ -259,9 +259,10 @@ trait Timeline {
     }
 
     /**
-     *  Delete Plurk
+     *  Delete a Plurk.
      *
      *  @param      plurkID     Plurk's unique id that you want to delete.
+     *
      *  @return                 Success[Boolean](true) if delete successfuly.
      */
     def plurkDelete(plurkID: Long): Try[Boolean] = {
@@ -274,6 +275,26 @@ trait Timeline {
       response.map { jsonData => 
         jsonData.get[String]("success_text") == "ok"
       }
+
+    }
+
+    /**
+     *  Edit a Plurk.
+     *
+     *  @param      plurkID     Plurk's unique id that you want to delete.
+     *  @param      content     New content of this plurk.
+     *
+     *  @return                 Success[Plurk] which contains new plurk data if edit successfully.
+     */
+    def plurkEdit(plurkID: Long, content: String): Try[Plurk] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/Timeline/plurkEdit", Verb.POST, 
+        "plurk_id" -> plurkID.toString,
+        "content"  -> content
+      )
+
+      response.map { jsonData => Plurk(jsonData) }
 
     }
 

@@ -501,6 +501,32 @@ object TimelineAPIMock extends PlurkOAuth(null) with MockOAuth {
     "owner_id": 1367985
   }""")
 
+  val plurkEditResponse = JsonParser.parse("""{
+    "replurkers": [],
+    "responses_seen": 0,
+    "qualifier": "thinks",
+    "replurkers_count": 0,
+    "plurk_id": 1099313284,
+    "response_count": 0,
+    "anonymous": false,
+    "replurkable": true,
+    "limited_to": null,
+    "favorite_count": 0,
+    "is_unread": 0,
+    "lang": "en",
+    "favorers": [],
+    "content_raw": "plurkEditContent",
+    "user_id": 1367985,
+    "plurk_type": 0,
+    "replurked": false,
+    "favorite": false,
+    "no_comments": 0,
+    "content": "plurkEditContent",
+    "replurker_id": null,
+    "posted": "Tue, 19 Feb 2013 09:38:22 GMT",
+    "owner_id": 1367985
+  }""")
+
   val plurkDeleteResponse = JsonParser.parse("""{
     "success_text": "ok"
   }""")
@@ -509,7 +535,7 @@ object TimelineAPIMock extends PlurkOAuth(null) with MockOAuth {
   override def sendRequest(url: String, method: Verb, 
                            params: (String, String)*): Try[JValue] = {
 
-
+    def isContent(content: String) = params.contains("content" -> "plurkEditContent")
     def isPlurkID(id: Long) = params.contains("plurk_id" -> id.toString)
     def isNickname(nickname: String) = params.contains("user_id" -> nickname)
     def isAdd(content: String, qualifier: String) = {
@@ -535,6 +561,10 @@ object TimelineAPIMock extends PlurkOAuth(null) with MockOAuth {
 
       case ("/APP/Timeline/plurkDelete", Verb.POST) if isPlurkID(1234L) =>
         Success(plurkDeleteResponse)
+
+      case ("/APP/Timeline/plurkEdit", Verb.POST) if isPlurkID(1099313284L) && 
+                                                     isContent("plurkEditContent") =>
+        Success(plurkEditResponse)
 
       case _ => 
         Failure(throw new Exception("Not implemented"))
@@ -602,6 +632,15 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
 
       val isOK = plurkAPI.Timeline.plurkDelete(1234L).get
       isOK should be === true
+
+    }
+
+    it ("edit plurk by /APP/Timeline/plurkEdit correctly") {
+
+      val plurk = plurkAPI.Timeline.plurkEdit(1099313284L, "plurkEditContent").get
+      
+      plurk.plurkID should be === 1099313284L
+      plurk.content should be === "plurkEditContent"
 
     }
 
