@@ -95,7 +95,7 @@ object CliquesAPIMock extends PlurkOAuth(null) with MockOAuth {
         Success(successJSON)
 
       case ("/APP/Cliques/remove", Verb.POST) if hasCliqueName("remove") && 
-                                                 hasUserID(1234L) =>
+                                                 hasUserID(5678L) =>
         Success(successJSON)
 
       case _ => 
@@ -138,11 +138,13 @@ class CliquesSpec extends FunSpec with ShouldMatchers {
     }
 
     it ("add user to clique by /APP/Cliques/add correctly") {
-      pending
+      val isOK = plurkAPI.Cliques.add("add", 1234L).get
+      isOK should be === true
     }
 
     it ("remove user from clique by /APP/Cliques/remove correctly") {
-      pending
+      val isOK = plurkAPI.Cliques.remove("remove", 5678L).get
+      isOK should be === true
     }
 
   }

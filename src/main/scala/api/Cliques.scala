@@ -102,6 +102,42 @@ trait Cliques {
       response.map { jsonData => jsonData.get[String]("success_text") == "ok" }
     }
 
+    /**
+     *  Add user to clique
+     *
+     *  @param    name    Add this user to which clique?
+     *  @param    userID  The id of user that to be added to this clique.
+     */
+    def add(name: String, userID: Long): Try[Boolean] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/Cliques/add", Verb.POST,
+        "clique_name" -> name,
+        "user_id" -> userID.toString
+      )
+
+      response.map { jsonData => jsonData.get[String]("success_text") == "ok" }
+
+    }
+
+    /**
+     *  Remove user from a clique
+     *
+     *  @param    name    Remove this user from which clique?
+     *  @param    userID  The id of user that to be removed from this clique.
+     */
+    def remove(name: String, userID: Long): Try[Boolean] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/Cliques/remove", Verb.POST,
+        "clique_name" -> name,
+        "user_id" -> userID.toString
+      )
+
+      response.map { jsonData => jsonData.get[String]("success_text") == "ok" }
+
+    }
+
   }
 
 }

@@ -23,10 +23,6 @@ Blocks
   /APP/Blocks/block
   /APP/Blocks/unblock
 
-Cliques
-  /APP/Cliques/add
-  /APP/Cliques/remove
-
 PlurkTop
   /APP/PlurkTop/getCollections
   /APP/PlurkTop/getTopics
