@@ -245,13 +245,11 @@ object FriendsFansAPIMock extends PlurkOAuth(null) with MockOAuth {
   ]""")
 
   val successJSON = JsonParser.parse("""{"success_text": "ok"}""")
-  val becomeFriendResponse = successJSON
-
 
   override def sendRequest(url: String, method: Verb, 
                            params: (String, String)*): Try[JValue] = {
 
-
+    def hasFriendID(id: Long) = params.contains("friend_id" -> id.toString)
     def hasUserID(id: Long) = params.contains("user_id" -> id.toString)
     def hasOffset(offset: Int) = params.contains("offset" -> offset.toString)
     def hasLimit(limit: Int) = params.contains("limit" -> limit.toString)
@@ -260,6 +258,8 @@ object FriendsFansAPIMock extends PlurkOAuth(null) with MockOAuth {
     val GetFans    = "/APP/FriendsFans/getFansByOffset"
     val GetFollowing = "/APP/FriendsFans/getFollowingByOffset"
     val BecomeFriend = "/APP/FriendsFans/becomeFriend"
+    val RemoveAsFriend = "/APP/FriendsFans/removeAsFriend"
+    val BecomeFan = "/APP/FriendsFans/becomeFan"
 
     (url, method) match {
 
@@ -272,7 +272,9 @@ object FriendsFansAPIMock extends PlurkOAuth(null) with MockOAuth {
       case (GetFollowing, Verb.GET) if hasOffset(2) && hasLimit(4) => 
           Success(getFollowingResponse)
 
-      case (BecomeFriend, Verb.POST) if hasUserID(3456L) => Success(becomeFriendResponse)
+      case (BecomeFriend, Verb.POST) if hasFriendID(3456L) => Success(successJSON)
+      case (RemoveAsFriend, Verb.POST) if hasFriendID(3456L) => Success(successJSON)
+      case (BecomeFan, Verb.POST) if hasFriendID(3456L) => Success(successJSON)
 
       case _ => 
         Failure(throw new Exception("Not implemented"))
@@ -310,6 +312,12 @@ class FriendsFansSpec extends FunSpec with ShouldMatchers {
 
       following.size should be === 4
       following.map(_.basicInfo.id) should be === List(5530231L, 5663569L, 8290019L, 4065129L)
+    }
+
+    it ("become friends with user by /APP/FriendsFans/becomeFriend correctly") {
+
+      val isOK = plurkAPI.FriendsFans.becomeFriend(3456L).get
+      isOK should be === true
     }
 
   }

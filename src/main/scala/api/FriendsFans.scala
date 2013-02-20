@@ -91,6 +91,26 @@ trait FriendsFans {
       
     }
 
+    /**
+     *  Ask to become friend with other user.
+     *
+     *  Ask permission to become friend with other user, the user with `userID`
+     *  has to accept a friendship.
+     *
+     *  @param  userID  The unique id of user that you want to be friend.
+     *  @return         Success[Boolean](true) if everything is fine.
+     */
+    def becomeFriend(userID: Long): Try[Boolean] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/FriendsFans/becomeFriend", Verb.POST,
+        "friend_id" -> userID.toString
+      )
+
+      response.map { jsonData => jsonData.get[String]("success_text") == "ok" }
+      
+    }
+
   }
 
 }
