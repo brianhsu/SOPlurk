@@ -273,8 +273,8 @@ object FriendsFansAPIMock extends PlurkOAuth(null) with MockOAuth {
           Success(getFollowingResponse)
 
       case (BecomeFriend, Verb.POST) if hasFriendID(3456L) => Success(successJSON)
-      case (RemoveAsFriend, Verb.POST) if hasFriendID(3456L) => Success(successJSON)
-      case (BecomeFan, Verb.POST) if hasFriendID(3456L) => Success(successJSON)
+      case (RemoveAsFriend, Verb.POST) if hasFriendID(7890L) => Success(successJSON)
+      case (BecomeFan, Verb.POST) if hasFriendID(1234L) => Success(successJSON)
 
       case _ => 
         Failure(throw new Exception("Not implemented"))
@@ -317,6 +317,12 @@ class FriendsFansSpec extends FunSpec with ShouldMatchers {
     it ("become friends with user by /APP/FriendsFans/becomeFriend correctly") {
 
       val isOK = plurkAPI.FriendsFans.becomeFriend(3456L).get
+      isOK should be === true
+    }
+
+    it ("remove friend by /APP/FriendsFans/removeAsFriend correctly") {
+
+      val isOK = plurkAPI.FriendsFans.removeAsFriend(7890L).get
       isOK should be === true
     }
 

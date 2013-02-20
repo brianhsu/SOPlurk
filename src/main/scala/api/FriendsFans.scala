@@ -111,6 +111,23 @@ trait FriendsFans {
       
     }
 
+    /**
+     *  Remove friendship with user.
+     *
+     *  @param  userID  The user's id that you want to remove as friend.
+     *  @return         Success[Boolean](true) if everything is fine.
+     */
+    def removeAsFriend(userID: Long): Try[Boolean] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/FriendsFans/removeAsFriend", Verb.POST,
+        "friend_id" -> userID.toString
+      )
+
+      response.map { jsonData => jsonData.get[String]("success_text") == "ok" }
+      
+    }
+
   }
 
 }
