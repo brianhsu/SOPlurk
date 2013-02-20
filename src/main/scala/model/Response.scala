@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat
  *  @param  contentRaw  The raw content of this response, without any URL replacing...etc.
  *  @param  qualifier   Qualifier of this response.
  *  @param  posted      When did this response poeted?
- *  @param  language    Two-character language code of this response.
+ *  @param  language    Language code of this response.
  */
 case class Response(
   userID: Long, plurkID: Long, id: Long, 

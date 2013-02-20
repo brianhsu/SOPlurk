@@ -216,7 +216,7 @@ trait Timeline {
      *                      `Nil` for everyone, `List(0)` for only friends, 
      *                      `List(123, 379)` for those whoes user id is in the list.
      *  @param  noComment   Only users set by this field can comment on this plurk.
-     *  @param  language    The plurk's language two-character code. 
+     *  @param  language    The plurk's language code. 
      *                      See [[http://www.plurk.com/API/2#/APP/Timeline/plurkAdd PlurkAPI Document]]
      */
     def plurkAdd(content: String, 
