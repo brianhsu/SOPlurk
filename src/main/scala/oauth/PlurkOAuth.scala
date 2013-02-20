@@ -65,13 +65,26 @@ class PlurkOAuth(val service: OAuthService)  {
     val isSuccess = code >= 200 && code < 400
 
     isSuccess match {
-      case true  => Success(JsonParser.parse(responseBody))
+      case true  => parseResponseToJSON(code, responseBody)
       case false => Failure(
         JsonParser.parseOpt(responseBody).
                    map(x => new RequestException(code, x.get("error_text"))).
                    getOrElse(new RequestException(code, responseBody))
       )
     }
+  }
+
+  private def parseResponseToJSON(code: Int, responseBody: String) = Try {
+    
+    val response = JsonParser.parse(responseBody)
+    val errorText = (response \\ "error_text")
+
+    errorText match {
+      case JString(msg) => throw new RequestException(code, "error_text:" + msg)
+      case _ =>
+    }
+
+    response
   }
 
   /**

@@ -26,7 +26,7 @@ class ExtendedUserSpec extends FunSpec with ShouldMatchers {
         gender = Gender.Female,
         karma = 82.37,
         hasProfileImage = true,
-        birthdayPrivacy = BirthdayPrivacy.ShowAll,
+        birthdayPrivacy = Some(BirthdayPrivacy.ShowAll),
         defaultLanguage = "tr_ch",
         avatarVersion = Some(40),
         location = Some("Taipei, Taiwan"),

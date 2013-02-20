@@ -5,7 +5,9 @@ import org.bone.soplurk.oauth.PlurkOAuth
 import org.bone.soplurk.oauth.MockOAuth
 
 import org.scribe.builder._
-import org.scribe.model._
+import org.scribe.model.Token
+import org.scribe.model.Verifier
+
 import org.scribe.builder.api._
 
 import scala.util.Try
@@ -14,7 +16,9 @@ import java.util.Date
 import java.util.TimeZone
 import java.text.SimpleDateFormat
 
-class PlurkAPI private (val plurkOAuth: PlurkOAuth) extends Users with Profile with Polling with Timeline {
+class PlurkAPI private (val plurkOAuth: PlurkOAuth) extends Users with 
+                Profile with Polling with Timeline with Responses with FriendsFans with 
+                UserSearch with PlurkSearch with Cliques {
 
   private var requestToken: Option[Token] = None
 
@@ -135,6 +139,28 @@ object PlurkAPI {
     val isSuccess = error.isEmpty
   }
 
+  /*
+   *  Represented the search result of a plurk searching.
+   *
+   *  @param  users       The user's information of found plurks.
+   *  @param  plurks      Plurks that match the query.
+   *  @param  hasMore     Do we have more plurks?
+   *  @param  lastOffset  The last plurkID in this query.
+   */
+  case class PlurkSearchResult(
+    users: Map[Long, User], plurks: List[Plurk], 
+    hasMore: Boolean, lastOffset: Long
+  )
+
+  /**
+   *  Represented the search result of a user searching.
+   *
+   *  @param  counts        How many users found.
+   *  @param  users         Users found.
+   *  @param  exactMatches  Users that is exact matches the query.
+   */
+  case class UserSearchResult(counts: Int, users: List[User], exactMatches: List[User])
+
   /**
    *  Represented data that need to render user's timeline
    *
@@ -196,6 +222,19 @@ object PlurkAPI {
     areFriends: Option[Boolean],
     isFollowing: Option[Boolean]
   )
+
+  /**
+   *  Represented responses of specific Plurk.
+   *
+   *  The `friends` field is a `Map[Long, User]`, where key is the userID of users
+   *  that posted responses, and value is the user information about that user.
+   * 
+   *  @param  friends     The user information about users that has posted response.
+   *  @param  responses   Responses of this plurk.
+   *  @param  seen        The last response that logged user has seen.
+   *                      0 means all unread, -1 means there is no response.
+   */
+  case class PlurkResponses(friends: Map[Long, User], responses: List[Response], seen: Int)
 
 }
 
