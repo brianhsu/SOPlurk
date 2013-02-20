@@ -5,7 +5,9 @@ import org.bone.soplurk.oauth.PlurkOAuth
 import org.bone.soplurk.oauth.MockOAuth
 
 import org.scribe.builder._
-import org.scribe.model._
+import org.scribe.model.Token
+import org.scribe.model.Verifier
+
 import org.scribe.builder.api._
 
 import scala.util.Try
@@ -14,7 +16,7 @@ import java.util.Date
 import java.util.TimeZone
 import java.text.SimpleDateFormat
 
-class PlurkAPI private (val plurkOAuth: PlurkOAuth) extends Users with Profile with Polling with Timeline {
+class PlurkAPI private (val plurkOAuth: PlurkOAuth) extends Users with Profile with Polling with Timeline with Responses {
 
   private var requestToken: Option[Token] = None
 
@@ -181,6 +183,19 @@ object PlurkAPI {
     areFriends: Option[Boolean],
     isFollowing: Option[Boolean]
   )
+
+  /**
+   *  Represented responses of specific Plurk.
+   *
+   *  The `friends` field is a `Map[Long, User]`, where key is the userID of users
+   *  that posted responses, and value is the user information about that user.
+   * 
+   *  @param  friends     The user information about users that has posted response.
+   *  @param  responses   Responses of this plurk.
+   *  @param  seen        The last response that logged user has seen.
+   *                      0 means all unread, -1 means there is no response.
+   */
+  case class PlurkResponses(friends: Map[Long, User], responses: List[Response], seen: Int)
 
 }
 

@@ -126,11 +126,18 @@ class ResponsesSpec extends FunSpec with ShouldMatchers {
     val plurkAPI = PlurkAPI.withMock(ResponsesAPIMock)
 
     it ("get data with no responses by /APP/Responses/get correctly") {
-      pending
+
+      val responses = plurkAPI.Responses.get(0L).get
+
+      responses should be === PlurkResponses(Map(), Nil, -1)
     }
 
     it ("get data with responses by /APP/Responses/get correctly") {
-      pending
+      val responses = plurkAPI.Responses.get(1099531474L).get
+
+      responses.friends.size should be === 1
+      responses.responses.size should be === 2
+      responses.seen should be === 2
     }
 
     it ("add response by /APP/Responses/responseAdd correctly") {
