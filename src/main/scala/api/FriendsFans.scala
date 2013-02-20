@@ -146,6 +146,28 @@ trait FriendsFans {
       response.map { jsonData => jsonData.get[String]("success_text") == "ok" }
     }
 
+    /**
+     *  Update following status of a user.
+     *
+     *  A user can befriend someone, but can unfollow them. 
+     *
+     *  This request is also used to stop following someone as a fan.
+     *
+     *  @param    userID    The ID of user that you want to follow / unfollow
+     *  @param    follow    `true` if want to following, `false` if want to unfollow.
+     *  @return             Success[Boolean](true) if everything is OK.
+     */
+    def setFollowing(userID: Long, following: Boolean): Try[Boolean] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/FriendsFans/setFollowing", Verb.POST,
+        "user_id" -> userID.toString,
+        "follow"  -> following.toString
+      )
+
+      response.map { jsonData => jsonData.get[String]("success_text") == "ok" }
+    }
+
   }
 
 }

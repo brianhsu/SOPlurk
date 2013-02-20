@@ -254,8 +254,8 @@ object FriendsFansAPIMock extends PlurkOAuth(null) with MockOAuth {
     def hasFanID(id: Long) = params.contains("fan_id" -> id.toString)
     def hasOffset(offset: Int) = params.contains("offset" -> offset.toString)
     def hasLimit(limit: Int) = params.contains("limit" -> limit.toString)
-    def hasFollowing(isFollowing: Boolean) = {
-      params.contains("following" -> isFollowing.toString)
+    def hasFollow(isFollowing: Boolean) = {
+      params.contains("follow" -> isFollowing.toString)
     }
 
     val GetFriends = "/APP/FriendsFans/getFriendsByOffset"
@@ -277,7 +277,7 @@ object FriendsFansAPIMock extends PlurkOAuth(null) with MockOAuth {
       case (GetFollowing, Verb.GET) if hasOffset(2) && hasLimit(4) => 
         Success(getFollowingResponse)
 
-      case (SetFollowing, Verb.POST) if hasUserID(4321L) && hasFollowing(true) => 
+      case (SetFollowing, Verb.POST) if hasUserID(4321L) && hasFollow(true) => 
         Success(successJSON)
 
       case (BecomeFriend, Verb.POST)   if hasFriendID(3456L) => Success(successJSON)
@@ -340,6 +340,11 @@ class FriendsFansSpec extends FunSpec with ShouldMatchers {
       isOK should be === true
     }
 
+    it ("following user by /APP/FriendsFans/setFollowing correctly") {
+
+      val isOK = plurkAPI.FriendsFans.setFollowing(4321L, true).get
+      isOK should be === true
+    }
 
   }
 }
