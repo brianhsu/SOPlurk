@@ -16,7 +16,7 @@ import java.util.Date
 import java.util.TimeZone
 import java.text.SimpleDateFormat
 
-class PlurkAPI private (val plurkOAuth: PlurkOAuth) extends Users with Profile with Polling with Timeline with Responses with FriendsFans with UserSearch with PlurkSearch {
+class PlurkAPI private (val plurkOAuth: PlurkOAuth) extends Users with Profile with Polling with Timeline with Responses with FriendsFans with UserSearch with PlurkSearch with Cliques {
 
   private var requestToken: Option[Token] = None
 
