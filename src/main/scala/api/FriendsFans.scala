@@ -168,6 +168,7 @@ trait FriendsFans {
       response.map { jsonData => jsonData.get[String]("success_text") == "ok" }
     }
 
+
   }
 
 }

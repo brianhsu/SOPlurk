@@ -244,6 +244,23 @@ object FriendsFansAPIMock extends PlurkOAuth(null) with MockOAuth {
     }
   ]""")
 
+  val completionResponse = JsonParser.parse("""{
+    "4281091": {
+        "nick_name": "user1Nick",
+        "full_name": "user1Full"
+    },
+    "4233609": {
+        "nick_name": "user2Nick",
+        "display_name": "user2Display",
+        "full_name": "user2Full"
+    },
+    "4147596": {
+        "nick_name": "user3Nick",
+        "display_name": "user3Display",
+        "full_name": "user3Full"
+    }
+  }""")
+
   val successJSON = JsonParser.parse("""{"success_text": "ok"}""")
 
   override def sendRequest(url: String, method: Verb, 
@@ -265,6 +282,7 @@ object FriendsFansAPIMock extends PlurkOAuth(null) with MockOAuth {
     val RemoveAsFriend = "/APP/FriendsFans/removeAsFriend"
     val BecomeFan = "/APP/FriendsFans/becomeFan"
     val SetFollowing = "/APP/FriendsFans/setFollowing"
+    val Completion = "/APP/FriendsFans/getCompletion"
 
     (url, method) match {
 
@@ -283,6 +301,7 @@ object FriendsFansAPIMock extends PlurkOAuth(null) with MockOAuth {
       case (BecomeFriend, Verb.POST)   if hasFriendID(3456L) => Success(successJSON)
       case (RemoveAsFriend, Verb.POST) if hasFriendID(7890L) => Success(successJSON)
       case (BecomeFan, Verb.POST)      if hasFanID(1234L) => Success(successJSON)
+      case (Completion, Verb.GET) => Success(completionResponse)
 
       case _ => 
         Failure(throw new Exception("Not implemented"))
