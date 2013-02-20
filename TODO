@@ -2,6 +2,12 @@ Real time notifications
   /APP/Realtime/getUserChannel
   Comet channel specification
 
+Users
+  /APP/Users/updatePicture
+
+Timeline
+  /APP/Timeline/uploadPicture
+
 Alerts
   General data structures
   /APP/Alerts/getActive
@@ -22,14 +28,6 @@ Blocks
   /APP/Blocks/get
   /APP/Blocks/block
   /APP/Blocks/unblock
-
-Cliques
-  /APP/Cliques/getCliques
-  /APP/Cliques/getClique
-  /APP/Cliques/createClique
-  /APP/Cliques/renameClique
-  /APP/Cliques/add
-  /APP/Cliques/remove
 
 PlurkTop
   /APP/PlurkTop/getCollections
