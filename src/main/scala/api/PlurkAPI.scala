@@ -16,7 +16,7 @@ import java.util.Date
 import java.util.TimeZone
 import java.text.SimpleDateFormat
 
-class PlurkAPI private (val plurkOAuth: PlurkOAuth) extends Users with Profile with Polling with Timeline with Responses with FriendsFans with UserSearch {
+class PlurkAPI private (val plurkOAuth: PlurkOAuth) extends Users with Profile with Polling with Timeline with Responses with FriendsFans with UserSearch with PlurkSearch {
 
   private var requestToken: Option[Token] = None
 
@@ -120,6 +120,19 @@ object PlurkAPI {
 
 
   case class PlurkData(author: User, users: Map[Long, User], plurk: Plurk)
+
+  /**
+   *  Represented the search result of a plurk searching.
+   *
+   *  @param  users       The user's information of found plurks.
+   *  @param  plurks      Plurks that match the query.
+   *  @param  hasMore     Do we have more plurks?
+   *  @param  lastOffset  The last plurkID in this query.
+   */
+  case class PlurkSearchResult(
+    users: Map[Long, User], plurks: List[Plurk], 
+    hasMore: Boolean, lastOffset: Long
+  )
 
   /**
    *  Represented the search result of a user searching.

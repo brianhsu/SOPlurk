@@ -16,7 +16,7 @@ trait UserSearch {
   import MyJValueImplicits._
 
   /**
-   *  API of /APP/Responses/
+   *  API of /APP/UserSearch/
    */
   object UserSearch {
 
