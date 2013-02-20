@@ -2,6 +2,12 @@ Real time notifications
   /APP/Realtime/getUserChannel
   Comet channel specification
 
+Users
+  /APP/Users/updatePicture
+
+Timeline
+  /APP/Timeline/uploadPicture
+
 Alerts
   General data structures
   /APP/Alerts/getActive
