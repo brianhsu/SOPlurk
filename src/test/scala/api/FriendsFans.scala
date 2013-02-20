@@ -326,6 +326,12 @@ class FriendsFansSpec extends FunSpec with ShouldMatchers {
       isOK should be === true
     }
 
+    it ("become fan of a user by /APP/FriendsFans/becomeFan correctly") {
+
+      val isOK = plurkAPI.FriendsFans.becomeFan(1234L).get
+      isOK should be === true
+    }
+
   }
 }
 

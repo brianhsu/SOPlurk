@@ -128,6 +128,25 @@ trait FriendsFans {
       
     }
 
+    /**
+     *  Become a fan of other user.
+     *
+     *  If you want stop being a fan of someone, use `setFollowing(userID, false)`.
+     *
+     *  @param  userID  The unique id of user that you want to be his / her fan.
+     *  @return         Success[Boolean](true) if everything is fine.
+     */
+    def becomeFan(userID: Long): Try[Boolean] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/FriendsFans/becomeFan", Verb.POST,
+        "friend_id" -> userID.toString
+      )
+
+      response.map { jsonData => jsonData.get[String]("success_text") == "ok" }
+      
+    }
+
   }
 
 }
