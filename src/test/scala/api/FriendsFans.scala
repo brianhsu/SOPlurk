@@ -365,6 +365,11 @@ class FriendsFansSpec extends FunSpec with ShouldMatchers {
       isOK should be === true
     }
 
+    it ("get completion list by /APP/FriendsFans/getCompletion correctly") {
+      val completion = plurkAPI.FriendsFans.getCompletion.get
+      completion.size should be === 3
+      completion.keySet should be === Set(4281091L, 4233609L, 4147596L)
+    }
   }
 }
 

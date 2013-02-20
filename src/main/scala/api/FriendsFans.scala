@@ -6,6 +6,8 @@ import org.bone.soplurk.api.TimelineParser._
 
 import org.scribe.model.Verb
 
+import net.liftweb.json.JField
+
 import scala.util.Try
 import java.util.Date
 
@@ -166,6 +168,30 @@ trait FriendsFans {
       )
 
       response.map { jsonData => jsonData.get[String]("success_text") == "ok" }
+    }
+
+    /**
+     *  Get auto-completion list of current user's friend.
+     *
+     *  The returned data will be a `Map[Long, Completion]` where key is
+     *  the user id of friends, and value is nickname / full name / display name
+     *  of that user.
+     *
+     *  @return   Success[Map[userID, completionData]] if everything is OK.
+     */
+    def getCompletion: Try[Map[Long, Completion]] = {
+
+      val response = plurkOAuth.sendRequest("/APP/FriendsFans/getCompletion", Verb.GET)
+
+      response.map { jsonData =>
+        jsonData.children.map { user =>
+          val userID = user.asInstanceOf[JField].name.toLong
+          val completion = Completion(user)
+
+          (userID, completion)
+        }.toMap
+      }
+     
     }
 
 
