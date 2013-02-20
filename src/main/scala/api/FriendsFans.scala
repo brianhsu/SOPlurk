@@ -140,11 +140,10 @@ trait FriendsFans {
 
       val response = plurkOAuth.sendRequest(
         "/APP/FriendsFans/becomeFan", Verb.POST,
-        "friend_id" -> userID.toString
+        "fan_id" -> userID.toString
       )
 
       response.map { jsonData => jsonData.get[String]("success_text") == "ok" }
-      
     }
 
   }

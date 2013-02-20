@@ -251,8 +251,12 @@ object FriendsFansAPIMock extends PlurkOAuth(null) with MockOAuth {
 
     def hasFriendID(id: Long) = params.contains("friend_id" -> id.toString)
     def hasUserID(id: Long) = params.contains("user_id" -> id.toString)
+    def hasFanID(id: Long) = params.contains("fan_id" -> id.toString)
     def hasOffset(offset: Int) = params.contains("offset" -> offset.toString)
     def hasLimit(limit: Int) = params.contains("limit" -> limit.toString)
+    def hasFollowing(isFollowing: Boolean) = {
+      params.contains("following" -> isFollowing.toString)
+    }
 
     val GetFriends = "/APP/FriendsFans/getFriendsByOffset"
     val GetFans    = "/APP/FriendsFans/getFansByOffset"
@@ -260,21 +264,25 @@ object FriendsFansAPIMock extends PlurkOAuth(null) with MockOAuth {
     val BecomeFriend = "/APP/FriendsFans/becomeFriend"
     val RemoveAsFriend = "/APP/FriendsFans/removeAsFriend"
     val BecomeFan = "/APP/FriendsFans/becomeFan"
+    val SetFollowing = "/APP/FriendsFans/setFollowing"
 
     (url, method) match {
 
       case (GetFriends, Verb.GET) if hasUserID(123L) && hasOffset(1) && hasLimit(3) => 
-          Success(getFriendsResponse)
+        Success(getFriendsResponse)
 
       case (GetFans, Verb.GET) if hasUserID(123L) && hasOffset(1) && hasLimit(3) => 
-          Success(getFansResponse)
+        Success(getFansResponse)
 
       case (GetFollowing, Verb.GET) if hasOffset(2) && hasLimit(4) => 
-          Success(getFollowingResponse)
+        Success(getFollowingResponse)
 
-      case (BecomeFriend, Verb.POST) if hasFriendID(3456L) => Success(successJSON)
+      case (SetFollowing, Verb.POST) if hasUserID(4321L) && hasFollowing(true) => 
+        Success(successJSON)
+
+      case (BecomeFriend, Verb.POST)   if hasFriendID(3456L) => Success(successJSON)
       case (RemoveAsFriend, Verb.POST) if hasFriendID(7890L) => Success(successJSON)
-      case (BecomeFan, Verb.POST) if hasFriendID(1234L) => Success(successJSON)
+      case (BecomeFan, Verb.POST)      if hasFanID(1234L) => Success(successJSON)
 
       case _ => 
         Failure(throw new Exception("Not implemented"))
@@ -331,6 +339,7 @@ class FriendsFansSpec extends FunSpec with ShouldMatchers {
       val isOK = plurkAPI.FriendsFans.becomeFan(1234L).get
       isOK should be === true
     }
+
 
   }
 }
