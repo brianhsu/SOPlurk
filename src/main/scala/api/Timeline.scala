@@ -17,7 +17,7 @@ trait Timeline {
   import java.text.SimpleDateFormat
 
   /**
-   *  API of /APP/Polling/
+   *  API of /APP/Timeline/
    */
   object Timeline {
 

@@ -1,0 +1,43 @@
+Real time notifications
+  /APP/Realtime/getUserChannel
+  Comet channel specification
+
+Alerts
+  General data structures
+  /APP/Alerts/getActive
+  /APP/Alerts/getHistory
+  /APP/Alerts/addAsFan
+  /APP/Alerts/addAllAsFan
+  /APP/Alerts/addAllAsFriends
+  /APP/Alerts/addAsFriend
+  /APP/Alerts/denyFriendship
+  /APP/Alerts/removeNotification
+
+Emoticons
+  /APP/Emoticons/get
+  /APP/Emoticons/addFromURL
+  /APP/Emoticons/delete
+
+Blocks
+  /APP/Blocks/get
+  /APP/Blocks/block
+  /APP/Blocks/unblock
+
+Cliques
+  /APP/Cliques/getCliques
+  /APP/Cliques/getClique
+  /APP/Cliques/createClique
+  /APP/Cliques/renameClique
+  /APP/Cliques/add
+  /APP/Cliques/remove
+
+PlurkTop
+  /APP/PlurkTop/getCollections
+  /APP/PlurkTop/getTopics
+  /APP/PlurkTop/getPlurks
+
+OAuth Utilities
+  /APP/checkToken
+  /APP/expireToken
+  /APP/checkTime
+  /APP/echo
