@@ -24,8 +24,6 @@ Blocks
   /APP/Blocks/unblock
 
 Cliques
-  /APP/Cliques/createClique
-  /APP/Cliques/renameClique
   /APP/Cliques/add
   /APP/Cliques/remove
 

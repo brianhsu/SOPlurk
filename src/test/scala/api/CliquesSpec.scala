@@ -62,11 +62,15 @@ object CliquesAPIMock extends PlurkOAuth(null) with MockOAuth {
     }
   ]""")
 
+  val successJSON = JsonParser.parse("""{"success_text": "ok"}""")
+
   override def sendRequest(url: String, method: Verb, 
                            params: (String, String)*): Try[JValue] = {
 
 
     def hasCliqueName(name: String) = params.contains("clique_name" -> name)
+    def hasNewName(name: String) = params.contains("new_name" -> name)
+    def hasUserID(id: Long) = params.contains("user_id" -> id.toString)
 
     (url, method) match {
 
@@ -75,6 +79,24 @@ object CliquesAPIMock extends PlurkOAuth(null) with MockOAuth {
 
       case ("/APP/Cliques/getClique", Verb.GET) if hasCliqueName("C0") => 
         Success(getCliqueResponse)
+
+      case ("/APP/Cliques/createClique", Verb.POST) if hasCliqueName("Create") =>
+        Success(successJSON)
+
+      case ("/APP/Cliques/renameClique", Verb.POST) if hasCliqueName("Rename") &&
+                                                       hasNewName("newName") =>
+        Success(successJSON)
+
+      case ("/APP/Cliques/deleteClique", Verb.POST) if hasCliqueName("Delete") =>
+        Success(successJSON)
+
+      case ("/APP/Cliques/add", Verb.POST) if hasCliqueName("add") && 
+                                              hasUserID(1234L) =>
+        Success(successJSON)
+
+      case ("/APP/Cliques/remove", Verb.POST) if hasCliqueName("remove") && 
+                                                 hasUserID(1234L) =>
+        Success(successJSON)
 
       case _ => 
         Failure(throw new Exception("Not implemented"))
@@ -101,15 +123,18 @@ class CliquesSpec extends FunSpec with ShouldMatchers {
     }
 
     it ("create clique by /APP/Cliques/createClique correctly") {
-      pending
+      val isOK = plurkAPI.Cliques.createClique("Create").get
+      isOK should be === true
     }
 
     it ("rename clique by /APP/Cliques/renameClique correctly") {
-      pending
+      val isOK = plurkAPI.Cliques.renameClique("Rename", "newName").get
+      isOK should be === true
     }
 
     it ("delete clique by /APP/Cliques/deleteClique correctly") {
-      pending
+      val isOK = plurkAPI.Cliques.deleteClique("Delete").get
+      isOK should be === true
     }
 
     it ("add user to clique by /APP/Cliques/add correctly") {
