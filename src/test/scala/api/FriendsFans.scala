@@ -145,6 +145,108 @@ object FriendsFansAPIMock extends PlurkOAuth(null) with MockOAuth {
     }
   ]""")
 
+  val getFollowingResponse = JsonParser.parse("""[
+    {
+      "verified_account": true,
+      "uid": 5530231,
+      "full_name": "\u57ce\u9580\u57ce\u9580\u776b\u6bdb\u7cd5",
+      "name_color": null,
+      "timezone": null,
+      "id": 5530231,
+      "display_name": "\u8df3\u6d1e\u738b\uff0e\u8cca\u6bdb\u5b50",
+      "date_of_birth": "Mon, 14 Jul 1986 00:01:00 GMT",
+      "location": "Taipei, Taiwan",
+      "recruited": 175,
+      "bday_privacy": 2,
+      "avatar": 10,
+      "default_lang": "tr_ch",
+      "relationship": "single",
+      "dateformat": 0,
+      "has_profile_image": 1,
+      "email_confirmed": true,
+      "settings": true,
+      "nick_name": "johnnydoki",
+      "gender": 1,
+      "karma": 96.07,
+      "following": true
+    },
+    {
+      "verified_account": false,
+      "uid": 5663569,
+      "full_name": "Kyoko ",
+      "name_color": null,
+      "timezone": null,
+      "id": 5663569,
+      "display_name": "Kyoko",
+      "date_of_birth": "Sat, 22 Dec 1990 00:01:00 GMT",
+      "location": "\u53f0\u5317, Taiwan",
+      "recruited": 2,
+      "bday_privacy": 2,
+      "avatar": 38,
+      "default_lang": "tr_ch",
+      "relationship": "not_saying",
+      "dateformat": 0,
+      "has_profile_image": 1,
+      "email_confirmed": true,
+      "settings": true,
+      "nick_name": "kyoko99551",
+      "gender": 0,
+      "karma": 100,
+      "following": true
+    },
+    {
+      "verified_account": false,
+      "uid": 8290019,
+      "full_name": "Yume \u5922\u5922",
+      "name_color": "0A9C17",
+      "timezone": null,
+      "id": 8290019,
+      "display_name": "YUME",
+      "date_of_birth": "Fri, 14 Jun 1996 00:01:00 GMT",
+      "location": "Tapei, Taiwan",
+      "recruited": 0,
+      "bday_privacy": 2,
+      "avatar": 54,
+      "default_lang": "tr_ch",
+      "relationship": "not_saying",
+      "dateformat": 0,
+      "has_profile_image": 1,
+      "email_confirmed": true,
+      "settings": true,
+      "nick_name": "likerm6",
+      "gender": 0,
+      "karma": 100.46,
+      "following": true
+    },
+    {
+      "verified_account": false,
+      "uid": 4065129,
+      "full_name": "\u661f\u5bbf\u55b5",
+      "name_color": "2264D6",
+      "timezone": "Asia\/Taipei",
+      "id": 4065129,
+      "display_name": "lordmi",
+      "date_of_birth": "Fri, 11 May 1973 00:01:00 GMT",
+      "location": "Chungho, Taiwan",
+      "recruited": 81,
+      "bday_privacy": 2,
+      "avatar": 2,
+      "default_lang": "tr_ch",
+      "relationship": "single",
+      "dateformat": 0,
+      "has_profile_image": 1,
+      "email_confirmed": true,
+      "settings": true,
+      "nick_name": "lordmi",
+      "gender": 1,
+      "karma": 133,
+      "following": true
+    }
+  ]""")
+
+  val successJSON = JsonParser.parse("""{"success_text": "ok"}""")
+  val becomeFriendResponse = successJSON
+
 
   override def sendRequest(url: String, method: Verb, 
                            params: (String, String)*): Try[JValue] = {
@@ -156,6 +258,8 @@ object FriendsFansAPIMock extends PlurkOAuth(null) with MockOAuth {
 
     val GetFriends = "/APP/FriendsFans/getFriendsByOffset"
     val GetFans    = "/APP/FriendsFans/getFansByOffset"
+    val GetFollowing = "/APP/FriendsFans/getFollowingByOffset"
+    val BecomeFriend = "/APP/FriendsFans/becomeFriend"
 
     (url, method) match {
 
@@ -164,6 +268,11 @@ object FriendsFansAPIMock extends PlurkOAuth(null) with MockOAuth {
 
       case (GetFans, Verb.GET) if hasUserID(123L) && hasOffset(1) && hasLimit(3) => 
           Success(getFansResponse)
+
+      case (GetFollowing, Verb.GET) if hasOffset(2) && hasLimit(4) => 
+          Success(getFollowingResponse)
+
+      case (BecomeFriend, Verb.POST) if hasUserID(3456L) => Success(becomeFriendResponse)
 
       case _ => 
         Failure(throw new Exception("Not implemented"))
@@ -180,7 +289,11 @@ class FriendsFansSpec extends FunSpec with ShouldMatchers {
     val plurkAPI = PlurkAPI.withMock(FriendsFansAPIMock)
 
     it ("get friends of user by /APP/FriendsFans/getFriendsByOffset correctly") {
-      pending
+
+      val friends = plurkAPI.FriendsFans.getFriendsByOffset(123L, 3, Some(1)).get
+
+      friends.size should be === 2
+      friends.map(_.basicInfo.id) should be === List(8120302L, 3779288L)
     }
 
     it ("get fans of user by /APP/FriendsFans/getFansByOffset correctly") {
@@ -191,6 +304,13 @@ class FriendsFansSpec extends FunSpec with ShouldMatchers {
       fans.map(_.basicInfo.id) should be === List(4948413L, 6960804L, 4138952L)
     }
 
+    it ("get following of user by /APP/FriendsFans/getFollowingByOffset correctly") {
+
+      val following = plurkAPI.FriendsFans.getFollowingByOffset(4, Some(2)).get
+
+      following.size should be === 4
+      following.map(_.basicInfo.id) should be === List(5530231L, 5663569L, 8290019L, 4065129L)
+    }
 
   }
 }
