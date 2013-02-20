@@ -15,7 +15,7 @@ import net.liftweb.json.JsonAST._
 import net.liftweb.json.JsonParser
 
 import scala.util.{Try, Success, Failure}
-
+import java.util.Date
 
 object ResponsesAPIMock extends PlurkOAuth(null) with MockOAuth {
 
@@ -72,11 +72,11 @@ object ResponsesAPIMock extends PlurkOAuth(null) with MockOAuth {
 
   val addResponse = JsonParser.parse("""{
     "lang": "en",
-    "content_raw": "啊啊啊，出門時忘記做 git push 啊……",
+    "content_raw": "ContentRaw",
     "user_id": 1367985,
     "qualifier": "says",
     "plurk_id": 1099531474,
-    "content": "啊啊啊，出門時忘記做 git push 啊……",
+    "content": "Content",
     "id": 5385889041,
     "posted": "Wed, 20 Feb 2013 01:56:10 GMT"
   }""")
@@ -141,7 +141,25 @@ class ResponsesSpec extends FunSpec with ShouldMatchers {
     }
 
     it ("add response by /APP/Responses/responseAdd correctly") {
-      pending
+
+      val response = plurkAPI.Responses.responseAdd(
+        plurkID = 1099531474L,
+        content = "responseTest",
+        qualifier = Qualifier.Says
+      ).get
+
+      val correctResponse = Response(
+        userID  = 1367985L,
+        plurkID = 1099531474L,
+        id = 5385889041L,
+        content = "Content",
+        contentRaw = "ContentRaw",
+        qualifier = Qualifier.Says,
+        posted = new Date(1361325370000L),
+        language = "en"
+      )
+
+      response should be === correctResponse
     }
 
     it ("delete response by /APP/Responses/responseAdd correctly") {

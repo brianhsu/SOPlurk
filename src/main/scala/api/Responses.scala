@@ -27,6 +27,8 @@ trait Responses {
      *
      *  @param  plurkID       The unique id of plurk that you want to fetch responses.
      *  @param  fromResponse  Only fetch responses an offset, index starts from 0.
+     *
+     *  @return               Responses of this plurk.
      */
     def get(plurkID: Long, fromResponse: Int = 0): Try[PlurkResponses] = {
       
@@ -45,6 +47,29 @@ trait Responses {
           seen      = jsonData.get("responses_seen")
         )
       }
+    }
+
+    /**
+     *  Add response to a Plurk.
+     *
+     *  @param  plurkID     Which plurk you want to response.
+     *  @param  content     Content of your response.
+     *  @param  qualifier   Qualifier of this response.
+     *
+     *  @return             Success[Response] which contains your response if everything is ok.
+     */
+    def responseAdd(plurkID: Long, content: String, 
+                    qualifier: Qualifier): Try[Response] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/Responses/responseAdd", Verb.POST,
+        "plurk_id"  -> plurkID.toString,
+        "content"   -> content,
+        "qualifier" -> qualifier.name
+      )
+
+      response.map { jsonData => Response(jsonData) }
+
     }
 
   }
