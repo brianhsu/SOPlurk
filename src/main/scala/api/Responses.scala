@@ -72,6 +72,25 @@ trait Responses {
 
     }
 
+    /**
+     *  Delete response of a plurk.
+     *
+     *  @param  plurkID     Which plurk does that response belongs to?
+     *  @param  responseID  The unique id of that response you want to delete.
+     *
+     *  @return             Success[Boolean](true) if delete successfully.
+     */
+    def responseDelete(plurkID: Long, responseID: Long): Try[Boolean] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/Responses/responseDelete", Verb.POST,
+        "plurk_id"    -> plurkID.toString,
+        "response_id" -> responseID.toString
+      )
+
+      response.map { jsonData => jsonData.get[String]("success_text") == "ok" }
+    }
+
   }
 
 }

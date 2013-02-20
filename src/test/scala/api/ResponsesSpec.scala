@@ -163,7 +163,8 @@ class ResponsesSpec extends FunSpec with ShouldMatchers {
     }
 
     it ("delete response by /APP/Responses/responseAdd correctly") {
-      pending
+      val isOK = plurkAPI.Responses.responseDelete(1099531474L, 5385889041L).get
+      isOK should be === true
     }
 
   }
