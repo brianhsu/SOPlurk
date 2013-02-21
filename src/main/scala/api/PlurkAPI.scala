@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat
 class PlurkAPI private (val plurkOAuth: PlurkOAuth) extends Users with 
                 Profile with Polling with Timeline with Responses with 
                 FriendsFans with UserSearch with PlurkSearch with 
-                Cliques with Blocks with Alerts {
+                Cliques with Blocks with Alerts with Emoticons {
 
   private var requestToken: Option[Token] = None
 
@@ -237,6 +237,42 @@ object PlurkAPI {
    *                      0 means all unread, -1 means there is no response.
    */
   case class PlurkResponses(friends: Map[Long, User], responses: List[Response], seen: Int)
+
+  /**
+   *  Reprsented emoticons that current user can use.
+   *
+   *  The `recruited`, `karma` is a `Map[Int, List[Emoticon]]`, where
+   *  key is the lower bound of recrutied count or karma.
+   *
+   *  For example, if your `karma` looks like the following:
+   *
+   *  {{{
+   *
+   *     Map(
+   *        0 -> List(Emoticon(""":-))""",  "http://statics.plurk.com/4.gif"), 
+   *                  Emoticon(""":-)""",   "http://statics.plurk.com/5.gif")), 
+   *
+   *       25 -> List(Emoticon("""(:""",        "http://statics.plurk.com/6.gif), 
+   *                  Emoticon("""(K)""",       "http://statics.plurk.com/7.gif), 
+   *                  Emoticon("""(angry)""",   "http://statics.plurk.com/8.gif), 
+   *                  Emoticon("""(annoyed)""", "http://statics.plurk.com/9.gif))
+   *    )
+   *  }}}
+   *
+   *  It means you need karma >= 0 to use """:-))""" and """:-)""", and
+   *  karma >= 25 to use """(:""", """(K)""", """(angry)""", "(annoyed)""".
+   *
+   *  @param  custom      Custom icons uploaded by user.
+   *  @param  recruited   key is the lower bound of recrutied count 
+   *                      to use icons in the corresponding value.
+   *  @param  karma       key in the lower bound of karma to use icons 
+   *                      in the corresponding value.
+   */
+  case class EmoticonsList(
+    custom: List[CustomIcon], 
+    recruited: Map[Int, List[Emoticon]],
+    karma: Map[Int, List[Emoticon]]
+  )
 
 }
 
