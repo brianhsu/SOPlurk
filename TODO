@@ -24,11 +24,6 @@ Emoticons
   /APP/Emoticons/addFromURL
   /APP/Emoticons/delete
 
-Blocks
-  /APP/Blocks/get
-  /APP/Blocks/block
-  /APP/Blocks/unblock
-
 PlurkTop
   /APP/PlurkTop/getCollections
   /APP/PlurkTop/getTopics

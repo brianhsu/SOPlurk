@@ -95,11 +95,13 @@ class BlocksSpec extends FunSpec with ShouldMatchers {
     }
 
     it ("block a user by /APP/Blocks/block correctly") {
-      pending
+      val isOK = plurkAPI.Blocks.block(1234L).get
+      isOK should be === true
     }
 
     it ("unblock a user by /APP/Blocks/block correctly") {
-      pending
+      val isOK = plurkAPI.Blocks.unblock(5678L).get
+      isOK should be === true
     }
 
   }

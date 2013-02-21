@@ -44,6 +44,38 @@ trait Blocks {
 
     }
 
+    /**
+     *  Block a user.
+     *
+     *  @param    userID  The id of user that to be blocked.
+     *  @return           Success[Boolean](true) if everything is fine.
+     */
+    def block(userID: Long): Try[Boolean] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/Blocks/block", Verb.POST,
+        "user_id" -> userID.toString
+      )
+
+      response.map { jsonData => jsonData.get[String]("success_text") == "ok" }
+    }
+
+    /**
+     *  Unblock a user.
+     *
+     *  @param    userID  The id of user that to be unblocked.
+     *  @return           Success[Boolean](true) if everything is fine.
+     */
+    def unblock(userID: Long): Try[Boolean] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/Blocks/unblock", Verb.POST,
+        "user_id" -> userID.toString
+      )
+
+      response.map { jsonData => jsonData.get[String]("success_text") == "ok" }
+    }
+
   }
 
 }
