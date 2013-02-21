@@ -23,7 +23,7 @@ object Qualifier {
    *  @param    name    qualifier field in Plurk JSON.
    *  @return           The corresponding case object.
    */
-  def apply(name: String) = name match {
+  def apply(name: String): Qualifier = name match {
     case ":"         => ::
     case "loves"     => Loves
     case "likes"     => Likes

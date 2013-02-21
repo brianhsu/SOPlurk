@@ -18,7 +18,7 @@ object ReadStatus
    *  @return           Corresponding case object.
    *  @throws           NoSuchReadStatusException if no matched code.
    */
-  def apply(code: Byte) = code match {
+  def apply(code: Byte): ReadStatus = code match {
     case 0 => Read
     case 1 => Unread
     case 2 => Muted

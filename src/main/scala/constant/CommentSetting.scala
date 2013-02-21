@@ -40,7 +40,7 @@ object CommentSetting {
    *  @return           Corresponding case object.
    *  @throws           NoSuchCommentSettingException if no matched code.
    */
-  def apply(code: Byte) = code match {
+  def apply(code: Byte): CommentSetting = code match {
     case 0 => Everyone
     case 1 => Disabled
     case 2 => OnlyFriends

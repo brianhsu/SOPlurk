@@ -2,12 +2,23 @@ package org.bone.soplurk.constant
 
 import org.bone.soplurk.exceptions._
 
+/**
+ *  Represented type of alerts.
+ *
+ *  @param  word    The alert type value returned by Plurk JSON.
+ */
 sealed abstract class AlertType(val word: String)
 
 object AlertType
 {
 
-  def apply(word: String) = word match {
+  /**
+   *  Construct AlertType case object from JSON
+   *
+   *  @param    word                    The alert type value returned by Plurk JSON.
+   *  @throws   NoSuchAlertException    if there is no such alert type.
+   */
+  def apply(word: String): AlertType = word match {
     case "friendship_request"   => FriendshipRequest
     case "friendship_pending"   => FriendshipPending
     case "friendship_accepted"  => FriendshipAccepted

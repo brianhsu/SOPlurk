@@ -16,7 +16,7 @@ object BirthdayPrivacy {
    *  @return           Corresponding case object.
    *  @throws           NoSuchBirthdayPrivacyException if no matched code.
    */
-  def apply(code: Byte) = code match {
+  def apply(code: Byte): BirthdayPrivacy = code match {
     case 0 => HideAll
     case 1 => HideYear
     case 2 => ShowAll

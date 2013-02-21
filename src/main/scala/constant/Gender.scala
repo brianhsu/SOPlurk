@@ -21,7 +21,7 @@ object Gender {
    *  @return           Corresponding case object.
    *  @throws           NoSuchGenderException if no matched code.
    */
-  def apply(code: Byte) = code match {
+  def apply(code: Byte): Gender = code match {
     case 0 => Female
     case 1 => Male
     case 2 => NotStating
