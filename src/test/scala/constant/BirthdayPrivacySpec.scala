@@ -1,4 +1,4 @@
-package org.bone.soplurk.model
+package org.bone.soplurk.constant
 
 import org.scalatest.FunSpec
 import org.scalatest.matchers.ShouldMatchers
