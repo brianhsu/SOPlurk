@@ -7,7 +7,6 @@ import net.liftweb.json._
 
 import org.bone.soplurk.exceptions._
 import org.bone.soplurk.model._
-import org.bone.soplurk.model.PlurkType._
 
 class FavoriteInfoSpec extends FunSpec with ShouldMatchers {
 

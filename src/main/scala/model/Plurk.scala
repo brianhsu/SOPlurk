@@ -1,5 +1,6 @@
 package org.bone.soplurk.model
 
+import org.bone.soplurk.constant._
 import java.util.Date
 import java.lang.{Long => JLong}
 import net.liftweb.json.JsonAST._

@@ -1,4 +1,4 @@
-package org.bone.soplurk.model
+package org.bone.soplurk.constant
 
 /**
  *  This class represented a plurk's type, which currently are:

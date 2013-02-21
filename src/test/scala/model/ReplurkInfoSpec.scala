@@ -5,9 +5,10 @@ import org.scalatest.matchers.ShouldMatchers
 
 import net.liftweb.json._
 
+import org.bone.soplurk.constant._
+import org.bone.soplurk.constant.PlurkType._
 import org.bone.soplurk.exceptions._
 import org.bone.soplurk.model._
-import org.bone.soplurk.model.PlurkType._
 
 class ReplurkInfoSpec extends FunSpec with ShouldMatchers {
 

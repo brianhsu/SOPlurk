@@ -1,4 +1,4 @@
-package org.bone.soplurk.model
+package org.bone.soplurk.constant
 
 /**
  *  This object corresponding to Plurk's qualifier.

@@ -3,9 +3,10 @@ package org.bone.soplurk.model
 import org.scalatest.FunSpec
 import org.scalatest.matchers.ShouldMatchers
 
+import org.bone.soplurk.constant._
+import org.bone.soplurk.constant.ReadStatus._
 import org.bone.soplurk.exceptions._
 import org.bone.soplurk.model._
-import org.bone.soplurk.model.ReadStatus._
 
 class ReadStatusSpec extends FunSpec with ShouldMatchers {
 

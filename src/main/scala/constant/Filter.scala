@@ -1,4 +1,4 @@
-package org.bone.soplurk.model
+package org.bone.soplurk.constant
 
 sealed abstract class Filter(val word: String)
 

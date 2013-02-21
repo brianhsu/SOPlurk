@@ -3,6 +3,7 @@ package org.bone.soplurk.api
 import org.bone.soplurk.api.PlurkAPI._
 import org.bone.soplurk.oauth.PlurkOAuth
 import org.bone.soplurk.oauth.MockOAuth
+import org.bone.soplurk.constant._
 import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec

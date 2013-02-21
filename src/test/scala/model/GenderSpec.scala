@@ -3,9 +3,10 @@ package org.bone.soplurk.model
 import org.scalatest.FunSpec
 import org.scalatest.matchers.ShouldMatchers
 
+import org.bone.soplurk.constant._
+import org.bone.soplurk.constant.Gender._
 import org.bone.soplurk.exceptions._
 import org.bone.soplurk.model._
-import org.bone.soplurk.model.Gender._
 
 class GenderSpec extends FunSpec with ShouldMatchers {
 

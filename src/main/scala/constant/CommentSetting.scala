@@ -1,4 +1,4 @@
-package org.bone.soplurk.model
+package org.bone.soplurk.constant
 
 import scala.annotation._
 import org.bone.soplurk.exceptions._

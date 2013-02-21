@@ -1,5 +1,7 @@
 package org.bone.soplurk.model
 
+import org.bone.soplurk.constant._
+
 import net.liftweb.json.JValue
 
 import java.util.Date

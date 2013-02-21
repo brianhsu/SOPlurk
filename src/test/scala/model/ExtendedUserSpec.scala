@@ -1,8 +1,8 @@
 package org.bone.soplurk.model
 
+import org.bone.soplurk.constant._
 import org.bone.soplurk.exceptions._
 import org.bone.soplurk.model._
-import org.bone.soplurk.model.PlurkType._
 
 import org.scalatest.FunSpec
 import org.scalatest.matchers.ShouldMatchers

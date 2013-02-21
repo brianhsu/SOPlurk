@@ -1,6 +1,7 @@
 package org.bone.soplurk.api
 
 import org.bone.soplurk.model._
+import org.bone.soplurk.constant._
 import org.bone.soplurk.api.PlurkAPI._
 import org.bone.soplurk.api.TimelineParser._
 
