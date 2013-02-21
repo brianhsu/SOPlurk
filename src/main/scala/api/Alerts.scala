@@ -20,13 +20,28 @@ trait Alerts {
   object Alerts {
     
     /**
-     *  Get current user's active alerts list.
+     *  Get current user's active alerts list
      *
      *  @return   Success[List[Alert]] if everything is fine.
      */
     def getActive: Try[List[Alert]] = {
 
       val response = plurkOAuth.sendRequest("/APP/Alerts/getActive", Verb.GET)
+
+      response.map { jsonData => 
+        jsonData.children.map(alertJS => Alert(alertJS)) 
+      }
+
+    }
+
+    /**
+     *  Get 30 past alerts
+     *
+     *  @return   Success[List[Alert]] of 30 past alerts if everything is OK.
+     */
+    def getHistory: Try[List[Alert]] = {
+
+      val response = plurkOAuth.sendRequest("/APP/Alerts/getHistory", Verb.GET)
 
       response.map { jsonData => 
         jsonData.children.map(alertJS => Alert(alertJS)) 

@@ -62,8 +62,32 @@ object AlertsAPIMock extends PlurkOAuth(null) with MockOAuth {
       "posted": "Thu, 21 Feb 2013 02:56:59 GMT"
     }
   ]""")
-  val historyResponse = JsonParser.parse("""{
-  }""")
+
+  val historyResponse = JsonParser.parse("""[
+    {
+      "friend_info": {
+        "verified_account": false,
+        "default_lang": "tr_ch",
+        "display_name": "\u58b3\u5893\uff08Brian Hsu\uff09",
+        "dateformat": 0,
+        "nick_name": "brianhsu",
+        "has_profile_image": 1,
+        "location": "Taipei, Taiwan",
+        "bday_privacy": 2,
+        "date_of_birth": "Tue, 02 Jan 1990 00:01:00 GMT",
+        "karma": 121.16,
+        "full_name": "BrianHsu",
+        "gender": 1,
+        "name_color": null,
+        "timezone": "Asia\/Taipei",
+        "id": 1367985,
+        "avatar": 0
+      },
+      "type": "friendship_accepted",
+      "posted": "Thu, 21 Feb 2013 02:56:59 GMT"
+    }
+
+  ]""")
 
   val successJSON = JsonParser.parse("""{"success_text": "ok"}""")
 
@@ -99,7 +123,11 @@ class AlertsSpec extends FunSpec with ShouldMatchers {
     }
 
     it ("get history alerts by /APP/Alerts/getHistory correctly") {
-      pending
+
+      val alerts = plurkAPI.Alerts.getHistory.get
+
+      alerts.size should be === 1
+      alerts.map(_.alertType) should be === List(FriendshipAccepted)
     }
 
     it ("accept user as a fan by /APP/Alerts/addAsFan correctly") {
