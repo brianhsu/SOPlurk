@@ -9,7 +9,6 @@ Timeline
   /APP/Timeline/uploadPicture
 
 Emoticons
-  /APP/Emoticons/get
   /APP/Emoticons/addFromURL
   /APP/Emoticons/delete
 
