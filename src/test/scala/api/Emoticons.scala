@@ -46,13 +46,24 @@ object EmoticonsAPIMock extends PlurkOAuth(null) with MockOAuth {
     }
   }""")
 
+  val successJSON = JsonParser.parse("""{"success_text": "ok"}""")
+
+
   override def sendRequest(url: String, method: Verb, 
                            params: (String, String)*): Try[JValue] = {
 
 
+    def hasURL(url: String) = params.contains("url" -> url)
+    def hasKeyword(keyword: String) = params.contains("keyword" -> keyword)
+
     (url, method) match {
 
       case ("/APP/Emoticons/get", Verb.GET) => Success(getResponse)
+      case ("/APP/Emoticons/delete", Verb.POST) if hasKeyword("delete") => Success(successJSON)
+      case ("/APP/Emoticons/addFromURL", Verb.POST) if hasURL("http://aa.bb/add.gif") &&
+                                                       hasKeyword("add") => 
+        Success(successJSON)
+
       case _ => Failure(throw new Exception("Not implemented"))
     }
 
@@ -82,11 +93,13 @@ class EmoticonsSpec extends FunSpec with ShouldMatchers {
     }
 
     it ("add custom icons by /APP/Emoticons/addFromURL correctly") {
-      pending
+      val isOK = plurkAPI.Emoticons.addFromURL("http://aa.bb/add.gif", "add").get
+      isOK should be === true
     }
 
     it ("remove custom icons by /APP/Emoticons/delete correctly") {
-      pending
+      val isOK = plurkAPI.Emoticons.delete("delete").get
+      isOK should be === true
     }
 
 

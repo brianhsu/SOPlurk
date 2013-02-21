@@ -8,10 +8,6 @@ Users
 Timeline
   /APP/Timeline/uploadPicture
 
-Emoticons
-  /APP/Emoticons/addFromURL
-  /APP/Emoticons/delete
-
 PlurkTop
   /APP/PlurkTop/getCollections
   /APP/PlurkTop/getTopics

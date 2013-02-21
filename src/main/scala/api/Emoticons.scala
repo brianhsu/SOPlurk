@@ -64,6 +64,44 @@ trait Emoticons {
 
     }
 
+    /**
+     *  Add custom emoticons from URL.
+     *
+     *  This API only support url emoticons that are uploaded to Plurk already,
+     *  which meas the `url` must starts with `http://emos.plurk.com/`.
+     *
+     *  @param    url       The url of custom emoticon icon.
+     *  @param    keyword   The keyword (name) of this icon.
+     *
+     *  @return             Success[Boolean](true) if add icon successfuly.
+     */
+    def addFromURL(url: String, keyword: String): Try[Boolean] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/Emoticons/addFromURL", Verb.POST,
+        "url" -> url,
+        "keyword" -> keyword
+      )
+
+      response.map { jsonData => jsonData.get[String]("success_text") == "ok" }
+    }
+
+    /**
+     *  Delete custom emoticon icon
+     *
+     *  @param    keyword   The keyword (name) of custom icon to be deleted.
+     *  @return             Success[Boolean](true) if delete icon successfuly.
+     */
+    def delete(keyword: String): Try[Boolean] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/Emoticons/delete", Verb.POST,
+        "keyword" -> keyword
+      )
+
+      response.map { jsonData => jsonData.get[String]("success_text") == "ok" }
+    }
+
   }
 
 }

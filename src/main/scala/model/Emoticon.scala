@@ -4,6 +4,10 @@ import net.liftweb.json.JsonAST._
 
 
 sealed abstract class Icon(val name: String, val url: String) {
+  /**
+   *  When user want to insert this icon to plurk, what he should enter
+   *  into text.
+   */
   def insertText: String = name
 }
 
