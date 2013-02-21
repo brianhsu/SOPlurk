@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat
 
 class PlurkAPI private (val plurkOAuth: PlurkOAuth) extends Users with 
                 Profile with Polling with Timeline with Responses with FriendsFans with 
-                UserSearch with PlurkSearch with Cliques {
+                UserSearch with PlurkSearch with Cliques with Blocks {
 
   private var requestToken: Option[Token] = None
 
