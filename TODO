@@ -9,7 +9,6 @@ Timeline
   /APP/Timeline/uploadPicture
 
 PlurkTop
-  /APP/PlurkTop/getCollections
   /APP/PlurkTop/getTopics
   /APP/PlurkTop/getPlurks
 
