@@ -147,7 +147,8 @@ class AlertsSpec extends FunSpec with ShouldMatchers {
     }
 
     it ("deny user's friend request by /APP/Alerts/denyFriendship correctly") {
-      pending
+      val isOK = plurkAPI.Alerts.denyFriendship(789L).get
+      isOK should be === true
     }
 
     it ("accept all user's request as fans by /APP/Alerts/addAllAsFan correctly") {

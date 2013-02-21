@@ -103,6 +103,22 @@ trait Alerts {
       response.map { jsonData => jsonData.get[String]("success_text") == "ok" }
     }
 
+    /**
+     *  Deny other user's friend request.
+     *
+     *  @param    userID    The id of user that has asked for friendship.
+     *  @return             Success[Boolean](true) if everything is OK.
+     */
+    def denyFriendship(userID: Long): Try[Boolean] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/Alerts/denyFriendship", Verb.POST,
+        "user_id" -> userID.toString
+      )
+
+      response.map { jsonData => jsonData.get[String]("success_text") == "ok" }
+    }
+
   }
 
 }
