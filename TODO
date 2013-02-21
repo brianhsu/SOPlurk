@@ -9,7 +9,6 @@ Timeline
   /APP/Timeline/uploadPicture
 
 PlurkTop
-  /APP/PlurkTop/getTopics
   /APP/PlurkTop/getPlurks
 
 OAuth Utilities

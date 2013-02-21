@@ -38,10 +38,13 @@ object PlurkTopAPIMock extends PlurkOAuth(null) with MockOAuth {
   override def sendRequest(url: String, method: Verb, 
                            params: (String, String)*): Try[JValue] = {
 
+    def hasLang(language: String) = params.contains("lang" -> language)
 
     (url, method) match {
 
       case ("/APP/PlurkTop/getCollections", Verb.GET) => Success(collectionJSON)
+      case ("/APP/PlurkTop/getTopics", Verb.GET) if hasLang("tr_ch") => Success(topicJSON)
+
       case _ => Failure(throw new Exception("Not implemented"))
     }
 
@@ -65,7 +68,16 @@ class PlurkTopSpec extends FunSpec with ShouldMatchers {
     }
 
     it ("get topics by /APP/PlurkTop/getTopics correctly") {
-      pending
+
+      val topics = plurkAPI.PlurkTop.getTopics("tr_ch").get
+
+      topics should be === List(
+        Topic(1, "News", "News"), 
+        Topic(2, "Entertainment", "Entertainment"), 
+        Topic(0, "Interesting", "Interesting"), 
+        Topic(5, "Technology", "Technology")
+      )
+
     }
 
     it ("get plurks by /APP/PlurkTop/getPlurks correctly") {

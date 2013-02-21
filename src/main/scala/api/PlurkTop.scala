@@ -33,6 +33,24 @@ trait PlurkTop {
       }
     }
 
+    /**
+     *  Get topics of PlurkTop.
+     *
+     *  @param  language  Get topics for this specified language.
+     *  @return           Success[List[Topic]] if get data from Plurk correctly.
+     */
+    def getTopics(language: String = "en"): Try[List[Topic]] = {
+
+      val params = List("lang" -> language).filterNot(_._2 == "en")
+      val response = plurkOAuth.sendRequest(
+        "/APP/PlurkTop/getTopics", Verb.GET, params: _*
+      )
+
+      response.map { jsonData => 
+        jsonData.children.map(c => Topic(c)) 
+      }
+    }
+
   }
 
 }
