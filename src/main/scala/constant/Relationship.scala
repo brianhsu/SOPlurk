@@ -22,7 +22,7 @@ object Relationship {
    *  @return           Corresponding case object.
    *  @throws           NoSuchRelationshipException if no matched code.
    */
-  def apply(word: String) = word match {
+  def apply(word: String): Relationship = word match {
     case "not_saying"            => NotSaying
     case "single"                => Single
     case "married"               => Married

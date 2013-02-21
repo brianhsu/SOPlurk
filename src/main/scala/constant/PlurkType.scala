@@ -22,7 +22,7 @@ object PlurkType
    *  @param    code    Plurk's type code returned from Plurk's API.
    *  @return           Corresponding case object.
    */
-  def apply(code: Byte) = code match {
+  def apply(code: Byte): PlurkType = code match {
     case 0 => Public
     case 1 => Private
     case 2 => PublicResponded

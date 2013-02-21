@@ -8,17 +8,6 @@ Users
 Timeline
   /APP/Timeline/uploadPicture
 
-Alerts
-  General data structures
-  /APP/Alerts/getActive
-  /APP/Alerts/getHistory
-  /APP/Alerts/addAsFan
-  /APP/Alerts/addAllAsFan
-  /APP/Alerts/addAllAsFriends
-  /APP/Alerts/addAsFriend
-  /APP/Alerts/denyFriendship
-  /APP/Alerts/removeNotification
-
 Emoticons
   /APP/Emoticons/get
   /APP/Emoticons/addFromURL
