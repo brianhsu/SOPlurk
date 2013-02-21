@@ -101,6 +101,8 @@ object AlertsAPIMock extends PlurkOAuth(null) with MockOAuth {
 
       case ("/APP/Alerts/getActive", Verb.GET) => Success(activeResponse)
       case ("/APP/Alerts/getHistory", Verb.GET) => Success(historyResponse)
+      case ("/APP/Alerts/addAllAsFan", Verb.POST) => Success(successJSON)
+      case ("/APP/Alerts/addAllAsFriends", Verb.POST) => Success(successJSON)
       case _ => Failure(throw new Exception("Not implemented"))
     }
 
@@ -143,11 +145,13 @@ class AlertsSpec extends FunSpec with ShouldMatchers {
     }
 
     it ("accept all user's request as fans by /APP/Alerts/addAllAsFan correctly") {
-      pending
+      val isOK = plurkAPI.Alerts.addAllAsFan().get
+      isOK should be === true
     }
 
     it ("accept all users's request as friends by /APP/Alerts/addAllAsFriends correctly") {
-      pending
+      val isOK = plurkAPI.Alerts.addAllAsFriends().get
+      isOK should be === true
     }
 
     it ("remove notification by /APP/Alerts/removeNotification correctly") {

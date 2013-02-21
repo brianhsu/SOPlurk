@@ -49,6 +49,28 @@ trait Alerts {
 
     }
 
+    /**
+     *  Accept all friend request as fans.
+     *
+     *  @return   Success[Boolean](true) if everything is OK.
+     */
+    def addAllAsFan(): Try[Boolean] = {
+
+      val response = plurkOAuth.sendRequest("/APP/Alerts/addAllAsFan", Verb.POST)
+      response.map { jsonData => jsonData.get[String]("success_text") == "ok" }
+    }
+
+    /**
+     *  Accept all friend request as friends.
+     *
+     *  @return   Success[Boolean](true) if everything is OK.
+     */
+    def addAllAsFriends(): Try[Boolean] = {
+
+      val response = plurkOAuth.sendRequest("/APP/Alerts/addAllAsFriends", Verb.POST)
+      response.map { jsonData => jsonData.get[String]("success_text") == "ok" }
+    }
+
   }
 
 }
