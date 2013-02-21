@@ -10,8 +10,6 @@ Timeline
 
 Alerts
   General data structures
-  /APP/Alerts/addAsFan
-  /APP/Alerts/addAsFriend
   /APP/Alerts/denyFriendship
   /APP/Alerts/removeNotification
 
