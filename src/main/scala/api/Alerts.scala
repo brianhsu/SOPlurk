@@ -119,6 +119,22 @@ trait Alerts {
       response.map { jsonData => jsonData.get[String]("success_text") == "ok" }
     }
 
+    /**
+     *  Remove friendship request to user.
+     *
+     *  @param    userID    The id of user that the current user has requested friendship for.
+     *  @return             Success[Boolean](true) if everything is OK.
+     */
+    def removeNotification(userID: Long): Try[Boolean] = {
+
+      val response = plurkOAuth.sendRequest(
+        "/APP/Alerts/removeNotification", Verb.POST,
+        "user_id" -> userID.toString
+      )
+
+      response.map { jsonData => jsonData.get[String]("success_text") == "ok" }
+    }
+
   }
 
 }

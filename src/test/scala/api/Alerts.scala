@@ -162,7 +162,8 @@ class AlertsSpec extends FunSpec with ShouldMatchers {
     }
 
     it ("remove notification by /APP/Alerts/removeNotification correctly") {
-      pending
+      val isOK = plurkAPI.Alerts.removeNotification(1L).get
+      isOK should be === true
     }
 
 

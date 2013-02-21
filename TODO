@@ -8,11 +8,6 @@ Users
 Timeline
   /APP/Timeline/uploadPicture
 
-Alerts
-  General data structures
-  /APP/Alerts/denyFriendship
-  /APP/Alerts/removeNotification
-
 Emoticons
   /APP/Emoticons/get
   /APP/Emoticons/addFromURL
