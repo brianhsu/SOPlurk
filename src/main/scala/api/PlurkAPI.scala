@@ -13,11 +13,12 @@ import org.scribe.builder.api._
 
 import scala.util.Try
 
+import java.net.URLEncoder
 import java.util.Date
 import java.util.TimeZone
 import java.text.SimpleDateFormat
 
-class PlurkAPI private (val plurkOAuth: PlurkOAuth) extends Users with 
+class PlurkAPI private (val plurkOAuth: PlurkOAuth, val deviceID: Option[String]) extends Users with 
                 Profile with Polling with Timeline with Responses with 
                 FriendsFans with UserSearch with PlurkSearch with 
                 Cliques with Blocks with Alerts with Emoticons with 
@@ -33,7 +34,10 @@ class PlurkAPI private (val plurkOAuth: PlurkOAuth) extends Users with
   def getAuthorizationURL: Try[String] = Try {
     val service = plurkOAuth.service
     requestToken = Some(service.getRequestToken)
-    requestToken.map(service.getAuthorizationUrl).get
+    requestToken.map { token =>
+      val deviceIDParam = deviceID.map(id => s"&deviceid=${URLEncoder.encode(id, "UTF-8")}")
+      service.getAuthorizationUrl(token) + deviceIDParam.getOrElse("")
+    }.get
   }
 
   /**
@@ -75,11 +79,21 @@ object PlurkAPI {
    *  Create PlurkAPI object that user will be redirect to callbackURL
    *  when he verify this PlurkAPI client at Plurk.
    *
+   *  DeviceID is use to support multiple-device app, the previous access
+   *  token using the same `deviceID` will be overwritten, but access
+   *  token with other `deviceID` will still work.
+   *
+   *  Please see "Multiple-devices support" section in 
+   *  [[http://www.plurk.com/API/2 Plurk API Document]] for the details.
+   *
    *  @param    apiKey          API key from Plurk API console.
    *  @param    appSecret       API secret from Plurk API console.
    *  @param    callbackURL     OAuth callback URL.
+   *  @param    deviceID        DeviceID of application.
    */
-  def withCallback(apiKey: String, apiSecret: String, callbackURL: String) = {
+  def withCallback(apiKey: String, apiSecret: String, callbackURL: String, 
+                   deviceID: Option[String] = None) = {
+
     val service = (new ServiceBuilder).
                    provider(classOf[PlurkApi]).
                    apiKey(apiKey).
@@ -87,7 +101,7 @@ object PlurkAPI {
                    callback(callbackURL).
                    build()
     
-    new PlurkAPI(new PlurkOAuth(service))
+    new PlurkAPI(new PlurkOAuth(service), deviceID)
   }
 
   /**
@@ -96,20 +110,29 @@ object PlurkAPI {
    *  Create PlurkAPI object that user need to input his verify code
    *  get from Plurk when he verified this PlurkAPI client at Plurk.
    *
+   *  DeviceID is use to support multiple-device app, the previous access
+   *  token using the same `deviceID` will be overwritten, but access
+   *  token with other `deviceID` will still work.
+   *
+   *  Please see "Multiple-devices support" section in 
+   *  [[http://www.plurk.com/API/2 Plurk API Document]] for the details.
+   *
    *  @param    apiKey          API key from Plurk API console.
    *  @param    appSecret       API secret from Plurk API console.
+   *  @param    deviceID        The deviceID of application.
    */
-  def withoutCallback(apiKey: String, apiSecret: String) = {
+  def withoutCallback(apiKey: String, apiSecret: String, deviceID: Option[String]) = {
+
     val service = (new ServiceBuilder).
                    provider(classOf[PlurkApi]).
                    apiKey(apiKey).
                    apiSecret(apiSecret).
                    build()
     
-    new PlurkAPI(new PlurkOAuth(service))
+    new PlurkAPI(new PlurkOAuth(service), deviceID)
   }
 
-  private[soplurk] def withMock(mockOAuth: PlurkOAuth with MockOAuth) = new PlurkAPI(mockOAuth)
+  private[soplurk] def withMock(mockOAuth: PlurkOAuth with MockOAuth) = new PlurkAPI(mockOAuth, None)
 
   /**
    *  Format java.lang.Date object to `2009-6-20T21:55:34` in GMT timezone.
