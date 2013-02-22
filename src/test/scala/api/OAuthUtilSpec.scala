@@ -36,7 +36,7 @@ object OAuthUtilAPIMock extends PlurkOAuth(null) with MockOAuth {
   val checkTimeJSON = JsonParser.parse("""{
     "timestamp": 1361511154,
     "now": "Fri, 22 Feb 2013 05:32:34 GMT",
-    "user_id": 1367987,
+    "user_id": null,
     "app_id": 8477
   }""")
 
@@ -85,7 +85,7 @@ class OAuthUtilSpec extends FunSpec with ShouldMatchers {
 
     it ("get current time of Plurk servers by /APP/checkTime correctly") {
       val timeInfo = plurkAPI.OAuthUtils.checkTime.get
-      val correctTime = TimeInfo(8477L, 1367987L, 1361511154L, new Date(1361511154000L))
+      val correctTime = TimeInfo(8477L, None, 1361511154L, new Date(1361511154000L))
 
       timeInfo should be === correctTime
     }

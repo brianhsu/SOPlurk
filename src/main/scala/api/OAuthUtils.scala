@@ -78,7 +78,7 @@ trait OAuthUtils {
         
         TimeInfo(
           appID = jsonData.get("app_id"),
-          userID = jsonData.get("user_id"),
+          userID = jsonData.getOption("user_id"),
           timestamp = jsonData.get("timestamp"),
           now = toDate(jsonData.get("now"))
         )
