@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat
 class PlurkAPI private (val plurkOAuth: PlurkOAuth) extends Users with 
                 Profile with Polling with Timeline with Responses with 
                 FriendsFans with UserSearch with PlurkSearch with 
-                Cliques with Blocks with Alerts with Emoticons {
+                Cliques with Blocks with Alerts with Emoticons with PlurkTop {
 
   private var requestToken: Option[Token] = None
 
@@ -273,6 +273,15 @@ object PlurkAPI {
     recruited: Map[Int, List[Emoticon]],
     karma: Map[Int, List[Emoticon]]
   )
+
+  /**
+   *  Represented the page returned by PlurkTop.getPlurks
+   *
+   *  @param  users   The information about users that posted a Plurk.
+   *  @param  plurks  The plurks in this page.
+   *  @param  offset  The offset of this page, you need using this to get next page.
+   */
+  case class PlurkTopResult(users: Map[Long, User], plurks: List[TopPlurk], offset: Double)
 
 }
 

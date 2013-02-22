@@ -2,10 +2,6 @@ package org.bone.soplurk.model
 
 import net.liftweb.json.JValue
 
-import java.util.Date
-import java.util.Locale
-import java.text.SimpleDateFormat
-
 /**
  *  Represented as a user's friend completion entry.
  *
