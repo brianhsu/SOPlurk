@@ -40,15 +40,23 @@ object OAuthUtilAPIMock extends PlurkOAuth(null) with MockOAuth {
     "app_id": 8477
   }""")
 
+  val echoJSON = JsonParser.parse("""{
+    "length": 8,
+    "data": "testDATA"
+  }""")
+
   override def sendRequest(url: String, method: Verb, 
                            params: (String, String)*): Try[JValue] = {
 
+
+    def hasData(data: String) = params.contains("data" -> data)
 
     (url, method) match {
 
       case ("/APP/checkToken", Verb.GET) => Success(checkTokenJSON)
       case ("/APP/expireToken", Verb.POST) => Success(expireTokenJSON)
       case ("/APP/checkTime", Verb.GET) => Success(checkTimeJSON)
+      case ("/APP/echo", Verb.POST) if hasData("testDATA") => Success(echoJSON)
       case _ => Failure(throw new Exception("Not implemented"))
     }
 
@@ -83,7 +91,8 @@ class OAuthUtilSpec extends FunSpec with ShouldMatchers {
     }
 
     it ("get echo of OAuth request by /APP/echo correctly") {
-      pending
+      val echo = plurkAPI.OAuthUtils.echo("testDATA").get
+      echo should be === (8, "testDATA")
     }
 
   }

@@ -86,6 +86,24 @@ trait OAuthUtils {
 
     }
 
+    /**
+     *  Test for argument passing
+     *
+     *  This method will return the `data` you passed in.
+     *
+     *  @return   Success[(length, data)] if success.
+     *
+     */
+    def echo(data: String): Try[(Int, String)] = {
+      
+      val response = plurkOAuth.sendRequest("/APP/echo", Verb.POST, "data" -> data)
+
+      response.map { jsonData =>
+        (jsonData.get[Int]("length"), jsonData.get("data"))
+      }
+
+    }
+
 
 
   }
