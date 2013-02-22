@@ -10,6 +10,8 @@ import org.scribe.model.Verb
 import net.liftweb.json.JsonAST._
 
 import scala.util.Try
+
+import java.io.File
 import java.util.Date
 
 trait Timeline {
@@ -462,6 +464,13 @@ trait Timeline {
 
       response.map { jsonData => 
         jsonData.get[String]("success_text") == "ok"
+      }
+    }
+
+    def uploadPicture(file: File): Try[(String, String)] = {
+      val response = plurkOAuth.uploadFile("/APP/Timeline/uploadPicture", "image", file)
+      response.map { jsonData =>
+        (jsonData.get("full"), jsonData.get("thumbnail"))
       }
     }
   }

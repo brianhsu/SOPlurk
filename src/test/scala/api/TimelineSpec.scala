@@ -16,7 +16,7 @@ import net.liftweb.json.JsonAST._
 import net.liftweb.json.JsonParser
 
 import scala.util.{Try, Success, Failure}
-
+import java.io.File
 
 object TimelineAPIMock extends PlurkOAuth(null) with MockOAuth {
 
@@ -607,6 +607,22 @@ object TimelineAPIMock extends PlurkOAuth(null) with MockOAuth {
   val favoritePlurksResponse = JsonParser.parse("""{"success_text": "ok"}""")
   val unfavoritePlurksResponse = JsonParser.parse("""{"success_text": "ok"}""")
   val markAsReadResponse = JsonParser.parse("""{"success_text": "ok"}""")
+  val uploadResponse = JsonParser.parse("""{
+    "full": "http://images.plurk.com/full.jpg", 
+    "thumbnail": "http://images.plurk.com/thumbnail.jpg"
+  }""")
+
+  override def uploadFile(url: String, 
+                         parameterName: String, 
+                         file: File): Try[JValue] = {
+    
+    if (url == "/APP/Timeline/uploadPicture" && parameterName == "image") {
+      Success(uploadResponse)
+    } else {
+      Failure(throw new Exception("Not Implemented"))
+    }
+
+  }
 
   override def sendRequest(url: String, method: Verb, 
                            params: (String, String)*): Try[JValue] = {
@@ -805,6 +821,15 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
       replurkStatus(1098983626L).isSuccess should be === true
       replurkStatus(1098983626L).plurk.plurkID should be === 1098983626L
       replurkStatus(1098776249L).plurk.plurkID should be === 1098776249L
+    }
+
+    it ("should upload picture by /APP/Timeline/uploadPicture corectly") {
+
+      val (fullImageURL, thumbnailURL) = plurkAPI.Timeline.uploadPicture(new File("null.jpg")).get
+
+      fullImageURL should be === "http://images.plurk.com/full.jpg"
+      thumbnailURL should be === "http://images.plurk.com/thumbnail.jpg"
+
     }
 
   }

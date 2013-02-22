@@ -31,7 +31,7 @@ class PlurkOAuth(val service: OAuthService)  {
   private val plurkAPIPrefix = "http://www.plurk.com"
 
   /**
-   *  Default's to empty token, so we can use two-legged OAuth API.
+   *  Default to empty token, so we can use two-legged OAuth API.
    */
   private[soplurk] var accessToken: Option[Token] = Some(new Token("", ""))
 
@@ -46,9 +46,56 @@ class PlurkOAuth(val service: OAuthService)  {
 
     val request = buildRequest(url, method, params: _*)
 
+    accessToken.foreach { token => service.signRequest(token, request) }
+
     Try {
       val response = request.send
       parseResponse(response.getCode, response.getBody).get
+    }
+  }
+
+  /**
+   *  Upload file to Plurk
+   *
+   *  @param  url               The Plurk API request URL.
+   *  @param  parameterName     The parameter name of API call.
+   *  @param  file              The file you want to upload.
+   */
+  def uploadFile(url: String, parameterName: String, 
+                 file: File): Try[JValue] = Try {
+
+    if (!file.isFile || !file.exists) {
+      throw new RequestException(0, "File not found:" + file)
+    }
+
+    val request = buildRequest(url, Verb.POST)
+
+    accessToken.foreach { token => service.signRequest(token, request) }
+
+    val oauthParams = request.getOauthParameters.asScala
+    val queryString = oauthParams.map { case(name, value) => 
+      new Parameter(name, value).asUrlEncodedPair
+    }
+
+    val httpClient = new HttpClient
+    val fullURL = request.getCompleteUrl + queryString.mkString("?", "&", "")
+    val post = new PostMethod(fullURL)
+
+    try {
+
+      val filePart = new FilePart(parameterName, file.getName(), file, "binary/octet-stream", "UTF-8")
+      val parts = Array[Part](filePart)
+
+      parts.foreach(_.asInstanceOf[FilePart].setTransferEncoding("binary"))
+      post.setRequestEntity(new MultipartRequestEntity(parts, post.getParams()))
+
+      val code = httpClient.executeMethod(post)
+      val responseBody = Source.fromInputStream(post.getResponseBodyAsStream).mkString
+      
+      parseResponse(code, responseBody).get
+
+    } finally {
+      post.releaseConnection();
     }
   }
 
@@ -128,55 +175,9 @@ class PlurkOAuth(val service: OAuthService)  {
       params.foreach { case(key, value) => request.addQuerystringParameter(key, value) }
     }
 
-    accessToken.foreach {
-      service.signRequest(_, request)
-    }
-
     request
   }
 
-  /**
-   *  Upload file to Plurk
-   *
-   *  @param  url               The Plurk API request URL.
-   *  @param  parameterName     The parameter name of API call.
-   *  @param  file              The file you want to upload.
-   */
-  private def uploadFile(url: String, 
-                         parameterName: String, 
-                         file: File): Try[JValue] = Try {
-
-    if (!file.isFile || !file.exists) {
-      throw new RequestException(0, "File not found:" + file)
-    }
-
-    val request = buildRequest(url, Verb.POST)
-    val oauthParams = request.getOauthParameters.asScala
-    val queryString = oauthParams.map { case(name, value) => 
-      new Parameter(name, value).asUrlEncodedPair
-    }
-
-    val httpClient = new HttpClient
-    val fullURL = request.getCompleteUrl + queryString.mkString("?", "&", "")
-    val post = new PostMethod(fullURL)
-
-    try {
-
-      val filePart = new FilePart(parameterName, file.getName(), file, "binary/octet-stream", "UTF-8")
-      val parts = Array[Part](filePart)
-
-      parts.foreach(_.asInstanceOf[FilePart].setTransferEncoding("binary"))
-      post.setRequestEntity(new MultipartRequestEntity(parts, post.getParams()))
-
-      val code = httpClient.executeMethod(post)
-      val responseBody = Source.fromInputStream(post.getResponseBodyAsStream).mkString
-      
-      parseResponse(code, responseBody).get
-
-    } finally {
-      post.releaseConnection();
-    }
-  }
 
 }
 
