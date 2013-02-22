@@ -11,6 +11,7 @@ import net.liftweb.json.JsonAST._
 import net.liftweb.json.JsonParser
 
 import scala.util.{Try, Success, Failure}
+import java.io.File
 
 import org.scalatest.FunSpec
 import org.scalatest.matchers.ShouldMatchers
@@ -56,6 +57,35 @@ object UserAPIMock extends PlurkOAuth(null) with MockOAuth {
         "1360915735-121.02"
     ]
   }""")
+
+  val updatePictureJSON = JsonParser.parse("""{
+    "verified_account":false,
+    "default_lang":"tr_ch",
+    "dateformat":0,
+    "nick_name":"linuxhsu",
+    "has_profile_image":1,
+    "location":"Taipei, Taiwan",
+    "bday_privacy":2,
+    "date_of_birth":"Wed, 24 Nov 2010 00:00:00 GMT",
+    "karma":1.2,
+    "full_name":"c d hw gee",
+    "gender":1,
+    "timezone":null,
+    "id":7462357,
+    "avatar":2
+  }""")
+
+  override def uploadFile(url: String, 
+                         parameterName: String, 
+                         file: File): Try[JValue] = {
+    
+    if (url == "/APP/Users/updatePicture" && parameterName == "profile_image") {
+      Success(updatePictureJSON)
+    } else {
+      Failure(throw new Exception("Not Implemented"))
+    }
+
+  }
 
   override def sendRequest(url: String, method: Verb, 
                            params: (String, String)*): Try[JValue] = {
@@ -107,6 +137,11 @@ class UsersSpec extends FunSpec with ShouldMatchers {
       val Success(karmaStats) = plurkAPI.Users.getKarmaStats
       karmaStats should be === correctStats
 
+    }
+
+    it ("update profile image by /APP/Users/updatePicture correctly") {
+      val updatedUser = plurkAPI.Users.updatePicture(new File("null.jpg")).get
+      updatedUser.avatarVersion should be === Some(2)
     }
 
   }

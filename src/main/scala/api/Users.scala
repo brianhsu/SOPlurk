@@ -3,8 +3,11 @@ package org.bone.soplurk.api
 import org.bone.soplurk.constant._
 import org.bone.soplurk.model._
 
-import java.util.Date
 import org.scribe.model.Verb
+
+import java.util.Date
+import java.io.File
+
 import scala.util.Try
 
 trait Users {
@@ -97,6 +100,19 @@ trait Users {
     def getKarmaStats: Try[KarmaStats] = {
       val response = plurkOAuth.sendRequest("/APP/Users/getKarmaStats", Verb.GET)
       response.map( jsonData => KarmaStats(jsonData))
+    }
+
+    /**
+     *  Update User's avatar image.
+     *
+     *  According to Plurk API document, the picture will be scaled down to 3 versions: big, medium and small. 
+     *  The optimal size of profile_image should be 195x195 pixels. 
+     *
+     *  @param  file    The new image file of avatar.
+     */
+    def updatePicture(file: File): Try[User] = {
+      val response = plurkOAuth.uploadFile("/APP/Users/updatePicture", "profile_image", file)
+      response.map { jsonData => User(jsonData) }
     }
   }
 
