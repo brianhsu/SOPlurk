@@ -322,5 +322,17 @@ object PlurkAPI {
     def requestURL = s"$cometServer&offset=$offset"
   }
 
+  /**
+   *  The event from Realtime channel.
+   *
+   *  @param  nextChannel   What channel you should get in next request?
+   *  @param  event         Current events. 
+   *                        Each element in it is either a `Plurk` or `RealtimeResponse` 
+   */
+  case class RealtimeEvent(
+    nextChannel: UserChannel, 
+    events: List[Either[Plurk, RealtimeResponse]]
+  )
+
 }
 

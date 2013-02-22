@@ -43,6 +43,35 @@ trait Realtime {
 
     }
 
+    /**
+     *  Get events from UserChannel
+     *
+     *  According to Plurk API document, this request will sleep for about 50 seconds
+     *  if there is no new events.
+     *
+     *  @param  channel   The channel you want to get from.
+     */
+    def getEvents(channel: UserChannel): Try[RealtimeEvent] = {
+
+      val response = plurkOAuth.sendRequest(channel.requestURL, Verb.GET)
+
+      response.map { jsonData =>
+        
+        val nextChannel = channel.copy(offset = jsonData.get[Int]("new_offset"))
+        val events = (jsonData \ "data").children.map { event =>
+          
+          val eventType = event.get[String]("type")
+
+          eventType match {
+            case "new_plurk"    => Left(Plurk(event))
+            case "new_response" => Right(RealtimeResponse(event))
+          }
+        }
+
+        RealtimeEvent(nextChannel, events)
+      }
+    }
+
   }
 
 }
