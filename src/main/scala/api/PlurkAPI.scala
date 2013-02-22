@@ -121,7 +121,7 @@ object PlurkAPI {
    *  @param    appSecret       API secret from Plurk API console.
    *  @param    deviceID        The deviceID of application.
    */
-  def withoutCallback(apiKey: String, apiSecret: String, deviceID: Option[String]) = {
+  def withoutCallback(apiKey: String, apiSecret: String, deviceID: Option[String] = None) = {
 
     val service = (new ServiceBuilder).
                    provider(classOf[PlurkApi]).
