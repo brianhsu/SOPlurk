@@ -20,7 +20,8 @@ import java.text.SimpleDateFormat
 class PlurkAPI private (val plurkOAuth: PlurkOAuth) extends Users with 
                 Profile with Polling with Timeline with Responses with 
                 FriendsFans with UserSearch with PlurkSearch with 
-                Cliques with Blocks with Alerts with Emoticons with PlurkTop {
+                Cliques with Blocks with Alerts with Emoticons with 
+                PlurkTop with OAuthUtils {
 
   private var requestToken: Option[Token] = None
 
@@ -282,6 +283,29 @@ object PlurkAPI {
    *  @param  offset  The offset of this page, you need using this to get next page.
    */
   case class PlurkTopResult(users: Map[Long, User], plurks: List[TopPlurk], offset: Double)
+
+  /**
+   *  Token Information returned by OAuth Utilities API
+   *
+   *  @param  appID       Application ID of this access token.
+   *  @param  userID      The ID of this access token's user
+   *  @param  issued      When did this token is issued?
+   *  @param  deviceID    deviceID used to authorize this token 
+   */
+  case class TokenInfo(appID: Long, userID: Long, issued: Date, deviceID: String)
+
+  /**
+   *  Plurk Server Time information.
+   *
+   *  The `timestamp` is unix timestamp, you need mutiple it with 1000 if you
+   *  want to use it to construct `java.util.Date` with it.
+   *
+   *  @param  appID       The appID of this access token.
+   *  @param  userID      The userID of this access token.
+   *  @param  timestamp   Unix timestamp of current time of Plurk servers.
+   *  @param  now         Current date time of Plurk servers.
+   */
+  case class TimeInfo(appID: Long, userID: Long, timestamp: Long, now: Date)
 
 }
 
