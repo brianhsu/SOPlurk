@@ -1,8 +1,7 @@
-package org.bone.splurk2.model
+package org.bone.soplurk.model
 
-import org.bone.splurk2.exceptions._
-import org.bone.splurk2.model._
-import org.bone.splurk2.model.PlurkType._
+import org.bone.soplurk.exceptions._
+import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
 import org.scalatest.matchers.ShouldMatchers
@@ -18,7 +17,7 @@ class KarmaStatsSpec extends FunSpec with ShouldMatchers {
 
     it ("should able to parse plurk's karma data that without fall reason") {
       val correctStats = new KarmaStats (
-        current = 121.02,
+        current = 121,
         fallReason = None,
         graphURL = "http://image.example/graph1",
         trend = List(
@@ -53,7 +52,7 @@ object KarmaStatsSpec {
 
   val withoutReason = JsonParser.parse("""{
     "karma_fall_reason": "",
-    "current_karma": 121.02,
+    "current_karma": 121,
     "karma_graph": "http://image.example/graph1",
     "karma_trend": [
         "1360080759-120.75",
@@ -74,5 +73,3 @@ object KarmaStatsSpec {
   }""")
 
 }
-
-

@@ -1,5 +1,6 @@
-package org.bone.splurk2.model
+package org.bone.soplurk.model
 
+import org.bone.soplurk.constant._
 import net.liftweb.json.JsonAST._
 import java.util.Date
 
@@ -30,7 +31,7 @@ case class User (
   gender: Gender,
   karma: Double,
   hasProfileImage: Boolean,
-  birthdayPrivacy: BirthdayPrivacy,
+  birthdayPrivacy: Option[BirthdayPrivacy],
   defaultLanguage: String,
   avatarVersion: Option[Int],
   location: Option[String],
@@ -82,19 +83,19 @@ object User {
    *  @param    user    The user JSON data returned by Plurk.
    */
   def apply(user: JValue) = new User (
-    id = user.get[BigInt]("id").toLong,
+    id = user.get("id"),
     nickname = user.get("nick_name"),
     fullName = user.get("full_name"),
     displayName = user.get("display_name"),
     isVerifiedAccount = user.get("verified_account"),
-    gender = Gender(user.get[BigInt]("gender").toByte),
-    karma = user.get[Double]("karma"),
-    hasProfileImage = (user.get[BigInt]("has_profile_image") == 1),
-    birthdayPrivacy = BirthdayPrivacy(user.get[BigInt]("bday_privacy").toByte),
+    gender = Gender(user.get[Int]("gender").toByte),
+    karma = user.get("karma"),
+    hasProfileImage = (user.get[Int]("has_profile_image") == 1),
+    birthdayPrivacy = user.getOption[Int]("bday_privacy").map(x => BirthdayPrivacy(x.toByte)),
     defaultLanguage = user.get("default_lang"),
-    avatarVersion = user.getOption[BigInt]("avatar").map(_.toInt),
+    avatarVersion = user.getOption("avatar"),
     location = user.getOption("location"),
-    birthday = user.getOption("date_of_birth").map(toDate),
+    birthday = user.getOption[String]("date_of_birth").map(toDate),
     timezone = user.getOption("timezone"),
     nameColor = user.getOption("name_color")
   )

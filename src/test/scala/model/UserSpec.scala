@@ -1,8 +1,8 @@
-package org.bone.splurk2.model
+package org.bone.soplurk.model
 
-import org.bone.splurk2.exceptions._
-import org.bone.splurk2.model._
-import org.bone.splurk2.model.PlurkType._
+import org.bone.soplurk.constant._
+import org.bone.soplurk.exceptions._
+import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
 import org.scalatest.matchers.ShouldMatchers
@@ -26,7 +26,7 @@ class UserSpec extends FunSpec with ShouldMatchers {
         gender = Gender.Female,
         karma = 100.31,
         hasProfileImage = true,
-        birthdayPrivacy = BirthdayPrivacy.ShowAll,
+        birthdayPrivacy = Some(BirthdayPrivacy.ShowAll),
         defaultLanguage = "tr_ch",
         avatarVersion = Some(54),
         location = Some("Tapei, Taiwan"),
@@ -48,7 +48,7 @@ class UserSpec extends FunSpec with ShouldMatchers {
         gender = Gender.Female,
         karma = 114.51,
         hasProfileImage = true,
-        birthdayPrivacy = BirthdayPrivacy.ShowAll,
+        birthdayPrivacy = Some(BirthdayPrivacy.ShowAll),
         defaultLanguage = "tr_ch",
         avatarVersion = Some(86),
         location = Some("Fatimaid, Taiwan"),
