@@ -9,6 +9,5 @@ Timeline
   /APP/Timeline/uploadPicture
 
 OAuth Utilities
-  /APP/expireToken
   /APP/checkTime
   /APP/echo

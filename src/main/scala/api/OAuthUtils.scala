@@ -45,8 +45,27 @@ trait OAuthUtils {
           deviceID = jsonData.get("deviceid")
         )
       }
-
     }
+
+    /**
+     *  Expire current access token 
+     *
+     *  @return   Success[TokenInfo] if expire token correctly.
+     */
+    def expireToken: Try[TokenInfo] = {
+      val response = plurkOAuth.sendRequest("/APP/expireToken", Verb.POST)
+
+      response.map { jsonData =>
+        TokenInfo(
+          appID = jsonData.get("app_id"),
+          userID = jsonData.get("user_id"),
+          issued = toDate(jsonData.get[String]("issued")),
+          deviceID = jsonData.get("deviceid")
+        )
+      }
+    }
+
+
 
   }
 

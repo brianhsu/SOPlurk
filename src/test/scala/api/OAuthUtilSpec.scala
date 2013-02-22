@@ -27,6 +27,10 @@ object OAuthUtilAPIMock extends PlurkOAuth(null) with MockOAuth {
   }""")
 
   val expireTokenJSON = JsonParser.parse("""{
+    "issued": "Fri, 22 Feb 2013 05:11:23 GMT",
+    "user_id": 1367986,
+    "app_id": 8476,
+    "deviceid": "iphone"
   }""")
 
   override def sendRequest(url: String, method: Verb, 
@@ -36,7 +40,7 @@ object OAuthUtilAPIMock extends PlurkOAuth(null) with MockOAuth {
     (url, method) match {
 
       case ("/APP/checkToken", Verb.GET) => Success(checkTokenJSON)
-      case ("/APP/expireToken", Verb.GET) => Success(expireTokenJSON)
+      case ("/APP/expireToken", Verb.POST) => Success(expireTokenJSON)
       case _ => Failure(throw new Exception("Not implemented"))
     }
 
@@ -57,7 +61,9 @@ class OAuthUtilSpec extends FunSpec with ShouldMatchers {
     }
 
     it ("expire token by /APP/checkToken correctly") {
-      pending
+      val tokenInfo = plurkAPI.OAuthUtils.expireToken.get
+      val correctToken = TokenInfo(8476L, 1367986L, new Date(1361509883000L), "iphone")
+      tokenInfo should be === correctToken
     }
 
     it ("get current time of Plurk servers by /APP/checkTime correctly") {
