@@ -72,8 +72,6 @@ class PlurkOAuth(val service: OAuthService)  {
 
     val isSuccess = code >= 200 && code < 400
 
-    println(stripOutCometPrefix)
-
     isSuccess match {
       case true  => parseResponseToJSON(code, stripOutCometPrefix)
       case false => Failure(

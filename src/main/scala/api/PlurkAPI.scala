@@ -21,7 +21,7 @@ class PlurkAPI private (val plurkOAuth: PlurkOAuth) extends Users with
                 Profile with Polling with Timeline with Responses with 
                 FriendsFans with UserSearch with PlurkSearch with 
                 Cliques with Blocks with Alerts with Emoticons with 
-                PlurkTop with OAuthUtils {
+                PlurkTop with OAuthUtils with Realtime {
 
   private var requestToken: Option[Token] = None
 
@@ -306,6 +306,21 @@ object PlurkAPI {
    *  @param  now         Current date time of Plurk servers.
    */
   case class TimeInfo(appID: Long, userID: Option[Long], timestamp: Long, now: Date)
+
+  /**
+   *  The user channel of Plurk Realtime API.
+   *
+   *  @param  cometServer   The server of comet.
+   *  @param  channelName   Name of this channel
+   *  @param  offset        Offset in this channel
+   */
+  case class UserChannel(cometServer: String, channelName: String, offset: Int) {
+
+    /**
+     *  You should use this URL to get response from Plurk.
+     */
+    def requestURL = s"$cometServer&offset=$offset"
+  }
 
 }
 
