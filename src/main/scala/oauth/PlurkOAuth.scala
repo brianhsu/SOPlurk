@@ -33,7 +33,8 @@ class PlurkOAuth(val service: OAuthService)  {
    */
   def sendRequest(url: String, method: Verb, params: (String, String)*): Try[JValue] = {
 
-    val request = buildRequest(plurkAPIPrefix + url, method, params: _*)
+    val fullURL = if(url.startsWith("http")) url else plurkAPIPrefix + url
+    val request = buildRequest(fullURL, method, params: _*)
 
     accessToken.foreach {
       service.signRequest(_, request)
@@ -62,10 +63,19 @@ class PlurkOAuth(val service: OAuthService)  {
 
     import MyJValueImplicits._
     
+    def stripOutCometPrefix = responseBody.startsWith("CometChannel.scriptCallback") match {
+      case false => responseBody
+      case true  => 
+        val regex = """(CometChannel.scriptCallback\()(.*)(\).*)""".r
+        regex.findFirstMatchIn(responseBody).map(_.group(2).trim).getOrElse(responseBody)
+    }
+
     val isSuccess = code >= 200 && code < 400
 
+    println(stripOutCometPrefix)
+
     isSuccess match {
-      case true  => parseResponseToJSON(code, responseBody)
+      case true  => parseResponseToJSON(code, stripOutCometPrefix)
       case false => Failure(
         JsonParser.parseOpt(responseBody).
                    map(x => new RequestException(code, x.get("error_text"))).
@@ -76,15 +86,22 @@ class PlurkOAuth(val service: OAuthService)  {
 
   private def parseResponseToJSON(code: Int, responseBody: String) = Try {
     
-    val response = JsonParser.parse(responseBody)
-    val errorText = (response \\ "error_text")
+    val response = JsonParser.parseOpt(responseBody)
 
-    errorText match {
-      case JString(msg) => throw new RequestException(code, "error_text:" + msg)
-      case _ =>
+    val result = response match {
+      case None       => throw new RequestException(code, responseBody)
+      case Some(json) =>
+
+        val errorText = (json \\ "error_text")
+
+        errorText match {
+          case JString(msg) => throw new RequestException(code, "error_text:" + msg)
+          case _ => json
+        }
+
     }
 
-    response
+    result
   }
 
   /**
@@ -94,7 +111,9 @@ class PlurkOAuth(val service: OAuthService)  {
    *  @param    method      HTTP method type.
    *  @param    params      Parameters to send.
    */
-  private def buildRequest(url: String, method: Verb, params: (String, String)*): OAuthRequest = {
+  private def buildRequest(url: String, 
+                           method: Verb, 
+                           params: (String, String)*): OAuthRequest = {
 
     val request = new OAuthRequest(method, url)
 
