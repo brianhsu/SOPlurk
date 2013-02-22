@@ -294,5 +294,18 @@ object PlurkAPI {
    */
   case class TokenInfo(appID: Long, userID: Long, issued: Date, deviceID: String)
 
+  /**
+   *  Plurk Server Time information.
+   *
+   *  The `timestamp` is unix timestamp, you need mutiple it with 1000 if you
+   *  want to use it to construct `java.util.Date` with it.
+   *
+   *  @param  appID       The appID of this access token.
+   *  @param  userID      The userID of this access token.
+   *  @param  timestamp   Unix timestamp of current time of Plurk servers.
+   *  @param  now         Current date time of Plurk servers.
+   */
+  case class TimeInfo(appID: Long, userID: Long, timestamp: Long, now: Date)
+
 }
 

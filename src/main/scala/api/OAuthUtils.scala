@@ -65,6 +65,27 @@ trait OAuthUtils {
       }
     }
 
+    /**
+     *  Get current time of Plurk servers.
+     *
+     *  @return   Success[TimeInfo] if get data successfully.
+     */
+    def checkTime: Try[TimeInfo] = {
+      
+      val response = plurkOAuth.sendRequest("/APP/checkTime", Verb.GET)
+
+      response.map { jsonData =>
+        
+        TimeInfo(
+          appID = jsonData.get("app_id"),
+          userID = jsonData.get("user_id"),
+          timestamp = jsonData.get("timestamp"),
+          now = toDate(jsonData.get("now"))
+        )
+      }
+
+    }
+
 
 
   }
