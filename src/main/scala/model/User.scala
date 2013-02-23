@@ -10,7 +10,9 @@ import java.util.Date
  *  @param  id                  The unique user id.
  *  @param  nickname            The unique nick_name of the user.
  *  @param  displayName         The non-unique display name of the user.
- *  @param  isVerifiedAccount   Is this user a [[http://www.plurk.com/Verify/ Plurk verified account]]?
+ *  @param  isVerifiedAccount   Is this user a 
+ *                              [[http://www.plurk.com/Verify/ Plurk verified account]]?
+ *
  *  @param  gender              The user's gender
  *  @param  karma               User's karma value
  *  @param  hasProfileImage     Does this user have profile image?
@@ -18,8 +20,12 @@ import java.util.Date
  *  @param  defaultLanguage     User's default language.
  *  @param  avatarVersion       The user's avatar version.
  *  @param  location            The user's location.
- *  @param  birthday            The user's birthday, if birthday privact is set to HideYear, year will be 1904.
- *  @param  timezone            The user's timezone, None if user has set it to browser's default.
+ *  @param  birthday            The user's birthday, if birthday privact is set to 
+ *                              HideYear, year will be 1904.
+ *
+ *  @param  timezone            The user's timezone, None if user has set it to 
+ *                              browser's default.
+ *
  *  @param  nameColor           The user's name color in HTML hex color value.
  */
 case class User (
@@ -69,14 +75,8 @@ case class User (
 object User {
 
   import MyJValueImplicits._
-  import java.text.SimpleDateFormat
-  import java.util.Locale
+  import org.bone.soplurk.util.DateTimeUtils
 
-  private def toDate(dateString: String): Date = {
-    val dateFormatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.US)
-    dateFormatter.parse(dateString)
-  }
-  
   /**
    *  Create BasicUser object from Plurk's user data JSON.
    *
@@ -95,7 +95,7 @@ object User {
     defaultLanguage = user.get("default_lang"),
     avatarVersion = user.getOption("avatar"),
     location = user.getOption("location"),
-    birthday = user.getOption[String]("date_of_birth").map(toDate),
+    birthday = user.getOption[String]("date_of_birth").map(DateTimeUtils.fromPlurkDate),
     timezone = user.getOption("timezone"),
     nameColor = user.getOption("name_color")
   )
