@@ -281,15 +281,15 @@ object PlurkAPI {
    *        0 -> List(Emoticon(""":-))""",  "http://statics.plurk.com/4.gif"), 
    *                  Emoticon(""":-)""",   "http://statics.plurk.com/5.gif")), 
    *
-   *       25 -> List(Emoticon("""(:""",        "http://statics.plurk.com/6.gif), 
-   *                  Emoticon("""(K)""",       "http://statics.plurk.com/7.gif), 
-   *                  Emoticon("""(angry)""",   "http://statics.plurk.com/8.gif), 
-   *                  Emoticon("""(annoyed)""", "http://statics.plurk.com/9.gif))
+   *       25 -> List(Emoticon("""(:""",        "http://statics.plurk.com/6.gif"), 
+   *                  Emoticon("""(K)""",       "http://statics.plurk.com/7.gif"), 
+   *                  Emoticon("""(angry)""",   "http://statics.plurk.com/8.gif"), 
+   *                  Emoticon("""(annoyed)""", "http://statics.plurk.com/9.gif"))
    *    )
    *  }}}
    *
-   *  It means you need karma >= 0 to use """:-))""" and """:-)""", and
-   *  karma >= 25 to use """(:""", """(K)""", """(angry)""", "(annoyed)""".
+   *  It means you need karma >= 0 to use `:-))` and `:-)`, 
+   *  karma >= 25 to use `(:`, `(K)`, `(angry)`, `(annoyed)`.
    *
    *  @param  custom      Custom icons uploaded by user.
    *  @param  recruited   key is the lower bound of recrutied count 

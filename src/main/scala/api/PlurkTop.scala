@@ -68,10 +68,12 @@ trait PlurkTop {
      *  You need to do the following to get the second page:
      *
      *  {{{
+     *
      *    val Success(secondPage) = plurkAPI.getPlurks(
      *      collectionName = "Taiwan", 
      *      offset = Some(firstPage.offset)
      *    )
+     *
      *  }}}
      *
      *

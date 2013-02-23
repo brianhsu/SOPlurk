@@ -24,7 +24,7 @@ import scala.util.{Try, Success, Failure}
 
 import java.io.File
 
-trait MockOAuth extends PlurkOAuth
+private[soplurk] trait MockOAuth extends PlurkOAuth
 
 class PlurkOAuth(val service: OAuthService)  {
 
