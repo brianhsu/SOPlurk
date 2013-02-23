@@ -7,8 +7,8 @@ version := "0.1"
 scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature")
 
 scalacOptions in (Compile, doc) ++= Seq(
-  "-doc-root-content", "src/doc/index.txt",
-  "-doc-title", "SOPlurk API document"
+  "-doc-root-content", "README.scaladoc",
+  "-doc-title", "SOPlurk 0.1 API document"
 )
 
 docDirectory in Compile <<= (baseDirectory / "scaladoc")
