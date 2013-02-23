@@ -50,16 +50,12 @@ case class Plurk(
 
 object Plurk {
   
+  import org.bone.soplurk.util.DateTimeUtils
   import MyJValueImplicits._
-  import java.text.SimpleDateFormat
-  import java.util.Locale
 
-  private def toDate(dateString: String): Date = {
-    val dateFormatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.US)
-    dateFormatter.parse(dateString)
+  private def urlFromID(plurkID: Long) = {
+    raw"http://www.plurk.com/p/${JLong.toString(plurkID, 36)}"
   }
-
-  private def urlFromID(plurkID: Long) = raw"http://www.plurk.com/p/${JLong.toString(plurkID, 36)}"
 
   /**
    *  Create Plurk object from Plurk JSON data.
@@ -72,12 +68,12 @@ object Plurk {
     ownerID = plurk.get("owner_id"),
     userID = plurk.get("user_id"),
     qualifier = Qualifier(plurk.get("qualifier")),
-    content = plurk.get[String]("content"),
+    content = plurk.get("content"),
     plurkType = PlurkType(plurk.get[Int]("plurk_type").toByte),
     readStatus = plurk.getOption[Int]("is_unread").map(code => ReadStatus(code.toByte)),
     whoIsCommentable = CommentSetting(plurk.get[Int]("no_comments").toByte),
-    posted = toDate(plurk.get("posted")),
-    language = plurk.get[String]("lang"),
+    posted = DateTimeUtils.fromPlurkDate(plurk.get("posted")),
+    language = plurk.get("lang"),
     responseCount = plurk.get("response_count"),
     replurkInfo = ReplurkInfo(plurk),
     favoriteInfo = FavoriteInfo(plurk),

@@ -30,12 +30,9 @@ case class Response(
 
 object Response {
 
+  import org.bone.soplurk.util.DateTimeUtils
   import MyJValueImplicits._
 
-  private def toDate(dateString: String): Date = {
-    val dateFormatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.US)
-    dateFormatter.parse(dateString)
-  }
 
   /**
    *  Create Response object from JSON returned by Plurk.
@@ -50,8 +47,8 @@ object Response {
       id = jsonData.get("id"),
       content = jsonData.get("content"),
       contentRaw = jsonData.get("content_raw"),
-      qualifier = Qualifier(jsonData.get[String]("qualifier")),
-      posted = toDate(jsonData.get[String]("posted")),
+      qualifier = Qualifier(jsonData.get("qualifier")),
+      posted = DateTimeUtils.fromPlurkDate(jsonData.get("posted")),
       language = jsonData.get("lang")
     )
   }

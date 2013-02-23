@@ -20,14 +20,7 @@ trait OAuthUtils {
    */
   object OAuthUtils {
 
-
-    private def toDate(dateString: String): Date = {
-      import java.text.SimpleDateFormat
-      import java.util.Locale
-
-      val dateFormatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.US)
-      dateFormatter.parse(dateString)
-    }
+    import org.bone.soplurk.util.DateTimeUtils
 
     /**
      *  Check if current access token is valid and return information for this token.
@@ -41,7 +34,7 @@ trait OAuthUtils {
         TokenInfo(
           appID = jsonData.get("app_id"),
           userID = jsonData.get("user_id"),
-          issued = toDate(jsonData.get[String]("issued")),
+          issued = DateTimeUtils.fromPlurkDate(jsonData.get("issued")),
           deviceID = jsonData.get("deviceid")
         )
       }
@@ -59,7 +52,7 @@ trait OAuthUtils {
         TokenInfo(
           appID = jsonData.get("app_id"),
           userID = jsonData.get("user_id"),
-          issued = toDate(jsonData.get[String]("issued")),
+          issued = DateTimeUtils.fromPlurkDate(jsonData.get("issued")),
           deviceID = jsonData.get("deviceid")
         )
       }
@@ -80,7 +73,7 @@ trait OAuthUtils {
           appID = jsonData.get("app_id"),
           userID = jsonData.getOption("user_id"),
           timestamp = jsonData.get("timestamp"),
-          now = toDate(jsonData.get("now"))
+          now = DateTimeUtils.fromPlurkDate(jsonData.get("now"))
         )
       }
 

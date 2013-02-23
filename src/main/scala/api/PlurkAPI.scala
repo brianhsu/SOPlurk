@@ -18,7 +18,8 @@ import java.util.Date
 import java.util.TimeZone
 import java.text.SimpleDateFormat
 
-class PlurkAPI private (val plurkOAuth: PlurkOAuth, val deviceID: Option[String]) extends Users with 
+class PlurkAPI private (val plurkOAuth: PlurkOAuth, 
+                        val deviceID: Option[String]) extends Users with 
                 Profile with Polling with Timeline with Responses with 
                 FriendsFans with UserSearch with PlurkSearch with 
                 Cliques with Blocks with Alerts with Emoticons with 
@@ -49,10 +50,12 @@ class PlurkAPI private (val plurkOAuth: PlurkOAuth, val deviceID: Option[String]
    *
    *
    *  @param    verifyCode              Verify code returned by Plurk.
-   *  @throws   IllegalStateException   if did not call getAuthorizationURL first.
-   *  @throws   OAuthException          if authorization is failed.
+   *
+   *  @return                           Failure(IllegalStateException) if did not 
+   *                                    call getAuthorizationURL first.
+   *                                    Failure(OAuthException) if authorization is failed.
    */
-  def authorize(verifyCode: String) {
+  def authorize(verifyCode: String): Try[Unit] = Try {
 
     if (requestToken.isEmpty) {
       throw new IllegalStateException(
@@ -132,7 +135,9 @@ object PlurkAPI {
     new PlurkAPI(new PlurkOAuth(service), deviceID)
   }
 
-  private[soplurk] def withMock(mockOAuth: PlurkOAuth with MockOAuth) = new PlurkAPI(mockOAuth, None)
+  private[soplurk] def withMock(mockOAuth: PlurkOAuth with MockOAuth) = {
+    new PlurkAPI(mockOAuth, None)
+  }
 
   /**
    *  Format java.lang.Date object to `2009-6-20T21:55:34` in GMT timezone.
@@ -276,15 +281,15 @@ object PlurkAPI {
    *        0 -> List(Emoticon(""":-))""",  "http://statics.plurk.com/4.gif"), 
    *                  Emoticon(""":-)""",   "http://statics.plurk.com/5.gif")), 
    *
-   *       25 -> List(Emoticon("""(:""",        "http://statics.plurk.com/6.gif), 
-   *                  Emoticon("""(K)""",       "http://statics.plurk.com/7.gif), 
-   *                  Emoticon("""(angry)""",   "http://statics.plurk.com/8.gif), 
-   *                  Emoticon("""(annoyed)""", "http://statics.plurk.com/9.gif))
+   *       25 -> List(Emoticon("""(:""",        "http://statics.plurk.com/6.gif"), 
+   *                  Emoticon("""(K)""",       "http://statics.plurk.com/7.gif"), 
+   *                  Emoticon("""(angry)""",   "http://statics.plurk.com/8.gif"), 
+   *                  Emoticon("""(annoyed)""", "http://statics.plurk.com/9.gif"))
    *    )
    *  }}}
    *
-   *  It means you need karma >= 0 to use """:-))""" and """:-)""", and
-   *  karma >= 25 to use """(:""", """(K)""", """(angry)""", "(annoyed)""".
+   *  It means you need karma >= 0 to use `:-))` and `:-)`, 
+   *  karma >= 25 to use `(:`, `(K)`, `(angry)`, `(annoyed)`.
    *
    *  @param  custom      Custom icons uploaded by user.
    *  @param  recruited   key is the lower bound of recrutied count 

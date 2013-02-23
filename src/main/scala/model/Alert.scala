@@ -20,12 +20,8 @@ case class Alert(alertType: AlertType, user: User, posted: Date)
 
 object Alert {
 
+  import org.bone.soplurk.util.DateTimeUtils
   import MyJValueImplicits._
-
-  private def toDate(dateString: String): Date = {
-    val dateFormatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.US)
-    dateFormatter.parse(dateString)
-  }
 
   /**
    *  Create Alert object from JSON returned by Plurk.
@@ -37,7 +33,7 @@ object Alert {
     
     val alertType = AlertType(jsonData.get[String]("type"))
     val user = getUserData(alertType, jsonData)
-    val posted = toDate(jsonData.get[String]("posted"))
+    val posted = DateTimeUtils.fromPlurkDate(jsonData.get("posted"))
 
     Alert(alertType, user, posted)
   }

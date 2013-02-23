@@ -11,6 +11,8 @@ scalacOptions in (Compile, doc) ++= Seq(
   "-doc-title", "SOPlurk API document"
 )
 
+docDirectory in Compile <<= (baseDirectory / "scaladoc")
+
 scalaVersion := "2.10.0"
 
 libraryDependencies ++= Seq(
