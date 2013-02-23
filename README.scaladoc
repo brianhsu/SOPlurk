@@ -59,7 +59,7 @@ For example, the following is the complete code to post a plurk to user's timeli
 
 == Installation ==
 
-To using SOPlurk in your Scala project, please add the following defintion in your [[http://brianhsu.github.com/SOPlurk/scaladoc/index.html SBT]] `build.sbt ` project. 
+To using SOPlurk in your Scala project, please add the following defintion in your [[http://brianhsu.github.com/SOPlurk/api/index.html SBT]] `build.sbt ` project. 
 
 Since SOPlurk used `scala.util.Try` which only exists after Scala 2.10.0, you must tell SBT to build your project using Scala 2.10.0 or above.
 
@@ -90,7 +90,7 @@ After done this, enter `reload` and `update` in your SBT console, it will fetch 
 
 == API Document and Example Code ==
 
-  - [[http://brianhsu.github.com/SOPlurk/scaladoc/index.html API Document]]
+  - [[http://brianhsu.github.com/SOPlurk/api/index.html API Document]]
   - [[https://github.com/brianhsu/SOPlurk/blob/develop/src/test/scala/example/PlurkAPI.scala Example code with detailed explanation]]
 
 == Design of SOPlurk ==

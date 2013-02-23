@@ -482,8 +482,8 @@ plurkAPI.authorize(verifyCode).foreach {
 
 
 [0]: http://www.plurk.com/API/2
-[1]: http://brianhsu.github.com/SOPlurk/scaladoc/index.html
+[1]: http://brianhsu.github.com/SOPlurk/api/index.html
 [2]: https://github.com/brianhsu/SOPlurk/blob/develop/src/test/scala/example/PlurkAPI.scala
-[3]: http://brianhsu.github.com/SOPlurk/scaladoc/index.html#org.bone.soplurk.api.PlurkAPI
+[3]: http://brianhsu.github.com/SOPlurk/api/index.html#org.bone.soplurk.api.PlurkAPI
 [4]: http://danielwestheide.com/blog/2012/12/26/the-neophytes-guide-to-scala-part-6-error-handling-with-try.html
 
