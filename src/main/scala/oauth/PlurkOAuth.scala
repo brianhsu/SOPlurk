@@ -24,16 +24,19 @@ import scala.util.{Try, Success, Failure}
 
 import java.io.File
 
-private[soplurk] trait MockOAuth extends PlurkOAuth
+private[soplurk] trait MockOAuth extends PlurkOAuth // For unit-test mock
 
-class PlurkOAuth(val service: OAuthService)  {
+/**
+ *  Plurk OAuth Util
+ *
+ *  @param  service       Scribe OAuth object that connect to Plurk.
+ *  @param  accessToken   Sign request using this access token.
+ */
+class PlurkOAuth(val service: OAuthService, 
+                 private[soplurk] var accessToken: Option[Token] = None)  {
 
+  private val defaultToken = new Token("", "")
   private val plurkAPIPrefix = "http://www.plurk.com"
-
-  /**
-   *  Default to empty token, so we can use two-legged OAuth API.
-   */
-  private[soplurk] var accessToken: Option[Token] = Some(new Token("", ""))
 
   /**
    *  Send request to Plurk OAuth API
@@ -46,7 +49,7 @@ class PlurkOAuth(val service: OAuthService)  {
 
     val request = buildRequest(url, method, params: _*)
 
-    accessToken.foreach { token => service.signRequest(token, request) }
+    service.signRequest(accessToken.getOrElse(defaultToken), request)
 
     Try {
       val response = request.send
@@ -83,7 +86,11 @@ class PlurkOAuth(val service: OAuthService)  {
 
     try {
 
-      val filePart = new FilePart(parameterName, file.getName(), file, "binary/octet-stream", "UTF-8")
+      val filePart = new FilePart(
+        parameterName, file.getName(), file, 
+        "binary/octet-stream", "UTF-8"
+      )
+
       val parts = Array[Part](filePart)
 
       parts.foreach(_.asInstanceOf[FilePart].setTransferEncoding("binary"))
