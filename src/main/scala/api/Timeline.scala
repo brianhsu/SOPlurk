@@ -249,7 +249,7 @@ trait Timeline {
       val params = List(
         "content" -> content,
         "qualifier" -> qualifier.name,
-        "limitedTo" -> formatLimitedTo,
+        "limited_to" -> formatLimitedTo,
         "noComment" -> commentSetting.map(_.code.toString).getOrElse(""),
         "language"  -> language.getOrElse("")
       ).filterNot(_._2.isEmpty)
