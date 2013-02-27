@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>TimlinePrivacy - SOPlurk 0.1 API document - org.bone.splurk2.model.TimlinePrivacy</title>
-          <meta name="description" content="TimlinePrivacy - SOPlurk 0.1 API document - org.bone.splurk2.model.TimlinePrivacy" />
-          <meta name="keywords" content="TimlinePrivacy SOPlurk 0.1 API document org.bone.splurk2.model.TimlinePrivacy" />
+          <title>PlurkBot - SOPlurk 0.1 API document - org.bone.soplurk.bot.PlurkBot</title>
+          <meta name="description" content="PlurkBot - SOPlurk 0.1 API document - org.bone.soplurk.bot.PlurkBot" />
+          <meta name="keywords" content="PlurkBot SOPlurk 0.1 API document org.bone.soplurk.bot.PlurkBot" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -17,7 +17,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../../index.html';
-            var hash = 'org.bone.splurk2.model.TimlinePrivacy$';
+            var hash = 'org.bone.soplurk.bot.PlurkBot$';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -29,9 +29,9 @@
         </head>
         <body class="value">
       <div id="definition">
-        <img src="../../../../lib/object_big.png" />
-        <p id="owner"><a href="../../../package.html" class="extype" name="org">org</a>.<a href="../../package.html" class="extype" name="org.bone">bone</a>.<a href="../package.html" class="extype" name="org.bone.splurk2">splurk2</a>.<a href="package.html" class="extype" name="org.bone.splurk2.model">model</a></p>
-        <h1>TimlinePrivacy</h1>
+        <a href="PlurkBot.html" title="Go to companion"><img src="../../../../lib/object_to_class_big.png" /></a>
+        <p id="owner"><a href="../../../package.html" class="extype" name="org">org</a>.<a href="../../package.html" class="extype" name="org.bone">bone</a>.<a href="../package.html" class="extype" name="org.bone.soplurk">soplurk</a>.<a href="package.html" class="extype" name="org.bone.soplurk.bot">bot</a></p>
+        <h1><a href="PlurkBot.html" title="Go to companion">PlurkBot</a></h1>
       </div>
 
       <h4 id="signature" class="signature">
@@ -40,11 +40,27 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">TimlinePrivacy</span>
+        <span class="name">PlurkBot</span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p> PlurkBot</p><p> You could use this object to create and start PlurkBot.</p><p> You could choose construct new PlurkAPI object by using appKey / appSecret and
+ tokenKey / tokenSecret pair, or you could using a existing PlurkAPI object.</p><p> Please note that your plurkAPI must be authorized one, or it will throw exception.</p><p> Here is a minimal example code about how to use PlurkBot:</p><pre><span class="kw">import</span> org.bone.soplurk.api.PlurkAPI._
+<span class="kw">import</span> org.bone.soplurk.bot._
+<span class="kw">import</span> org.bone.soplurk.constant._
+<span class="kw">import</span> org.bone.soplurk.model._
+
+<span class="kw">val</span> (appKey, appSecret) = (<span class="lit">"APP_KEY"</span>, <span class="lit">"APP_SECRET"</span>)
+<span class="kw">val</span> (tokenKey, tokenSecret) = (<span class="lit">"TOKEN_KEY"</span>, <span class="lit">"TOKEN_SECRET"</span>)
+
+<span class="kw">val</span> plurkAPI = PlurkAPI.withAccessToken(appKey, appSecret, tokenKey, tokenSecret)
+<span class="kw">val</span> plurkBot = PlurkBot.withPlurkAPI(plurkAPI)( plurkAPI <span class="kw">=&gt;</span> {
+
+  <span class="kw">case</span> alert: Alert <span class="kw">=&gt;</span> println(<span class="lit">"get alert:"</span> + alert)
+  <span class="kw">case</span> plurk: Plurk <span class="kw">=&gt;</span> println(<span class="lit">"get plurk:"</span> + plurk)
+  <span class="kw">case</span> response: RealtimeResponse <span class="kw">=&gt;</span> println(<span class="lit">"get response:"</span> + response)
+
+})</pre></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -64,7 +80,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="org.bone.splurk2.model.TimlinePrivacy"><span>TimlinePrivacy</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="org.bone.soplurk.bot.PlurkBot"><span>PlurkBot</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -155,32 +171,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="org.bone.splurk2.model.TimlinePrivacy.OnlyFriends" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="OnlyFriends"></a>
-      <a id="OnlyFriends:OnlyFriends"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="TimlinePrivacy$$OnlyFriends$.html"><span class="name">OnlyFriends</span></a><span class="result"> extends <a href="TimelinePrivacy.html" class="extype" name="org.bone.splurk2.model.TimelinePrivacy">TimelinePrivacy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
-      </span>
-      </h4>
-      
-    </li><li name="org.bone.splurk2.model.TimlinePrivacy.World" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="World"></a>
-      <a id="World:World"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="TimlinePrivacy$$World$.html"><span class="name">World</span></a><span class="result"> extends <a href="TimelinePrivacy.html" class="extype" name="org.bone.splurk2.model.TimelinePrivacy">TimelinePrivacy</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
-      </span>
-      </h4>
-      
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -404,6 +394,36 @@
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
+    </li><li name="org.bone.soplurk.bot.PlurkBot#withAccessToken" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="withAccessToken(appKey:String,appSecret:String,tokenKey:String,tokenSecret:String,alertPollingPeroid:Int)(handler:org.bone.soplurk.api.PlurkAPI=&gt;PartialFunction[Any,Unit]):org.bone.soplurk.bot.PlurkBot"></a>
+      <a id="withAccessToken(String,String,String,String,Int)((PlurkAPI)⇒PartialFunction[Any,Unit]):PlurkBot"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">withAccessToken</span><span class="params">(<span name="appKey">appKey: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="appSecret">appSecret: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tokenKey">tokenKey: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tokenSecret">tokenSecret: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="alertPollingPeroid">alertPollingPeroid: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">60</span></span>)</span><span class="params">(<span name="handler">handler: (<a href="../api/PlurkAPI.html" class="extype" name="org.bone.soplurk.api.PlurkAPI">PlurkAPI</a>) ⇒ <span class="extype" name="scala.PartialFunction">PartialFunction</span>[<span class="extype" name="scala.Any">Any</span>, <span class="extype" name="scala.Unit">Unit</span>]</span>)</span><span class="result">: <a href="PlurkBot.html" class="extype" name="org.bone.soplurk.bot.PlurkBot">PlurkBot</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt"> Create and start Plurk bot by app / token pair.</p><div class="fullcomment"><div class="comment cmt"><p> Create and start Plurk bot by app / token pair.</p><p> This method will create an PlurkBot by using accessToken directly,
+ and starts the bot after it is constructed.
+</p></div><dl class="paramcmts block"><dt class="param">appKey</dt><dd class="cmt"><p>Your Plurk APP token</p></dd><dt class="param">appSecret</dt><dd class="cmt"><p>Your Plurk APP secret</p></dd><dt class="param">tokenKey</dt><dd class="cmt"><p>Your access token key.</p></dd><dt class="param">tokenSecret</dt><dd class="cmt"><p>Your access token secret.</p></dd><dt class="param">alertPollingPeroid</dt><dd class="cmt"><p>The peroid of polling active alerts in seconds.</p></dd><dt class="param">handler</dt><dd class="cmt"><p>Your bot's action.
+</p></dd><dt>returns</dt><dd class="cmt"><p>PlurkBot you constructed.
+</p></dd></dl></div>
+    </li><li name="org.bone.soplurk.bot.PlurkBot#withPlurkAPI" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="withPlurkAPI(plurkAPI:org.bone.soplurk.api.PlurkAPI,alertPollingPeroid:Int)(handler:org.bone.soplurk.api.PlurkAPI=&gt;PartialFunction[Any,Unit]):org.bone.soplurk.bot.PlurkBot"></a>
+      <a id="withPlurkAPI(PlurkAPI,Int)((PlurkAPI)⇒PartialFunction[Any,Unit]):PlurkBot"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">withPlurkAPI</span><span class="params">(<span name="plurkAPI">plurkAPI: <a href="../api/PlurkAPI.html" class="extype" name="org.bone.soplurk.api.PlurkAPI">PlurkAPI</a></span>, <span name="alertPollingPeroid">alertPollingPeroid: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">60</span></span>)</span><span class="params">(<span name="handler">handler: (<a href="../api/PlurkAPI.html" class="extype" name="org.bone.soplurk.api.PlurkAPI">PlurkAPI</a>) ⇒ <span class="extype" name="scala.PartialFunction">PartialFunction</span>[<span class="extype" name="scala.Any">Any</span>, <span class="extype" name="scala.Unit">Unit</span>]</span>)</span><span class="result">: <a href="PlurkBot.html" class="extype" name="org.bone.soplurk.bot.PlurkBot">PlurkBot</a></span>
+      </span>
+      </h4>
+      
     </li></ol>
             </div>
 

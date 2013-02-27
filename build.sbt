@@ -19,7 +19,8 @@ libraryDependencies ++= Seq(
     "org.scribe" % "scribe" % "1.3.2",
     "org.scalatest" %% "scalatest" % "1.9.1" % "test",
     "net.liftweb" %% "lift-json" % "2.5-M4",
-    "commons-httpclient" % "commons-httpclient" % "3.1"
+    "commons-httpclient" % "commons-httpclient" % "3.1",
+    "com.typesafe.akka" %% "akka-actor" % "2.1.0"
 )
 
 publishTo := Some(
