@@ -89,18 +89,18 @@ object PlurkAPI {
    *  Please see "Multiple-devices support" section in 
    *  [[http://www.plurk.com/API/2 Plurk API Document]] for the details.
    *
-   *  @param    apiKey          API key from Plurk API console.
+   *  @param    appKey          API key from Plurk API console.
    *  @param    appSecret       API secret from Plurk API console.
    *  @param    callbackURL     OAuth callback URL.
    *  @param    deviceID        DeviceID of application.
    */
-  def withCallback(apiKey: String, apiSecret: String, callbackURL: String, 
+  def withCallback(appKey: String, appSecret: String, callbackURL: String, 
                    deviceID: Option[String] = None) = {
 
     val service = (new ServiceBuilder).
                    provider(classOf[PlurkApi]).
-                   apiKey(apiKey).
-                   apiSecret(apiSecret).
+                   apiKey(appKey).
+                   apiSecret(appSecret).
                    callback(callbackURL).
                    build()
     
@@ -120,16 +120,16 @@ object PlurkAPI {
    *  Please see "Multiple-devices support" section in 
    *  [[http://www.plurk.com/API/2 Plurk API Document]] for the details.
    *
-   *  @param    apiKey          API key from Plurk API console.
+   *  @param    appKey          API key from Plurk API console.
    *  @param    appSecret       API secret from Plurk API console.
    *  @param    deviceID        The deviceID of application.
    */
-  def withoutCallback(apiKey: String, apiSecret: String, deviceID: Option[String] = None) = {
+  def withoutCallback(appKey: String, appSecret: String, deviceID: Option[String] = None) = {
 
     val service = (new ServiceBuilder).
                    provider(classOf[PlurkApi]).
-                   apiKey(apiKey).
-                   apiSecret(apiSecret).
+                   apiKey(appKey).
+                   apiSecret(appSecret).
                    build()
     
     new PlurkAPI(new PlurkOAuth(service), deviceID)
@@ -138,21 +138,21 @@ object PlurkAPI {
   /**
    *  Get PlurkAPI with access token key / secret pair directly.
    *
-   *  @param    apiKey          API key from Plurk API console.
+   *  @param    appKey          API key from Plurk API console.
    *  @param    appSecret       API secret from Plurk API console.
    *  @param    tokenKey        Token key
    *  @param    tokenSecret     Token secret
    *  @param    deviceID        The deviceID of application.
    */
-  def withAccessToken(apiKey: String, apiSecret: String, 
+  def withAccessToken(appKey: String, appSecret: String, 
                       tokenKey: String, tokenSecret: String, 
                       deviceID: Option[String] = None) = {
 
     val token = new Token(tokenKey, tokenSecret)
     val service = (new ServiceBuilder).
                    provider(classOf[PlurkApi]).
-                   apiKey(apiKey).
-                   apiSecret(apiSecret).
+                   apiKey(appKey).
+                   apiSecret(appSecret).
                    build()
 
     new PlurkAPI(new PlurkOAuth(service, Some(token)), deviceID)
