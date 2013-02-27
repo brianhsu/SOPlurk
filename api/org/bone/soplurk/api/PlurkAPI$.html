@@ -580,7 +580,7 @@
               
         </dd></dl></div>
     </li><li name="org.bone.soplurk.api.PlurkAPI#withAccessToken" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="withAccessToken(apiKey:String,apiSecret:String,tokenKey:String,tokenSecret:String,deviceID:Option[String]):org.bone.soplurk.api.PlurkAPI"></a>
+      <a id="withAccessToken(appKey:String,appSecret:String,tokenKey:String,tokenSecret:String,deviceID:Option[String]):org.bone.soplurk.api.PlurkAPI"></a>
       <a id="withAccessToken(String,String,String,String,Option[String]):PlurkAPI"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -588,14 +588,14 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">withAccessToken</span><span class="params">(<span name="apiKey">apiKey: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="apiSecret">apiSecret: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tokenKey">tokenKey: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tokenSecret">tokenSecret: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="deviceID">deviceID: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="result">: <a href="PlurkAPI.html" class="extype" name="org.bone.soplurk.api.PlurkAPI">PlurkAPI</a></span>
+        <span class="name">withAccessToken</span><span class="params">(<span name="appKey">appKey: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="appSecret">appSecret: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tokenKey">tokenKey: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tokenSecret">tokenSecret: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="deviceID">deviceID: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="result">: <a href="PlurkAPI.html" class="extype" name="org.bone.soplurk.api.PlurkAPI">PlurkAPI</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt"> Get PlurkAPI with access token key / secret pair directly.</p><div class="fullcomment"><div class="comment cmt"><p> Get PlurkAPI with access token key / secret pair directly.
-</p></div><dl class="paramcmts block"><dt class="param">apiKey</dt><dd class="cmt"><p>API key from Plurk API console.</p></dd><dt class="param">tokenKey</dt><dd class="cmt"><p>Token key</p></dd><dt class="param">tokenSecret</dt><dd class="cmt"><p>Token secret</p></dd><dt class="param">deviceID</dt><dd class="cmt"><p>The deviceID of application.
+</p></div><dl class="paramcmts block"><dt class="param">appKey</dt><dd class="cmt"><p>API key from Plurk API console.</p></dd><dt class="param">appSecret</dt><dd class="cmt"><p>API secret from Plurk API console.</p></dd><dt class="param">tokenKey</dt><dd class="cmt"><p>Token key</p></dd><dt class="param">tokenSecret</dt><dd class="cmt"><p>Token secret</p></dd><dt class="param">deviceID</dt><dd class="cmt"><p>The deviceID of application.
 </p></dd></dl></div>
     </li><li name="org.bone.soplurk.api.PlurkAPI#withCallback" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="withCallback(apiKey:String,apiSecret:String,callbackURL:String,deviceID:Option[String]):org.bone.soplurk.api.PlurkAPI"></a>
+      <a id="withCallback(appKey:String,appSecret:String,callbackURL:String,deviceID:Option[String]):org.bone.soplurk.api.PlurkAPI"></a>
       <a id="withCallback(String,String,String,Option[String]):PlurkAPI"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -603,7 +603,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">withCallback</span><span class="params">(<span name="apiKey">apiKey: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="apiSecret">apiSecret: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="callbackURL">callbackURL: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="deviceID">deviceID: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="result">: <a href="PlurkAPI.html" class="extype" name="org.bone.soplurk.api.PlurkAPI">PlurkAPI</a></span>
+        <span class="name">withCallback</span><span class="params">(<span name="appKey">appKey: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="appSecret">appSecret: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="callbackURL">callbackURL: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="deviceID">deviceID: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="result">: <a href="PlurkAPI.html" class="extype" name="org.bone.soplurk.api.PlurkAPI">PlurkAPI</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt"> Get PlurkAPI with callback URL.</p><div class="fullcomment"><div class="comment cmt"><p> Get PlurkAPI with callback URL.</p><p> Create PlurkAPI object that user will be redirect to callbackURL
@@ -611,10 +611,10 @@
  token using the same <code>deviceID</code> will be overwritten, but access
  token with other <code>deviceID</code> will still work.</p><p> Please see &quot;Multiple-devices support&quot; section in
  <a href="http://www.plurk.com/API/2" target="_blank">Plurk API Document</a> for the details.
-</p></div><dl class="paramcmts block"><dt class="param">apiKey</dt><dd class="cmt"><p>API key from Plurk API console.</p></dd><dt class="param">callbackURL</dt><dd class="cmt"><p>OAuth callback URL.</p></dd><dt class="param">deviceID</dt><dd class="cmt"><p>DeviceID of application.
+</p></div><dl class="paramcmts block"><dt class="param">appKey</dt><dd class="cmt"><p>API key from Plurk API console.</p></dd><dt class="param">appSecret</dt><dd class="cmt"><p>API secret from Plurk API console.</p></dd><dt class="param">callbackURL</dt><dd class="cmt"><p>OAuth callback URL.</p></dd><dt class="param">deviceID</dt><dd class="cmt"><p>DeviceID of application.
 </p></dd></dl></div>
     </li><li name="org.bone.soplurk.api.PlurkAPI#withoutCallback" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="withoutCallback(apiKey:String,apiSecret:String,deviceID:Option[String]):org.bone.soplurk.api.PlurkAPI"></a>
+      <a id="withoutCallback(appKey:String,appSecret:String,deviceID:Option[String]):org.bone.soplurk.api.PlurkAPI"></a>
       <a id="withoutCallback(String,String,Option[String]):PlurkAPI"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -622,7 +622,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">withoutCallback</span><span class="params">(<span name="apiKey">apiKey: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="apiSecret">apiSecret: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="deviceID">deviceID: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="result">: <a href="PlurkAPI.html" class="extype" name="org.bone.soplurk.api.PlurkAPI">PlurkAPI</a></span>
+        <span class="name">withoutCallback</span><span class="params">(<span name="appKey">appKey: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="appSecret">appSecret: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="deviceID">deviceID: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="result">: <a href="PlurkAPI.html" class="extype" name="org.bone.soplurk.api.PlurkAPI">PlurkAPI</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt"> Get PlurkAPI with callback URL.</p><div class="fullcomment"><div class="comment cmt"><p> Get PlurkAPI with callback URL.</p><p> Create PlurkAPI object that user need to input his verify code
@@ -630,7 +630,7 @@
  token using the same <code>deviceID</code> will be overwritten, but access
  token with other <code>deviceID</code> will still work.</p><p> Please see &quot;Multiple-devices support&quot; section in
  <a href="http://www.plurk.com/API/2" target="_blank">Plurk API Document</a> for the details.
-</p></div><dl class="paramcmts block"><dt class="param">apiKey</dt><dd class="cmt"><p>API key from Plurk API console.</p></dd><dt class="param">deviceID</dt><dd class="cmt"><p>The deviceID of application.
+</p></div><dl class="paramcmts block"><dt class="param">appKey</dt><dd class="cmt"><p>API key from Plurk API console.</p></dd><dt class="param">appSecret</dt><dd class="cmt"><p>API secret from Plurk API console.</p></dd><dt class="param">deviceID</dt><dd class="cmt"><p>The deviceID of application.
 </p></dd></dl></div>
     </li></ol>
             </div>

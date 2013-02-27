@@ -44,7 +44,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><h3> SOPlurk - Scala binding for Plurk API 2.0 </h3><h4> Introduction </h4><p>SOPlurk is an Scala binding for <a href="http://www.plurk.com/API/2" target="_blank">Plurk API 2.0</a> which use OAuth 1.0 to get authorization from users. It means user don't required to expose thier username / password to the application.</p><p>SOPlurk provides a nice and type-safe API to access the Plurk API 2.0, it's very easy to use but also type-safe due to the power Scala has.</p><p>You don't need to bother how OAuth works internally, what you need to do is call some API in a certain sequence, and prompt your users to enter the verfication code they get from Plurk.</p><p>For example, the following is the complete code to post a plurk to user's timeline. We'll explain the code later, but as you can see, it's quite simple. Most part of code is just to get verfication code from user.</p><pre><span class="kw">import</span> scala.util.{Try, Success, Failure}
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><h3> SOPlurk - Scala binding for Plurk API 2.0 </h3><h4> Introduction </h4><p>SOPlurk is an Scala binding for <a href="http://www.plurk.com/API/2" target="_blank">Plurk API 2.0</a> which use OAuth 1.0 to get authorization from users. It means user don't required to expose thier username / password to the application.</p><p>SOPlurk provides a nice and type-safe API to access the Plurk API 2.0, it's very easy to use but also type-safe due to the power Scala has.</p><p>You don't need to bother how OAuth works internally, what you need to do is call some API in a certain sequence, and prompt your users to enter the verfication code they get from Plurk.</p><h5> Example: Post a Plurk </h5><p>For example, the following is the complete code to post a plurk to user's timeline. We'll explain the code later, but as you can see, it's quite simple. Most part of code is just to get verfication code from user.</p><pre><span class="kw">import</span> scala.util.{Try, Success, Failure}
 
 <span class="kw">import</span> org.bone.soplurk.util.BombTry._
 <span class="kw">import</span> org.bone.soplurk.constant.Qualifier
@@ -85,13 +85,38 @@
 
   <span class="kw">val</span> scanner = <span class="kw">new</span> Scanner(java.lang.System.in)
   scanner.nextLine()
+}</pre><h5> Example: A Plurk bot </h5><p>Thanks for the power of Scala and Akka library, it become very easy to design an Plurk Bot with SOPlurk, the following code is everything you need to create a Plurk bot that accepts all friendship reqeust, and responds to those Plurks contains <code>hello</code> in it.</p><pre><span class="cmt">//</span>
+<span class="cmt">//  This bot will accept all friendship request, and responded to</span>
+<span class="cmt">//  new Plurks that contains `hello` in it.</span>
+<span class="cmt">//</span>
+<span class="cmt">//  It basically a Scala version of [[http://pastie.org/2765457 this python code]]</span>
+<span class="cmt">//</span>
+
+<span class="kw">import</span> org.bone.soplurk.api._
+<span class="kw">import</span> org.bone.soplurk.bot._
+<span class="kw">import</span> org.bone.soplurk.constant._
+<span class="kw">import</span> org.bone.soplurk.model._
+
+<span class="kw">val</span> (appKey, appSecret) = (<span class="lit">"APP_KEY"</span>, <span class="lit">"APP_SECRET"</span>)
+<span class="kw">val</span> (tokenKey, tokenSecret) = (<span class="lit">"TOKEN_KEY"</span>, <span class="lit">"TOKEN_SECRET"</span>)
+
+<span class="kw">val</span> plurkBot = PlurkBot.withAccessToken(appKey, appSecret, tokenKey, tokenSecret) {
+  plurkAPI: PlurkAPI <span class="kw">=&gt;</span> {
+    <span class="kw">case</span> Alert(alertType, user, posted) <span class="kw">=&gt;</span> plurkAPI.Alerts.addAllAsFriends()
+    <span class="kw">case</span> RealtimeResponse(user, plurk, response) <span class="kw">=&gt;</span> <span class="cmt">// Ignore any response</span>
+    <span class="kw">case</span> plurk: Plurk <span class="kw">=&gt;</span>
+
+      <span class="kw">if</span> (plurk.content.toLowerCase contains <span class="lit">"hello"</span>) {
+        plurkAPI.Responses.responseAdd(plurk.plurkID, <span class="lit">"world"</span>, Qualifier.Says)
+      }
+  }
 }</pre><h4> Installation </h4><p>To using SOPlurk in your Scala project, please add the following defintion in your <a href="http://brianhsu.github.com/SOPlurk/api/index.html" target="_blank">SBT</a> <code>build.sbt </code> project.</p><p>Since SOPlurk used <code>scala.util.Try</code> which only exists after Scala 2.10.0, you must tell SBT to build your project using Scala 2.10.0 or above.</p><pre><span class="cmt">// In build.sbt</span>
 
 scalaVersion := <span class="lit">"2.10.0"</span>
 
 resolvers += <span class="lit">"bone"</span> at <span class="lit">"http://bone.twbbs.org.tw/ivy"</span>
 
-libraryDependencies += <span class="lit">"org.bone"</span> %% <span class="lit">"soplurk"</span> % <span class="lit">"0.1"</span></pre><p>After done this, enter <code>reload</code> and <code>update</code> in your SBT console, it will fetch all libraries that need to using SOPlurk.</p><pre>brianhsu@USBGentoo ~/Test $ sbt
+libraryDependencies += <span class="lit">"org.bone"</span> %% <span class="lit">"soplurk"</span> % <span class="lit">"0.2"</span></pre><p>After done this, enter <code>reload</code> and <code>update</code> in your SBT console, it will fetch all libraries that need to using SOPlurk.</p><pre>brianhsu@USBGentoo ~/Test $ sbt
 [info] <span class="std">Set</span> current project to default-<span class="num">9</span>dcd95 (in build file:/home/brianhsu/Test/)
 &gt; reload
 [info] <span class="std">Set</span> current project to default-<span class="num">9</span>dcd95 (in build file:/home/brianhsu/Test/)

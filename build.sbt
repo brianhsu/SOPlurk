@@ -2,13 +2,13 @@ name := "SOPlurk"
 
 organization := "org.bone"
 
-version := "0.1"
+version := "0.2"
 
 scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature")
 
 scalacOptions in (Compile, doc) ++= Seq(
   "-doc-root-content", "README.scaladoc",
-  "-doc-title", "SOPlurk 0.1 API document"
+  "-doc-title", "SOPlurk 0.2 API document"
 )
 
 docDirectory in Compile <<= (baseDirectory / "api")

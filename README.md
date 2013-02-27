@@ -21,6 +21,9 @@ SOPlurk provides a nice and type-safe API to access the Plurk API 2.0, it's very
 
 You don't need to bother how OAuth works internally, what you need to do is call some API in a certain sequence, and prompt your users to enter the verfication code they get from Plurk.
 
+
+### Example: Post a Plurk ####
+
 For example, the following is the complete code to post a plurk to user's timeline. We'll explain the code later, but as you can see, it's quite simple. Most part of code is just to get verfication code from user.
 
 ```scala
@@ -68,7 +71,40 @@ def getVerifcationFromUser(authURL: String): Try[String] = Try {
 }
 ```
 
+### Example: A Plurk bot ###
 
+Thanks for the power of Scala and Akka library, it become very easy to design an Plurk Bot with SOPlurk, the following code is everything you need to create a Plurk bot that accepts all friendship reqeust, and responds to those Plurks contains `hello` in it.
+
+```scala
+
+/**
+ *  This bot will accept all friendship request, and responded to 
+ *  new Plurks that contains `hello` in it.
+ *
+ *  It basically a Scala version of http://pastie.org/2765457
+ */
+
+import org.bone.soplurk.api._
+import org.bone.soplurk.bot._
+import org.bone.soplurk.constant._
+import org.bone.soplurk.model._
+
+val (appKey, appSecret) = ("APP_KEY", "APP_SECRET")
+val (tokenKey, tokenSecret) = ("TOKEN_KEY", "TOKEN_SECRET")
+
+val plurkBot = PlurkBot.withAccessToken(appKey, appSecret, tokenKey, tokenSecret) { 
+  plurkAPI: PlurkAPI => {
+    case Alert(alertType, user, posted) => plurkAPI.Alerts.addAllAsFriends()
+    case RealtimeResponse(user, plurk, response) => // Ignore any response
+    case plurk: Plurk =>
+      
+      if (plurk.content.toLowerCase contains "hello") {
+        plurkAPI.Responses.responseAdd(plurk.plurkID, "world", Qualifier.Says)
+      }
+  }
+}
+
+```
 
 Installation
 --------------
@@ -84,7 +120,7 @@ scalaVersion := "2.10.0"
 
 resolvers += "bone" at "http://bone.twbbs.org.tw/ivy"
 
-libraryDependencies += "org.bone" %% "soplurk" % "0.1"
+libraryDependencies += "org.bone" %% "soplurk" % "0.2"
 ```
 
 After done this, enter `reload` and `update` in your SBT console, it will fetch all libraries that need to using SOPlurk.
