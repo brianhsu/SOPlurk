@@ -12,7 +12,7 @@ class PlurkAPISpec extends FunSpec with ShouldMatchers {
 
       intercept[IllegalStateException] {
 
-        PlurkAPI.withoutCallback("apiKey", "apiSecret").authorize("code").get
+        PlurkAPI.withoutCallback("appKey", "appSecret").authorize("code").get
       }
 
     }

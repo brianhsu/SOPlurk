@@ -44,7 +44,8 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p> Plurk OAuth Util
+</p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -84,8 +85,8 @@
         <div id="allMembers">
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
-              <ol><li name="org.bone.soplurk.oauth.PlurkOAuth#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(service:org.scribe.oauth.OAuthService):org.bone.soplurk.oauth.PlurkOAuth"></a>
+              <ol><li name="org.bone.soplurk.oauth.PlurkOAuth#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="&lt;init&gt;(service:org.scribe.oauth.OAuthService,accessToken:Option[org.scribe.model.Token]):org.bone.soplurk.oauth.PlurkOAuth"></a>
       <a id="&lt;init&gt;:PlurkOAuth"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -93,10 +94,11 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">PlurkOAuth</span><span class="params">(<span name="service">service: <span class="extype" name="org.scribe.oauth.OAuthService">OAuthService</span></span>)</span>
+        <span class="name">PlurkOAuth</span><span class="params">(<span name="service">service: <span class="extype" name="org.scribe.oauth.OAuthService">OAuthService</span></span>, <span name="accessToken">accessToken: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="org.scribe.model.Token">Token</span>] = <span class="symbol">scala.None</span></span>)</span>
       </span>
       </h4>
-      
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">service</dt><dd class="cmt"><p>Scribe OAuth object that connect to Plurk.</p></dd><dt class="param">accessToken</dt><dd class="cmt"><p>Sign request using this access token.
+</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -348,7 +350,7 @@
         <span class="name">service</span><span class="result">: <span class="extype" name="org.scribe.oauth.OAuthService">OAuthService</span></span>
       </span>
       </h4>
-      
+      <p class="shortcomment cmt">Scribe OAuth object that connect to Plurk.</p>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
