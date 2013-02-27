@@ -1,0 +1,522 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>model - SOPlurk 0.1 API document - org.bone.soplurk.model</title>
+          <meta name="description" content="model - SOPlurk 0.1 API document - org.bone.soplurk.model" />
+          <meta name="keywords" content="model SOPlurk 0.1 API document org.bone.soplurk.model" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../../../index.html';
+            var hash = 'org.bone.soplurk.model.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img src="../../../../lib/package_big.png" />
+        <p id="owner"><a href="../../../package.html" class="extype" name="org">org</a>.<a href="../../package.html" class="extype" name="org.bone">bone</a>.<a href="../package.html" class="extype" name="org.bone.soplurk">soplurk</a></p>
+        <h1>model</h1>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">model</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        
+        
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="org.bone.soplurk.model.Alert" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="AlertextendsProductwithSerializable"></a>
+      <a id="Alert:Alert"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Alert.html"><span class="name">Alert</span></a><span class="params">(<span name="alertType">alertType: <a href="../constant/AlertType.html" class="extype" name="org.bone.soplurk.constant.AlertType">AlertType</a></span>, <span name="user">user: <a href="User.html" class="extype" name="org.bone.soplurk.model.User">User</a></span>, <span name="posted">posted: <span class="extype" name="java.util.Date">Date</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> Represented Alert in Plurk.</p>
+    </li><li name="org.bone.soplurk.model.Collection" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CollectionextendsProductwithSerializable"></a>
+      <a id="Collection:Collection"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Collection.html"><span class="name">Collection</span></a><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="languages">languages: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="translatedName">translatedName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> Represented as a Topic in PlurkTop.</p>
+    </li><li name="org.bone.soplurk.model.Completion" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CompletionextendsProductwithSerializable"></a>
+      <a id="Completion:Completion"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Completion.html"><span class="name">Completion</span></a><span class="params">(<span name="nickname">nickname: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="fullName">fullName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="displayName">displayName: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> Represented as a user's friend completion entry.</p>
+    </li><li name="org.bone.soplurk.model.CustomIcon" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CustomIconextendsIconwithProductwithSerializable"></a>
+      <a id="CustomIcon:CustomIcon"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="CustomIcon.html"><span class="name">CustomIcon</span></a><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="url">url: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Icon.html" class="extype" name="org.bone.soplurk.model.Icon">Icon</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.bone.soplurk.model.Emoticon" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="EmoticonextendsIconwithProductwithSerializable"></a>
+      <a id="Emoticon:Emoticon"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Emoticon.html"><span class="name">Emoticon</span></a><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="url">url: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Icon.html" class="extype" name="org.bone.soplurk.model.Icon">Icon</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.bone.soplurk.model.ExtendedUser" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ExtendedUserextendsProductwithSerializable"></a>
+      <a id="ExtendedUser:ExtendedUser"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="ExtendedUser.html"><span class="name">ExtendedUser</span></a><span class="params">(<span name="basicInfo">basicInfo: <a href="User.html" class="extype" name="org.bone.soplurk.model.User">User</a></span>, <span name="relationship">relationship: <a href="../constant/Relationship.html" class="extype" name="org.bone.soplurk.constant.Relationship">Relationship</a></span>, <span name="recruited">recruited: <span class="extype" name="scala.Int">Int</span></span>, <span name="about">about: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> Extended User Information
+</p>
+    </li><li name="org.bone.soplurk.model.FavoriteInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="FavoriteInfoextendsProductwithSerializable"></a>
+      <a id="FavoriteInfo:FavoriteInfo"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="FavoriteInfo.html"><span class="name">FavoriteInfo</span></a><span class="params">(<span name="isFavorite">isFavorite: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="favoriteCount">favoriteCount: <span class="extype" name="scala.Int">Int</span></span>, <span name="favorers">favorers: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Long">Long</span>]]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> This class holds information about whether a Plurk is current user's favorite or
+ is favorited by others.</p>
+    </li><li name="org.bone.soplurk.model.Icon" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="IconextendsObject"></a>
+      <a id="Icon:Icon"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Icon.html"><span class="name">Icon</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.bone.soplurk.model.KarmaStats" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="KarmaStatsextendsProductwithSerializable"></a>
+      <a id="KarmaStats:KarmaStats"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="KarmaStats.html"><span class="name">KarmaStats</span></a><span class="params">(<span name="current">current: <span class="extype" name="scala.Double">Double</span></span>, <span name="fallReason">fallReason: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="graphURL">graphURL: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="trend">trend: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> Represented Plurk Karam status</p>
+    </li><li name="org.bone.soplurk.model.Plurk" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PlurkextendsProductwithSerializable"></a>
+      <a id="Plurk:Plurk"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Plurk.html"><span class="name">Plurk</span></a><span class="params">(<span name="plurkID">plurkID: <span class="extype" name="scala.Long">Long</span></span>, <span name="ownerID">ownerID: <span class="extype" name="scala.Long">Long</span></span>, <span name="userID">userID: <span class="extype" name="scala.Long">Long</span></span>, <span name="qualifier">qualifier: <a href="../constant/Qualifier.html" class="extype" name="org.bone.soplurk.constant.Qualifier">Qualifier</a></span>, <span name="content">content: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="plurkType">plurkType: <a href="../constant/PlurkType.html" class="extype" name="org.bone.soplurk.constant.PlurkType">PlurkType</a></span>, <span name="readStatus">readStatus: <span class="extype" name="scala.Option">Option</span>[<a href="../constant/ReadStatus.html" class="extype" name="org.bone.soplurk.constant.ReadStatus">ReadStatus</a>]</span>, <span name="whoIsCommentable">whoIsCommentable: <a href="../constant/CommentSetting.html" class="extype" name="org.bone.soplurk.constant.CommentSetting">CommentSetting</a></span>, <span name="posted">posted: <span class="extype" name="java.util.Date">Date</span></span>, <span name="language">language: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="responseCount">responseCount: <span class="extype" name="scala.Int">Int</span></span>, <span name="replurkInfo">replurkInfo: <a href="ReplurkInfo.html" class="extype" name="org.bone.soplurk.model.ReplurkInfo">ReplurkInfo</a></span>, <span name="favoriteInfo">favoriteInfo: <a href="FavoriteInfo.html" class="extype" name="org.bone.soplurk.model.FavoriteInfo">FavoriteInfo</a></span>, <span name="qualifierTranslated">qualifierTranslated: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="limitedTo">limitedTo: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Long">Long</span>]]</span>, <span name="responsesSeen">responsesSeen: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="contentRaw">contentRaw: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> Minmial info about a Plurk post
+</p>
+    </li><li name="org.bone.soplurk.model.RealtimeResponse" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RealtimeResponseextendsProductwithSerializable"></a>
+      <a id="RealtimeResponse:RealtimeResponse"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="RealtimeResponse.html"><span class="name">RealtimeResponse</span></a><span class="params">(<span name="user">user: <a href="User.html" class="extype" name="org.bone.soplurk.model.User">User</a></span>, <span name="plurk">plurk: <a href="Plurk.html" class="extype" name="org.bone.soplurk.model.Plurk">Plurk</a></span>, <span name="response">response: <a href="Response.html" class="extype" name="org.bone.soplurk.model.Response">Response</a></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> Response from Realtime API.</p>
+    </li><li name="org.bone.soplurk.model.ReplurkInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ReplurkInfoextendsProductwithSerializable"></a>
+      <a id="ReplurkInfo:ReplurkInfo"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="ReplurkInfo.html"><span class="name">ReplurkInfo</span></a><span class="params">(<span name="isReplurkable">isReplurkable: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="isReplurked">isReplurked: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="replurkersCount">replurkersCount: <span class="extype" name="scala.Int">Int</span></span>, <span name="replurkerID">replurkerID: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Long">Long</span>]</span>, <span name="replurkers">replurkers: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Long">Long</span>]]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> This class holds information about whether a plurk is replurkable or has been
+ replurked.</p>
+    </li><li name="org.bone.soplurk.model.Response" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ResponseextendsProductwithSerializable"></a>
+      <a id="Response:Response"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Response.html"><span class="name">Response</span></a><span class="params">(<span name="userID">userID: <span class="extype" name="scala.Long">Long</span></span>, <span name="plurkID">plurkID: <span class="extype" name="scala.Long">Long</span></span>, <span name="id">id: <span class="extype" name="scala.Long">Long</span></span>, <span name="content">content: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="contentRaw">contentRaw: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="qualifier">qualifier: <a href="../constant/Qualifier.html" class="extype" name="org.bone.soplurk.constant.Qualifier">Qualifier</a></span>, <span name="posted">posted: <span class="extype" name="java.util.Date">Date</span></span>, <span name="language">language: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> Represented Response of a Plurk.</p>
+    </li><li name="org.bone.soplurk.model.TopPlurk" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TopPlurkextendsProductwithSerializable"></a>
+      <a id="TopPlurk:TopPlurk"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="TopPlurk.html"><span class="name">TopPlurk</span></a><span class="params">(<span name="plurk">plurk: <a href="Plurk.html" class="extype" name="org.bone.soplurk.model.Plurk">Plurk</a></span>, <span name="voteUp">voteUp: <span class="extype" name="scala.Int">Int</span></span>, <span name="voteDown">voteDown: <span class="extype" name="scala.Int">Int</span></span>, <span name="score">score: <span class="extype" name="scala.Double">Double</span></span>, <span name="topicID">topicID: <span class="extype" name="scala.Int">Int</span></span>, <span name="posterUID">posterUID: <span class="extype" name="scala.Int">Int</span></span>, <span name="posted">posted: <span class="extype" name="java.util.Date">Date</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> Represented Plurk entry returned by PlurkTop
+</p>
+    </li><li name="org.bone.soplurk.model.Topic" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TopicextendsProductwithSerializable"></a>
+      <a id="Topic:Topic"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Topic.html"><span class="name">Topic</span></a><span class="params">(<span name="id">id: <span class="extype" name="scala.Int">Int</span></span>, <span name="translatedName">translatedName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> Represented as a Topic in PlurkTop.</p>
+    </li><li name="org.bone.soplurk.model.User" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UserextendsProductwithSerializable"></a>
+      <a id="User:User"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="User.html"><span class="name">User</span></a><span class="params">(<span name="id">id: <span class="extype" name="scala.Long">Long</span></span>, <span name="nickname">nickname: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="fullName">fullName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="displayName">displayName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="isVerifiedAccount">isVerifiedAccount: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="gender">gender: <a href="../constant/Gender.html" class="extype" name="org.bone.soplurk.constant.Gender">Gender</a></span>, <span name="karma">karma: <span class="extype" name="scala.Double">Double</span></span>, <span name="hasProfileImage">hasProfileImage: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="birthdayPrivacy">birthdayPrivacy: <span class="extype" name="scala.Option">Option</span>[<a href="../constant/BirthdayPrivacy.html" class="extype" name="org.bone.soplurk.constant.BirthdayPrivacy">BirthdayPrivacy</a>]</span>, <span name="defaultLanguage">defaultLanguage: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="avatarVersion">avatarVersion: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="location">location: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="birthday">birthday: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="java.util.Date">Date</span>]</span>, <span name="timezone">timezone: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="nameColor">nameColor: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> Represnted a user's basic information.</p>
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="org.bone.soplurk.model.Alert" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Alert"></a>
+      <a id="Alert:Alert"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Alert$.html"><span class="name">Alert</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.bone.soplurk.model.Collection" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Collection"></a>
+      <a id="Collection:Collection"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Collection$.html"><span class="name">Collection</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.bone.soplurk.model.Completion" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Completion"></a>
+      <a id="Completion:Completion"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Completion$.html"><span class="name">Completion</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.bone.soplurk.model.CustomIcon" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CustomIcon"></a>
+      <a id="CustomIcon:CustomIcon"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="CustomIcon$.html"><span class="name">CustomIcon</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.bone.soplurk.model.Emoticon" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Emoticon"></a>
+      <a id="Emoticon:Emoticon"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Emoticon$.html"><span class="name">Emoticon</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.bone.soplurk.model.ExtendedUser" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ExtendedUser"></a>
+      <a id="ExtendedUser:ExtendedUser"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="ExtendedUser$.html"><span class="name">ExtendedUser</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.bone.soplurk.model.FavoriteInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="FavoriteInfo"></a>
+      <a id="FavoriteInfo:FavoriteInfo"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="FavoriteInfo$.html"><span class="name">FavoriteInfo</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.bone.soplurk.model.KarmaStats" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="KarmaStats"></a>
+      <a id="KarmaStats:KarmaStats"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="KarmaStats$.html"><span class="name">KarmaStats</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.bone.soplurk.model.MyJValueImplicits" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="MyJValueImplicits"></a>
+      <a id="MyJValueImplicits:MyJValueImplicits"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="MyJValueImplicits$.html"><span class="name">MyJValueImplicits</span></a>
+      </span>
+      </h4>
+      
+    </li><li name="org.bone.soplurk.model.Plurk" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Plurk"></a>
+      <a id="Plurk:Plurk"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Plurk$.html"><span class="name">Plurk</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.bone.soplurk.model.RealtimeResponse" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RealtimeResponse"></a>
+      <a id="RealtimeResponse:RealtimeResponse"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="RealtimeResponse$.html"><span class="name">RealtimeResponse</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.bone.soplurk.model.ReplurkInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ReplurkInfo"></a>
+      <a id="ReplurkInfo:ReplurkInfo"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="ReplurkInfo$.html"><span class="name">ReplurkInfo</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.bone.soplurk.model.Response" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Response"></a>
+      <a id="Response:Response"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Response$.html"><span class="name">Response</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.bone.soplurk.model.TopPlurk" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TopPlurk"></a>
+      <a id="TopPlurk:TopPlurk"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="TopPlurk$.html"><span class="name">TopPlurk</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.bone.soplurk.model.Topic" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Topic"></a>
+      <a id="Topic:Topic"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Topic$.html"><span class="name">Topic</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.bone.soplurk.model.User" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="User"></a>
+      <a id="User:User"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="User$.html"><span class="name">User</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>

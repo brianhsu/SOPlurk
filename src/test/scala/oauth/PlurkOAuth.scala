@@ -1,6 +1,6 @@
-package org.bone.splurk2.oauth
+package org.bone.soplurk.oauth
 
-import org.bone.splurk2.exceptions.RequestException
+import org.bone.soplurk.exceptions.RequestException
 
 import org.scalatest.FunSpec
 import org.scalatest.matchers.ShouldMatchers

@@ -1,8 +1,9 @@
-package org.bone.splurk2.model
+package org.bone.soplurk.model
 
-import org.bone.splurk2.exceptions._
-import org.bone.splurk2.model._
-import org.bone.splurk2.model.PlurkType._
+import org.bone.soplurk.constant._
+import org.bone.soplurk.constant.PlurkType._
+import org.bone.soplurk.exceptions._
+import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
 import org.scalatest.matchers.ShouldMatchers
@@ -24,7 +25,7 @@ class PlurkSpec extends FunSpec with ShouldMatchers {
         qualifier = Qualifier.Says, 
         content = "NormalPlurkPost",
         plurkType = PlurkType.Public, 
-        readStatus = ReadStatus.Read,
+        readStatus = Some(ReadStatus.Read),
         whoIsCommentable = CommentSetting.Everyone,
         posted = new Date(1360752727000L), // 2013-02-13T10:52:07 GMT
         language = "tr_ch",
@@ -49,7 +50,7 @@ class PlurkSpec extends FunSpec with ShouldMatchers {
         qualifier = Qualifier.Says, 
         content = "NormalPlurkPostMinimal",
         plurkType = PlurkType.Public, 
-        readStatus = ReadStatus.Read,
+        readStatus = Some(ReadStatus.Read),
         whoIsCommentable = CommentSetting.Everyone,
         posted = new Date(1360752727000L), // 2013-02-13T10:52:07 GMT
         language = "tr_ch",
@@ -57,7 +58,7 @@ class PlurkSpec extends FunSpec with ShouldMatchers {
         replurkInfo = replurkInfo,
         favoriteInfo = favoriteInfo,
         qualifierTranslated = Some("說"),
-        limitedTo = None,
+        limitedTo = Some(List(1367985, 8814877, 4373060)),
         responsesSeen = None,
         contentRaw = None
       )
@@ -74,7 +75,7 @@ class PlurkSpec extends FunSpec with ShouldMatchers {
         qualifier = Qualifier.Whispers,
         content = "偷偷說的 API 測試……",
         plurkType = PlurkType.AnonymousResponded,
-        readStatus = ReadStatus.Read,
+        readStatus = Some(ReadStatus.Read),
         whoIsCommentable = CommentSetting.Everyone,
         posted = new Date(1360743094000L), // 2013-02-13T08:11:34 GMT
         language = "tr_ch",
@@ -101,7 +102,7 @@ class PlurkSpec extends FunSpec with ShouldMatchers {
         qualifier = Qualifier.Whispers,
         content = "偷偷說的 API 測試……",
         plurkType = PlurkType.AnonymousResponded,
-        readStatus = ReadStatus.Read,
+        readStatus = Some(ReadStatus.Read),
         whoIsCommentable = CommentSetting.Everyone,
         posted = new Date(1360743094000L), // 2013-02-13T08:11:34 GMT
         language = "tr_ch",
@@ -169,7 +170,7 @@ object PlurkSpec {
     "qualifier": "says",
     "plurk_id": 1097524102,
     "response_count": 21,
-    "limited_to": null,
+    "limited_to": "|1367985||8814877||4373060|",
     "no_comments": 0,
     "posted": "Wed, 13 Feb 2013 10:52:07 GMT",
     "lang": "tr_ch",

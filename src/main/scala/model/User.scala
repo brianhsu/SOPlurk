@@ -1,5 +1,6 @@
-package org.bone.splurk2.model
+package org.bone.soplurk.model
 
+import org.bone.soplurk.constant._
 import net.liftweb.json.JsonAST._
 import java.util.Date
 
@@ -9,7 +10,9 @@ import java.util.Date
  *  @param  id                  The unique user id.
  *  @param  nickname            The unique nick_name of the user.
  *  @param  displayName         The non-unique display name of the user.
- *  @param  isVerifiedAccount   Is this user a [[http://www.plurk.com/Verify/ Plurk verified account]]?
+ *  @param  isVerifiedAccount   Is this user a 
+ *                              [[http://www.plurk.com/Verify/ Plurk verified account]]?
+ *
  *  @param  gender              The user's gender
  *  @param  karma               User's karma value
  *  @param  hasProfileImage     Does this user have profile image?
@@ -17,8 +20,12 @@ import java.util.Date
  *  @param  defaultLanguage     User's default language.
  *  @param  avatarVersion       The user's avatar version.
  *  @param  location            The user's location.
- *  @param  birthday            The user's birthday, if birthday privact is set to HideYear, year will be 1904.
- *  @param  timezone            The user's timezone, None if user has set it to browser's default.
+ *  @param  birthday            The user's birthday, if birthday privact is set to 
+ *                              HideYear, year will be 1904.
+ *
+ *  @param  timezone            The user's timezone, None if user has set it to 
+ *                              browser's default.
+ *
  *  @param  nameColor           The user's name color in HTML hex color value.
  */
 case class User (
@@ -30,7 +37,7 @@ case class User (
   gender: Gender,
   karma: Double,
   hasProfileImage: Boolean,
-  birthdayPrivacy: BirthdayPrivacy,
+  birthdayPrivacy: Option[BirthdayPrivacy],
   defaultLanguage: String,
   avatarVersion: Option[Int],
   location: Option[String],
@@ -68,33 +75,27 @@ case class User (
 object User {
 
   import MyJValueImplicits._
-  import java.text.SimpleDateFormat
-  import java.util.Locale
+  import org.bone.soplurk.util.DateTimeUtils
 
-  private def toDate(dateString: String): Date = {
-    val dateFormatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.US)
-    dateFormatter.parse(dateString)
-  }
-  
   /**
    *  Create BasicUser object from Plurk's user data JSON.
    *
    *  @param    user    The user JSON data returned by Plurk.
    */
   def apply(user: JValue) = new User (
-    id = user.get[BigInt]("id").toLong,
+    id = user.get("id"),
     nickname = user.get("nick_name"),
     fullName = user.get("full_name"),
     displayName = user.get("display_name"),
     isVerifiedAccount = user.get("verified_account"),
-    gender = Gender(user.get[BigInt]("gender").toByte),
-    karma = user.get[Double]("karma"),
-    hasProfileImage = (user.get[BigInt]("has_profile_image") == 1),
-    birthdayPrivacy = BirthdayPrivacy(user.get[BigInt]("bday_privacy").toByte),
+    gender = Gender(user.get[Int]("gender").toByte),
+    karma = user.get("karma"),
+    hasProfileImage = (user.get[Int]("has_profile_image") == 1),
+    birthdayPrivacy = user.getOption[Int]("bday_privacy").map(x => BirthdayPrivacy(x.toByte)),
     defaultLanguage = user.get("default_lang"),
-    avatarVersion = user.getOption[BigInt]("avatar").map(_.toInt),
+    avatarVersion = user.getOption("avatar"),
     location = user.getOption("location"),
-    birthday = user.getOption("date_of_birth").map(toDate),
+    birthday = user.getOption[String]("date_of_birth").map(DateTimeUtils.fromPlurkDate),
     timezone = user.getOption("timezone"),
     nameColor = user.getOption("name_color")
   )

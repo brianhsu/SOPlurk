@@ -1,0 +1,396 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>root - SOPlurk 0.1 API document - _root_</title>
+          <meta name="description" content="root - SOPlurk 0.1 API document - root " />
+          <meta name="keywords" content="root SOPlurk 0.1 API document root " />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="lib/template.js"></script>
+      <script type="text/javascript" src="lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = 'index.html';
+            var hash = 'package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img src="lib/package_big.png" />
+        
+        <h1>root package</h1>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">root</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><h3> SOPlurk - Scala binding for Plurk API 2.0 </h3><h4> Introduction </h4><p>SOPlurk is an Scala binding for <a href="http://www.plurk.com/API/2" target="_blank">Plurk API 2.0</a> which use OAuth 1.0 to get authorization from users. It means user don't required to expose thier username / password to the application.</p><p>SOPlurk provides a nice and type-safe API to access the Plurk API 2.0, it's very easy to use but also type-safe due to the power Scala has.</p><p>You don't need to bother how OAuth works internally, what you need to do is call some API in a certain sequence, and prompt your users to enter the verfication code they get from Plurk.</p><h5> Example: Post a Plurk </h5><p>For example, the following is the complete code to post a plurk to user's timeline. We'll explain the code later, but as you can see, it's quite simple. Most part of code is just to get verfication code from user.</p><pre><span class="kw">import</span> scala.util.{Try, Success, Failure}
+
+<span class="kw">import</span> org.bone.soplurk.util.BombTry._
+<span class="kw">import</span> org.bone.soplurk.constant.Qualifier
+
+<span class="kw">def</span> logginAPIExample(appKey: <span class="std">String</span>, appSecret: <span class="std">String</span>) {
+
+  <span class="kw">val</span> plurkAPI = PlurkAPI.withoutCallback(appKey, appSecret)
+
+  <span class="kw">for</span> {
+    authURL    <span class="kw">&lt;-</span> plurkAPI.getAuthorizationURL.boomIfFailed    <span class="cmt">// Get authorization URL</span>
+    verifyCode <span class="kw">&lt;-</span> getVerifcationFromUser(authURL).boomIfFailed <span class="cmt">// Get verify code from User</span>
+    _          <span class="kw">&lt;-</span> plurkAPI.authorize(verifyCode).boomIfFailed  <span class="cmt">// Try to get verified.</span>
+  } {
+
+    plurkAPI.Timeline.plurkAdd(
+      content = <span class="lit">"This is a test plurk posted from SOPlurk"</span>,
+      qualifier = Qualifier.Says
+    ).boomIfFailed
+
+  }
+
+}
+
+<span class="kw">def</span> getVerifcationFromUser(authURL: <span class="std">String</span>): Try[<span class="std">String</span>] = Try {
+
+  <span class="kw">import</span> java.util.Scanner
+
+  println( <span class="lit">"======== Plurk Authorization Instruction ========"</span>)
+  println(s<span class="lit">"1. Please goto the following URL using your favorite browser:"</span>)
+  println(s<span class="lit">""</span>)
+  println(s<span class="lit">"     $authURL"</span>)
+  println(s<span class="lit">""</span>)
+  println(s<span class="lit">"2. Hit the `Yes, Grant the permission` button"</span>)
+  println(s<span class="lit">"3. Copy the verifcation number shows in bold text"</span>)
+  println(s<span class="lit">"4. Paste it to this program and hit enter!"</span>)
+  println( <span class="lit">"================================================="</span>)
+  print( <span class="lit">"Please enter verfication number:"</span>)
+
+  <span class="kw">val</span> scanner = <span class="kw">new</span> Scanner(java.lang.System.in)
+  scanner.nextLine()
+}</pre><h5> Example: A Plurk bot </h5><p>Thanks for the power of Scala and Akka library, it become very easy to design an Plurk Bot with SOPlurk, the following code is everything you need to create a Plurk bot that accepts all friendship reqeust, and responds to those Plurks contains <code>hello</code> in it.</p><pre><span class="cmt">//</span>
+<span class="cmt">//  This bot will accept all friendship request, and responded to</span>
+<span class="cmt">//  new Plurks that contains `hello` in it.</span>
+<span class="cmt">//</span>
+<span class="cmt">//  It basically a Scala version of [[http://pastie.org/2765457 this python code]]</span>
+<span class="cmt">//</span>
+
+<span class="kw">import</span> org.bone.soplurk.api._
+<span class="kw">import</span> org.bone.soplurk.bot._
+<span class="kw">import</span> org.bone.soplurk.constant._
+<span class="kw">import</span> org.bone.soplurk.model._
+
+<span class="kw">val</span> (appKey, appSecret) = (<span class="lit">"APP_KEY"</span>, <span class="lit">"APP_SECRET"</span>)
+<span class="kw">val</span> (tokenKey, tokenSecret) = (<span class="lit">"TOKEN_KEY"</span>, <span class="lit">"TOKEN_SECRET"</span>)
+
+<span class="kw">val</span> plurkBot = PlurkBot.withAccessToken(appKey, appSecret, tokenKey, tokenSecret) {
+  plurkAPI: PlurkAPI <span class="kw">=&gt;</span> {
+    <span class="kw">case</span> Alert(alertType, user, posted) <span class="kw">=&gt;</span> plurkAPI.Alerts.addAllAsFriends()
+    <span class="kw">case</span> RealtimeResponse(user, plurk, response) <span class="kw">=&gt;</span> <span class="cmt">// Ignore any response</span>
+    <span class="kw">case</span> plurk: Plurk <span class="kw">=&gt;</span>
+
+      <span class="kw">if</span> (plurk.content.toLowerCase contains <span class="lit">"hello"</span>) {
+        plurkAPI.Responses.responseAdd(plurk.plurkID, <span class="lit">"world"</span>, Qualifier.Says)
+      }
+  }
+}</pre><h4> Installation </h4><p>To using SOPlurk in your Scala project, please add the following defintion in your <a href="http://brianhsu.github.com/SOPlurk/api/index.html" target="_blank">SBT</a> <code>build.sbt </code> project.</p><p>Since SOPlurk used <code>scala.util.Try</code> which only exists after Scala 2.10.0, you must tell SBT to build your project using Scala 2.10.0 or above.</p><pre><span class="cmt">// In build.sbt</span>
+
+scalaVersion := <span class="lit">"2.10.0"</span>
+
+resolvers += <span class="lit">"bone"</span> at <span class="lit">"http://bone.twbbs.org.tw/ivy"</span>
+
+libraryDependencies += <span class="lit">"org.bone"</span> %% <span class="lit">"soplurk"</span> % <span class="lit">"0.2"</span></pre><p>After done this, enter <code>reload</code> and <code>update</code> in your SBT console, it will fetch all libraries that need to using SOPlurk.</p><pre>brianhsu@USBGentoo ~/Test $ sbt
+[info] <span class="std">Set</span> current project to default-<span class="num">9</span>dcd95 (in build file:/home/brianhsu/Test/)
+&gt; reload
+[info] <span class="std">Set</span> current project to default-<span class="num">9</span>dcd95 (in build file:/home/brianhsu/Test/)
+&gt; update
+[info] Updating {file:/home/brianhsu/Test/}default-<span class="num">9</span>dcd95...
+[info] Resolving commons-logging#commons-logging;<span class="num">1.0</span>.<span class="num">4</span> ...
+[info] Done updating.
+[success] Total time: <span class="num">2</span> s, completed <span class="num">2013</span>/<span class="num">2</span>/<span class="num">23</span> ￤ﾸﾋ￥ﾍﾈ <span class="num">01</span>:<span class="num">41</span>:<span class="num">12</span>
+&gt;</pre><h4> API Document and Example Code </h4><ul><li><a href="http://brianhsu.github.com/SOPlurk/api/index.html" target="_blank">API Document</a></li><li><a href="https://github.com/brianhsu/SOPlurk/blob/develop/src/test/scala/example/PlurkAPI.scala" target="_blank">Example code with detailed explanation</a></li></ul><h4> Design of SOPlurk </h4><p>SOPlurk is a project that let me practice how to design Scala library that make client code clean yet robust at first.</p><p>But it turns out Scala is really powerful and so much fun to programming with it, so I've implemented every API you could find in <a href="http://www.plurk.com/API/2" target="_blank">Plurk API 2.0 Document</a> just in 12 days. In facts, there are even some API that doesn't list on the document is also be implemented in SOPlurk.</p><h5> API Layout </h5><p><a href="org/bone/soplurk/api/PlurkAPI.html" class="extype" name="org.bone.soplurk.api.PlurkAPI">org.bone.soplurk.api.PlurkAPI</a> is the marjor class you will dealing with when using SOPlurk.</p><p>To make things more intutive, there are 15 singleton Scala <code>object</code> in it, which are corresponding to the second part of URL in official Plurk API.</p><p>For example, if you found the following API in Plurk API 2.0 document:</p><ul><li><code>/APP/Timeline/plurkAdd</code></li><li><code>/APP/Profile/getOwnProfile</code></li><li><code>/APP/Users/currUser</code></li></ul><p>They will corresponding to the following API at <code>PlurkAPI</code> instance, respectively.</p><ul><li><code>PlurkAPI#Timeline.plurkAdd</code></li><li><code>PlurkAPI#Profile.getOwnProfile</code></li><li><code>PlurkAPI#Users.currUser</code></li></ul><p>The only exception is those OAuth utils API, they are grouped under <code>PlurkAPI#OAuthUtils</code>.</p><h5> Leverage with <code>scala.util.Try[T]</code> </h5><p>There are many thing could go wrong when we accessing resource from Internet, user's network maybe down, the Plurk's server maybe is crashed and not responding. It's very hard to ensure that everything will go correct as we exepcted.</p><p>To solve this and make sure the client code is as robust as possible, almost every API in SOPlurk is returning a <code>scala.util.Try[T]</code>.</p><p>By using <code>Try[T]</code>, the client code will notice there are doing something that could go wrong, and they could choose how to deal with it.</p><p>For example, we could choose the good old procedure style, just check if PlurkAPI returned an <code>TimeInfo</code> or there is an exception occurs (for example, network is not available).</p><pre><span class="kw">import</span> scala.util.{Try, Success, Failure}
+<span class="kw">import</span> org.bone.soplurk.api.PlurkAPI
+
+<span class="kw">val</span> plurkAPI = PlurkAPI.withoutCallback(<span class="lit">"7xHSzV4xGLJS"</span>, <span class="lit">"r2SgShtAqMP0IWdYHQGYyoi8imWqiw48"</span>)
+
+plurkAPI.OAuthUtils.checkTime <span class="kw">match</span> {
+  <span class="kw">case</span> Success(timeInfo) <span class="kw">=&gt;</span> println(<span class="lit">"We got server time from Plurk:"</span> + timeInfo)
+  <span class="kw">case</span> Failure(exception) <span class="kw">=&gt;</span> println(<span class="lit">"Here is an exception:"</span> + exception)
+}</pre><p>Sometime we may just want ignore the exception if we're just doing some quick test, in this case, <code>for</code> is a good friend.</p><pre><span class="kw">import</span> scala.util.{Try, Success, Failure}
+<span class="kw">import</span> org.bone.soplurk.api.PlurkAPI
+
+<span class="kw">val</span> plurkAPI = PlurkAPI.withoutCallback(<span class="lit">"7xHSzV4xGLJS"</span>, <span class="lit">"r2SgShtAqMP0IWdYHQGYyoi8imWqiw48"</span>)
+
+<span class="kw">for</span> (timeInfo <span class="kw">&lt;-</span> plurkAPI.OAuthUtils.checkTime) {
+  println(<span class="lit">"We got time from server:"</span> + timeInfo)
+}</pre><p>We may do this in functional too, <code>Try[T]</code> has a <code>map()</code> method just like <code>Option[T]</code>, and it similiar to <code>map()</code> in <code>Optiont[T]</code>. If we have a <code>Success[T]</code>, the map will convert <code>T</code> to something, but if we have a <code>Failure</code>, then the result will still be <code>Failure</code>.</p><pre><span class="kw">import</span> scala.util.{Try, Success, Failure}
+<span class="kw">import</span> org.bone.soplurk.api.PlurkAPI
+
+<span class="kw">val</span> plurkAPI = PlurkAPI.withoutCallback(<span class="lit">"7xHSzV4xGLJS"</span>, <span class="lit">"r2SgShtAqMP0IWdYHQGYyoi8imWqiw48"</span>)
+<span class="kw">val</span> unixTimettamp = plurkAPI.OAuthUtils.checkTime.map(_.unixTimestamp)</pre><p>If you are not familiar with <code>Try[T]</code>, we recommanded the following article:</p><ul><li><a href="http://danielwestheide.com/blog/2012/12/26/the-neophytes-guide-to-scala-part-6-error-handling-with-try.html" target="_blank">The Neophyte's Guide to Scala Part 6: Error Handling With Try</a></li></ul><p>It's worth to reading and understand how <code>Try[T]</code> works, you will love how <code>Try[T]</code> could help you handle Exception once you get it IMHO.</p><h5> But sometime we hope it just crash -- <code>BombTry</code> </h5><p>When using <code>Try[T]</code> in the for-comprehension without yield form, if there are <code>Failure</code> in the chain, it will simply ignore the body code block.</p><p>It's like a <code>try-catch</code> block which swallowed any exception, which is a code smell that almost every code-style book will told you not to do it.</p><p>For example, the following code will executed without an error:</p><pre><span class="kw">import</span> scala.util._
+
+<span class="kw">def</span> operationA: Try[<span class="std">Int</span>] = Success(<span class="num">1</span>)
+<span class="kw">def</span> operationB: Try[<span class="std">Int</span>] = Failure(<span class="kw">new</span> Exception(<span class="lit">"error"</span>))
+
+<span class="kw">for</span> {
+  valueA <span class="kw">&lt;-</span> operationA
+  valueB <span class="kw">&lt;-</span> operationB
+} {
+  println(<span class="lit">"A:"</span> + valueA)
+  println(<span class="lit">"B:"</span> + valueB)
+}</pre><p>It is basically wrapping everything in a try block, and ignore any exceptions:</p><pre><span class="kw">import</span> scala.util._
+
+<span class="kw">def</span> operationA: Try[<span class="std">Int</span>] = Success(<span class="num">1</span>)
+<span class="kw">def</span> operationB: Try[<span class="std">Int</span>] = Failure(<span class="kw">new</span> Exception(<span class="lit">"error"</span>))
+
+<span class="kw">try</span> {
+
+  <span class="kw">val</span> valueA = operationA.get
+  <span class="kw">val</span> valueB = operationB.get   <span class="cmt">// This line will throw exception since operationB is a Failure</span>
+
+  println(<span class="lit">"A:"</span> + valueA)
+  println(<span class="lit">"B:"</span> + valueB)
+
+} <span class="kw">catch</span> {
+  <span class="kw">case</span> _: Exception <span class="kw">=&gt;</span> <span class="cmt">// Eat exception</span>
+}</pre><p>It's not a good code, because no one will notice we have an exception.</p><p>Sometime we hope our program just crash when there are exceptions occurs, so we could find out what's go wrong by dig into the stacktrace.</p><p>So here comes <a href="org/bone/soplurk/util/BombTry$.html" class="extype" name="org.bone.soplurk.util.BombTry">org.bone.soplurk.util.BombTry</a>, it provides an implicit class which let you use the nice for-comprehension syntax, but throw out the exception as soon as possible.</p><pre><span class="kw">import</span> scala.util._
+<span class="kw">import</span> org.bone.soplurk.util.BombTry._
+
+<span class="kw">def</span> operationA: Try[<span class="std">Int</span>] = Success(<span class="num">1</span>)
+<span class="kw">def</span> operationB: Try[<span class="std">Int</span>] = Failure(<span class="kw">new</span> Exception(<span class="lit">"error"</span>))
+
+<span class="kw">for</span> {
+  valueA <span class="kw">&lt;-</span> operationA.boomIfFailed
+  valueB <span class="kw">&lt;-</span> operationB.boomIfFailed
+} {
+  println(<span class="lit">"A:"</span> + valueA)
+  println(<span class="lit">"B:"</span> + valueB)
+}</pre><h4> Using API that doesn't required logged in </h4><p>There are some Plurk API doesn't required access token(user logged in).</p><p>For access to these API, just create an instance of <code>PlurkAPI</code> by using <code>withoutCallback</code>, and access it directly.</p><pre><span class="cmt">// We are developing console program, so we don't need callback</span>
+<span class="cmt">// URL.</span>
+
+<span class="kw">val</span> plurkAPI = PlurkAPI.withoutCallback(appKey, appSecret)</pre><p>Now, we're trying to retrive a public profile of a Plurk user.</p><p>Not that almost every request API to Plurk in SOPlurk will return a <code>Try[T]</code>, this is very useful, because we don't know what will go wrong on Internet.</p><p>For example, the user's network maybe not working, or Plurk's servers are in maintenance, in this sistuation, it will return a <code>Failure</code> instead of blow up your program, but you still aware that there is a problem in your request.</p><pre><span class="kw">val</span> profile: Try[PublicProfile] = plurkAPI.Profile.getPublicProfile(<span class="lit">"brianhsu"</span>)
+
+<span class="cmt">// The body of foreach will only execute if we got profile</span>
+<span class="cmt">// correctly.</span>
+profile.foreach { p <span class="kw">=&gt;</span>
+  println(<span class="lit">"============ User Profile ============"</span>)
+  println(s<span class="lit">"His nickname:${p.userInfo.basicInfo.nickname}"</span>)
+  println(s<span class="lit">"His relationship:${p.userInfo.relationship}"</span>)
+  println(s<span class="lit">"His fans:${p.fansCount}"</span>)
+  println(s<span class="lit">"His friends:${p.friendsCount}"</span>)
+  println(<span class="lit">"======================================"</span>)
+}</pre><p>Since <code>Try[T]</code> is a monad, we could transform it using <code>map</code> and chain it with for-comprehension.</p><pre><span class="cmt">// The following example will print out the response of the lasted Plurk</span>
+<span class="cmt">// posted by user `brianhsu`.</span>
+
+<span class="kw">for</span> {
+  profile <span class="kw">&lt;-</span> plurkAPI.Profile.getPublicProfile(<span class="lit">"brianhsu"</span>) <span class="cmt">// Get profile</span>
+  plurk <span class="kw">&lt;-</span> Try(profile.plurks.head) <span class="cmt">// Get lastest plurk</span>
+  plurkResponse <span class="kw">&lt;-</span> plurkAPI.Responses.get(plurk.plurkID) <span class="cmt">// Get response of it</span>
+} {
+
+  <span class="cmt">// Now we get friends which is a Map[Long, User], where key is userID</span>
+  <span class="cmt">// and value is user information.</span>
+  <span class="kw">val</span> PlurkResponses(users, responses, seen) = plurkResponse
+
+  println(<span class="lit">"========== Lastest Response =========="</span>)
+
+  <span class="cmt">// So we could print it out.</span>
+  responses.foreach { r <span class="kw">=&gt;</span>
+    <span class="kw">val</span> nickname = users(r.userID).nickname
+    <span class="kw">val</span> qualifier = r.qualifier.name
+    <span class="kw">val</span> content = r.contentRaw
+
+    println(s<span class="lit">"$nickname $qualifier $content"</span>)
+  }
+
+  println(<span class="lit">"======================================"</span>)
+
+}</pre><p>Or you could use it in a more functional way, map it to new values instead of print it out directly.</p><pre><span class="kw">val</span> responses = <span class="kw">for</span> {
+  profile <span class="kw">&lt;-</span> plurkAPI.Profile.getPublicProfile(<span class="lit">"brianhsu"</span>) <span class="cmt">// Get profile</span>
+  plurk <span class="kw">&lt;-</span> Try(profile.plurks.head) <span class="cmt">// Get lastest plurk</span>
+  plurkResponse <span class="kw">&lt;-</span> plurkAPI.Responses.get(plurk.plurkID) <span class="cmt">// Get response of it</span>
+} <span class="kw">yield</span> {
+
+  <span class="kw">val</span> PlurkResponses(users, responses, seen) = plurkResponse
+
+  responses.map { r <span class="kw">=&gt;</span>
+    <span class="kw">val</span> nickname = users(r.userID).nickname
+    <span class="kw">val</span> qualifier = r.qualifier.name
+    <span class="kw">val</span> content = r.contentRaw
+
+    (nickname, qualifier, content)
+  }
+}
+
+<span class="cmt">// Now the `response` will be a `Try[List[(String, String, String)]]`, which means</span>
+<span class="cmt">// that it either is a Success with a List[(String, String, String)], or it is a</span>
+<span class="cmt">// `Failure` with exception.</span>
+<span class="cmt">//</span>
+<span class="cmt">// So we could handle them like the following code:</span>
+
+responses <span class="kw">match</span> {
+  <span class="kw">case</span> Success(xs) <span class="kw">=&gt;</span> println(xs.mkString(<span class="lit">"\n"</span>))
+  <span class="kw">case</span> Failure(exception) <span class="kw">=&gt;</span> println(<span class="lit">"We got exception:"</span> + exception)
+}</pre><h4> Using API that required logged in </h4><p>To using API that required user logged in, you need to do the following things:</p><ol class="decimal"><li>Get an authorization URL from Plurk.
+  2. Prompt user to browse the authroization URL you got in step 1.
+  3. Prompt user to copy the <code>verification number</code> after he hit the <code>Yes, Grant the permission</code> button on that URL.
+  4. Your program using <code>PlurkAPI#authroize()</code> with the verfication number that user got from step3.
+  5. Now you can use those logged-in required API as usual.</li></ol><p>So the following is how to do this in practice.</p><p>Note there is an <code>boomIfFailed</code> in the for-comprehension, this is provided by an implicit class in <code>BombTry</code>, it will throw the exception as soon as possible, so we could know there is something went wrong. (eg. authorization failed)</p><pre><span class="kw">import</span> org.bone.soplurl.api.PlurkAPI
+<span class="kw">import</span> org.bone.soplurk.util.BombTry._
+
+<span class="kw">val</span> plurkAPI = PlurkAPI.withoutCallback(appKey, appSecret)
+
+<span class="kw">for</span> {
+  authURL <span class="kw">&lt;-</span> plurkAPI.getAuthorizationURL.boomIfFailed <span class="cmt">// Get authorization URL</span>
+  verifyCode <span class="kw">&lt;-</span> getVerifcationFromUser(authURL).boomIfFailed <span class="cmt">// Get verify code from User</span>
+  _ <span class="kw">&lt;-</span> plurkAPI.authorize(verifyCode).boomIfFailed <span class="cmt">// Try to get verified.</span>
+} {
+
+  <span class="cmt">// The body of this for-comprehension will only executed if get authorization</span>
+  <span class="cmt">// successfully, so we could use those API which required logged in.</span>
+  <span class="cmt">//</span>
+
+  <span class="cmt">// Post a new Plurk.</span>
+  <span class="cmt">//</span>
+  <span class="kw">import</span> org.bone.soplurk.constant.Qualifier
+
+  plurkAPI.Timeline.plurkAdd(
+    content = <span class="lit">"This is a test plurk posted from SOPlurk"</span>,
+    qualifier = Qualifier.Says
+  ).boomIfFailed
+
+  <span class="cmt">// Get user's own profile.</span>
+  <span class="kw">val</span> ownProfile = plurkAPI.Profile.getOwnProfile
+
+  ownProfile.foreach { p <span class="kw">=&gt;</span>
+    println(s<span class="lit">"You have ${p.unreadCount} unread plurks and ${p.alertsCount} alerts"</span>)
+  }
+
+}
+
+<span class="kw">def</span> getVerifcationFromUser(authURL: <span class="std">String</span>): Try[<span class="std">String</span>] = Try {
+
+  <span class="kw">import</span> java.util.Scanner
+
+  println( <span class="lit">"======== Plurk Authorization Instruction ========"</span>)
+  println(s<span class="lit">"1. Please goto the following URL using your favorite browser:"</span>)
+  println(s<span class="lit">""</span>)
+  println(s<span class="lit">" $authURL"</span>)
+  println(s<span class="lit">""</span>)
+  println(s<span class="lit">"2. Hit the `Yes, Grant the permission` button"</span>)
+  println(s<span class="lit">"3. Copy the verifcation number shows in bold text"</span>)
+  println(s<span class="lit">"4. Paste it to this program and hit enter!"</span>)
+  println( <span class="lit">"================================================="</span>)
+  print( <span class="lit">"Please enter verfication number:"</span>)
+
+  <span class="kw">val</span> scanner = <span class="kw">new</span> Scanner(java.lang.System.in)
+  scanner.nextLine()
+}</pre><h4> Authroization in Web Application </h4><p>The authorization steps in Web application could be a lot simpler if you provide an callback argument to <code>PlurkAPI</code>, the user won't need to paste its verifcation number by themselevs.</p><p>When you provide <code>callback</code> argument to <code>PlurkAPI</code>, when user hit the <code>Yes, grant the permission</code> button, they will be redirect to the callback URL you set, and the verfication number if passed by the <code>oauth_verifier</code> http GET parameter in the URL.</p><p>So your code will look like the following:</p><pre><span class="cmt">//</span>
+<span class="cmt">// In http://localhost/yourApp/login</span>
+<span class="cmt">//</span>
+
+<span class="kw">val</span> plurkAPI = PlurkAPI.withCallback(
+  appKey    = <span class="lit">"yAW0goxD23qF"</span>,
+  appSecret = <span class="lit">"agKpMI6qImQIzhJm11b3t9mvuZo7xpny"</span>,
+  callback  = <span class="lit">"http://localhost/yourApp/myProfile"</span>
+)
+
+<span class="kw">for</span> (authURL <span class="kw">&lt;-</span> plurkAPI.getAuthorizationURL) {
+
+  <span class="cmt">// 1. Save `api` to session</span>
+
+  <span class="cmt">// 2. Redirect user to authURL</span>
+
+}</pre><pre><span class="cmt">//</span>
+<span class="cmt">// In http://localhost/yourApp/myProfile</span>
+<span class="cmt">//</span>
+
+<span class="kw">val</span> plurkAPI = ....  <span class="cmt">// Get `plurkAPI` from session</span>
+<span class="kw">val</span> verifyCode = ... <span class="cmt">// Get `oauth_verifier` URL parameter</span>
+
+plurkAPI.authorize(verifyCode).foreach {
+
+  println(plurkAPI.OAuthUtils.checkToken)
+
+}</pre></div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        
+        
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="_root_.org" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="org"></a>
+      <a id="org:org"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a href="org/package.html"><span class="name">org</span></a>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>

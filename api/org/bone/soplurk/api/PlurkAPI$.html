@@ -1,0 +1,667 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>PlurkAPI - SOPlurk 0.1 API document - org.bone.soplurk.api.PlurkAPI</title>
+          <meta name="description" content="PlurkAPI - SOPlurk 0.1 API document - org.bone.soplurk.api.PlurkAPI" />
+          <meta name="keywords" content="PlurkAPI SOPlurk 0.1 API document org.bone.soplurk.api.PlurkAPI" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../../../index.html';
+            var hash = 'org.bone.soplurk.api.PlurkAPI$';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <a href="PlurkAPI.html" title="Go to companion"><img src="../../../../lib/object_to_class_big.png" /></a>
+        <p id="owner"><a href="../../../package.html" class="extype" name="org">org</a>.<a href="../../package.html" class="extype" name="org.bone">bone</a>.<a href="../package.html" class="extype" name="org.bone.soplurk">soplurk</a>.<a href="package.html" class="extype" name="org.bone.soplurk.api">api</a></p>
+        <h1><a href="PlurkAPI.html" title="Go to companion">PlurkAPI</a></h1>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <span class="name">PlurkAPI</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="org.bone.soplurk.api.PlurkAPI"><span>PlurkAPI</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="org.bone.soplurk.api.PlurkAPI.EmoticonsList" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="EmoticonsListextendsProductwithSerializable"></a>
+      <a id="EmoticonsList:EmoticonsList"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="PlurkAPI$$EmoticonsList.html"><span class="name">EmoticonsList</span></a><span class="params">(<span name="custom">custom: <span class="extype" name="scala.List">List</span>[<a href="../model/CustomIcon.html" class="extype" name="org.bone.soplurk.model.CustomIcon">CustomIcon</a>]</span>, <span name="recruited">recruited: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.List">List</span>[<a href="../model/Emoticon.html" class="extype" name="org.bone.soplurk.model.Emoticon">Emoticon</a>]]</span>, <span name="karma">karma: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.List">List</span>[<a href="../model/Emoticon.html" class="extype" name="org.bone.soplurk.model.Emoticon">Emoticon</a>]]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> Reprsented emoticons that current user can use.</p>
+    </li><li name="org.bone.soplurk.api.PlurkAPI.OwnProfile" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="OwnProfileextendsProductwithSerializable"></a>
+      <a id="OwnProfile:OwnProfile"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="PlurkAPI$$OwnProfile.html"><span class="name">OwnProfile</span></a><span class="params">(<span name="userInfo">userInfo: <a href="../model/ExtendedUser.html" class="extype" name="org.bone.soplurk.model.ExtendedUser">ExtendedUser</a></span>, <span name="timeline">timeline: <a href="PlurkAPI$$Timeline.html" class="extype" name="org.bone.soplurk.api.PlurkAPI.Timeline">Timeline</a></span>, <span name="fansCount">fansCount: <span class="extype" name="scala.Int">Int</span></span>, <span name="friendsCount">friendsCount: <span class="extype" name="scala.Int">Int</span></span>, <span name="unreadCount">unreadCount: <span class="extype" name="scala.Int">Int</span></span>, <span name="alertsCount">alertsCount: <span class="extype" name="scala.Int">Int</span></span>, <span name="privacy">privacy: <a href="../constant/TimelinePrivacy.html" class="extype" name="org.bone.soplurk.constant.TimelinePrivacy">TimelinePrivacy</a></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> Current user's profile.</p>
+    </li><li name="org.bone.soplurk.api.PlurkAPI.PlurkData" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PlurkDataextendsProductwithSerializable"></a>
+      <a id="PlurkData:PlurkData"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="PlurkAPI$$PlurkData.html"><span class="name">PlurkData</span></a><span class="params">(<span name="author">author: <a href="../model/User.html" class="extype" name="org.bone.soplurk.model.User">User</a></span>, <span name="users">users: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Long">Long</span>, <a href="../model/User.html" class="extype" name="org.bone.soplurk.model.User">User</a>]</span>, <span name="plurk">plurk: <a href="../model/Plurk.html" class="extype" name="org.bone.soplurk.model.Plurk">Plurk</a></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> Represented data about specific Plurk.</p>
+    </li><li name="org.bone.soplurk.api.PlurkAPI.PlurkResponses" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PlurkResponsesextendsProductwithSerializable"></a>
+      <a id="PlurkResponses:PlurkResponses"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="PlurkAPI$$PlurkResponses.html"><span class="name">PlurkResponses</span></a><span class="params">(<span name="friends">friends: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Long">Long</span>, <a href="../model/User.html" class="extype" name="org.bone.soplurk.model.User">User</a>]</span>, <span name="responses">responses: <span class="extype" name="scala.List">List</span>[<a href="../model/Response.html" class="extype" name="org.bone.soplurk.model.Response">Response</a>]</span>, <span name="seen">seen: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> Represented responses of specific Plurk.</p>
+    </li><li name="org.bone.soplurk.api.PlurkAPI.PlurkSearchResult" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PlurkSearchResultextendsProductwithSerializable"></a>
+      <a id="PlurkSearchResult:PlurkSearchResult"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="PlurkAPI$$PlurkSearchResult.html"><span class="name">PlurkSearchResult</span></a><span class="params">(<span name="users">users: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Long">Long</span>, <a href="../model/User.html" class="extype" name="org.bone.soplurk.model.User">User</a>]</span>, <span name="plurks">plurks: <span class="extype" name="scala.List">List</span>[<a href="../model/Plurk.html" class="extype" name="org.bone.soplurk.model.Plurk">Plurk</a>]</span>, <span name="hasMore">hasMore: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="lastOffset">lastOffset: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.bone.soplurk.api.PlurkAPI.PlurkTopResult" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PlurkTopResultextendsProductwithSerializable"></a>
+      <a id="PlurkTopResult:PlurkTopResult"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="PlurkAPI$$PlurkTopResult.html"><span class="name">PlurkTopResult</span></a><span class="params">(<span name="users">users: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Long">Long</span>, <a href="../model/User.html" class="extype" name="org.bone.soplurk.model.User">User</a>]</span>, <span name="plurks">plurks: <span class="extype" name="scala.List">List</span>[<a href="../model/TopPlurk.html" class="extype" name="org.bone.soplurk.model.TopPlurk">TopPlurk</a>]</span>, <span name="offset">offset: <span class="extype" name="scala.Double">Double</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> Represented the page returned by PlurkTop.</p>
+    </li><li name="org.bone.soplurk.api.PlurkAPI.PublicProfile" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PublicProfileextendsProductwithSerializable"></a>
+      <a id="PublicProfile:PublicProfile"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="PlurkAPI$$PublicProfile.html"><span class="name">PublicProfile</span></a><span class="params">(<span name="userInfo">userInfo: <a href="../model/ExtendedUser.html" class="extype" name="org.bone.soplurk.model.ExtendedUser">ExtendedUser</a></span>, <span name="plurks">plurks: <span class="extype" name="scala.List">List</span>[<a href="../model/Plurk.html" class="extype" name="org.bone.soplurk.model.Plurk">Plurk</a>]</span>, <span name="fansCount">fansCount: <span class="extype" name="scala.Int">Int</span></span>, <span name="friendsCount">friendsCount: <span class="extype" name="scala.Int">Int</span></span>, <span name="privacy">privacy: <a href="../constant/TimelinePrivacy.html" class="extype" name="org.bone.soplurk.constant.TimelinePrivacy">TimelinePrivacy</a></span>, <span name="hasReadPermission">hasReadPermission: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="isFan">isFan: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>, <span name="areFriends">areFriends: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>, <span name="isFollowing">isFollowing: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> User's public profile.</p>
+    </li><li name="org.bone.soplurk.api.PlurkAPI.RealtimeEvent" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RealtimeEventextendsProductwithSerializable"></a>
+      <a id="RealtimeEvent:RealtimeEvent"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="PlurkAPI$$RealtimeEvent.html"><span class="name">RealtimeEvent</span></a><span class="params">(<span name="nextChannel">nextChannel: <a href="PlurkAPI$$UserChannel.html" class="extype" name="org.bone.soplurk.api.PlurkAPI.UserChannel">UserChannel</a></span>, <span name="events">events: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Either">Either</span>[<a href="../model/Plurk.html" class="extype" name="org.bone.soplurk.model.Plurk">Plurk</a>, <a href="../model/RealtimeResponse.html" class="extype" name="org.bone.soplurk.model.RealtimeResponse">RealtimeResponse</a>]]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> The event from Realtime channel.</p>
+    </li><li name="org.bone.soplurk.api.PlurkAPI.ReplurkStatus" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ReplurkStatusextendsProductwithSerializable"></a>
+      <a id="ReplurkStatus:ReplurkStatus"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="PlurkAPI$$ReplurkStatus.html"><span class="name">ReplurkStatus</span></a><span class="params">(<span name="error">error: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="plurk">plurk: <a href="../model/Plurk.html" class="extype" name="org.bone.soplurk.model.Plurk">Plurk</a></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> Represented whether replurk / unreplurk is success or failed.</p>
+    </li><li name="org.bone.soplurk.api.PlurkAPI.TimeInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TimeInfoextendsProductwithSerializable"></a>
+      <a id="TimeInfo:TimeInfo"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="PlurkAPI$$TimeInfo.html"><span class="name">TimeInfo</span></a><span class="params">(<span name="appID">appID: <span class="extype" name="scala.Long">Long</span></span>, <span name="userID">userID: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Long">Long</span>]</span>, <span name="timestamp">timestamp: <span class="extype" name="scala.Long">Long</span></span>, <span name="now">now: <span class="extype" name="java.util.Date">Date</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> Plurk Server Time information.</p>
+    </li><li name="org.bone.soplurk.api.PlurkAPI.Timeline" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TimelineextendsProductwithSerializable"></a>
+      <a id="Timeline:Timeline"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="PlurkAPI$$Timeline.html"><span class="name">Timeline</span></a><span class="params">(<span name="users">users: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Long">Long</span>, <a href="../model/User.html" class="extype" name="org.bone.soplurk.model.User">User</a>]</span>, <span name="plurks">plurks: <span class="extype" name="scala.List">List</span>[<a href="../model/Plurk.html" class="extype" name="org.bone.soplurk.model.Plurk">Plurk</a>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> Represented data that need to render user's timeline
+</p>
+    </li><li name="org.bone.soplurk.api.PlurkAPI.TokenInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TokenInfoextendsProductwithSerializable"></a>
+      <a id="TokenInfo:TokenInfo"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="PlurkAPI$$TokenInfo.html"><span class="name">TokenInfo</span></a><span class="params">(<span name="appID">appID: <span class="extype" name="scala.Long">Long</span></span>, <span name="userID">userID: <span class="extype" name="scala.Long">Long</span></span>, <span name="issued">issued: <span class="extype" name="java.util.Date">Date</span></span>, <span name="deviceID">deviceID: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> Token Information returned by OAuth Utilities API
+</p>
+    </li><li name="org.bone.soplurk.api.PlurkAPI.UnreadCount" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UnreadCountextendsProductwithSerializable"></a>
+      <a id="UnreadCount:UnreadCount"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="PlurkAPI$$UnreadCount.html"><span class="name">UnreadCount</span></a><span class="params">(<span name="all">all: <span class="extype" name="scala.Int">Int</span></span>, <span name="my">my: <span class="extype" name="scala.Int">Int</span></span>, <span name="privatePlurks">privatePlurks: <span class="extype" name="scala.Int">Int</span></span>, <span name="responded">responded: <span class="extype" name="scala.Int">Int</span></span>, <span name="favorite">favorite: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> Unread plurks count
+</p>
+    </li><li name="org.bone.soplurk.api.PlurkAPI.UserChannel" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UserChannelextendsProductwithSerializable"></a>
+      <a id="UserChannel:UserChannel"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="PlurkAPI$$UserChannel.html"><span class="name">UserChannel</span></a><span class="params">(<span name="cometServer">cometServer: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="channelName">channelName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="offset">offset: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> The user channel of Plurk Realtime API.</p>
+    </li><li name="org.bone.soplurk.api.PlurkAPI.UserSearchResult" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UserSearchResultextendsProductwithSerializable"></a>
+      <a id="UserSearchResult:UserSearchResult"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="PlurkAPI$$UserSearchResult.html"><span class="name">UserSearchResult</span></a><span class="params">(<span name="counts">counts: <span class="extype" name="scala.Int">Int</span></span>, <span name="users">users: <span class="extype" name="scala.List">List</span>[<a href="../model/User.html" class="extype" name="org.bone.soplurk.model.User">User</a>]</span>, <span name="exactMatches">exactMatches: <span class="extype" name="scala.List">List</span>[<a href="../model/User.html" class="extype" name="org.bone.soplurk.model.User">User</a>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> Represented the search result of a user searching.</p>
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:AnyRef):Boolean"></a>
+      <a id="!=(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a>
+      <a id="!=(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
+      <a id="##():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:AnyRef):Boolean"></a>
+      <a id="==(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a>
+      <a id="==(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
+      <a id="asInstanceOf[T0]:T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a>
+      <a id="clone():AnyRef"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a>
+      <a id="eq(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a>
+      <a id="equals(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
+      <a id="finalize():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
+      <a id="getClass():Class[_]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
+      <a id="hashCode():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a>
+      <a id="ne(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
+      <a id="notify():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
+      <a id="notifyAll():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
+      <a id="synchronized[T0](⇒T0):T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
+      <a id="toString():String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
+      <a id="wait():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
+      <a id="wait(Long,Int):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a>
+      <a id="wait(Long):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="org.bone.soplurk.api.PlurkAPI#withAccessToken" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="withAccessToken(appKey:String,appSecret:String,tokenKey:String,tokenSecret:String,deviceID:Option[String]):org.bone.soplurk.api.PlurkAPI"></a>
+      <a id="withAccessToken(String,String,String,String,Option[String]):PlurkAPI"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">withAccessToken</span><span class="params">(<span name="appKey">appKey: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="appSecret">appSecret: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tokenKey">tokenKey: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tokenSecret">tokenSecret: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="deviceID">deviceID: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="result">: <a href="PlurkAPI.html" class="extype" name="org.bone.soplurk.api.PlurkAPI">PlurkAPI</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt"> Get PlurkAPI with access token key / secret pair directly.</p><div class="fullcomment"><div class="comment cmt"><p> Get PlurkAPI with access token key / secret pair directly.
+</p></div><dl class="paramcmts block"><dt class="param">appKey</dt><dd class="cmt"><p>API key from Plurk API console.</p></dd><dt class="param">appSecret</dt><dd class="cmt"><p>API secret from Plurk API console.</p></dd><dt class="param">tokenKey</dt><dd class="cmt"><p>Token key</p></dd><dt class="param">tokenSecret</dt><dd class="cmt"><p>Token secret</p></dd><dt class="param">deviceID</dt><dd class="cmt"><p>The deviceID of application.
+</p></dd></dl></div>
+    </li><li name="org.bone.soplurk.api.PlurkAPI#withCallback" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="withCallback(appKey:String,appSecret:String,callbackURL:String,deviceID:Option[String]):org.bone.soplurk.api.PlurkAPI"></a>
+      <a id="withCallback(String,String,String,Option[String]):PlurkAPI"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">withCallback</span><span class="params">(<span name="appKey">appKey: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="appSecret">appSecret: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="callbackURL">callbackURL: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="deviceID">deviceID: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="result">: <a href="PlurkAPI.html" class="extype" name="org.bone.soplurk.api.PlurkAPI">PlurkAPI</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt"> Get PlurkAPI with callback URL.</p><div class="fullcomment"><div class="comment cmt"><p> Get PlurkAPI with callback URL.</p><p> Create PlurkAPI object that user will be redirect to callbackURL
+ when he verify this PlurkAPI client at Plurk.</p><p> DeviceID is use to support multiple-device app, the previous access
+ token using the same <code>deviceID</code> will be overwritten, but access
+ token with other <code>deviceID</code> will still work.</p><p> Please see &quot;Multiple-devices support&quot; section in
+ <a href="http://www.plurk.com/API/2" target="_blank">Plurk API Document</a> for the details.
+</p></div><dl class="paramcmts block"><dt class="param">appKey</dt><dd class="cmt"><p>API key from Plurk API console.</p></dd><dt class="param">appSecret</dt><dd class="cmt"><p>API secret from Plurk API console.</p></dd><dt class="param">callbackURL</dt><dd class="cmt"><p>OAuth callback URL.</p></dd><dt class="param">deviceID</dt><dd class="cmt"><p>DeviceID of application.
+</p></dd></dl></div>
+    </li><li name="org.bone.soplurk.api.PlurkAPI#withoutCallback" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="withoutCallback(appKey:String,appSecret:String,deviceID:Option[String]):org.bone.soplurk.api.PlurkAPI"></a>
+      <a id="withoutCallback(String,String,Option[String]):PlurkAPI"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">withoutCallback</span><span class="params">(<span name="appKey">appKey: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="appSecret">appSecret: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="deviceID">deviceID: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="result">: <a href="PlurkAPI.html" class="extype" name="org.bone.soplurk.api.PlurkAPI">PlurkAPI</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt"> Get PlurkAPI with callback URL.</p><div class="fullcomment"><div class="comment cmt"><p> Get PlurkAPI with callback URL.</p><p> Create PlurkAPI object that user need to input his verify code
+ get from Plurk when he verified this PlurkAPI client at Plurk.</p><p> DeviceID is use to support multiple-device app, the previous access
+ token using the same <code>deviceID</code> will be overwritten, but access
+ token with other <code>deviceID</code> will still work.</p><p> Please see &quot;Multiple-devices support&quot; section in
+ <a href="http://www.plurk.com/API/2" target="_blank">Plurk API Document</a> for the details.
+</p></div><dl class="paramcmts block"><dt class="param">appKey</dt><dd class="cmt"><p>API key from Plurk API console.</p></dd><dt class="param">appSecret</dt><dd class="cmt"><p>API secret from Plurk API console.</p></dd><dt class="param">deviceID</dt><dd class="cmt"><p>The deviceID of application.
+</p></dd></dl></div>
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>

@@ -1,8 +1,8 @@
-package org.bone.splurk2.model
+package org.bone.soplurk.model
 
-import org.bone.splurk2.exceptions._
-import org.bone.splurk2.model._
-import org.bone.splurk2.model.PlurkType._
+import org.bone.soplurk.constant._
+import org.bone.soplurk.exceptions._
+import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
 import org.scalatest.matchers.ShouldMatchers
@@ -26,7 +26,7 @@ class ExtendedUserSpec extends FunSpec with ShouldMatchers {
         gender = Gender.Female,
         karma = 82.37,
         hasProfileImage = true,
-        birthdayPrivacy = BirthdayPrivacy.ShowAll,
+        birthdayPrivacy = Some(BirthdayPrivacy.ShowAll),
         defaultLanguage = "tr_ch",
         avatarVersion = Some(40),
         location = Some("Taipei, Taiwan"),
@@ -35,7 +35,14 @@ class ExtendedUserSpec extends FunSpec with ShouldMatchers {
         nameColor = None
       )
 
-      ExtendedUser(userJSON) should be === ExtendedUser(basicInfo, Relationship.NotSaying, 32)
+      val correctUserInfo = new ExtendedUser(
+        basicInfo = basicInfo, 
+        relationship = Relationship.NotSaying, 
+        recruited = 32, 
+        about = Some("AboutContent")
+      )
+
+      ExtendedUser(userJSON) should be === correctUserInfo
     }
   }
 }

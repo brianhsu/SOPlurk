@@ -1,5 +1,6 @@
-package org.bone.splurk2.model
+package org.bone.soplurk.model
 
+import org.bone.soplurk.constant._
 import java.util.Date
 import java.lang.{Long => JLong}
 import net.liftweb.json.JsonAST._
@@ -28,7 +29,7 @@ import net.liftweb.json.JsonAST._
 case class Plurk(
   plurkID: Long, ownerID: Long, userID: Long, 
   qualifier: Qualifier, content: String,
-  plurkType: PlurkType, readStatus: ReadStatus, 
+  plurkType: PlurkType, readStatus: Option[ReadStatus],
   whoIsCommentable: CommentSetting, 
   posted: Date, 
   language: String,
@@ -49,16 +50,12 @@ case class Plurk(
 
 object Plurk {
   
+  import org.bone.soplurk.util.DateTimeUtils
   import MyJValueImplicits._
-  import java.text.SimpleDateFormat
-  import java.util.Locale
 
-  private def toDate(dateString: String): Date = {
-    val dateFormatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.US)
-    dateFormatter.parse(dateString)
+  private def urlFromID(plurkID: Long) = {
+    raw"http://www.plurk.com/p/${JLong.toString(plurkID, 36)}"
   }
-
-  private def urlFromID(plurkID: Long) = raw"http://www.plurk.com/p/${JLong.toString(plurkID, 36)}"
 
   /**
    *  Create Plurk object from Plurk JSON data.
@@ -67,23 +64,23 @@ object Plurk {
    *  @return           Plurk object corresponded to JSON data.
    */
   def apply(plurk: JValue): Plurk = new Plurk (
-    plurkID = plurk.get[BigInt]("plurk_id").toLong,
-    ownerID = plurk.get[BigInt]("owner_id").toLong,
-    userID = plurk.get[BigInt]("user_id").toLong,
+    plurkID = plurk.get("plurk_id"),
+    ownerID = plurk.get("owner_id"),
+    userID = plurk.get("user_id"),
     qualifier = Qualifier(plurk.get("qualifier")),
-    content = plurk.get[String]("content"),
-    plurkType = PlurkType(plurk.get[BigInt]("plurk_type").toByte),
-    readStatus = ReadStatus(plurk.get[BigInt]("is_unread").toByte),
-    whoIsCommentable = CommentSetting(plurk.get[BigInt]("no_comments").toByte),
-    posted = toDate(plurk.get("posted")),
-    language = plurk.get[String]("lang"),
-    responseCount = plurk.get[BigInt]("response_count").toInt,
+    content = plurk.get("content"),
+    plurkType = PlurkType(plurk.get[Int]("plurk_type").toByte),
+    readStatus = plurk.getOption[Int]("is_unread").map(code => ReadStatus(code.toByte)),
+    whoIsCommentable = CommentSetting(plurk.get[Int]("no_comments").toByte),
+    posted = DateTimeUtils.fromPlurkDate(plurk.get("posted")),
+    language = plurk.get("lang"),
+    responseCount = plurk.get("response_count"),
     replurkInfo = ReplurkInfo(plurk),
     favoriteInfo = FavoriteInfo(plurk),
     qualifierTranslated = plurk.getOption[String]("qualifier_translated"),
     limitedTo = plurk.getOption[List[Long]]("limited_to").filterNot(_.isEmpty),
-    responsesSeen = plurk.getOption[BigInt]("responses_seen").map(_.toInt),
-    contentRaw = plurk.getOption[String]("content_raw")
+    responsesSeen = plurk.getOption("responses_seen"),
+    contentRaw = plurk.getOption("content_raw")
   )
 
 }
