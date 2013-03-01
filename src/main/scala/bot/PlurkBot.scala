@@ -37,7 +37,7 @@ class PlurkBot (plurkAPI: PlurkAPI, alertsPollingPeriod: Int = 60)
 
   require(plurkAPI.OAuthUtils.checkToken.isSuccess, "PlurkAPI must get authroized first")
 
-  private val system = ActorSystem("PlurkBot")
+  private lazy val system = ActorSystem("PlurkBot")
 
   /**
    *  Actor that handle message from monitor actor.
