@@ -9,12 +9,6 @@ import org.scribe.model.Token
 import org.scribe.model.OAuthRequest
 import org.scribe.model.Parameter
 
-import org.apache.commons.httpclient.HttpClient
-import org.apache.commons.httpclient.methods.PostMethod
-import org.apache.commons.httpclient.methods.multipart.FilePart
-import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity
-import org.apache.commons.httpclient.methods.multipart.Part
-
 import net.liftweb.json.JsonAST._
 import net.liftweb.json.JsonParser
 
@@ -23,6 +17,9 @@ import scala.collection.JavaConverters._
 import scala.util.{Try, Success, Failure}
 
 import java.io.File
+import java.io.ByteArrayOutputStream
+import java.io.PrintWriter
+import java.io.FileInputStream
 
 private[soplurk] trait MockOAuth extends PlurkOAuth // For unit-test mock
 
@@ -72,38 +69,43 @@ class PlurkOAuth(val service: OAuthService,
     }
 
     val request = buildRequest(url, Verb.POST)
-
+    val boundary = "===" + System.currentTimeMillis() + "==="
     accessToken.foreach { token => service.signRequest(token, request) }
 
-    val oauthParams = request.getOauthParameters.asScala
-    val queryString = oauthParams.map { case(name, value) => 
-      new Parameter(name, value).asUrlEncodedPair
+    request.addHeader("Content-Type", s"multipart/form-data; boundary=${boundary}")
+    request.addPayload(createPayload(boundary, parameterName, file))
+
+    val response = request.send
+    parseResponse(response.getCode, response.getBody).get
+  }
+
+  private def createPayload(boundary: String, parameterName: String, file: File): Array[Byte] = {
+
+    val bos = new ByteArrayOutputStream()
+    val writer = new PrintWriter(bos)
+
+    writer.append(s"--${boundary}").append("\r\n")
+
+    writer.append(raw"""Content-Disposition: form-data; name="${parameterName}"; """)
+    writer.append(raw"""filename="${file.getName}"""").append("\r\n")
+
+    writer.append("Content-Type: application/octet-stream").append("\r\n")
+    writer.append("Content-Transfer-Encoding: binary").append("\r\n")
+    writer.append("\r\n")
+    writer.flush()
+    
+    val inputStream = new FileInputStream(file)
+    val buffer = new Array[Byte](4096)
+    var bytesRead = inputStream.read(buffer)
+    while (bytesRead != -1) {
+      bos.write(buffer, 0, bytesRead)
+      bytesRead = inputStream.read(buffer)
     }
 
-    val httpClient = new HttpClient
-    val fullURL = request.getCompleteUrl + queryString.mkString("?", "&", "")
-    val post = new PostMethod(fullURL)
+    bos.flush()
+    inputStream.close()
 
-    try {
-
-      val filePart = new FilePart(
-        parameterName, file.getName(), file, 
-        "binary/octet-stream", "UTF-8"
-      )
-
-      val parts = Array[Part](filePart)
-
-      parts.foreach(_.asInstanceOf[FilePart].setTransferEncoding("binary"))
-      post.setRequestEntity(new MultipartRequestEntity(parts, post.getParams()))
-
-      val code = httpClient.executeMethod(post)
-      val responseBody = Source.fromInputStream(post.getResponseBodyAsStream).mkString
-      
-      parseResponse(code, responseBody).get
-
-    } finally {
-      post.releaseConnection();
-    }
+    bos.toByteArray
   }
 
   /**
@@ -185,6 +187,29 @@ class PlurkOAuth(val service: OAuthService,
     request
   }
 
+  /**
+   *  Create OAuthReqeust object and attatch params to it.
+   *
+   *  @param    url         Plurk's API URL.
+   *  @param    method      HTTP method type.
+   *  @param    params      Parameters to send.
+   */
+  private def buildRequest(url: String, 
+                           payload: Array[Byte],
+                           method: Verb, 
+                           params: (String, String)*): OAuthRequest = {
+
+    val fullURL = if(url.startsWith("http")) url else plurkAPIPrefix + url
+    val request = new OAuthRequest(method, fullURL)
+
+    if (method == Verb.POST) {
+      params.foreach { case(key, value) => request.addBodyParameter(key, value) }
+    } else if (method == Verb.GET) {
+      params.foreach { case(key, value) => request.addQuerystringParameter(key, value) }
+    }
+
+    request
+  }
 
 }
 
