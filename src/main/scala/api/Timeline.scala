@@ -142,7 +142,7 @@ trait Timeline {
       val params = List(
         "offset" -> offset.map(toPlurkOffset).getOrElse(""),
         "limit"  -> limit.toString,
-        "filter" -> filter.map(_.word).getOrElse(""),
+        "filter" -> filter.map(_.unreadWord).getOrElse(""),
         "favorers_detail"   -> favorersDetail.toString,
         "limited_detail"    -> limitedDetail.toString,
         "replurkers_detail" -> replurkersDetail.toString,

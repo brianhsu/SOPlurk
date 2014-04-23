@@ -50,7 +50,7 @@ case class User (
    *  User's small avatar URL.
    */
   val smallAvatar = hasProfileImage match {
-    case true  => s"http://avatars.plurk.com/$id-small${avatarVersion.getOrElse("")}.gif"
+    case true  => s"http://avatars.plurk.com/$id-small${avatarVersion.filter(_ != 0).getOrElse("")}.gif"
     case false => "http://www.plurk.com/static/default_small.gif"
   }
 
@@ -58,7 +58,7 @@ case class User (
    *  User's small medium avatar URL.
    */
   val mediumAvatar = hasProfileImage match {
-    case true  => s"http://avatars.plurk.com/$id-medium${avatarVersion.getOrElse("")}.gif"
+    case true  => s"http://avatars.plurk.com/$id-medium${avatarVersion.filter(_ != 0).getOrElse("")}.gif"
     case false => "http://www.plurk.com/static/default_medium.gif"
   }
 
@@ -66,7 +66,7 @@ case class User (
    *  User's big medium avatar URL.
    */
   val bigAvatar = hasProfileImage match {
-    case true  => s"http://avatars.plurk.com/$id-big${avatarVersion.getOrElse("")}.jpg"
+    case true  => s"http://avatars.plurk.com/$id-big${avatarVersion.filter(_ != 0).getOrElse("")}.jpg"
     case false => "http://www.plurk.com/static/default_big.gif"
   }
 

@@ -2,7 +2,7 @@ name := "SOPlurk"
 
 organization := "org.bone"
 
-version := "0.2.1"
+version := "0.2.2"
 
 scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature")
 
