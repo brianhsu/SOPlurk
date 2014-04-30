@@ -75,6 +75,7 @@ class PlurkOAuth(val service: OAuthService,
 
   def uploadFile(url: String, parameterName: String, filename: String, data: InputStream, filesize: Long): Try[JValue] = Try {
 
+    val startTime = System.currentTimeMillis
     val request = buildRequest(url, Verb.POST)
     accessToken.foreach { token => service.signRequest(token, request) }
 
@@ -86,14 +87,14 @@ class PlurkOAuth(val service: OAuthService,
     headers.foreach { case(key, value) => connection.setRequestProperty(key, value) }
     connection.setRequestProperty("Content-Type", s"multipart/form-data; boundary=${boundary}")
     connection.setDoOutput(true)
-    connection.setFixedLengthStreamingMode(payloadHeader.length + filesize)
+    connection.setFixedLengthStreamingMode((payloadHeader.length + filesize).toInt)
 
     val outputStream = connection.getOutputStream
     outputStream.write(payloadHeader)
     outputStream.flush()
 
     val bufferedInputStream = new BufferedInputStream(data)
-    val buffer = new Array[Byte](1024)
+    val buffer = new Array[Byte](1024 * 512)
     var byteCounter = bufferedInputStream.read(buffer)
 
     while (byteCounter > 0) {
@@ -107,6 +108,10 @@ class PlurkOAuth(val service: OAuthService,
     val inputStream = if (responseCode >= 200 && responseCode < 400) connection.getInputStream else connection.getErrorStream
     val responseContent = scala.io.Source.fromInputStream(inputStream).mkString
     inputStream.close()
+    val duration = (System.currentTimeMillis - startTime) / 1000.0
+
+    println("duration:" + duration)
+
     parseResponse(responseCode, responseContent).get
   }
 
