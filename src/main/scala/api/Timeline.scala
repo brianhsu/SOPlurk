@@ -12,6 +12,7 @@ import net.liftweb.json.JsonAST._
 import scala.util.Try
 
 import java.io.File
+import java.io.InputStream
 import java.util.Date
 
 trait Timeline {
@@ -469,6 +470,13 @@ trait Timeline {
 
     def uploadPicture(file: File): Try[(String, String)] = {
       val response = plurkOAuth.uploadFile("/APP/Timeline/uploadPicture", "image", file)
+      response.map { jsonData =>
+        (jsonData.get("full"), jsonData.get("thumbnail"))
+      }
+    }
+
+    def uploadPicture(filename: String, inputStream: InputStream, fileSize: Long): Try[(String, String)] = {
+      val response = plurkOAuth.uploadFile("/APP/Timeline/uploadPicture", "image", filename, inputStream, fileSize)
       response.map { jsonData =>
         (jsonData.get("full"), jsonData.get("thumbnail"))
       }

@@ -7,6 +7,7 @@ import org.scribe.oauth.OAuthService
 import org.scribe.model.Verb
 import org.scribe.model.Token
 import org.scribe.model.OAuthRequest
+import org.scribe.model.Response
 import org.scribe.model.Parameter
 
 import net.liftweb.json.JsonAST._
@@ -16,10 +17,9 @@ import scala.io.Source
 import scala.collection.JavaConverters._
 import scala.util.{Try, Success, Failure}
 
-import java.io.File
-import java.io.ByteArrayOutputStream
-import java.io.PrintWriter
-import java.io.FileInputStream
+import java.io._
+import java.net._
+
 
 private[soplurk] trait MockOAuth extends PlurkOAuth // For unit-test mock
 
@@ -68,15 +68,61 @@ class PlurkOAuth(val service: OAuthService,
       throw new RequestException(0, "File not found:" + file)
     }
 
+    val fileInputStream = new FileInputStream(file)
+    val fileSize = file.length()
+    uploadFile(url, parameterName, file.getName, fileInputStream, fileSize).get
+  }
+
+  def uploadFile(url: String, parameterName: String, filename: String, data: InputStream, filesize: Long): Try[JValue] = Try {
+
     val request = buildRequest(url, Verb.POST)
-    val boundary = "===" + System.currentTimeMillis() + "==="
     accessToken.foreach { token => service.signRequest(token, request) }
 
-    request.addHeader("Content-Type", s"multipart/form-data; boundary=${boundary}")
-    request.addPayload(createPayload(boundary, parameterName, file))
+    val boundary = "===" + System.currentTimeMillis() + "==="
+    val connection = new URL(request.getCompleteUrl).openConnection.asInstanceOf[HttpURLConnection]
+    val payloadHeader = createPayloadHeader(boundary, parameterName, filename).getBytes
+    val headers = request.getHeaders().asScala
 
-    val response = request.send
-    parseResponse(response.getCode, response.getBody).get
+    headers.foreach { case(key, value) => connection.setRequestProperty(key, value) }
+    connection.setRequestProperty("Content-Type", s"multipart/form-data; boundary=${boundary}")
+    connection.setDoOutput(true)
+    connection.setFixedLengthStreamingMode(payloadHeader.length + filesize)
+
+    val outputStream = connection.getOutputStream
+    outputStream.write(payloadHeader)
+    outputStream.flush()
+
+    val bufferedInputStream = new BufferedInputStream(data)
+    val buffer = new Array[Byte](1024)
+    var byteCounter = bufferedInputStream.read(buffer)
+
+    while (byteCounter > 0) {
+      outputStream.write(buffer, 0, byteCounter)
+      byteCounter = bufferedInputStream.read(buffer)
+    }
+    outputStream.flush()
+    outputStream.close()
+
+    val responseCode = connection.getResponseCode
+    val inputStream = if (responseCode >= 200 && responseCode < 400) connection.getInputStream else connection.getErrorStream
+    val responseContent = scala.io.Source.fromInputStream(inputStream).mkString
+    inputStream.close()
+    parseResponse(responseCode, responseContent).get
+  }
+
+
+  private def createPayloadHeader(boundary: String, parameterName: String, filename: String): String = {
+
+    val buffer = new StringBuffer()
+    buffer.append(s"--${boundary}").append("\r\n")
+
+    buffer.append(raw"""Content-Disposition: form-data; name="${parameterName}"; """)
+    buffer.append(raw"""filename="${filename}"""").append("\r\n")
+
+    buffer.append("Content-Type: application/octet-stream").append("\r\n")
+    buffer.append("Content-Transfer-Encoding: binary").append("\r\n")
+    buffer.append("\r\n")
+    buffer.toString
   }
 
   private def createPayload(boundary: String, parameterName: String, file: File): Array[Byte] = {
@@ -84,14 +130,7 @@ class PlurkOAuth(val service: OAuthService,
     val bos = new ByteArrayOutputStream()
     val writer = new PrintWriter(bos)
 
-    writer.append(s"--${boundary}").append("\r\n")
-
-    writer.append(raw"""Content-Disposition: form-data; name="${parameterName}"; """)
-    writer.append(raw"""filename="${file.getName}"""").append("\r\n")
-
-    writer.append("Content-Type: application/octet-stream").append("\r\n")
-    writer.append("Content-Transfer-Encoding: binary").append("\r\n")
-    writer.append("\r\n")
+    writer.append(createPayloadHeader(boundary, parameterName, file.getName))
     writer.flush()
     
     val inputStream = new FileInputStream(file)
