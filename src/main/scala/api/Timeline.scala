@@ -251,8 +251,8 @@ trait Timeline {
         "content" -> content,
         "qualifier" -> qualifier.name,
         "limited_to" -> formatLimitedTo,
-        "noComment" -> commentSetting.map(_.code.toString).getOrElse(""),
-        "language"  -> language.getOrElse("")
+        "no_comments" -> commentSetting.map(_.code.toString).getOrElse(""),
+        "lang"  -> language.getOrElse("")
       ).filterNot(_._2.isEmpty)
 
       val response = plurkOAuth.sendRequest(
