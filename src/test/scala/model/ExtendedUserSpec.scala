@@ -21,7 +21,7 @@ class ExtendedUserSpec extends FunSpec with ShouldMatchers {
         id = 3906924L,
         nickname = "UserNickName",
         fullName = "UserFullName",
-        displayName = "UserDisplayName",
+        displayName = Some("UserDisplayName"),
         isVerifiedAccount = false,
         gender = Gender.Female,
         karma = 82.37,
