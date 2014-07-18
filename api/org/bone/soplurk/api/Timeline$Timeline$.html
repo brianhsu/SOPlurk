@@ -562,32 +562,40 @@
  this id is success, and information about that plurk itself.
 </p></div><dl class="paramcmts block"><dt class="param">plurkIDs</dt><dd class="cmt"><p>List of Plurk's id that you want to unreplurk.</p></dd><dt>returns</dt><dd class="cmt"><p>Success[(isSuccess, Map[Long, ReplurkStatus])] if everything is fine.
 </p></dd></dl></div>
-    </li><li name="org.bone.soplurk.api.Timeline.Timeline#uploadPicture" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="uploadPicture(filename:String,inputStream:java.io.InputStream,fileSize:Long):scala.util.Try[(String,String)]"></a>
-      <a id="uploadPicture(String,InputStream,Long):Try[(String,String)]"></a>
+    </li><li name="org.bone.soplurk.api.Timeline.Timeline#uploadPicture" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="uploadPicture(filename:String,inputStream:java.io.InputStream,fileSize:Long,callback:(Long,Long)=&gt;Any):scala.util.Try[(String,String)]"></a>
+      <a id="uploadPicture(String,InputStream,Long,(Long,Long)⇒Any):Try[(String,String)]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">uploadPicture</span><span class="params">(<span name="filename">filename: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="inputStream">inputStream: <span class="extype" name="java.io.InputStream">InputStream</span></span>, <span name="fileSize">fileSize: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[(<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>)]</span>
+        <span class="name">uploadPicture</span><span class="params">(<span name="filename">filename: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="inputStream">inputStream: <span class="extype" name="java.io.InputStream">InputStream</span></span>, <span name="fileSize">fileSize: <span class="extype" name="scala.Long">Long</span></span>, <span name="callback">callback: (<span class="extype" name="scala.Long">Long</span>, <span class="extype" name="scala.Long">Long</span>) ⇒ <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[(<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>)]</span>
       </span>
       </h4>
-      
-    </li><li name="org.bone.soplurk.api.Timeline.Timeline#uploadPicture" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="uploadPicture(file:java.io.File):scala.util.Try[(String,String)]"></a>
-      <a id="uploadPicture(File):Try[(String,String)]"></a>
+      <p class="shortcomment cmt"> Upload image file to Plurk
+</p><div class="fullcomment"><div class="comment cmt"><p> Upload image file to Plurk
+</p></div><dl class="paramcmts block"><dt class="param">filename</dt><dd class="cmt"><p>The file name of current file</p></dd><dt class="param">inputStream</dt><dd class="cmt"><p>Data stream that will be uploaded.</p></dd><dt class="param">fileSize</dt><dd class="cmt"><p>How large is this file? In Bytes.</p></dd><dt class="param">callback</dt><dd class="cmt"><p>This callback will be called during uploading, first Long is total size in bytes of this image,
+                       second Long is how much bytes is already transfered currently.
+</p></dd></dl></div>
+    </li><li name="org.bone.soplurk.api.Timeline.Timeline#uploadPicture" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="uploadPicture(file:java.io.File,callback:(Long,Long)=&gt;Any):scala.util.Try[(String,String)]"></a>
+      <a id="uploadPicture(File,(Long,Long)⇒Any):Try[(String,String)]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">uploadPicture</span><span class="params">(<span name="file">file: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[(<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>)]</span>
+        <span class="name">uploadPicture</span><span class="params">(<span name="file">file: <span class="extype" name="java.io.File">File</span></span>, <span name="callback">callback: (<span class="extype" name="scala.Long">Long</span>, <span class="extype" name="scala.Long">Long</span>) ⇒ <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[(<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>)]</span>
       </span>
       </h4>
-      
+      <p class="shortcomment cmt"> Upload image file to Plurk
+</p><div class="fullcomment"><div class="comment cmt"><p> Upload image file to Plurk
+</p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>The file being to be uploaded.</p></dd><dt class="param">callback</dt><dd class="cmt"><p>This callback will be called during uploading, first Long is total size in bytes of this image,
+                   second Long is how much bytes is already transfered currently.
+</p></dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>

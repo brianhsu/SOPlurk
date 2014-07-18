@@ -398,6 +398,22 @@
  The optimal size of profile_image should be 195x195 pixels.
 </p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>The new image file of avatar.
 </p></dd></dl></div>
+    </li><li name="org.bone.soplurk.api.Users.Users#updatePicture" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="updatePicture(file:java.io.File,callback:(Long,Long)=&gt;Any):scala.util.Try[org.bone.soplurk.model.User]"></a>
+      <a id="updatePicture(File,(Long,Long)⇒Any):Try[User]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">updatePicture</span><span class="params">(<span name="file">file: <span class="extype" name="java.io.File">File</span></span>, <span name="callback">callback: (<span class="extype" name="scala.Long">Long</span>, <span class="extype" name="scala.Long">Long</span>) ⇒ <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="../model/User.html" class="extype" name="org.bone.soplurk.model.User">User</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt"> Update User's avatar image.</p><div class="fullcomment"><div class="comment cmt"><p> Update User's avatar image.</p><p> According to Plurk API document, the picture will be scaled down to 3 versions: big, medium and small.
+ The optimal size of profile_image should be 195x195 pixels.
+</p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>The new image file of avatar.</p></dd><dt class="param">callback</dt><dd class="cmt"><p>The progress callback when uploading, (Long, Long) will be (total size, current uploaded)
+</p></dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>

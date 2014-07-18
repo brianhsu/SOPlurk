@@ -62,7 +62,7 @@ class PlurkOAuth(val service: OAuthService,
    *  @param  file              The file you want to upload.
    */
   def uploadFile(url: String, parameterName: String, 
-                 file: File): Try[JValue] = Try {
+                 file: File, callback: (Long, Long) => Any): Try[JValue] = Try {
 
     if (!file.isFile || !file.exists) {
       throw new RequestException(0, "File not found:" + file)
@@ -70,10 +70,12 @@ class PlurkOAuth(val service: OAuthService,
 
     val fileInputStream = new FileInputStream(file)
     val fileSize = file.length()
-    uploadFile(url, parameterName, file.getName, fileInputStream, fileSize).get
+    uploadFile(url, parameterName, file.getName, fileInputStream, fileSize, callback).get
   }
 
-  def uploadFile(url: String, parameterName: String, filename: String, data: InputStream, filesize: Long): Try[JValue] = Try {
+  def uploadFile(url: String, parameterName: String, filename: String, 
+                 data: InputStream, filesize: Long, 
+                 callback: (Long, Long) => Any): Try[JValue] = Try {
 
     val startTime = System.currentTimeMillis
     val request = buildRequest(url, Verb.POST)
@@ -96,9 +98,12 @@ class PlurkOAuth(val service: OAuthService,
     val bufferedInputStream = new BufferedInputStream(data)
     val buffer = new Array[Byte](1024 * 512)
     var byteCounter = bufferedInputStream.read(buffer)
+    var totalTransfered = 0
 
     while (byteCounter > 0) {
       outputStream.write(buffer, 0, byteCounter)
+      callback(filesize, totalTransfered)
+      totalTransfered += byteCounter
       byteCounter = bufferedInputStream.read(buffer)
     }
     outputStream.flush()

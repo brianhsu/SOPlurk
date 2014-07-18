@@ -2,7 +2,7 @@ name := "SOPlurk"
 
 organization := "org.bone"
 
-version := "0.3.0"
+version := "0.3.2"
 
 scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature")
 
@@ -29,5 +29,5 @@ libraryDependencies ++= Seq(
 )
 
 publishTo := Some(
-  Resolver.sftp("bone", "bone.twbbs.org.tw", "public_html/ivy")
+  Resolver.sftp("bone", "bone.twbbs.org.tw", "site/ROOT/ivy/")
 )
