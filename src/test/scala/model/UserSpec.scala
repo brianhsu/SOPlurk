@@ -5,12 +5,12 @@ import org.bone.soplurk.exceptions._
 import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 
 import java.util.Date
 import net.liftweb.json._
 
-class UserSpec extends FunSpec with ShouldMatchers {
+class UserSpec extends FunSpec with Matchers {
 
   import UserSpec._
 
@@ -35,7 +35,7 @@ class UserSpec extends FunSpec with ShouldMatchers {
         nameColor = Some("0A9C17")
       )
 
-      User(hasNameColor) should be === correctUserInfo
+      User(hasNameColor) shouldBe correctUserInfo
     }
 
     it ("should able to parse plurk's JSON data of a user has no name color") {
@@ -57,7 +57,7 @@ class UserSpec extends FunSpec with ShouldMatchers {
         nameColor = None
       )
 
-      User(noNameColor) should be === correctUserInfo
+      User(noNameColor) shouldBe correctUserInfo
     }
 
 
@@ -65,9 +65,9 @@ class UserSpec extends FunSpec with ShouldMatchers {
 
       val userID = 8290019
 
-      User(avatarWithoutVersion).smallAvatar  should be === s"http://avatars.plurk.com/$userID-small.gif"
-      User(avatarWithoutVersion).mediumAvatar should be === s"http://avatars.plurk.com/$userID-medium.gif"
-      User(avatarWithoutVersion).bigAvatar    should be === s"http://avatars.plurk.com/$userID-big.jpg"
+      User(avatarWithoutVersion).smallAvatar  shouldBe s"http://avatars.plurk.com/$userID-small.gif"
+      User(avatarWithoutVersion).mediumAvatar shouldBe s"http://avatars.plurk.com/$userID-medium.gif"
+      User(avatarWithoutVersion).bigAvatar    shouldBe s"http://avatars.plurk.com/$userID-big.jpg"
     }
 
     it ("should able to get correct avatar when user has profile image with version") {
@@ -75,16 +75,16 @@ class UserSpec extends FunSpec with ShouldMatchers {
       val userID = 4460064
       val avatarVersion = 86
 
-      User(avatarWithVersion).smallAvatar  should be === s"http://avatars.plurk.com/$userID-small$avatarVersion.gif"
-      User(avatarWithVersion).mediumAvatar should be === s"http://avatars.plurk.com/$userID-medium$avatarVersion.gif"
-      User(avatarWithVersion).bigAvatar    should be === s"http://avatars.plurk.com/$userID-big$avatarVersion.jpg"
+      User(avatarWithVersion).smallAvatar  shouldBe s"http://avatars.plurk.com/$userID-small$avatarVersion.gif"
+      User(avatarWithVersion).mediumAvatar shouldBe s"http://avatars.plurk.com/$userID-medium$avatarVersion.gif"
+      User(avatarWithVersion).bigAvatar    shouldBe s"http://avatars.plurk.com/$userID-big$avatarVersion.jpg"
     }
 
     it ("should able to get correct avatar when user has no profile image") {
 
-      User(noAvatar).smallAvatar  should be === "http://www.plurk.com/static/default_small.gif"
-      User(noAvatar).mediumAvatar should be === "http://www.plurk.com/static/default_medium.gif"
-      User(noAvatar).bigAvatar    should be === "http://www.plurk.com/static/default_big.gif"
+      User(noAvatar).smallAvatar  shouldBe "http://www.plurk.com/static/default_small.gif"
+      User(noAvatar).mediumAvatar shouldBe "http://www.plurk.com/static/default_medium.gif"
+      User(noAvatar).bigAvatar    shouldBe "http://www.plurk.com/static/default_big.gif"
 
     }
 

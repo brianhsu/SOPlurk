@@ -6,7 +6,7 @@ import org.bone.soplurk.oauth.MockOAuth
 import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import org.scalatest.PrivateMethodTester 
 
 import org.scribe.model.Verb
@@ -152,7 +152,7 @@ object UserSearchAPIMock extends PlurkOAuth(null) with MockOAuth {
 
 }
 
-class UserSearchSpec extends FunSpec with ShouldMatchers {
+class UserSearchSpec extends FunSpec with Matchers {
 
   describe("A PlurkAPI with UserSearch trait") {
 
@@ -160,9 +160,9 @@ class UserSearchSpec extends FunSpec with ShouldMatchers {
 
     it ("get user search result by /APP/UserSearch/search correctly") {
       val result = plurkAPI.UserSearch.search("ddd", 10).get
-      result.counts should be === 779
-      result.users.size should be === 2
-      result.exactMatches.size should be === 3
+      result.counts shouldBe 779
+      result.users.size shouldBe 2
+      result.exactMatches.size shouldBe 3
     }
 
   }

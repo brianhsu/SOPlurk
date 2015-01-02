@@ -6,7 +6,7 @@ import org.bone.soplurk.oauth.MockOAuth
 import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import org.scalatest.PrivateMethodTester 
 
 import org.scribe.model.Verb
@@ -311,7 +311,7 @@ object FriendsFansAPIMock extends PlurkOAuth(null) with MockOAuth {
 
 }
 
-class FriendsFansSpec extends FunSpec with ShouldMatchers {
+class FriendsFansSpec extends FunSpec with Matchers {
 
   describe("A PlurkAPI with FriendsFans trait") {
 
@@ -321,54 +321,54 @@ class FriendsFansSpec extends FunSpec with ShouldMatchers {
 
       val friends = plurkAPI.FriendsFans.getFriendsByOffset(123L, 3, Some(1)).get
 
-      friends.size should be === 2
-      friends.map(_.basicInfo.id) should be === List(8120302L, 3779288L)
+      friends.size shouldBe 2
+      friends.map(_.basicInfo.id) shouldBe List(8120302L, 3779288L)
     }
 
     it ("get fans of user by /APP/FriendsFans/getFansByOffset correctly") {
 
       val fans = plurkAPI.FriendsFans.getFansByOffset(123L, 3, Some(1)).get
 
-      fans.size should be === 3
-      fans.map(_.basicInfo.id) should be === List(4948413L, 6960804L, 4138952L)
+      fans.size shouldBe 3
+      fans.map(_.basicInfo.id) shouldBe List(4948413L, 6960804L, 4138952L)
     }
 
     it ("get following of user by /APP/FriendsFans/getFollowingByOffset correctly") {
 
       val following = plurkAPI.FriendsFans.getFollowingByOffset(4, Some(2)).get
 
-      following.size should be === 4
-      following.map(_.basicInfo.id) should be === List(5530231L, 5663569L, 8290019L, 4065129L)
+      following.size shouldBe 4
+      following.map(_.basicInfo.id) shouldBe List(5530231L, 5663569L, 8290019L, 4065129L)
     }
 
     it ("become friends with user by /APP/FriendsFans/becomeFriend correctly") {
 
       val isOK = plurkAPI.FriendsFans.becomeFriend(3456L).get
-      isOK should be === true
+      isOK shouldBe true
     }
 
     it ("remove friend by /APP/FriendsFans/removeAsFriend correctly") {
 
       val isOK = plurkAPI.FriendsFans.removeAsFriend(7890L).get
-      isOK should be === true
+      isOK shouldBe true
     }
 
     it ("become fan of a user by /APP/FriendsFans/becomeFan correctly") {
 
       val isOK = plurkAPI.FriendsFans.becomeFan(1234L).get
-      isOK should be === true
+      isOK shouldBe true
     }
 
     it ("following user by /APP/FriendsFans/setFollowing correctly") {
 
       val isOK = plurkAPI.FriendsFans.setFollowing(4321L, true).get
-      isOK should be === true
+      isOK shouldBe true
     }
 
     it ("get completion list by /APP/FriendsFans/getCompletion correctly") {
       val completion = plurkAPI.FriendsFans.getCompletion.get
-      completion.size should be === 3
-      completion.keySet should be === Set(4281091L, 4233609L, 4147596L)
+      completion.size shouldBe 3
+      completion.keySet shouldBe Set(4281091L, 4233609L, 4147596L)
     }
   }
 }

@@ -5,12 +5,12 @@ import org.bone.soplurk.exceptions._
 import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 
 import java.util.Date
 import net.liftweb.json._
 
-class ResponseSpec extends FunSpec with ShouldMatchers {
+class ResponseSpec extends FunSpec with Matchers {
 
   import ResponseSpec._
 
@@ -26,7 +26,7 @@ class ResponseSpec extends FunSpec with ShouldMatchers {
         language = "en"
       )
 
-      Response(responseJSON) should be === correctResponse
+      Response(responseJSON) shouldBe correctResponse
 
     }
   }

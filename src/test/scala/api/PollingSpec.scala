@@ -6,7 +6,7 @@ import org.bone.soplurk.oauth.MockOAuth
 import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import org.scalatest.PrivateMethodTester 
 
 import org.scribe.model.Verb
@@ -177,7 +177,7 @@ object PollingAPIMock extends PlurkOAuth(null) with MockOAuth {
 
 }
 
-class PollingSpec extends FunSpec with ShouldMatchers {
+class PollingSpec extends FunSpec with Matchers {
 
   describe("A PlurkAPI with Polling trait") {
 
@@ -186,7 +186,7 @@ class PollingSpec extends FunSpec with ShouldMatchers {
     it ("get unread count by /APP/Polling/getUnreadCount correctly") {
       val unreadCount = plurkAPI.Polling.getUnreadCount.get
 
-      unreadCount should be === UnreadCount(
+      unreadCount shouldBe UnreadCount(
         all = 6,
         my = 3,
         privatePlurks = 5,
@@ -202,8 +202,8 @@ class PollingSpec extends FunSpec with ShouldMatchers {
       val offset = dateFormatter.parse("2013-01-01T00:00:00 GMT")
       val Timeline(users, plurks) = plurkAPI.Polling.getPlurks(offset).get
 
-      users.size should be === 2
-      plurks.size should be === 3
+      users.size shouldBe 2
+      plurks.size shouldBe 3
 
     }
 

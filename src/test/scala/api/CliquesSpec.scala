@@ -6,7 +6,7 @@ import org.bone.soplurk.oauth.MockOAuth
 import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import org.scalatest.PrivateMethodTester 
 
 import org.scribe.model.Verb
@@ -106,7 +106,7 @@ object CliquesAPIMock extends PlurkOAuth(null) with MockOAuth {
 
 }
 
-class CliquesSpec extends FunSpec with ShouldMatchers {
+class CliquesSpec extends FunSpec with Matchers {
 
   describe("A PlurkAPI with Cliques trait") {
 
@@ -114,37 +114,37 @@ class CliquesSpec extends FunSpec with ShouldMatchers {
 
     it ("get cliques list by /APP/Cliques/getCliques correctly") {
       val cliques = plurkAPI.Cliques.getCliques.get
-      cliques should be === List("C0", "C1", "C2")
+      cliques shouldBe List("C0", "C1", "C2")
     }
 
     it ("get user list of clique by /APP/Cliques/getClique correctly") {
       val users = plurkAPI.Cliques.getClique("C0").get
-      users.map(_.id) should be === List(4147596L, 4055276L)
+      users.map(_.id) shouldBe List(4147596L, 4055276L)
     }
 
     it ("create clique by /APP/Cliques/createClique correctly") {
       val isOK = plurkAPI.Cliques.createClique("Create").get
-      isOK should be === true
+      isOK shouldBe true
     }
 
     it ("rename clique by /APP/Cliques/renameClique correctly") {
       val isOK = plurkAPI.Cliques.renameClique("Rename", "newName").get
-      isOK should be === true
+      isOK shouldBe true
     }
 
     it ("delete clique by /APP/Cliques/deleteClique correctly") {
       val isOK = plurkAPI.Cliques.deleteClique("Delete").get
-      isOK should be === true
+      isOK shouldBe true
     }
 
     it ("add user to clique by /APP/Cliques/add correctly") {
       val isOK = plurkAPI.Cliques.add("add", 1234L).get
-      isOK should be === true
+      isOK shouldBe true
     }
 
     it ("remove user from clique by /APP/Cliques/remove correctly") {
       val isOK = plurkAPI.Cliques.remove("remove", 5678L).get
-      isOK should be === true
+      isOK shouldBe true
     }
 
   }

@@ -5,13 +5,13 @@ import org.bone.soplurk.exceptions._
 import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 
 import net.liftweb.json._
 
 import java.util.Date
 
-class TopPlurkSpec extends FunSpec with ShouldMatchers {
+class TopPlurkSpec extends FunSpec with Matchers {
 
   import TopPlurkSpec._
 
@@ -20,25 +20,25 @@ class TopPlurkSpec extends FunSpec with ShouldMatchers {
     it ("should able to parse JSON return by PlurkTop with vote") {
       val topPlurk = TopPlurk(topPlurkJSON)
 
-      topPlurk.plurk.plurkID should be === 1100143868L
-      topPlurk.voteUp should be === 2
-      topPlurk.voteDown should be === 1
-      topPlurk.score should be === 11373.3007812
-      topPlurk.topicID should be === 6
-      topPlurk.posterUID should be === 7609704
-      topPlurk.posted should be === new Date(1361492993 * 1000L)
+      topPlurk.plurk.plurkID shouldBe 1100143868L
+      topPlurk.voteUp shouldBe 2
+      topPlurk.voteDown shouldBe 1
+      topPlurk.score shouldBe 11373.3007812
+      topPlurk.topicID shouldBe 6
+      topPlurk.posterUID shouldBe 7609704
+      topPlurk.posted shouldBe new Date(1361492993 * 1000L)
     }
 
     it ("should able to parse JSON return by PlurkTop without vote") {
       val topPlurk = TopPlurk(withoutVote)
 
-      topPlurk.plurk.plurkID should be === 1100161190L
-      topPlurk.voteUp should be === 0
-      topPlurk.voteDown should be === 0
-      topPlurk.score should be === 11373.3007812
-      topPlurk.topicID should be === 0
-      topPlurk.posterUID should be === 8069251L
-      topPlurk.posted should be === new Date(1361498870 * 1000L)
+      topPlurk.plurk.plurkID shouldBe 1100161190L
+      topPlurk.voteUp shouldBe 0
+      topPlurk.voteDown shouldBe 0
+      topPlurk.score shouldBe 11373.3007812
+      topPlurk.topicID shouldBe 0
+      topPlurk.posterUID shouldBe 8069251L
+      topPlurk.posted shouldBe new Date(1361498870 * 1000L)
     }
 
   }

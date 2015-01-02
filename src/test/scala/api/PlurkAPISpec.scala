@@ -1,10 +1,10 @@
 package org.bone.soplurk.api
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import org.scalatest.PrivateMethodTester 
 
-class PlurkAPISpec extends FunSpec with ShouldMatchers {
+class PlurkAPISpec extends FunSpec with Matchers {
 
   describe("A PlurkAPI") {
 

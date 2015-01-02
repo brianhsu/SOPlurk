@@ -5,12 +5,12 @@ import org.bone.soplurk.exceptions._
 import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 
 import java.util.Date
 import net.liftweb.json._
 
-class AlertSpec extends FunSpec with ShouldMatchers {
+class AlertSpec extends FunSpec with Matchers {
 
   import AlertSpec._
 
@@ -20,42 +20,42 @@ class AlertSpec extends FunSpec with ShouldMatchers {
 
       val alert = Alert(friendshipRequest)
 
-      alert.alertType should be === AlertType.FriendshipRequest
-      alert.user.id should be === 7462357
-      alert.posted should be === new Date(1361415361000L)
+      alert.alertType shouldBe AlertType.FriendshipRequest
+      alert.user.id shouldBe 7462357
+      alert.posted shouldBe new Date(1361415361000L)
     }
 
     it ("should able to parse friendship_pending JSON") {
 
       val alert = Alert(friendshipPending)
 
-      alert.alertType should be === AlertType.FriendshipPending
-      alert.user.id should be === 1367985L
-      alert.posted should be === new Date(1361418787000L)
+      alert.alertType shouldBe AlertType.FriendshipPending
+      alert.user.id shouldBe 1367985L
+      alert.posted shouldBe new Date(1361418787000L)
     }
 
     it ("should able to parse friendship_accepted JSON") {
       val alert = Alert(friendshipAccepted)
 
-      alert.alertType should be === AlertType.FriendshipAccepted
-      alert.user.id should be === 1367985L
-      alert.posted should be === new Date(1361415419000L)
+      alert.alertType shouldBe AlertType.FriendshipAccepted
+      alert.user.id shouldBe 1367985L
+      alert.posted shouldBe new Date(1361415419000L)
     }
 
     it ("should able to parse new_fan JSON") {
       val alert = Alert(newFan)
 
-      alert.alertType should be === AlertType.NewFan
-      alert.user.id should be === 1534770L
-      alert.posted should be === new Date(1361281431000L)
+      alert.alertType shouldBe AlertType.NewFan
+      alert.user.id shouldBe 1534770L
+      alert.posted shouldBe new Date(1361281431000L)
     }
 
     it ("should able to parse new_friend JSON") {
       val alert = Alert(newFriend)
 
-      alert.alertType should be === AlertType.NewFriend
-      alert.user.id should be === 7462357L
-      alert.posted should be === new Date(1361415420000L)
+      alert.alertType shouldBe AlertType.NewFriend
+      alert.user.id shouldBe 7462357L
+      alert.posted shouldBe new Date(1361415420000L)
     }
 
   }

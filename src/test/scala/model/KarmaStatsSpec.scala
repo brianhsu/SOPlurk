@@ -4,12 +4,12 @@ import org.bone.soplurk.exceptions._
 import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 
 import java.util.Date
 import net.liftweb.json._
 
-class KarmaStatsSpec extends FunSpec with ShouldMatchers {
+class KarmaStatsSpec extends FunSpec with Matchers {
 
   import KarmaStatsSpec._
 
@@ -27,7 +27,7 @@ class KarmaStatsSpec extends FunSpec with ShouldMatchers {
         )
       )
 
-      KarmaStats(withoutReason) should be === correctStats
+      KarmaStats(withoutReason) shouldBe correctStats
     }
 
     it ("should able to parse plurk's karma data that with fall reason") {
@@ -42,7 +42,7 @@ class KarmaStatsSpec extends FunSpec with ShouldMatchers {
         )
       )
 
-      KarmaStats(withReason) should be === correctStats
+      KarmaStats(withReason) shouldBe correctStats
     }
 
   }
