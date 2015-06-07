@@ -120,7 +120,7 @@ scalaVersion := "2.11.4"
 
 resolvers += "bone" at "http://brianhsu.moe/ivy"
 
-libraryDependencies += "org.bone" %% "soplurk" % "0.3.2"
+libraryDependencies += "org.bone" %% "soplurk" % "0.3.4"
 ```
 
 After done this, enter `reload` and `update` in your SBT console, it will fetch all libraries that need to using SOPlurk.
