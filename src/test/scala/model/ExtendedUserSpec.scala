@@ -5,12 +5,12 @@ import org.bone.soplurk.exceptions._
 import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 
 import java.util.Date
 import net.liftweb.json._
 
-class ExtendedUserSpec extends FunSpec with ShouldMatchers {
+class ExtendedUserSpec extends FunSpec with Matchers {
 
   import ExtendedUserSpec._
 
@@ -21,7 +21,7 @@ class ExtendedUserSpec extends FunSpec with ShouldMatchers {
         id = 3906924L,
         nickname = "UserNickName",
         fullName = "UserFullName",
-        displayName = "UserDisplayName",
+        displayName = Some("UserDisplayName"),
         isVerifiedAccount = false,
         gender = Gender.Female,
         karma = 82.37,
@@ -42,7 +42,7 @@ class ExtendedUserSpec extends FunSpec with ShouldMatchers {
         about = Some("AboutContent")
       )
 
-      ExtendedUser(userJSON) should be === correctUserInfo
+      ExtendedUser(userJSON) shouldBe correctUserInfo
     }
   }
 }

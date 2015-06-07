@@ -6,7 +6,7 @@ import org.bone.soplurk.oauth.MockOAuth
 import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import org.scalatest.PrivateMethodTester 
 
 import org.scribe.model.Verb
@@ -80,7 +80,7 @@ object BlocksAPIMock extends PlurkOAuth(null) with MockOAuth {
 
 }
 
-class BlocksSpec extends FunSpec with ShouldMatchers {
+class BlocksSpec extends FunSpec with Matchers {
 
   describe("A PlurkAPI with Blocks trait") {
 
@@ -90,18 +90,18 @@ class BlocksSpec extends FunSpec with ShouldMatchers {
 
       val Success((total, users)) = plurkAPI.Blocks.get(offset = 3)
 
-      total should be === 43
-      users.size should be === 2
+      total shouldBe 43
+      users.size shouldBe 2
     }
 
     it ("block a user by /APP/Blocks/block correctly") {
       val isOK = plurkAPI.Blocks.block(1234L).get
-      isOK should be === true
+      isOK shouldBe true
     }
 
     it ("unblock a user by /APP/Blocks/block correctly") {
       val isOK = plurkAPI.Blocks.unblock(5678L).get
-      isOK should be === true
+      isOK shouldBe true
     }
 
   }

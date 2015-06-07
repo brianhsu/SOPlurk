@@ -7,7 +7,7 @@ import org.bone.soplurk.constant._
 import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import org.scalatest.PrivateMethodTester 
 
 import org.scribe.model.Verb
@@ -614,7 +614,8 @@ object TimelineAPIMock extends PlurkOAuth(null) with MockOAuth {
 
   override def uploadFile(url: String, 
                          parameterName: String, 
-                         file: File): Try[JValue] = {
+                         file: File,
+                         callback: (Long, Long) => Any): Try[JValue] = {
     
     if (url == "/APP/Timeline/uploadPicture" && parameterName == "image") {
       Success(uploadResponse)
@@ -688,7 +689,7 @@ object TimelineAPIMock extends PlurkOAuth(null) with MockOAuth {
 
 }
 
-class TimelineSpec extends FunSpec with ShouldMatchers {
+class TimelineSpec extends FunSpec with Matchers {
 
   describe("A PlurkAPI with Timeline trait") {
 
@@ -699,18 +700,18 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
       val PlurkData(author, users, plurk) = 
         plurkAPI.Timeline.getPlurk(1099209841L).get
 
-      author.id should be === 4460064
-      users.get(4460064L).map(_.id) should be === Some(4460064L)
-      plurk.plurkID should be === 1099209841L
-      plurk.contentRaw should be === Some("RawContent")
+      author.id shouldBe 4460064
+      users.get(4460064L).map(_.id) shouldBe Some(4460064L)
+      plurk.plurkID shouldBe 1099209841L
+      plurk.contentRaw shouldBe Some("RawContent")
     }
 
     it ("get plurks by /APP/Timeline/getPlurks correctly") {
 
       val Timeline(users, plurks) = plurkAPI.Timeline.getPlurks().get
 
-      users.size should be === 2
-      plurks.size should be === 3
+      users.size shouldBe 2
+      plurks.size shouldBe 3
 
     }
 
@@ -718,8 +719,8 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
 
       val Timeline(users, plurks) = plurkAPI.Timeline.getUnreadPlurks().get
 
-      users.size should be === 4
-      plurks.size should be === 2
+      users.size shouldBe 4
+      plurks.size shouldBe 2
 
     }
 
@@ -727,8 +728,8 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
 
       val Timeline(users, plurks) = plurkAPI.Timeline.getPublicPlurks("brianhsu").get
 
-      users.size should be === 2
-      plurks.size should be === 3
+      users.size shouldBe 2
+      plurks.size shouldBe 3
 
     }
 
@@ -736,16 +737,16 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
 
       val plurk = plurkAPI.Timeline.plurkAdd("plurkAddTest", Qualifier.Thinks).get
       
-      plurk.plurkID should be === 1099313284
-      plurk.content should be === "plurkAddTest"
-      plurk.qualifier should be === Qualifier.Thinks
+      plurk.plurkID shouldBe 1099313284
+      plurk.content shouldBe "plurkAddTest"
+      plurk.qualifier shouldBe Qualifier.Thinks
 
     }
 
     it ("delete plurk by /APP/Timeline/plurkDelete correctly") {
 
       val isOK = plurkAPI.Timeline.plurkDelete(1234L).get
-      isOK should be === true
+      isOK shouldBe true
 
     }
 
@@ -753,8 +754,8 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
 
       val plurk = plurkAPI.Timeline.plurkEdit(1099313284L, "plurkEditContent").get
       
-      plurk.plurkID should be === 1099313284L
-      plurk.content should be === "plurkEditContent"
+      plurk.plurkID shouldBe 1099313284L
+      plurk.content shouldBe "plurkEditContent"
 
     }
 
@@ -762,7 +763,7 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
 
       val plurkIDs = List(324L, 23242L, 2323L)
       val isOK = plurkAPI.Timeline.mutePlurks(plurkIDs).get
-      isOK should be === true
+      isOK shouldBe true
 
     }
 
@@ -770,7 +771,7 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
 
       val plurkIDs = List(324L, 23242L, 2323L)
       val isOK = plurkAPI.Timeline.unmutePlurks(plurkIDs).get
-      isOK should be === true
+      isOK shouldBe true
 
     }
 
@@ -778,7 +779,7 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
 
       val plurkIDs = List(324L, 23242L, 2323L)
       val isOK = plurkAPI.Timeline.favoritePlurks(plurkIDs).get
-      isOK should be === true
+      isOK shouldBe true
 
     }
 
@@ -786,7 +787,7 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
 
       val plurkIDs = List(324L, 23242L, 2323L)
       val isOK = plurkAPI.Timeline.unfavoritePlurks(plurkIDs).get
-      isOK should be === true
+      isOK shouldBe true
 
     }
 
@@ -794,7 +795,7 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
 
       val plurkIDs = List(324L, 23242L, 2323L)
       val isOK = plurkAPI.Timeline.markAsRead(plurkIDs).get
-      isOK should be === true
+      isOK shouldBe true
 
     }
 
@@ -802,12 +803,12 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
 
       val (isSuccess, replurkStatus) = plurkAPI.Timeline.replurk(1098776249L :: 1098983626L :: Nil).get
 
-      isSuccess should be === true
-      replurkStatus.size should be === 2
-      replurkStatus(1098776249L).isSuccess should be === true
-      replurkStatus(1098983626L).isSuccess should be === true
-      replurkStatus(1098983626L).plurk.plurkID should be === 1098983626L
-      replurkStatus(1098776249L).plurk.plurkID should be === 1098776249L
+      isSuccess shouldBe true
+      replurkStatus.size shouldBe 2
+      replurkStatus(1098776249L).isSuccess shouldBe true
+      replurkStatus(1098983626L).isSuccess shouldBe true
+      replurkStatus(1098983626L).plurk.plurkID shouldBe 1098983626L
+      replurkStatus(1098776249L).plurk.plurkID shouldBe 1098776249L
     }
 
 
@@ -815,20 +816,20 @@ class TimelineSpec extends FunSpec with ShouldMatchers {
 
       val (isSuccess, replurkStatus) = plurkAPI.Timeline.unreplurk(1098776249L :: 1098983626L :: Nil).get
 
-      isSuccess should be === true
-      replurkStatus.size should be === 2
-      replurkStatus(1098776249L).isSuccess should be === true
-      replurkStatus(1098983626L).isSuccess should be === true
-      replurkStatus(1098983626L).plurk.plurkID should be === 1098983626L
-      replurkStatus(1098776249L).plurk.plurkID should be === 1098776249L
+      isSuccess shouldBe true
+      replurkStatus.size shouldBe 2
+      replurkStatus(1098776249L).isSuccess shouldBe true
+      replurkStatus(1098983626L).isSuccess shouldBe true
+      replurkStatus(1098983626L).plurk.plurkID shouldBe 1098983626L
+      replurkStatus(1098776249L).plurk.plurkID shouldBe 1098776249L
     }
 
     it ("should upload picture by /APP/Timeline/uploadPicture corectly") {
 
-      val (fullImageURL, thumbnailURL) = plurkAPI.Timeline.uploadPicture(new File("null.jpg")).get
+      val (fullImageURL, thumbnailURL) = plurkAPI.Timeline.uploadPicture(new File("null.jpg"), (x, y) => {}).get
 
-      fullImageURL should be === "http://images.plurk.com/full.jpg"
-      thumbnailURL should be === "http://images.plurk.com/thumbnail.jpg"
+      fullImageURL shouldBe "http://images.plurk.com/full.jpg"
+      thumbnailURL shouldBe "http://images.plurk.com/thumbnail.jpg"
 
     }
 

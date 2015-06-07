@@ -1,10 +1,9 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
-          <title>root - SOPlurk 0.1 API document - _root_</title>
-          <meta name="description" content="root - SOPlurk 0.1 API document - root " />
-          <meta name="keywords" content="root SOPlurk 0.1 API document root " />
+          <title>root - SOPlurk 0.2 API document - _root_</title>
+          <meta name="description" content="root - SOPlurk 0.2 API document - root " />
+          <meta name="keywords" content="root SOPlurk 0.2 API document root " />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -31,7 +30,11 @@
       <div id="definition">
         <img src="lib/package_big.png" />
         
-        <h1>root package</h1>
+        <h1>root package</h1> <span class="permalink">
+      <a href="index.html#package" title="Permalink" target="_top">
+        <img src="lib/permalink.png" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -112,11 +115,11 @@
   }
 }</pre><h4> Installation </h4><p>To using SOPlurk in your Scala project, please add the following defintion in your <a href="http://brianhsu.github.com/SOPlurk/api/index.html" target="_blank">SBT</a> <code>build.sbt </code> project.</p><p>Since SOPlurk used <code>scala.util.Try</code> which only exists after Scala 2.10.0, you must tell SBT to build your project using Scala 2.10.0 or above.</p><pre><span class="cmt">// In build.sbt</span>
 
-scalaVersion := <span class="lit">"2.10.0"</span>
+scalaVersion := <span class="lit">"2.11.4"</span>
 
 resolvers += <span class="lit">"bone"</span> at <span class="lit">"http://bone.twbbs.org.tw/ivy"</span>
 
-libraryDependencies += <span class="lit">"org.bone"</span> %% <span class="lit">"soplurk"</span> % <span class="lit">"0.2"</span></pre><p>After done this, enter <code>reload</code> and <code>update</code> in your SBT console, it will fetch all libraries that need to using SOPlurk.</p><pre>brianhsu@USBGentoo ~/Test $ sbt
+libraryDependencies += <span class="lit">"org.bone"</span> %% <span class="lit">"soplurk"</span> % <span class="lit">"0.3.3"</span></pre><p>After done this, enter <code>reload</code> and <code>update</code> in your SBT console, it will fetch all libraries that need to using SOPlurk.</p><pre>brianhsu@USBGentoo ~/Test $ sbt
 [info] <span class="std">Set</span> current project to default-<span class="num">9</span>dcd95 (in build file:/home/brianhsu/Test/)
 &gt; reload
 [info] <span class="std">Set</span> current project to default-<span class="num">9</span>dcd95 (in build file:/home/brianhsu/Test/)
@@ -363,7 +366,11 @@ plurkAPI.authorize(verifyCode).foreach {
       <span class="symbol">
         <a href="org/package.html"><span class="name">org</span></a>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="index.html#package@org" title="Permalink" target="_top">
+        <img src="lib/permalink.png" />
+      </a>
+    </span>
       
     </li></ol>
             </div>

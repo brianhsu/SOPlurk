@@ -7,7 +7,7 @@ import org.bone.soplurk.model._
 import org.bone.soplurk.constant.AlertType._
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import org.scalatest.PrivateMethodTester 
 
 import org.scribe.model.Verb
@@ -179,7 +179,7 @@ object PlurkTopAPIMock extends PlurkOAuth(null) with MockOAuth {
 
 }
 
-class PlurkTopSpec extends FunSpec with ShouldMatchers {
+class PlurkTopSpec extends FunSpec with Matchers {
 
   describe("A PlurkAPI with PlurkTop trait") {
 
@@ -187,7 +187,7 @@ class PlurkTopSpec extends FunSpec with ShouldMatchers {
 
     it ("get collections by /APP/PlurkTop/getCollections correctly") {
       val collections = plurkAPI.PlurkTop.getCollections.get
-      collections should be === List(
+      collections shouldBe List(
         Collection("Taiwan", List("cn", "tr_ch", "en"), "台灣"),
         Collection("English", List("en"), "English"), 
         Collection("Philippines", List("en", "en_fo", "ta_fp"), "Pilipinas")
@@ -198,7 +198,7 @@ class PlurkTopSpec extends FunSpec with ShouldMatchers {
 
       val topics = plurkAPI.PlurkTop.getTopics("tr_ch").get
 
-      topics should be === List(
+      topics shouldBe List(
         Topic(1, "News", "News"), 
         Topic(2, "Entertainment", "Entertainment"), 
         Topic(0, "Interesting", "Interesting"), 
@@ -216,9 +216,9 @@ class PlurkTopSpec extends FunSpec with ShouldMatchers {
         topicIDFilter = Some(11)
       ).get
 
-      plurkTopResult.users.size should be === 2
-      plurkTopResult.plurks.size should be === 2
-      plurkTopResult.offset should be === 11373.3007812
+      plurkTopResult.users.size shouldBe 2
+      plurkTopResult.plurks.size shouldBe 2
+      plurkTopResult.offset shouldBe 11373.3007812
 
     }
 

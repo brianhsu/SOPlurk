@@ -25,7 +25,9 @@ case class Response(
   content: String, contentRaw: String,
   qualifier: Qualifier,
   posted: Date,
-  language: String
+  language: String,
+  handle: Option[String],
+  myAnonymous: Option[Boolean]
 )
 
 object Response {
@@ -49,7 +51,9 @@ object Response {
       contentRaw = jsonData.get("content_raw"),
       qualifier = Qualifier(jsonData.get("qualifier")),
       posted = DateTimeUtils.fromPlurkDate(jsonData.get("posted")),
-      language = jsonData.get("lang")
+      language = jsonData.get("lang"),
+      handle = jsonData.getOption[String]("handle"),
+      myAnonymous = jsonData.getOption[Boolean]("my_anonymous")
     )
   }
 

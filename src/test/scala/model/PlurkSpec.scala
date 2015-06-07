@@ -6,12 +6,12 @@ import org.bone.soplurk.exceptions._
 import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 
 import java.util.Date
 import net.liftweb.json._
 
-class PlurkSpec extends FunSpec with ShouldMatchers {
+class PlurkSpec extends FunSpec with Matchers {
 
   import PlurkSpec._
 
@@ -38,8 +38,8 @@ class PlurkSpec extends FunSpec with ShouldMatchers {
         contentRaw = Some("NormalPlurkPostRaw")
       )
 
-      Plurk(normalPlurk) should be === correctPlurk
-      Plurk(normalPlurk).plurkURL should be === "http://www.plurk.com/p/i5fr0m"
+      Plurk(normalPlurk) shouldBe correctPlurk
+      Plurk(normalPlurk).plurkURL shouldBe "http://www.plurk.com/p/i5fr0m"
     }
 
     it ("should able to parse plurks's miminal JSON data") {
@@ -63,8 +63,8 @@ class PlurkSpec extends FunSpec with ShouldMatchers {
         contentRaw = None
       )
 
-      Plurk(normalPlurkMinimal) should be === correctPlurk
-      Plurk(normalPlurkMinimal).plurkURL should be === "http://www.plurk.com/p/i5fr0m"
+      Plurk(normalPlurkMinimal) shouldBe correctPlurk
+      Plurk(normalPlurkMinimal).plurkURL shouldBe "http://www.plurk.com/p/i5fr0m"
     }
 
     it ("should able to parse whisper plurk's JSON data") {
@@ -88,8 +88,8 @@ class PlurkSpec extends FunSpec with ShouldMatchers {
         contentRaw = Some("偷偷說的 API 測試……")
       )
 
-      Plurk(whisperPlurk) should be === correctPlurk
-      Plurk(whisperPlurk).plurkURL should be === "http://www.plurk.com/p/i5f1aa"
+      Plurk(whisperPlurk) shouldBe correctPlurk
+      Plurk(whisperPlurk).plurkURL shouldBe "http://www.plurk.com/p/i5f1aa"
 
     }
 
@@ -115,8 +115,8 @@ class PlurkSpec extends FunSpec with ShouldMatchers {
         contentRaw = None
       )
 
-      Plurk(whisperPlurkMinimal) should be === correctPlurk
-      Plurk(whisperPlurkMinimal).plurkURL should be === "http://www.plurk.com/p/i5f1aa"
+      Plurk(whisperPlurkMinimal) shouldBe correctPlurk
+      Plurk(whisperPlurkMinimal).plurkURL shouldBe "http://www.plurk.com/p/i5f1aa"
     }
 
   }

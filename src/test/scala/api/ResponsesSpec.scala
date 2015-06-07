@@ -7,7 +7,7 @@ import org.bone.soplurk.constant._
 import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import org.scalatest.PrivateMethodTester 
 
 import org.scribe.model.Verb
@@ -120,7 +120,7 @@ object ResponsesAPIMock extends PlurkOAuth(null) with MockOAuth {
 
 }
 
-class ResponsesSpec extends FunSpec with ShouldMatchers {
+class ResponsesSpec extends FunSpec with Matchers {
 
   describe("A PlurkAPI with Response trait") {
 
@@ -130,15 +130,15 @@ class ResponsesSpec extends FunSpec with ShouldMatchers {
 
       val responses = plurkAPI.Responses.get(0L).get
 
-      responses should be === PlurkResponses(Map(), Nil, -1)
+      responses shouldBe PlurkResponses(Map(), Nil, -1)
     }
 
     it ("get data with responses by /APP/Responses/get correctly") {
       val responses = plurkAPI.Responses.get(1099531474L).get
 
-      responses.friends.size should be === 1
-      responses.responses.size should be === 2
-      responses.seen should be === 2
+      responses.friends.size shouldBe 1
+      responses.responses.size shouldBe 2
+      responses.seen shouldBe 2
     }
 
     it ("add response by /APP/Responses/responseAdd correctly") {
@@ -160,12 +160,12 @@ class ResponsesSpec extends FunSpec with ShouldMatchers {
         language = "en"
       )
 
-      response should be === correctResponse
+      response shouldBe correctResponse
     }
 
     it ("delete response by /APP/Responses/responseAdd correctly") {
       val isOK = plurkAPI.Responses.responseDelete(1099531474L, 5385889041L).get
-      isOK should be === true
+      isOK shouldBe true
     }
 
   }

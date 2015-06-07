@@ -5,13 +5,13 @@ import org.bone.soplurk.exceptions._
 import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 
 import net.liftweb.json._
 
 import java.util.Date
 
-class RealtimeResponseSpec extends FunSpec with ShouldMatchers {
+class RealtimeResponseSpec extends FunSpec with Matchers {
 
   import RealtimeResponseSpec._
 
@@ -21,9 +21,9 @@ class RealtimeResponseSpec extends FunSpec with ShouldMatchers {
 
       val realtimeResponse = RealtimeResponse(realtimeResponseJSON)
 
-      realtimeResponse.user.id should be === 5042068L
-      realtimeResponse.response.id should be === 5389539593L
-      realtimeResponse.plurk.plurkID should be === 1100202663L
+      realtimeResponse.user.id shouldBe 5042068L
+      realtimeResponse.response.id shouldBe 5389539593L
+      realtimeResponse.plurk.plurkID shouldBe 1100202663L
 
     }
 

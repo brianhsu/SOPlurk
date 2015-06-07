@@ -5,12 +5,12 @@ import org.bone.soplurk.exceptions._
 import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 
 import java.util.Date
 import net.liftweb.json._
 
-class CompletionSpec extends FunSpec with ShouldMatchers {
+class CompletionSpec extends FunSpec with Matchers {
 
   import CompletionSpec._
 
@@ -23,7 +23,7 @@ class CompletionSpec extends FunSpec with ShouldMatchers {
         displayName = Some("userDisplay")
       )
 
-      Completion(withDisplayName) should be === correctCompletion
+      Completion(withDisplayName) shouldBe correctCompletion
     }
 
     it ("should able to parse plurk's JSON data that has no display name") {
@@ -33,7 +33,7 @@ class CompletionSpec extends FunSpec with ShouldMatchers {
         displayName = None
       )
 
-      Completion(withoutDisplayName) should be === correctCompletion
+      Completion(withoutDisplayName) shouldBe correctCompletion
     }
 
   }

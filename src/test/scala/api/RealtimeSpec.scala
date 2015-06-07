@@ -6,7 +6,7 @@ import org.bone.soplurk.oauth.MockOAuth
 import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import org.scalatest.PrivateMethodTester 
 
 import org.scribe.model.Verb
@@ -128,7 +128,7 @@ object RealtimeAPIMock extends PlurkOAuth(null) with MockOAuth {
 
 }
 
-class RealtimeSpec extends FunSpec with ShouldMatchers {
+class RealtimeSpec extends FunSpec with Matchers {
 
   describe("A PlurkAPI with Realtime trait") {
 
@@ -137,7 +137,7 @@ class RealtimeSpec extends FunSpec with ShouldMatchers {
     it ("get user channel by /APP/getUserChannel correctly") {
       val channel = plurkAPI.Realtime.getUserChannel.get
 
-      channel should be === UserChannel(
+      channel shouldBe UserChannel(
         "http://comet03.plurk.com/comet/1235515351741/?channel=generic",
         "generic-4-f733d8522327edf87b4d1651e6395a6cca0807a0",
         0
@@ -149,9 +149,9 @@ class RealtimeSpec extends FunSpec with ShouldMatchers {
       val channel = UserChannel("http://comet03.plurk.com/", "name", 0)
       val events = plurkAPI.Realtime.getEvents(channel).get
 
-      events.nextChannel should be === UserChannel("http://comet03.plurk.com/", "name", 7)
-      events.events(0).isRight should be === true
-      events.events(1).isLeft should be === true
+      events.nextChannel shouldBe UserChannel("http://comet03.plurk.com/", "name", 7)
+      events.events(0).isRight shouldBe true
+      events.events(1).isLeft shouldBe true
 
 
     }

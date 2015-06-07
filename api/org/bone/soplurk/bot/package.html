@@ -1,10 +1,9 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
-          <title>bot - SOPlurk 0.1 API document - org.bone.soplurk.bot</title>
-          <meta name="description" content="bot - SOPlurk 0.1 API document - org.bone.soplurk.bot" />
-          <meta name="keywords" content="bot SOPlurk 0.1 API document org.bone.soplurk.bot" />
+          <title>bot - SOPlurk 0.2 API document - org.bone.soplurk.bot</title>
+          <meta name="description" content="bot - SOPlurk 0.2 API document - org.bone.soplurk.bot" />
+          <meta name="keywords" content="bot SOPlurk 0.2 API document org.bone.soplurk.bot" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -31,7 +30,11 @@
       <div id="definition">
         <img src="../../../../lib/package_big.png" />
         <p id="owner"><a href="../../../package.html" class="extype" name="org">org</a>.<a href="../../package.html" class="extype" name="org.bone">bone</a>.<a href="../package.html" class="extype" name="org.bone.soplurk">soplurk</a></p>
-        <h1>bot</h1>
+        <h1>bot</h1> <span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.bot.package" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -88,7 +91,7 @@
               <h3>Type Members</h3>
               <ol><li name="org.bone.soplurk.bot.BotAction" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="BotAction=org.bone.soplurk.api.PlurkAPI=&gt;PartialFunction[Any,Unit]"></a>
-      <a id="BotAction:(PlurkAPI)⇒PartialFunction[Any,Unit]"></a>
+      <a id="BotAction:BotAction"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
@@ -97,10 +100,14 @@
       <span class="symbol">
         <span class="name">BotAction</span><span class="result"> = (<a href="../api/PlurkAPI.html" class="extype" name="org.bone.soplurk.api.PlurkAPI">PlurkAPI</a>) ⇒ <span class="extype" name="scala.PartialFunction">PartialFunction</span>[<span class="extype" name="scala.Any">Any</span>, <span class="extype" name="scala.Unit">Unit</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.bot.package@BotAction=org.bone.soplurk.api.PlurkAPI=&gt;PartialFunction[Any,Unit]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       
-    </li><li name="org.bone.soplurk.bot.PlurkBot" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="PlurkBotextendsObject"></a>
+    </li><li name="org.bone.soplurk.bot.PlurkBot" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="PlurkBotextendsAnyRef"></a>
       <a id="PlurkBot:PlurkBot"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -110,8 +117,18 @@
       <span class="symbol">
         <a href="PlurkBot.html"><span class="name">PlurkBot</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <p class="comment cmt"> PlurkBot</p>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.bot.package@PlurkBotextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"> PlurkBot</p><div class="fullcomment"><div class="comment cmt"><p> PlurkBot</p><p> This bot will polling <a href="../api/Alerts$Alerts$.html#getActive:scala.util.Try[List[org.bone.soplurk.model.Alert]]" class="extmbr" name="org.bone.soplurk.api.Alerts.Alerts#getActive">org.bone.soplurk.api.PlurkAPI.Alerts.getActive</a> for every
+ period defined at <code>alertsPollingPeriod</code> and pass it to handler, if there is any
+ active alert.</p><p> It will also use <a href="../api/Realtime$Realtime$.html" class="extype" name="org.bone.soplurk.api.Realtime.Realtime">org.bone.soplurk.api.PlurkAPI.Realtime</a> to get new Plurks and
+ responses, and pass them to handler.</p><p> You should use <a href="PlurkBot$.html#withPlurkAPI(plurkAPI:org.bone.soplurk.api.PlurkAPI,alertPollingPeroid:Int)(handler:org.bone.soplurk.bot.BotAction):org.bone.soplurk.bot.PlurkBot" class="extmbr" name="org.bone.soplurk.bot.PlurkBot#withPlurkAPI">org.bone.soplurk.bot.PlurkBot.withPlurkAPI</a> /
+ <a href="PlurkBot$.html#withAccessToken(appKey:String,appSecret:String,tokenKey:String,tokenSecret:String,alertPollingPeroid:Int)(handler:org.bone.soplurk.bot.BotAction):org.bone.soplurk.bot.PlurkBot" class="extmbr" name="org.bone.soplurk.bot.PlurkBot#withAccessToken">org.bone.soplurk.bot.PlurkBot.withAccessToken</a> instead of create
+ this object by your self.</p><p> We will pass the following three type of messages to handler:</p><ul><li><a href="../model/Alert.html" class="extype" name="org.bone.soplurk.model.Alert">org.bone.soplurk.model.Alert</a> for active alerts.</li><li><a href="../model/Plurk.html" class="extype" name="org.bone.soplurk.model.Plurk">org.bone.soplurk.model.Plurk</a> for new plurks.</li><li><a href="../model/RealtimeResponse.html" class="extype" name="org.bone.soplurk.model.RealtimeResponse">org.bone.soplurk.model.RealtimeResponse</a> for new responses.
+</li></ul></div></div>
     </li></ol>
             </div>
 
@@ -119,7 +136,7 @@
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="org.bone.soplurk.bot.PlurkBot" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="org.bone.soplurk.bot.PlurkBot" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="PlurkBot"></a>
       <a id="PlurkBot:PlurkBot"></a>
       <h4 class="signature">
@@ -130,8 +147,28 @@
       <span class="symbol">
         <a href="PlurkBot$.html"><span class="name">PlurkBot</span></a>
       </span>
-      </h4>
-      <p class="comment cmt"> PlurkBot</p>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.bot.package@PlurkBot" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"> PlurkBot</p><div class="fullcomment"><div class="comment cmt"><p> PlurkBot</p><p> You could use this object to create and start PlurkBot.</p><p> You could choose construct new PlurkAPI object by using appKey / appSecret and
+ tokenKey / tokenSecret pair, or you could using a existing PlurkAPI object.</p><p> Please note that your plurkAPI must be authorized one, or it will throw exception.</p><p> Here is a minimal example code about how to use PlurkBot:</p><pre><span class="kw">import</span> org.bone.soplurk.api.PlurkAPI._
+<span class="kw">import</span> org.bone.soplurk.bot._
+<span class="kw">import</span> org.bone.soplurk.constant._
+<span class="kw">import</span> org.bone.soplurk.model._
+
+<span class="kw">val</span> (appKey, appSecret) = (<span class="lit">"APP_KEY"</span>, <span class="lit">"APP_SECRET"</span>)
+<span class="kw">val</span> (tokenKey, tokenSecret) = (<span class="lit">"TOKEN_KEY"</span>, <span class="lit">"TOKEN_SECRET"</span>)
+
+<span class="kw">val</span> plurkAPI = PlurkAPI.withAccessToken(appKey, appSecret, tokenKey, tokenSecret)
+<span class="kw">val</span> plurkBot = PlurkBot.withPlurkAPI(plurkAPI)( plurkAPI <span class="kw">=&gt;</span> {
+
+  <span class="kw">case</span> alert: Alert <span class="kw">=&gt;</span> println(<span class="lit">"get alert:"</span> + alert)
+  <span class="kw">case</span> plurk: Plurk <span class="kw">=&gt;</span> println(<span class="lit">"get plurk:"</span> + plurk)
+  <span class="kw">case</span> response: RealtimeResponse <span class="kw">=&gt;</span> println(<span class="lit">"get response:"</span> + response)
+
+})</pre></div></div>
     </li></ol>
             </div>
 

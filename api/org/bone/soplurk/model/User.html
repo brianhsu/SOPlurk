@@ -1,10 +1,9 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
-          <title>User - SOPlurk 0.1 API document - org.bone.soplurk.model.User</title>
-          <meta name="description" content="User - SOPlurk 0.1 API document - org.bone.soplurk.model.User" />
-          <meta name="keywords" content="User SOPlurk 0.1 API document org.bone.soplurk.model.User" />
+          <title>User - SOPlurk 0.2 API document - org.bone.soplurk.model.User</title>
+          <meta name="description" content="User - SOPlurk 0.2 API document - org.bone.soplurk.model.User" />
+          <meta name="keywords" content="User SOPlurk 0.2 API document org.bone.soplurk.model.User" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -31,7 +30,11 @@
       <div id="definition">
         <a href="User$.html" title="Go to companion"><img src="../../../../lib/class_to_object_big.png" /></a>
         <p id="owner"><a href="../../../package.html" class="extype" name="org">org</a>.<a href="../../package.html" class="extype" name="org.bone">bone</a>.<a href="../package.html" class="extype" name="org.bone.soplurk">soplurk</a>.<a href="package.html" class="extype" name="org.bone.soplurk.model">model</a></p>
-        <h1><a href="User$.html" title="Go to companion">User</a></h1>
+        <h1><a href="User$.html" title="Go to companion">User</a></h1> <span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -40,7 +43,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">User</span><span class="params">(<span name="id">id: <span class="extype" name="scala.Long">Long</span></span>, <span name="nickname">nickname: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="fullName">fullName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="displayName">displayName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="isVerifiedAccount">isVerifiedAccount: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="gender">gender: <a href="../constant/Gender.html" class="extype" name="org.bone.soplurk.constant.Gender">Gender</a></span>, <span name="karma">karma: <span class="extype" name="scala.Double">Double</span></span>, <span name="hasProfileImage">hasProfileImage: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="birthdayPrivacy">birthdayPrivacy: <span class="extype" name="scala.Option">Option</span>[<a href="../constant/BirthdayPrivacy.html" class="extype" name="org.bone.soplurk.constant.BirthdayPrivacy">BirthdayPrivacy</a>]</span>, <span name="defaultLanguage">defaultLanguage: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="avatarVersion">avatarVersion: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="location">location: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="birthday">birthday: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="java.util.Date">Date</span>]</span>, <span name="timezone">timezone: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="nameColor">nameColor: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">User</span><span class="params">(<span name="id">id: <span class="extype" name="scala.Long">Long</span></span>, <span name="nickname">nickname: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="fullName">fullName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="displayName">displayName: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="isVerifiedAccount">isVerifiedAccount: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="gender">gender: <a href="../constant/Gender.html" class="extype" name="org.bone.soplurk.constant.Gender">Gender</a></span>, <span name="karma">karma: <span class="extype" name="scala.Double">Double</span></span>, <span name="hasProfileImage">hasProfileImage: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="birthdayPrivacy">birthdayPrivacy: <span class="extype" name="scala.Option">Option</span>[<a href="../constant/BirthdayPrivacy.html" class="extype" name="org.bone.soplurk.constant.BirthdayPrivacy">BirthdayPrivacy</a>]</span>, <span name="defaultLanguage">defaultLanguage: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="avatarVersion">avatarVersion: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="location">location: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="birthday">birthday: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="java.util.Date">Date</span>]</span>, <span name="timezone">timezone: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="nameColor">nameColor: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
@@ -93,7 +96,7 @@
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="org.bone.soplurk.model.User#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&lt;init&gt;(id:Long,nickname:String,fullName:String,displayName:String,isVerifiedAccount:Boolean,gender:org.bone.soplurk.constant.Gender,karma:Double,hasProfileImage:Boolean,birthdayPrivacy:Option[org.bone.soplurk.constant.BirthdayPrivacy],defaultLanguage:String,avatarVersion:Option[Int],location:Option[String],birthday:Option[java.util.Date],timezone:Option[String],nameColor:Option[String]):org.bone.soplurk.model.User"></a>
+      <a id="&lt;init&gt;(id:Long,nickname:String,fullName:String,displayName:Option[String],isVerifiedAccount:Boolean,gender:org.bone.soplurk.constant.Gender,karma:Double,hasProfileImage:Boolean,birthdayPrivacy:Option[org.bone.soplurk.constant.BirthdayPrivacy],defaultLanguage:String,avatarVersion:Option[Int],location:Option[String],birthday:Option[java.util.Date],timezone:Option[String],nameColor:Option[String]):org.bone.soplurk.model.User"></a>
       <a id="&lt;init&gt;:User"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -101,9 +104,13 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">User</span><span class="params">(<span name="id">id: <span class="extype" name="scala.Long">Long</span></span>, <span name="nickname">nickname: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="fullName">fullName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="displayName">displayName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="isVerifiedAccount">isVerifiedAccount: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="gender">gender: <a href="../constant/Gender.html" class="extype" name="org.bone.soplurk.constant.Gender">Gender</a></span>, <span name="karma">karma: <span class="extype" name="scala.Double">Double</span></span>, <span name="hasProfileImage">hasProfileImage: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="birthdayPrivacy">birthdayPrivacy: <span class="extype" name="scala.Option">Option</span>[<a href="../constant/BirthdayPrivacy.html" class="extype" name="org.bone.soplurk.constant.BirthdayPrivacy">BirthdayPrivacy</a>]</span>, <span name="defaultLanguage">defaultLanguage: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="avatarVersion">avatarVersion: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="location">location: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="birthday">birthday: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="java.util.Date">Date</span>]</span>, <span name="timezone">timezone: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="nameColor">nameColor: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span>
+        <span class="name">User</span><span class="params">(<span name="id">id: <span class="extype" name="scala.Long">Long</span></span>, <span name="nickname">nickname: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="fullName">fullName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="displayName">displayName: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="isVerifiedAccount">isVerifiedAccount: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="gender">gender: <a href="../constant/Gender.html" class="extype" name="org.bone.soplurk.constant.Gender">Gender</a></span>, <span name="karma">karma: <span class="extype" name="scala.Double">Double</span></span>, <span name="hasProfileImage">hasProfileImage: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="birthdayPrivacy">birthdayPrivacy: <span class="extype" name="scala.Option">Option</span>[<a href="../constant/BirthdayPrivacy.html" class="extype" name="org.bone.soplurk.constant.BirthdayPrivacy">BirthdayPrivacy</a>]</span>, <span name="defaultLanguage">defaultLanguage: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="avatarVersion">avatarVersion: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="location">location: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="birthday">birthday: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="java.util.Date">Date</span>]</span>, <span name="timezone">timezone: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="nameColor">nameColor: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@&lt;init&gt;(id:Long,nickname:String,fullName:String,displayName:Option[String],isVerifiedAccount:Boolean,gender:org.bone.soplurk.constant.Gender,karma:Double,hasProfileImage:Boolean,birthdayPrivacy:Option[org.bone.soplurk.constant.BirthdayPrivacy],defaultLanguage:String,avatarVersion:Option[Int],location:Option[String],birthday:Option[java.util.Date],timezone:Option[String],nameColor:Option[String]):org.bone.soplurk.model.User" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">id</dt><dd class="cmt"><p>The unique user id.</p></dd><dt class="param">nickname</dt><dd class="cmt"><p>The unique nick_name of the user.</p></dd><dt class="param">displayName</dt><dd class="cmt"><p>The non-unique display name of the user.</p></dd><dt class="param">isVerifiedAccount</dt><dd class="cmt"><p>Is this user a
                              <a href="http://www.plurk.com/Verify/" target="_blank">Plurk verified account</a>?
 </p></dd><dt class="param">gender</dt><dd class="cmt"><p>The user's gender</p></dd><dt class="param">karma</dt><dd class="cmt"><p>User's karma value</p></dd><dt class="param">hasProfileImage</dt><dd class="cmt"><p>Does this user have profile image?</p></dd><dt class="param">birthdayPrivacy</dt><dd class="cmt"><p>User's birthday privacy setting.</p></dd><dt class="param">defaultLanguage</dt><dd class="cmt"><p>User's default language.</p></dd><dt class="param">avatarVersion</dt><dd class="cmt"><p>The user's avatar version.</p></dd><dt class="param">location</dt><dd class="cmt"><p>The user's location.</p></dd><dt class="param">birthday</dt><dd class="cmt"><p>The user's birthday, if birthday privact is set to
@@ -122,19 +129,6 @@
         <div id="values" class="values members">
               <h3>Value Members</h3>
               <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="!=(x$1:AnyRef):Boolean"></a>
-      <a id="!=(AnyRef):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
@@ -145,8 +139,12 @@
       <span class="symbol">
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="##():Int"></a>
       <a id="##():Int"></a>
@@ -158,22 +156,13 @@
       <span class="symbol">
         <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@##():Int" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="==(x$1:AnyRef):Boolean"></a>
-      <a id="==(AnyRef):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="==(x$1:Any):Boolean"></a>
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
@@ -184,8 +173,12 @@
       <span class="symbol">
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@==(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -197,7 +190,11 @@
       <span class="symbol">
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="org.bone.soplurk.model.User#avatarVersion" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="avatarVersion:Option[Int]"></a>
@@ -210,7 +207,11 @@
       <span class="symbol">
         <span class="name">avatarVersion</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@avatarVersion:Option[Int]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">The user's avatar version.</p>
     </li><li name="org.bone.soplurk.model.User#bigAvatar" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="bigAvatar:String"></a>
@@ -223,7 +224,11 @@
       <span class="symbol">
         <span class="name">bigAvatar</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@bigAvatar:String" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt"> User's big medium avatar URL.</p>
     </li><li name="org.bone.soplurk.model.User#birthday" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="birthday:Option[java.util.Date]"></a>
@@ -236,7 +241,11 @@
       <span class="symbol">
         <span class="name">birthday</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="java.util.Date">Date</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@birthday:Option[java.util.Date]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">The user's birthday, if birthday privact is set to
                              HideYear, year will be 1904.</p>
     </li><li name="org.bone.soplurk.model.User#birthdayPrivacy" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
@@ -250,7 +259,11 @@
       <span class="symbol">
         <span class="name">birthdayPrivacy</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<a href="../constant/BirthdayPrivacy.html" class="extype" name="org.bone.soplurk.constant.BirthdayPrivacy">BirthdayPrivacy</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@birthdayPrivacy:Option[org.bone.soplurk.constant.BirthdayPrivacy]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">User's birthday privacy setting.</p>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
@@ -263,9 +276,16 @@
       <span class="symbol">
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@clone():Object" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="org.bone.soplurk.model.User#defaultLanguage" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
@@ -279,20 +299,28 @@
       <span class="symbol">
         <span class="name">defaultLanguage</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@defaultLanguage:String" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">User's default language.</p>
     </li><li name="org.bone.soplurk.model.User#displayName" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="displayName:String"></a>
-      <a id="displayName:String"></a>
+      <a id="displayName:Option[String]"></a>
+      <a id="displayName:Option[String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">displayName</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+        <span class="name">displayName</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@displayName:Option[String]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">The non-unique display name of the user.</p>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
@@ -305,7 +333,11 @@
       <span class="symbol">
         <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
@@ -318,9 +350,16 @@
       <span class="symbol">
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@finalize():Unit" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="org.bone.soplurk.model.User#fullName" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
@@ -334,7 +373,11 @@
       <span class="symbol">
         <span class="name">fullName</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@fullName:String" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="org.bone.soplurk.model.User#gender" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="gender:org.bone.soplurk.constant.Gender"></a>
@@ -347,7 +390,11 @@
       <span class="symbol">
         <span class="name">gender</span><span class="result">: <a href="../constant/Gender.html" class="extype" name="org.bone.soplurk.constant.Gender">Gender</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@gender:org.bone.soplurk.constant.Gender" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">The user's gender</p>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
@@ -360,7 +407,11 @@
       <span class="symbol">
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@getClass():Class[_]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="org.bone.soplurk.model.User#hasProfileImage" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="hasProfileImage:Boolean"></a>
@@ -373,7 +424,11 @@
       <span class="symbol">
         <span class="name">hasProfileImage</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@hasProfileImage:Boolean" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Does this user have profile image?</p>
     </li><li name="org.bone.soplurk.model.User#id" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="id:Long"></a>
@@ -386,7 +441,11 @@
       <span class="symbol">
         <span class="name">id</span><span class="result">: <span class="extype" name="scala.Long">Long</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@id:Long" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">The unique user id.</p>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -399,7 +458,11 @@
       <span class="symbol">
         <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="org.bone.soplurk.model.User#isVerifiedAccount" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="isVerifiedAccount:Boolean"></a>
@@ -412,7 +475,11 @@
       <span class="symbol">
         <span class="name">isVerifiedAccount</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@isVerifiedAccount:Boolean" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Is this user a
                              <a href="http://www.plurk.com/Verify/" target="_blank">Plurk verified account</a>?
 </p>
@@ -427,7 +494,11 @@
       <span class="symbol">
         <span class="name">karma</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@karma:Double" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">User's karma value</p>
     </li><li name="org.bone.soplurk.model.User#location" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="location:Option[String]"></a>
@@ -440,7 +511,11 @@
       <span class="symbol">
         <span class="name">location</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@location:Option[String]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">The user's location.</p>
     </li><li name="org.bone.soplurk.model.User#mediumAvatar" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="mediumAvatar:String"></a>
@@ -453,7 +528,11 @@
       <span class="symbol">
         <span class="name">mediumAvatar</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@mediumAvatar:String" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt"> User's small medium avatar URL.</p>
     </li><li name="org.bone.soplurk.model.User#nameColor" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="nameColor:Option[String]"></a>
@@ -466,7 +545,11 @@
       <span class="symbol">
         <span class="name">nameColor</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@nameColor:Option[String]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">The user's name color in HTML hex color value.</p>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
@@ -479,7 +562,11 @@
       <span class="symbol">
         <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="org.bone.soplurk.model.User#nickname" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="nickname:String"></a>
@@ -492,7 +579,11 @@
       <span class="symbol">
         <span class="name">nickname</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@nickname:String" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">The unique nick_name of the user.</p>
     </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
@@ -505,7 +596,11 @@
       <span class="symbol">
         <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@notify():Unit" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notifyAll():Unit"></a>
@@ -518,7 +613,11 @@
       <span class="symbol">
         <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@notifyAll():Unit" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="org.bone.soplurk.model.User#smallAvatar" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="smallAvatar:String"></a>
@@ -531,7 +630,11 @@
       <span class="symbol">
         <span class="name">smallAvatar</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@smallAvatar:String" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt"> User's small avatar URL.</p>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
@@ -544,7 +647,11 @@
       <span class="symbol">
         <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="org.bone.soplurk.model.User#timezone" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="timezone:Option[String]"></a>
@@ -557,7 +664,11 @@
       <span class="symbol">
         <span class="name">timezone</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@timezone:Option[String]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">The user's timezone, None if user has set it to
                              browser's default.</p>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -571,9 +682,16 @@
       <span class="symbol">
         <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@wait():Unit" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -587,9 +705,16 @@
       <span class="symbol">
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -603,9 +728,16 @@
       <span class="symbol">
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.User@wait(x$1:Long):Unit" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li></ol>

@@ -27,6 +27,8 @@ class PlurkAPI private (val plurkOAuth: PlurkOAuth,
 
   private var requestToken: Option[Token] = None
 
+  def getAccessToken: Option[Token] = plurkOAuth.accessToken
+
   /**
    *  Get authorization URL.
    *

@@ -116,11 +116,11 @@ Since SOPlurk used `scala.util.Try` which only exists after Scala 2.10.0, you mu
 ```scala
 // In build.sbt
 
-scalaVersion := "2.10.0"
+scalaVersion := "2.11.4"
 
-resolvers += "bone" at "http://bone.twbbs.org.tw/ivy"
+resolvers += "bone" at "http://brianhsu.moe/ivy"
 
-libraryDependencies += "org.bone" %% "soplurk" % "0.2"
+libraryDependencies += "org.bone" %% "soplurk" % "0.3.3"
 ```
 
 After done this, enter `reload` and `update` in your SBT console, it will fetch all libraries that need to using SOPlurk.
