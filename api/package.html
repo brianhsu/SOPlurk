@@ -115,11 +115,11 @@
   }
 }</pre><h4> Installation </h4><p>To using SOPlurk in your Scala project, please add the following defintion in your <a href="http://brianhsu.github.com/SOPlurk/api/index.html" target="_blank">SBT</a> <code>build.sbt </code> project.</p><p>Since SOPlurk used <code>scala.util.Try</code> which only exists after Scala 2.10.0, you must tell SBT to build your project using Scala 2.10.0 or above.</p><pre><span class="cmt">// In build.sbt</span>
 
-scalaVersion := <span class="lit">"2.10.0"</span>
+scalaVersion := <span class="lit">"2.11.4"</span>
 
 resolvers += <span class="lit">"bone"</span> at <span class="lit">"http://bone.twbbs.org.tw/ivy"</span>
 
-libraryDependencies += <span class="lit">"org.bone"</span> %% <span class="lit">"soplurk"</span> % <span class="lit">"0.2"</span></pre><p>After done this, enter <code>reload</code> and <code>update</code> in your SBT console, it will fetch all libraries that need to using SOPlurk.</p><pre>brianhsu@USBGentoo ~/Test $ sbt
+libraryDependencies += <span class="lit">"org.bone"</span> %% <span class="lit">"soplurk"</span> % <span class="lit">"0.3.3"</span></pre><p>After done this, enter <code>reload</code> and <code>update</code> in your SBT console, it will fetch all libraries that need to using SOPlurk.</p><pre>brianhsu@USBGentoo ~/Test $ sbt
 [info] <span class="std">Set</span> current project to default-<span class="num">9</span>dcd95 (in build file:/home/brianhsu/Test/)
 &gt; reload
 [info] <span class="std">Set</span> current project to default-<span class="num">9</span>dcd95 (in build file:/home/brianhsu/Test/)
