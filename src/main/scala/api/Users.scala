@@ -45,14 +45,16 @@ trait Users {
                email: Option[String] = None,
                displayName: Option[String] = None,
                privacy: Option[TimelinePrivacy] = None,
-               birthday: Option[Date] = None): Try[Boolean] = {
+               birthday: Option[Date] = None,
+               about: Option[String] = None): Try[Boolean] = {
 
       val params = Map(
         "full_name" -> fullName, 
         "email" -> email,
         "display_name" -> displayName,
         "privacy" -> privacy.map(_.word),
-        "date_of_birth" -> birthday.map(toBirthdayString)
+        "date_of_birth" -> birthday.map(toBirthdayString),
+        "about" -> about
       ).filter(isValueDefined).mapValues(_.get).toSeq
 
       val jsonData = plurkOAuth.sendRequest("/APP/Users/update", Verb.POST, params:_*)

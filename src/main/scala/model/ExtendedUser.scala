@@ -14,7 +14,8 @@ case class ExtendedUser(
   basicInfo: User, 
   relationship: Relationship,
   recruited: Int,
-  about: Option[String]
+  about: Option[String],
+  plurksCount: Option[Int]
 )
 
 object ExtendedUser {
@@ -28,7 +29,8 @@ object ExtendedUser {
     basicInfo = User(user),
     relationship = Relationship(user.get("relationship")),
     recruited = user.get("recruited"),
-    about = user.getOption("about")
+    about = user.getOption("about"),
+    plurksCount = user.getOption("plurks_count")
   )
 
 }
