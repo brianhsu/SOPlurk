@@ -29,5 +29,5 @@ libraryDependencies ++= Seq(
 )
 
 publishTo := Some(
-  Resolver.sftp("bone", "bone.twbbs.org.tw", "site/ROOT/ivy/")
+  Resolver.sftp("brianhsu", "brianhsu.moe", "site/ROOT/ivy/")
 )
