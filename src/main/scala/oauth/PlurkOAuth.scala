@@ -33,7 +33,7 @@ class PlurkOAuth(val service: OAuthService,
                  private[soplurk] var accessToken: Option[Token] = None)  {
 
   private val defaultToken = new Token("", "")
-  private val plurkAPIPrefix = "http://www.plurk.com"
+  private val plurkAPIPrefix = "https://www.plurk.com"
 
   /**
    *  Send request to Plurk OAuth API
