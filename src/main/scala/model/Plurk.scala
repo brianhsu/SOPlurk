@@ -23,6 +23,7 @@ import net.liftweb.json.JsonAST._
  *  @param  favoriteInfo            Information about favorers.
  *  @param  quakufuerTranslated     Only set if the language is not English, will be the translated qualifier. 
  *  @param  limitedTo               None if this plurk is public, Some(List(0)) if this plurk is limited to friends, List(userID1, userID2, ...) if limited to users have those userID.
+ *  @param  isAnonymous             Is this plurk a Anonymous plurk?
  *  @param  responsesSeen           How many of the responses have the user read.
  *  @param  contentRaw              The raw content as user entered it.
  */
@@ -39,7 +40,9 @@ case class Plurk(
   qualifierTranslated: Option[String],
   limitedTo: Option[List[Long]],
   responsesSeen: Option[Int],
-  contentRaw: Option[String]
+  contentRaw: Option[String],
+  isAnonymous: Option[Boolean],
+  myAnonymous: Option[Boolean]
 ) {
 
   /**
@@ -80,7 +83,9 @@ object Plurk {
     qualifierTranslated = plurk.getOption[String]("qualifier_translated"),
     limitedTo = plurk.getOption[List[Long]]("limited_to").filterNot(_.isEmpty),
     responsesSeen = plurk.getOption("responses_seen"),
-    contentRaw = plurk.getOption("content_raw")
+    contentRaw = plurk.getOption("content_raw"),
+    isAnonymous = plurk.getOption("anonymous"),
+    myAnonymous = plurk.getOption("my_anonymous")
   )
 
 }

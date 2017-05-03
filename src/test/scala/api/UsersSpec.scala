@@ -14,7 +14,7 @@ import scala.util.{Try, Success, Failure}
 import java.io.File
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import org.scalatest.PrivateMethodTester 
 
 object UserAPIMock extends PlurkOAuth(null) with MockOAuth {
@@ -77,7 +77,8 @@ object UserAPIMock extends PlurkOAuth(null) with MockOAuth {
 
   override def uploadFile(url: String, 
                          parameterName: String, 
-                         file: File): Try[JValue] = {
+                         file: File,
+                         callback: (Long, Long) => Any): Try[JValue] = {
     
     if (url == "/APP/Users/updatePicture" && parameterName == "profile_image") {
       Success(updatePictureJSON)
@@ -101,7 +102,7 @@ object UserAPIMock extends PlurkOAuth(null) with MockOAuth {
 
 }
 
-class UsersSpec extends FunSpec with ShouldMatchers {
+class UsersSpec extends FunSpec with Matchers {
 
   describe("A PlurkAPI with Users trait") {
 
@@ -111,18 +112,18 @@ class UsersSpec extends FunSpec with ShouldMatchers {
 
       val Success((userInfo, pageTitle, about)) = plurkAPI.Users.currUser
 
-      userInfo.basicInfo.id should be === 1367985L
-      userInfo.relationship should be === Relationship.Single
-      userInfo.recruited should be === 15
-      about should be === "UsersAbout"
-      pageTitle should be === "PageTitle"
+      userInfo.basicInfo.id shouldBe 1367985L
+      userInfo.relationship shouldBe Relationship.Single
+      userInfo.recruited shouldBe 15
+      about shouldBe "UsersAbout"
+      pageTitle shouldBe "PageTitle"
     }
 
     it ("call /APP/Users/update correctly") {
 
       val Success(isOK) = plurkAPI.Users.update(fullName = Some("NewFullName"))
 
-      isOK should be === true
+      isOK shouldBe true
     }
 
     it ("call /APP/Users/getKarmaStats correctly") {
@@ -135,13 +136,13 @@ class UsersSpec extends FunSpec with ShouldMatchers {
       )
 
       val Success(karmaStats) = plurkAPI.Users.getKarmaStats
-      karmaStats should be === correctStats
+      karmaStats shouldBe correctStats
 
     }
 
     it ("update profile image by /APP/Users/updatePicture correctly") {
       val updatedUser = plurkAPI.Users.updatePicture(new File("null.jpg")).get
-      updatedUser.avatarVersion should be === Some(2)
+      updatedUser.avatarVersion shouldBe Some(2)
     }
 
   }

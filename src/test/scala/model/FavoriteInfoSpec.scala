@@ -1,14 +1,14 @@
 package org.bone.soplurk.model
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 
 import net.liftweb.json._
 
 import org.bone.soplurk.exceptions._
 import org.bone.soplurk.model._
 
-class FavoriteInfoSpec extends FunSpec with ShouldMatchers {
+class FavoriteInfoSpec extends FunSpec with Matchers {
 
   import FavoriteInfoSpec._
 
@@ -21,7 +21,7 @@ class FavoriteInfoSpec extends FunSpec with ShouldMatchers {
         favorers = None
       )
 
-      FavoriteInfo(withoutFavorers) should be === correctInfo
+      FavoriteInfo(withoutFavorers) shouldBe correctInfo
     }
 
     it ("should able to parse plurks without favorers in minimal JSON") {
@@ -31,7 +31,7 @@ class FavoriteInfoSpec extends FunSpec with ShouldMatchers {
         favorers = None
       )
 
-      FavoriteInfo(withoutFavorersMinimal) should be === correctInfo
+      FavoriteInfo(withoutFavorersMinimal) shouldBe correctInfo
     }
 
     it ("should able to parse plurks with favorers") {
@@ -41,7 +41,7 @@ class FavoriteInfoSpec extends FunSpec with ShouldMatchers {
         favorers = Some(List(1367985L, 3371337L, 3496438L, 3588660L))
       )
 
-      FavoriteInfo(withFavorers) should be === correctInfo
+      FavoriteInfo(withFavorers) shouldBe correctInfo
     }
 
     it ("should able to parse plurks with favorers in minimal JSON") {
@@ -51,7 +51,7 @@ class FavoriteInfoSpec extends FunSpec with ShouldMatchers {
         favorers = None
       )
 
-      FavoriteInfo(withFavorersMinimal) should be === correctInfo
+      FavoriteInfo(withFavorersMinimal) shouldBe correctInfo
     }
 
   }

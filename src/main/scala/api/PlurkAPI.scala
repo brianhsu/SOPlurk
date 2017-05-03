@@ -27,6 +27,8 @@ class PlurkAPI private (val plurkOAuth: PlurkOAuth,
 
   private var requestToken: Option[Token] = None
 
+  def getAccessToken: Option[Token] = plurkOAuth.accessToken
+
   /**
    *  Get authorization URL.
    *
@@ -98,7 +100,7 @@ object PlurkAPI {
                    deviceID: Option[String] = None) = {
 
     val service = (new ServiceBuilder).
-                   provider(classOf[PlurkApi]).
+                   provider(classOf[PlurkApi2]).
                    apiKey(appKey).
                    apiSecret(appSecret).
                    callback(callbackURL).
@@ -127,7 +129,7 @@ object PlurkAPI {
   def withoutCallback(appKey: String, appSecret: String, deviceID: Option[String] = None) = {
 
     val service = (new ServiceBuilder).
-                   provider(classOf[PlurkApi]).
+                   provider(classOf[PlurkApi2]).
                    apiKey(appKey).
                    apiSecret(appSecret).
                    build()
@@ -150,7 +152,7 @@ object PlurkAPI {
 
     val token = new Token(tokenKey, tokenSecret)
     val service = (new ServiceBuilder).
-                   provider(classOf[PlurkApi]).
+                   provider(classOf[PlurkApi2]).
                    apiKey(appKey).
                    apiSecret(appSecret).
                    build()

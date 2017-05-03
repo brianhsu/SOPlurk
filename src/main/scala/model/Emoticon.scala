@@ -38,10 +38,17 @@ object CustomIcon {
 
   import MyJValueImplicits._
 
+  private def prependProtocol(rawURL: String) = {
+    rawURL match {
+      case url if url.startsWith("http") => url
+      case url => s"http:${url}"
+    }
+  }
+
   def apply(jsonData: JValue): CustomIcon = {
     CustomIcon(
       name = jsonData(0).values.toString,
-      url  = jsonData(1).values.toString
+      url  = prependProtocol(jsonData(1).values.toString)
     )
   }
 }

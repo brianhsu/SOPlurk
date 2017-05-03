@@ -1,10 +1,9 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
-          <title>model - SOPlurk 0.1 API document - org.bone.soplurk.model</title>
-          <meta name="description" content="model - SOPlurk 0.1 API document - org.bone.soplurk.model" />
-          <meta name="keywords" content="model SOPlurk 0.1 API document org.bone.soplurk.model" />
+          <title>model - SOPlurk 0.2 API document - org.bone.soplurk.model</title>
+          <meta name="description" content="model - SOPlurk 0.2 API document - org.bone.soplurk.model" />
+          <meta name="keywords" content="model SOPlurk 0.2 API document org.bone.soplurk.model" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -31,7 +30,11 @@
       <div id="definition">
         <img src="../../../../lib/package_big.png" />
         <p id="owner"><a href="../../../package.html" class="extype" name="org">org</a>.<a href="../../package.html" class="extype" name="org.bone">bone</a>.<a href="../package.html" class="extype" name="org.bone.soplurk">soplurk</a></p>
-        <h1>model</h1>
+        <h1>model</h1> <span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -63,7 +66,7 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="org.bone.soplurk.model.Alert" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="org.bone.soplurk.model.Alert" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="AlertextendsProductwithSerializable"></a>
       <a id="Alert:Alert"></a>
       <h4 class="signature">
@@ -74,9 +77,15 @@
       <span class="symbol">
         <a href="Alert.html"><span class="name">Alert</span></a><span class="params">(<span name="alertType">alertType: <a href="../constant/AlertType.html" class="extype" name="org.bone.soplurk.constant.AlertType">AlertType</a></span>, <span name="user">user: <a href="User.html" class="extype" name="org.bone.soplurk.model.User">User</a></span>, <span name="posted">posted: <span class="extype" name="java.util.Date">Date</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt"> Represented Alert in Plurk.</p>
-    </li><li name="org.bone.soplurk.model.Collection" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@AlertextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"> Represented Alert in Plurk.</p><div class="fullcomment"><div class="comment cmt"><p> Represented Alert in Plurk.
+</p></div><dl class="paramcmts block"><dt class="param">alertType</dt><dd class="cmt"><p>Type of this alert.</p></dd><dt class="param">user</dt><dd class="cmt"><p>The user information about this alert.</p></dd><dt class="param">posted</dt><dd class="cmt"><p>When did this alert occurred.
+</p></dd></dl></div>
+    </li><li name="org.bone.soplurk.model.Collection" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="CollectionextendsProductwithSerializable"></a>
       <a id="Collection:Collection"></a>
       <h4 class="signature">
@@ -87,9 +96,15 @@
       <span class="symbol">
         <a href="Collection.html"><span class="name">Collection</span></a><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="languages">languages: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="translatedName">translatedName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt"> Represented as a Topic in PlurkTop.</p>
-    </li><li name="org.bone.soplurk.model.Completion" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@CollectionextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"> Represented as a Topic in PlurkTop.</p><div class="fullcomment"><div class="comment cmt"><p> Represented as a Topic in PlurkTop.
+</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>The english name of this collection.</p></dd><dt class="param">translatedName</dt><dd class="cmt"><p>The name of this collection in local language.
+</p></dd></dl></div>
+    </li><li name="org.bone.soplurk.model.Completion" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="CompletionextendsProductwithSerializable"></a>
       <a id="Completion:Completion"></a>
       <h4 class="signature">
@@ -100,8 +115,14 @@
       <span class="symbol">
         <a href="Completion.html"><span class="name">Completion</span></a><span class="params">(<span name="nickname">nickname: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="fullName">fullName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="displayName">displayName: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt"> Represented as a user's friend completion entry.</p>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@CompletionextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"> Represented as a user's friend completion entry.</p><div class="fullcomment"><div class="comment cmt"><p> Represented as a user's friend completion entry.
+</p></div><dl class="paramcmts block"><dt class="param">nickname</dt><dd class="cmt"><p>The unique nickname of that user.</p></dd><dt class="param">fullName</dt><dd class="cmt"><p>Full name of that user.</p></dd><dt class="param">displayName</dt><dd class="cmt"><p>Display name of that user, if is iet.
+</p></dd></dl></div>
     </li><li name="org.bone.soplurk.model.CustomIcon" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="CustomIconextendsIconwithProductwithSerializable"></a>
       <a id="CustomIcon:CustomIcon"></a>
@@ -113,7 +134,11 @@
       <span class="symbol">
         <a href="CustomIcon.html"><span class="name">CustomIcon</span></a><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="url">url: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Icon.html" class="extype" name="org.bone.soplurk.model.Icon">Icon</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@CustomIconextendsIconwithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="org.bone.soplurk.model.Emoticon" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="EmoticonextendsIconwithProductwithSerializable"></a>
@@ -126,9 +151,13 @@
       <span class="symbol">
         <a href="Emoticon.html"><span class="name">Emoticon</span></a><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="url">url: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Icon.html" class="extype" name="org.bone.soplurk.model.Icon">Icon</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@EmoticonextendsIconwithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       
-    </li><li name="org.bone.soplurk.model.ExtendedUser" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="org.bone.soplurk.model.ExtendedUser" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ExtendedUserextendsProductwithSerializable"></a>
       <a id="ExtendedUser:ExtendedUser"></a>
       <h4 class="signature">
@@ -137,12 +166,18 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="ExtendedUser.html"><span class="name">ExtendedUser</span></a><span class="params">(<span name="basicInfo">basicInfo: <a href="User.html" class="extype" name="org.bone.soplurk.model.User">User</a></span>, <span name="relationship">relationship: <a href="../constant/Relationship.html" class="extype" name="org.bone.soplurk.constant.Relationship">Relationship</a></span>, <span name="recruited">recruited: <span class="extype" name="scala.Int">Int</span></span>, <span name="about">about: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="ExtendedUser.html"><span class="name">ExtendedUser</span></a><span class="params">(<span name="basicInfo">basicInfo: <a href="User.html" class="extype" name="org.bone.soplurk.model.User">User</a></span>, <span name="relationship">relationship: <a href="../constant/Relationship.html" class="extype" name="org.bone.soplurk.constant.Relationship">Relationship</a></span>, <span name="recruited">recruited: <span class="extype" name="scala.Int">Int</span></span>, <span name="about">about: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="plurksCount">plurksCount: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt"> Extended User Information
-</p>
-    </li><li name="org.bone.soplurk.model.FavoriteInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@ExtendedUserextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"> Extended User Information
+</p><div class="fullcomment"><div class="comment cmt"><p> Extended User Information
+</p></div><dl class="paramcmts block"><dt class="param">basicInfo</dt><dd class="cmt"><p>Basic information about this user.</p></dd><dt class="param">relationship</dt><dd class="cmt"><p>Relationship status of this user.</p></dd><dt class="param">recruited</dt><dd class="cmt"><p>How many friends has the user recruited.
+</p></dd></dl></div>
+    </li><li name="org.bone.soplurk.model.FavoriteInfo" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="FavoriteInfoextendsProductwithSerializable"></a>
       <a id="FavoriteInfo:FavoriteInfo"></a>
       <h4 class="signature">
@@ -153,11 +188,18 @@
       <span class="symbol">
         <a href="FavoriteInfo.html"><span class="name">FavoriteInfo</span></a><span class="params">(<span name="isFavorite">isFavorite: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="favoriteCount">favoriteCount: <span class="extype" name="scala.Int">Int</span></span>, <span name="favorers">favorers: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Long">Long</span>]]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt"> This class holds information about whether a Plurk is current user's favorite or
- is favorited by others.</p>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@FavoriteInfoextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"> This class holds information about whether a Plurk is current user's favorite or
+ is favorited by others.</p><div class="fullcomment"><div class="comment cmt"><p> This class holds information about whether a Plurk is current user's favorite or
+ is favorited by others.
+</p></div><dl class="paramcmts block"><dt class="param">isFavorite</dt><dd class="cmt"><p>True if current user has liked given plurk.</p></dd><dt class="param">favoriteCount</dt><dd class="cmt"><p>Number of users who liked given plurk.</p></dd><dt class="param">favorers</dt><dd class="cmt"><p>List of ids of users who liked given plurk (can be truncated).
+</p></dd></dl></div>
     </li><li name="org.bone.soplurk.model.Icon" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="IconextendsObject"></a>
+      <a id="IconextendsAnyRef"></a>
       <a id="Icon:Icon"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -167,9 +209,13 @@
       <span class="symbol">
         <a href="Icon.html"><span class="name">Icon</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@IconextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       
-    </li><li name="org.bone.soplurk.model.KarmaStats" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="org.bone.soplurk.model.KarmaStats" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="KarmaStatsextendsProductwithSerializable"></a>
       <a id="KarmaStats:KarmaStats"></a>
       <h4 class="signature">
@@ -180,9 +226,19 @@
       <span class="symbol">
         <a href="KarmaStats.html"><span class="name">KarmaStats</span></a><span class="params">(<span name="current">current: <span class="extype" name="scala.Double">Double</span></span>, <span name="fallReason">fallReason: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="graphURL">graphURL: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="trend">trend: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt"> Represented Plurk Karam status</p>
-    </li><li name="org.bone.soplurk.model.Plurk" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@KarmaStatsextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"> Represented Plurk Karam status</p><div class="fullcomment"><div class="comment cmt"><p> Represented Plurk Karam status</p><p> trends is a List conatins String which is in following format:</p><p>   [unixtimestamp]-[karma_value]</p><p> For example:</p><pre><span class="std">List</span>(
+  <span class="lit">"1360080759-120.75"</span>,
+  <span class="lit">"1360109431-120.76"</span>,
+  <span class="lit">"1360138145-120.77"</span>,
+  <span class="lit">"1360167177-120.78"</span>
+)</pre></div><dl class="paramcmts block"><dt class="param">current</dt><dd class="cmt"><p>User's current karama value.</p></dd><dt class="param">fallReason</dt><dd class="cmt"><p>The falling reason about karma.</p></dd><dt class="param">graphURL</dt><dd class="cmt"><p>The url of karma trend graph.</p></dd><dt class="param">trend</dt><dd class="cmt"><p>Trends about karma change.
+</p></dd></dl></div>
+    </li><li name="org.bone.soplurk.model.Plurk" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="PlurkextendsProductwithSerializable"></a>
       <a id="Plurk:Plurk"></a>
       <h4 class="signature">
@@ -191,12 +247,18 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="Plurk.html"><span class="name">Plurk</span></a><span class="params">(<span name="plurkID">plurkID: <span class="extype" name="scala.Long">Long</span></span>, <span name="ownerID">ownerID: <span class="extype" name="scala.Long">Long</span></span>, <span name="userID">userID: <span class="extype" name="scala.Long">Long</span></span>, <span name="qualifier">qualifier: <a href="../constant/Qualifier.html" class="extype" name="org.bone.soplurk.constant.Qualifier">Qualifier</a></span>, <span name="content">content: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="plurkType">plurkType: <a href="../constant/PlurkType.html" class="extype" name="org.bone.soplurk.constant.PlurkType">PlurkType</a></span>, <span name="readStatus">readStatus: <span class="extype" name="scala.Option">Option</span>[<a href="../constant/ReadStatus.html" class="extype" name="org.bone.soplurk.constant.ReadStatus">ReadStatus</a>]</span>, <span name="whoIsCommentable">whoIsCommentable: <a href="../constant/CommentSetting.html" class="extype" name="org.bone.soplurk.constant.CommentSetting">CommentSetting</a></span>, <span name="posted">posted: <span class="extype" name="java.util.Date">Date</span></span>, <span name="language">language: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="responseCount">responseCount: <span class="extype" name="scala.Int">Int</span></span>, <span name="replurkInfo">replurkInfo: <a href="ReplurkInfo.html" class="extype" name="org.bone.soplurk.model.ReplurkInfo">ReplurkInfo</a></span>, <span name="favoriteInfo">favoriteInfo: <a href="FavoriteInfo.html" class="extype" name="org.bone.soplurk.model.FavoriteInfo">FavoriteInfo</a></span>, <span name="qualifierTranslated">qualifierTranslated: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="limitedTo">limitedTo: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Long">Long</span>]]</span>, <span name="responsesSeen">responsesSeen: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="contentRaw">contentRaw: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="Plurk.html"><span class="name">Plurk</span></a><span class="params">(<span name="plurkID">plurkID: <span class="extype" name="scala.Long">Long</span></span>, <span name="ownerID">ownerID: <span class="extype" name="scala.Long">Long</span></span>, <span name="userID">userID: <span class="extype" name="scala.Long">Long</span></span>, <span name="qualifier">qualifier: <a href="../constant/Qualifier.html" class="extype" name="org.bone.soplurk.constant.Qualifier">Qualifier</a></span>, <span name="content">content: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="plurkType">plurkType: <a href="../constant/PlurkType.html" class="extype" name="org.bone.soplurk.constant.PlurkType">PlurkType</a></span>, <span name="readStatus">readStatus: <span class="extype" name="scala.Option">Option</span>[<a href="../constant/ReadStatus.html" class="extype" name="org.bone.soplurk.constant.ReadStatus">ReadStatus</a>]</span>, <span name="whoIsCommentable">whoIsCommentable: <a href="../constant/CommentSetting.html" class="extype" name="org.bone.soplurk.constant.CommentSetting">CommentSetting</a></span>, <span name="posted">posted: <span class="extype" name="java.util.Date">Date</span></span>, <span name="language">language: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="responseCount">responseCount: <span class="extype" name="scala.Int">Int</span></span>, <span name="replurkInfo">replurkInfo: <a href="ReplurkInfo.html" class="extype" name="org.bone.soplurk.model.ReplurkInfo">ReplurkInfo</a></span>, <span name="favoriteInfo">favoriteInfo: <a href="FavoriteInfo.html" class="extype" name="org.bone.soplurk.model.FavoriteInfo">FavoriteInfo</a></span>, <span name="qualifierTranslated">qualifierTranslated: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="limitedTo">limitedTo: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Long">Long</span>]]</span>, <span name="responsesSeen">responsesSeen: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="contentRaw">contentRaw: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="isAnonymous">isAnonymous: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>, <span name="myAnonymous">myAnonymous: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt"> Minmial info about a Plurk post
-</p>
-    </li><li name="org.bone.soplurk.model.RealtimeResponse" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@PlurkextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"> Minmial info about a Plurk post
+</p><div class="fullcomment"><div class="comment cmt"><p> Minmial info about a Plurk post
+</p></div><dl class="paramcmts block"><dt class="param">plurkID</dt><dd class="cmt"><p>Plurk ID</p></dd><dt class="param">ownerID</dt><dd class="cmt"><p>Who posted this plurk?</p></dd><dt class="param">userID</dt><dd class="cmt"><p>In which users timeline?</p></dd><dt class="param">qualifier</dt><dd class="cmt"><p>Qualifier of this plurk.</p></dd><dt class="param">content</dt><dd class="cmt"><p>Contents of this plurk.</p></dd><dt class="param">plurkType</dt><dd class="cmt"><p>Type of this plurk.</p></dd><dt class="param">readStatus</dt><dd class="cmt"><p>Is this plurk read, unread or muted.</p></dd><dt class="param">whoIsCommentable</dt><dd class="cmt"><p>Comment policy setting</p></dd><dt class="param">posted</dt><dd class="cmt"><p>The date this plurk was posted.</p></dd><dt class="param">language</dt><dd class="cmt"><p>The plurk's language</p></dd><dt class="param">responseCount</dt><dd class="cmt"><p>How many comments this plurk has.</p></dd><dt class="param">replurkInfo</dt><dd class="cmt"><p>Information about replurk status.</p></dd><dt class="param">favoriteInfo</dt><dd class="cmt"><p>Information about favorers.</p></dd><dt class="param">limitedTo</dt><dd class="cmt"><p>None if this plurk is public, Some(List(0)) if this plurk is limited to friends, List(userID1, userID2, ...) if limited to users have those userID.</p></dd><dt class="param">responsesSeen</dt><dd class="cmt"><p>How many of the responses have the user read.</p></dd><dt class="param">contentRaw</dt><dd class="cmt"><p>The raw content as user entered it.
+</p></dd><dt class="param">isAnonymous</dt><dd class="cmt"><p>Is this plurk a Anonymous plurk?</p></dd></dl></div>
+    </li><li name="org.bone.soplurk.model.RealtimeResponse" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="RealtimeResponseextendsProductwithSerializable"></a>
       <a id="RealtimeResponse:RealtimeResponse"></a>
       <h4 class="signature">
@@ -207,9 +269,15 @@
       <span class="symbol">
         <a href="RealtimeResponse.html"><span class="name">RealtimeResponse</span></a><span class="params">(<span name="user">user: <a href="User.html" class="extype" name="org.bone.soplurk.model.User">User</a></span>, <span name="plurk">plurk: <a href="Plurk.html" class="extype" name="org.bone.soplurk.model.Plurk">Plurk</a></span>, <span name="response">response: <a href="Response.html" class="extype" name="org.bone.soplurk.model.Response">Response</a></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt"> Response from Realtime API.</p>
-    </li><li name="org.bone.soplurk.model.ReplurkInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@RealtimeResponseextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"> Response from Realtime API.</p><div class="fullcomment"><div class="comment cmt"><p> Response from Realtime API.
+</p></div><dl class="paramcmts block"><dt class="param">user</dt><dd class="cmt"><p>Who posted a new response?</p></dd><dt class="param">plurk</dt><dd class="cmt"><p>Which plurk does this response belongs to?</p></dd><dt class="param">response</dt><dd class="cmt"><p>Content of this response.
+</p></dd></dl></div>
+    </li><li name="org.bone.soplurk.model.ReplurkInfo" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ReplurkInfoextendsProductwithSerializable"></a>
       <a id="ReplurkInfo:ReplurkInfo"></a>
       <h4 class="signature">
@@ -220,10 +288,17 @@
       <span class="symbol">
         <a href="ReplurkInfo.html"><span class="name">ReplurkInfo</span></a><span class="params">(<span name="isReplurkable">isReplurkable: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="isReplurked">isReplurked: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="replurkersCount">replurkersCount: <span class="extype" name="scala.Int">Int</span></span>, <span name="replurkerID">replurkerID: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Long">Long</span>]</span>, <span name="replurkers">replurkers: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Long">Long</span>]]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt"> This class holds information about whether a plurk is replurkable or has been
- replurked.</p>
-    </li><li name="org.bone.soplurk.model.Response" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@ReplurkInfoextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"> This class holds information about whether a plurk is replurkable or has been
+ replurked.</p><div class="fullcomment"><div class="comment cmt"><p> This class holds information about whether a plurk is replurkable or has been
+ replurked.
+</p></div><dl class="paramcmts block"><dt class="param">isReplurkable</dt><dd class="cmt"><p>Is this plruk replurkable?</p></dd><dt class="param">isReplurked</dt><dd class="cmt"><p>Did current user replurked this plruk?</p></dd><dt class="param">replurkersCount</dt><dd class="cmt"><p>How many users replurked this plurk?</p></dd><dt class="param">replurkerID</dt><dd class="cmt"><p>ID of a user who has replurked given plurk to current user's timeline.</p></dd><dt class="param">replurkers</dt><dd class="cmt"><p>List of ids of users who replurked given plurk (can be truncated).
+</p></dd></dl></div>
+    </li><li name="org.bone.soplurk.model.Response" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ResponseextendsProductwithSerializable"></a>
       <a id="Response:Response"></a>
       <h4 class="signature">
@@ -232,11 +307,17 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="Response.html"><span class="name">Response</span></a><span class="params">(<span name="userID">userID: <span class="extype" name="scala.Long">Long</span></span>, <span name="plurkID">plurkID: <span class="extype" name="scala.Long">Long</span></span>, <span name="id">id: <span class="extype" name="scala.Long">Long</span></span>, <span name="content">content: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="contentRaw">contentRaw: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="qualifier">qualifier: <a href="../constant/Qualifier.html" class="extype" name="org.bone.soplurk.constant.Qualifier">Qualifier</a></span>, <span name="posted">posted: <span class="extype" name="java.util.Date">Date</span></span>, <span name="language">language: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="Response.html"><span class="name">Response</span></a><span class="params">(<span name="userID">userID: <span class="extype" name="scala.Long">Long</span></span>, <span name="plurkID">plurkID: <span class="extype" name="scala.Long">Long</span></span>, <span name="id">id: <span class="extype" name="scala.Long">Long</span></span>, <span name="content">content: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="contentRaw">contentRaw: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="qualifier">qualifier: <a href="../constant/Qualifier.html" class="extype" name="org.bone.soplurk.constant.Qualifier">Qualifier</a></span>, <span name="posted">posted: <span class="extype" name="java.util.Date">Date</span></span>, <span name="language">language: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="handle">handle: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="myAnonymous">myAnonymous: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt"> Represented Response of a Plurk.</p>
-    </li><li name="org.bone.soplurk.model.TopPlurk" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@ResponseextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"> Represented Response of a Plurk.</p><div class="fullcomment"><div class="comment cmt"><p> Represented Response of a Plurk.
+</p></div><dl class="paramcmts block"><dt class="param">userID</dt><dd class="cmt"><p>The response author's user id.</p></dd><dt class="param">plurkID</dt><dd class="cmt"><p>Which plurk does this response belong?</p></dd><dt class="param">id</dt><dd class="cmt"><p>The unique ID of this response.</p></dd><dt class="param">content</dt><dd class="cmt"><p>Content of this response.</p></dd><dt class="param">contentRaw</dt><dd class="cmt"><p>The raw content of this response, without any URL replacing...etc.</p></dd><dt class="param">qualifier</dt><dd class="cmt"><p>Qualifier of this response.</p></dd><dt class="param">posted</dt><dd class="cmt"><p>When did this response poeted?</p></dd><dt class="param">language</dt><dd class="cmt"><p>Language code of this response.
+</p></dd></dl></div>
+    </li><li name="org.bone.soplurk.model.TopPlurk" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="TopPlurkextendsProductwithSerializable"></a>
       <a id="TopPlurk:TopPlurk"></a>
       <h4 class="signature">
@@ -247,10 +328,16 @@
       <span class="symbol">
         <a href="TopPlurk.html"><span class="name">TopPlurk</span></a><span class="params">(<span name="plurk">plurk: <a href="Plurk.html" class="extype" name="org.bone.soplurk.model.Plurk">Plurk</a></span>, <span name="voteUp">voteUp: <span class="extype" name="scala.Int">Int</span></span>, <span name="voteDown">voteDown: <span class="extype" name="scala.Int">Int</span></span>, <span name="score">score: <span class="extype" name="scala.Double">Double</span></span>, <span name="topicID">topicID: <span class="extype" name="scala.Int">Int</span></span>, <span name="posterUID">posterUID: <span class="extype" name="scala.Int">Int</span></span>, <span name="posted">posted: <span class="extype" name="java.util.Date">Date</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt"> Represented Plurk entry returned by PlurkTop
-</p>
-    </li><li name="org.bone.soplurk.model.Topic" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@TopPlurkextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"> Represented Plurk entry returned by PlurkTop
+</p><div class="fullcomment"><div class="comment cmt"><p> Represented Plurk entry returned by PlurkTop
+</p></div><dl class="paramcmts block"><dt class="param">plurk</dt><dd class="cmt"><p>The content of this plurk.</p></dd><dt class="param">voteUp</dt><dd class="cmt"><p>How many user voted up this plurk.</p></dd><dt class="param">voteDown</dt><dd class="cmt"><p>How many user voted down this plurk.</p></dd><dt class="param">score</dt><dd class="cmt"><p>Score of this plurk.</p></dd><dt class="param">topicID</dt><dd class="cmt"><p>Which topic does this plurk belong to?</p></dd><dt class="param">posterUID</dt><dd class="cmt"><p>How posted it to PlurkTop?</p></dd><dt class="param">posted</dt><dd class="cmt"><p>When did this plurk posted to PlurkTop.
+</p></dd></dl></div>
+    </li><li name="org.bone.soplurk.model.Topic" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="TopicextendsProductwithSerializable"></a>
       <a id="Topic:Topic"></a>
       <h4 class="signature">
@@ -261,9 +348,15 @@
       <span class="symbol">
         <a href="Topic.html"><span class="name">Topic</span></a><span class="params">(<span name="id">id: <span class="extype" name="scala.Int">Int</span></span>, <span name="translatedName">translatedName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt"> Represented as a Topic in PlurkTop.</p>
-    </li><li name="org.bone.soplurk.model.User" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@TopicextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"> Represented as a Topic in PlurkTop.</p><div class="fullcomment"><div class="comment cmt"><p> Represented as a Topic in PlurkTop.
+</p></div><dl class="paramcmts block"><dt class="param">id</dt><dd class="cmt"><p>The unique id of this topic.</p></dd><dt class="param">translatedName</dt><dd class="cmt"><p>The name of this topic in local language.</p></dd><dt class="param">name</dt><dd class="cmt"><p>The english name of this topic.
+</p></dd></dl></div>
+    </li><li name="org.bone.soplurk.model.User" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="UserextendsProductwithSerializable"></a>
       <a id="User:User"></a>
       <h4 class="signature">
@@ -272,10 +365,22 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="User.html"><span class="name">User</span></a><span class="params">(<span name="id">id: <span class="extype" name="scala.Long">Long</span></span>, <span name="nickname">nickname: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="fullName">fullName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="displayName">displayName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="isVerifiedAccount">isVerifiedAccount: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="gender">gender: <a href="../constant/Gender.html" class="extype" name="org.bone.soplurk.constant.Gender">Gender</a></span>, <span name="karma">karma: <span class="extype" name="scala.Double">Double</span></span>, <span name="hasProfileImage">hasProfileImage: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="birthdayPrivacy">birthdayPrivacy: <span class="extype" name="scala.Option">Option</span>[<a href="../constant/BirthdayPrivacy.html" class="extype" name="org.bone.soplurk.constant.BirthdayPrivacy">BirthdayPrivacy</a>]</span>, <span name="defaultLanguage">defaultLanguage: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="avatarVersion">avatarVersion: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="location">location: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="birthday">birthday: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="java.util.Date">Date</span>]</span>, <span name="timezone">timezone: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="nameColor">nameColor: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="User.html"><span class="name">User</span></a><span class="params">(<span name="id">id: <span class="extype" name="scala.Long">Long</span></span>, <span name="nickname">nickname: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="fullName">fullName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="displayName">displayName: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="isVerifiedAccount">isVerifiedAccount: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="gender">gender: <a href="../constant/Gender.html" class="extype" name="org.bone.soplurk.constant.Gender">Gender</a></span>, <span name="karma">karma: <span class="extype" name="scala.Double">Double</span></span>, <span name="hasProfileImage">hasProfileImage: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="birthdayPrivacy">birthdayPrivacy: <span class="extype" name="scala.Option">Option</span>[<a href="../constant/BirthdayPrivacy.html" class="extype" name="org.bone.soplurk.constant.BirthdayPrivacy">BirthdayPrivacy</a>]</span>, <span name="defaultLanguage">defaultLanguage: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="avatarVersion">avatarVersion: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="location">location: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="birthday">birthday: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="java.util.Date">Date</span>]</span>, <span name="timezone">timezone: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="nameColor">nameColor: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt"> Represnted a user's basic information.</p>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@UserextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"> Represnted a user's basic information.</p><div class="fullcomment"><div class="comment cmt"><p> Represnted a user's basic information.
+</p></div><dl class="paramcmts block"><dt class="param">id</dt><dd class="cmt"><p>The unique user id.</p></dd><dt class="param">nickname</dt><dd class="cmt"><p>The unique nick_name of the user.</p></dd><dt class="param">displayName</dt><dd class="cmt"><p>The non-unique display name of the user.</p></dd><dt class="param">isVerifiedAccount</dt><dd class="cmt"><p>Is this user a
+                             <a href="http://www.plurk.com/Verify/" target="_blank">Plurk verified account</a>?
+</p></dd><dt class="param">gender</dt><dd class="cmt"><p>The user's gender</p></dd><dt class="param">karma</dt><dd class="cmt"><p>User's karma value</p></dd><dt class="param">hasProfileImage</dt><dd class="cmt"><p>Does this user have profile image?</p></dd><dt class="param">birthdayPrivacy</dt><dd class="cmt"><p>User's birthday privacy setting.</p></dd><dt class="param">defaultLanguage</dt><dd class="cmt"><p>User's default language.</p></dd><dt class="param">avatarVersion</dt><dd class="cmt"><p>The user's avatar version.</p></dd><dt class="param">location</dt><dd class="cmt"><p>The user's location.</p></dd><dt class="param">birthday</dt><dd class="cmt"><p>The user's birthday, if birthday privact is set to
+                             HideYear, year will be 1904.
+</p></dd><dt class="param">timezone</dt><dd class="cmt"><p>The user's timezone, None if user has set it to
+                             browser's default.
+</p></dd><dt class="param">nameColor</dt><dd class="cmt"><p>The user's name color in HTML hex color value.
+</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -294,7 +399,11 @@
       <span class="symbol">
         <a href="Alert$.html"><span class="name">Alert</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@Alert" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="org.bone.soplurk.model.Collection" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Collection"></a>
@@ -307,7 +416,11 @@
       <span class="symbol">
         <a href="Collection$.html"><span class="name">Collection</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@Collection" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="org.bone.soplurk.model.Completion" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Completion"></a>
@@ -320,7 +433,11 @@
       <span class="symbol">
         <a href="Completion$.html"><span class="name">Completion</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@Completion" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="org.bone.soplurk.model.CustomIcon" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="CustomIcon"></a>
@@ -333,7 +450,11 @@
       <span class="symbol">
         <a href="CustomIcon$.html"><span class="name">CustomIcon</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@CustomIcon" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="org.bone.soplurk.model.Emoticon" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Emoticon"></a>
@@ -346,7 +467,11 @@
       <span class="symbol">
         <a href="Emoticon$.html"><span class="name">Emoticon</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@Emoticon" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="org.bone.soplurk.model.ExtendedUser" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ExtendedUser"></a>
@@ -359,7 +484,11 @@
       <span class="symbol">
         <a href="ExtendedUser$.html"><span class="name">ExtendedUser</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@ExtendedUser" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="org.bone.soplurk.model.FavoriteInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="FavoriteInfo"></a>
@@ -372,7 +501,11 @@
       <span class="symbol">
         <a href="FavoriteInfo$.html"><span class="name">FavoriteInfo</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@FavoriteInfo" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="org.bone.soplurk.model.KarmaStats" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="KarmaStats"></a>
@@ -385,7 +518,11 @@
       <span class="symbol">
         <a href="KarmaStats$.html"><span class="name">KarmaStats</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@KarmaStats" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="org.bone.soplurk.model.MyJValueImplicits" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="MyJValueImplicits"></a>
@@ -398,7 +535,11 @@
       <span class="symbol">
         <a href="MyJValueImplicits$.html"><span class="name">MyJValueImplicits</span></a>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@MyJValueImplicits" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="org.bone.soplurk.model.Plurk" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Plurk"></a>
@@ -411,7 +552,11 @@
       <span class="symbol">
         <a href="Plurk$.html"><span class="name">Plurk</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@Plurk" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="org.bone.soplurk.model.RealtimeResponse" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="RealtimeResponse"></a>
@@ -424,7 +569,11 @@
       <span class="symbol">
         <a href="RealtimeResponse$.html"><span class="name">RealtimeResponse</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@RealtimeResponse" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="org.bone.soplurk.model.ReplurkInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ReplurkInfo"></a>
@@ -437,7 +586,11 @@
       <span class="symbol">
         <a href="ReplurkInfo$.html"><span class="name">ReplurkInfo</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@ReplurkInfo" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="org.bone.soplurk.model.Response" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Response"></a>
@@ -450,7 +603,11 @@
       <span class="symbol">
         <a href="Response$.html"><span class="name">Response</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@Response" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="org.bone.soplurk.model.TopPlurk" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="TopPlurk"></a>
@@ -463,7 +620,11 @@
       <span class="symbol">
         <a href="TopPlurk$.html"><span class="name">TopPlurk</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@TopPlurk" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="org.bone.soplurk.model.Topic" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Topic"></a>
@@ -476,7 +637,11 @@
       <span class="symbol">
         <a href="Topic$.html"><span class="name">Topic</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@Topic" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li><li name="org.bone.soplurk.model.User" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="User"></a>
@@ -489,7 +654,11 @@
       <span class="symbol">
         <a href="User$.html"><span class="name">User</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.model.package@User" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li></ol>
             </div>

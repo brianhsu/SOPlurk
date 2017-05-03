@@ -7,7 +7,7 @@ import org.bone.soplurk.constant._
 import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import org.scalatest.PrivateMethodTester 
 
 import org.scribe.model.Verb
@@ -307,7 +307,7 @@ object ProfileAPIMock extends PlurkOAuth(null) with MockOAuth {
 
 }
 
-class ProfileSpec extends FunSpec with ShouldMatchers {
+class ProfileSpec extends FunSpec with Matchers {
 
   describe("A PlurkAPI with Profile trait") {
 
@@ -316,47 +316,47 @@ class ProfileSpec extends FunSpec with ShouldMatchers {
     it ("call getOwnProfile correctly") {
       val profile = plurkAPI.Profile.getOwnProfile.get
 
-      profile.fansCount should be === 280
-      profile.friendsCount should be === 46
-      profile.unreadCount should be === 3
-      profile.alertsCount should be === 0
-      profile.privacy should be === TimelinePrivacy.World
-      profile.userInfo.basicInfo.id should be === 1367985
+      profile.fansCount shouldBe 280
+      profile.friendsCount shouldBe 46
+      profile.unreadCount shouldBe 3
+      profile.alertsCount shouldBe 0
+      profile.privacy shouldBe TimelinePrivacy.World
+      profile.userInfo.basicInfo.id shouldBe 1367985
 
       val Timeline(users, plurks) = profile.timeline
-      users.size should be === 2
-      plurks.size should be === 3
+      users.size shouldBe 2
+      plurks.size shouldBe 3
     }
 
     it ("call getPublicProfile to a public timeline") {
       val profile = plurkAPI.Profile.getPublicProfile("public").get
       
-      profile.userInfo.basicInfo.id should be === 4426947
-      profile.userInfo.basicInfo.defaultLanguage should be === "ja"
-      profile.userInfo.relationship should be === Relationship.NotSaying
-      profile.fansCount should be === 191
-      profile.friendsCount should be === 190
-      profile.privacy should be === TimelinePrivacy.World
-      profile.hasReadPermission should be === true
-      profile.isFan should be === Some(true)
-      profile.isFollowing should be === Some(true)
-      profile.areFriends should be === Some(false)
-      profile.plurks.size should be === 2
+      profile.userInfo.basicInfo.id shouldBe 4426947
+      profile.userInfo.basicInfo.defaultLanguage shouldBe "ja"
+      profile.userInfo.relationship shouldBe Relationship.NotSaying
+      profile.fansCount shouldBe 191
+      profile.friendsCount shouldBe 190
+      profile.privacy shouldBe TimelinePrivacy.World
+      profile.hasReadPermission shouldBe true
+      profile.isFan shouldBe Some(true)
+      profile.isFollowing shouldBe Some(true)
+      profile.areFriends shouldBe Some(false)
+      profile.plurks.size shouldBe 2
     }
 
     it ("call getPublicProfile to a private timeline") {
 
       val profile = plurkAPI.Profile.getPublicProfile("private").get
       
-      profile.userInfo.basicInfo.id should be === 3290730
-      profile.fansCount should be === 1
-      profile.friendsCount should be === 200
-      profile.privacy should be === TimelinePrivacy.OnlyFriends
-      profile.hasReadPermission should be === false
-      profile.isFan should be === Some(false)
-      profile.isFollowing should be === Some(false)
-      profile.areFriends should be === Some(false)
-      profile.plurks should be === Nil
+      profile.userInfo.basicInfo.id shouldBe 3290730
+      profile.fansCount shouldBe 1
+      profile.friendsCount shouldBe 200
+      profile.privacy shouldBe TimelinePrivacy.OnlyFriends
+      profile.hasReadPermission shouldBe false
+      profile.isFan shouldBe Some(false)
+      profile.isFollowing shouldBe Some(false)
+      profile.areFriends shouldBe Some(false)
+      profile.plurks shouldBe Nil
     }
 
   }

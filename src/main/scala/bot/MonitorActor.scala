@@ -23,11 +23,11 @@ import scala.concurrent.ExecutionContext.Implicits.global
 private class MonitorActor(plurkAPI: PlurkAPI, bot: ActorRef) extends Actor {
   
   private def getAlerts: Future[List[Alert]] = { 
-    future(plurkAPI.Alerts.getActive getOrElse Nil)
+    Future(plurkAPI.Alerts.getActive getOrElse Nil)
   }
 
   private def getEvents(channel: UserChannel): Future[Try[RealtimeEvent]] = {
-    future(plurkAPI.Realtime.getEvents(channel))
+    Future(plurkAPI.Realtime.getEvents(channel))
   }
 
   /**

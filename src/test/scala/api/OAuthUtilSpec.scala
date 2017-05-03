@@ -6,7 +6,7 @@ import org.bone.soplurk.oauth.MockOAuth
 import org.bone.soplurk.model._
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import org.scalatest.PrivateMethodTester 
 
 import org.scribe.model.Verb
@@ -64,7 +64,7 @@ object OAuthUtilAPIMock extends PlurkOAuth(null) with MockOAuth {
 
 }
 
-class OAuthUtilSpec extends FunSpec with ShouldMatchers {
+class OAuthUtilSpec extends FunSpec with Matchers {
 
   describe("A PlurkAPI with OAuthUtil trait") {
 
@@ -73,26 +73,26 @@ class OAuthUtilSpec extends FunSpec with ShouldMatchers {
     it ("get token info by /APP/checkToken correctly") {
       val tokenInfo = plurkAPI.OAuthUtils.checkToken.get
       val correctToken = TokenInfo(8475L, 1367985L, new Date(1361509883000L), "")
-      tokenInfo should be === correctToken
+      tokenInfo shouldBe correctToken
     }
 
     it ("expire token by /APP/checkToken correctly") {
       val tokenInfo = plurkAPI.OAuthUtils.expireToken.get
       val correctToken = TokenInfo(8476L, 1367986L, new Date(1361509883000L), "iphone")
 
-      tokenInfo should be === correctToken
+      tokenInfo shouldBe correctToken
     }
 
     it ("get current time of Plurk servers by /APP/checkTime correctly") {
       val timeInfo = plurkAPI.OAuthUtils.checkTime.get
       val correctTime = TimeInfo(8477L, None, 1361511154L, new Date(1361511154000L))
 
-      timeInfo should be === correctTime
+      timeInfo shouldBe correctTime
     }
 
     it ("get echo of OAuth request by /APP/echo correctly") {
       val echo = plurkAPI.OAuthUtils.echo("testDATA").get
-      echo should be === (8, "testDATA")
+      echo shouldBe (8, "testDATA")
     }
 
   }

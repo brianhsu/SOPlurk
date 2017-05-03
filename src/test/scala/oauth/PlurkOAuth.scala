@@ -3,7 +3,7 @@ package org.bone.soplurk.oauth
 import org.bone.soplurk.exceptions.RequestException
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import org.scalatest.PrivateMethodTester 
 
 import org.scribe.model.OAuthRequest
@@ -14,7 +14,7 @@ import scala.util.{Try, Success, Failure}
 import net.liftweb.json.JsonAST._
 import net.liftweb.json.JsonDSL._
 
-class PlurkOAuthSpec extends FunSpec with ShouldMatchers with PrivateMethodTester {
+class PlurkOAuthSpec extends FunSpec with Matchers with PrivateMethodTester {
 
   describe("A PlurkOAuth") {
 
@@ -32,15 +32,15 @@ class PlurkOAuthSpec extends FunSpec with ShouldMatchers with PrivateMethodTeste
         )
       )
 
-      request.getUrl should be === "http://localhost/get"
-      request.getVerb should be === Verb.GET
-      request.getBodyParams.size should be === 0
+      request.getUrl shouldBe "http://localhost/get"
+      request.getVerb shouldBe Verb.GET
+      request.getBodyParams.size shouldBe 0
 
       val buildParams = request.getQueryStringParams
-      buildParams.size should be === 3
-      buildParams.contains(new Parameter("option1", "HelloWorld")) should be === true
-      buildParams.contains(new Parameter("option2", "Foo")) should be === true
-      buildParams.contains(new Parameter("option3", "Bar")) should be === true
+      buildParams.size shouldBe 3
+      buildParams.contains(new Parameter("option1", "HelloWorld")) shouldBe true
+      buildParams.contains(new Parameter("option2", "Foo")) shouldBe true
+      buildParams.contains(new Parameter("option3", "Bar")) shouldBe true
     }
 
     it ("should build POST request with param correct") {
@@ -58,16 +58,16 @@ class PlurkOAuthSpec extends FunSpec with ShouldMatchers with PrivateMethodTeste
         )
       )
       
-      request.getUrl should be === "http://localhost/post"
-      request.getVerb should be === Verb.POST
-      request.getQueryStringParams.size should be === 0
+      request.getUrl shouldBe "http://localhost/post"
+      request.getVerb shouldBe Verb.POST
+      request.getQueryStringParams.size shouldBe 0
 
       val buildParams = request.getBodyParams
-      buildParams.size should be === 4
-      buildParams.contains(new Parameter("option1", "HelloWorld")) should be === true
-      buildParams.contains(new Parameter("option2", "Foo")) should be === true
-      buildParams.contains(new Parameter("option3", "Bar")) should be === true
-      buildParams.contains(new Parameter("option4", "FooBar")) should be === true
+      buildParams.size shouldBe 4
+      buildParams.contains(new Parameter("option1", "HelloWorld")) shouldBe true
+      buildParams.contains(new Parameter("option2", "Foo")) shouldBe true
+      buildParams.contains(new Parameter("option3", "Bar")) shouldBe true
+      buildParams.contains(new Parameter("option4", "FooBar")) shouldBe true
     }
 
     it ("should parse HTTP 200 with response to Success[JValue] object") {
@@ -83,8 +83,8 @@ class PlurkOAuthSpec extends FunSpec with ShouldMatchers with PrivateMethodTeste
       val parseResponse = PrivateMethod[Try[JValue]]('parseResponse)
       val responseJSON = plurkOAuth invokePrivate parseResponse(200, mockJSON)
 
-      responseJSON.isSuccess should be === true
-      responseJSON.get should be === (
+      responseJSON.isSuccess shouldBe true
+      responseJSON.get shouldBe (
         ("lang" -> "en") ~
         ("posted" -> "Fri, 05 Jun 2009 23:07:13 GMT") ~
         ("qualifier" -> "thinks") ~
@@ -102,14 +102,14 @@ class PlurkOAuthSpec extends FunSpec with ShouldMatchers with PrivateMethodTeste
       val parseResponse = PrivateMethod[Try[JValue]]('parseResponse)
       val responseJSON = plurkOAuth invokePrivate parseResponse(400, mockJSON)
 
-      responseJSON.isFailure should be === true
+      responseJSON.isFailure shouldBe true
 
       val exception = intercept[RequestException] {
         responseJSON.get
       }
 
-      exception.code should be === 400
-      exception.message should be === "Email invalid"
+      exception.code shouldBe 400
+      exception.message shouldBe "Email invalid"
     }
 
     it ("should parse HTTP 4xx with HTML response to Failure contains original contents") {
@@ -120,14 +120,14 @@ class PlurkOAuthSpec extends FunSpec with ShouldMatchers with PrivateMethodTeste
       val parseResponse = PrivateMethod[Try[JValue]]('parseResponse)
       val responseJSON = plurkOAuth invokePrivate parseResponse(404, mockHTML)
 
-      responseJSON.isFailure should be === true
+      responseJSON.isFailure shouldBe true
 
       val exception = intercept[RequestException] {
         responseJSON.get
       }
 
-      exception.code should be === 404
-      exception.message should be === mockHTML
+      exception.code shouldBe 404
+      exception.message shouldBe mockHTML
     }
 
   }

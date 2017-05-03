@@ -7,13 +7,8 @@ import org.scribe.oauth.OAuthService
 import org.scribe.model.Verb
 import org.scribe.model.Token
 import org.scribe.model.OAuthRequest
+import org.scribe.model.Response
 import org.scribe.model.Parameter
-
-import org.apache.commons.httpclient.HttpClient
-import org.apache.commons.httpclient.methods.PostMethod
-import org.apache.commons.httpclient.methods.multipart.FilePart
-import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity
-import org.apache.commons.httpclient.methods.multipart.Part
 
 import net.liftweb.json.JsonAST._
 import net.liftweb.json.JsonParser
@@ -22,7 +17,9 @@ import scala.io.Source
 import scala.collection.JavaConverters._
 import scala.util.{Try, Success, Failure}
 
-import java.io.File
+import java.io._
+import java.net._
+
 
 private[soplurk] trait MockOAuth extends PlurkOAuth // For unit-test mock
 
@@ -36,7 +33,7 @@ class PlurkOAuth(val service: OAuthService,
                  private[soplurk] var accessToken: Option[Token] = None)  {
 
   private val defaultToken = new Token("", "")
-  private val plurkAPIPrefix = "http://www.plurk.com"
+  private val plurkAPIPrefix = "https://www.plurk.com"
 
   /**
    *  Send request to Plurk OAuth API
@@ -65,45 +62,99 @@ class PlurkOAuth(val service: OAuthService,
    *  @param  file              The file you want to upload.
    */
   def uploadFile(url: String, parameterName: String, 
-                 file: File): Try[JValue] = Try {
+                 file: File, callback: (Long, Long) => Any): Try[JValue] = Try {
 
     if (!file.isFile || !file.exists) {
       throw new RequestException(0, "File not found:" + file)
     }
 
-    val request = buildRequest(url, Verb.POST)
+    val fileInputStream = new FileInputStream(file)
+    val fileSize = file.length()
+    uploadFile(url, parameterName, file.getName, fileInputStream, fileSize, callback).get
+  }
 
+  def uploadFile(url: String, parameterName: String, filename: String, 
+                 data: InputStream, filesize: Long, 
+                 callback: (Long, Long) => Any): Try[JValue] = Try {
+
+    val startTime = System.currentTimeMillis
+    val request = buildRequest(url, Verb.POST)
     accessToken.foreach { token => service.signRequest(token, request) }
 
-    val oauthParams = request.getOauthParameters.asScala
-    val queryString = oauthParams.map { case(name, value) => 
-      new Parameter(name, value).asUrlEncodedPair
+    val boundary = "===" + System.currentTimeMillis() + "==="
+    val connection = new URL(request.getCompleteUrl).openConnection.asInstanceOf[HttpURLConnection]
+    val payloadHeader = createPayloadHeader(boundary, parameterName, filename).getBytes
+    val headers = request.getHeaders().asScala
+
+    headers.foreach { case(key, value) => connection.setRequestProperty(key, value) }
+    connection.setRequestProperty("Content-Type", s"multipart/form-data; boundary=${boundary}")
+    connection.setDoOutput(true)
+    connection.setFixedLengthStreamingMode((payloadHeader.length + filesize).toInt)
+
+    val outputStream = connection.getOutputStream
+    outputStream.write(payloadHeader)
+    outputStream.flush()
+
+    val bufferedInputStream = new BufferedInputStream(data)
+    val buffer = new Array[Byte](1024 * 512)
+    var byteCounter = bufferedInputStream.read(buffer)
+    var totalTransfered = 0
+
+    while (byteCounter > 0) {
+      outputStream.write(buffer, 0, byteCounter)
+      callback(filesize, totalTransfered)
+      totalTransfered += byteCounter
+      byteCounter = bufferedInputStream.read(buffer)
+    }
+    outputStream.flush()
+    outputStream.close()
+
+    val responseCode = connection.getResponseCode
+    val inputStream = if (responseCode >= 200 && responseCode < 400) connection.getInputStream else connection.getErrorStream
+    val responseContent = scala.io.Source.fromInputStream(inputStream).mkString
+    inputStream.close()
+    val duration = (System.currentTimeMillis - startTime) / 1000.0
+
+    println("duration:" + duration)
+
+    parseResponse(responseCode, responseContent).get
+  }
+
+
+  private def createPayloadHeader(boundary: String, parameterName: String, filename: String): String = {
+
+    val buffer = new StringBuffer()
+    buffer.append(s"--${boundary}").append("\r\n")
+
+    buffer.append(raw"""Content-Disposition: form-data; name="${parameterName}"; """)
+    buffer.append(raw"""filename="${filename}"""").append("\r\n")
+
+    buffer.append("Content-Type: application/octet-stream").append("\r\n")
+    buffer.append("Content-Transfer-Encoding: binary").append("\r\n")
+    buffer.append("\r\n")
+    buffer.toString
+  }
+
+  private def createPayload(boundary: String, parameterName: String, file: File): Array[Byte] = {
+
+    val bos = new ByteArrayOutputStream()
+    val writer = new PrintWriter(bos)
+
+    writer.append(createPayloadHeader(boundary, parameterName, file.getName))
+    writer.flush()
+    
+    val inputStream = new FileInputStream(file)
+    val buffer = new Array[Byte](4096)
+    var bytesRead = inputStream.read(buffer)
+    while (bytesRead != -1) {
+      bos.write(buffer, 0, bytesRead)
+      bytesRead = inputStream.read(buffer)
     }
 
-    val httpClient = new HttpClient
-    val fullURL = request.getCompleteUrl + queryString.mkString("?", "&", "")
-    val post = new PostMethod(fullURL)
+    bos.flush()
+    inputStream.close()
 
-    try {
-
-      val filePart = new FilePart(
-        parameterName, file.getName(), file, 
-        "binary/octet-stream", "UTF-8"
-      )
-
-      val parts = Array[Part](filePart)
-
-      parts.foreach(_.asInstanceOf[FilePart].setTransferEncoding("binary"))
-      post.setRequestEntity(new MultipartRequestEntity(parts, post.getParams()))
-
-      val code = httpClient.executeMethod(post)
-      val responseBody = Source.fromInputStream(post.getResponseBodyAsStream).mkString
-      
-      parseResponse(code, responseBody).get
-
-    } finally {
-      post.releaseConnection();
-    }
+    bos.toByteArray
   }
 
   /**
@@ -185,6 +236,29 @@ class PlurkOAuth(val service: OAuthService,
     request
   }
 
+  /**
+   *  Create OAuthReqeust object and attatch params to it.
+   *
+   *  @param    url         Plurk's API URL.
+   *  @param    method      HTTP method type.
+   *  @param    params      Parameters to send.
+   */
+  private def buildRequest(url: String, 
+                           payload: Array[Byte],
+                           method: Verb, 
+                           params: (String, String)*): OAuthRequest = {
+
+    val fullURL = if(url.startsWith("http")) url else plurkAPIPrefix + url
+    val request = new OAuthRequest(method, fullURL)
+
+    if (method == Verb.POST) {
+      params.foreach { case(key, value) => request.addBodyParameter(key, value) }
+    } else if (method == Verb.GET) {
+      params.foreach { case(key, value) => request.addQuerystringParameter(key, value) }
+    }
+
+    request
+  }
 
 }
 

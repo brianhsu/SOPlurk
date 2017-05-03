@@ -1,7 +1,7 @@
 package org.bone.soplurk.model
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 
 import net.liftweb.json._
 
@@ -10,7 +10,7 @@ import org.bone.soplurk.constant.PlurkType._
 import org.bone.soplurk.exceptions._
 import org.bone.soplurk.model._
 
-class ReplurkInfoSpec extends FunSpec with ShouldMatchers {
+class ReplurkInfoSpec extends FunSpec with Matchers {
 
   import ReplurkInfoSpec._
 
@@ -24,7 +24,7 @@ class ReplurkInfoSpec extends FunSpec with ShouldMatchers {
         replurkerID = None, replurkers = None
       )
 
-      ReplurkInfo(withoutReplurkers) should be === correctInfo
+      ReplurkInfo(withoutReplurkers) shouldBe correctInfo
     }
 
     it ("should able to parse plurks without replurkers in minimal JSON") {
@@ -35,7 +35,7 @@ class ReplurkInfoSpec extends FunSpec with ShouldMatchers {
         replurkerID = None, replurkers = None
       )
 
-      ReplurkInfo(withoutReplurkersMinimal) should be === correctInfo
+      ReplurkInfo(withoutReplurkersMinimal) shouldBe correctInfo
 
     }
 
@@ -48,7 +48,7 @@ class ReplurkInfoSpec extends FunSpec with ShouldMatchers {
         replurkers = Some(List(3648151L, 6946060L, 7877054L))
       )
 
-      ReplurkInfo(withReplurkers) should be === correctInfo
+      ReplurkInfo(withReplurkers) shouldBe correctInfo
     }
 
     it ("should able to parse plurks with replurkers in minimal JSON") {
@@ -59,7 +59,7 @@ class ReplurkInfoSpec extends FunSpec with ShouldMatchers {
         replurkers = None
       )
 
-      ReplurkInfo(withReplurkersMinimal) should be === correctInfo
+      ReplurkInfo(withReplurkersMinimal) shouldBe correctInfo
     }
 
   }

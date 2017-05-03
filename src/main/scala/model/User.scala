@@ -32,7 +32,7 @@ case class User (
   id: Long,
   nickname: String,
   fullName: String,
-  displayName: String,
+  displayName: Option[String],
   isVerifiedAccount: Boolean,
   gender: Gender,
   karma: Double,
@@ -50,7 +50,7 @@ case class User (
    *  User's small avatar URL.
    */
   val smallAvatar = hasProfileImage match {
-    case true  => s"http://avatars.plurk.com/$id-small${avatarVersion.getOrElse("")}.gif"
+    case true  => s"http://avatars.plurk.com/$id-small${avatarVersion.filter(_ != 0).getOrElse("")}.gif"
     case false => "http://www.plurk.com/static/default_small.gif"
   }
 
@@ -58,7 +58,7 @@ case class User (
    *  User's small medium avatar URL.
    */
   val mediumAvatar = hasProfileImage match {
-    case true  => s"http://avatars.plurk.com/$id-medium${avatarVersion.getOrElse("")}.gif"
+    case true  => s"http://avatars.plurk.com/$id-medium${avatarVersion.filter(_ != 0).getOrElse("")}.gif"
     case false => "http://www.plurk.com/static/default_medium.gif"
   }
 
@@ -66,7 +66,7 @@ case class User (
    *  User's big medium avatar URL.
    */
   val bigAvatar = hasProfileImage match {
-    case true  => s"http://avatars.plurk.com/$id-big${avatarVersion.getOrElse("")}.jpg"
+    case true  => s"http://avatars.plurk.com/$id-big${avatarVersion.filter(_ != 0).getOrElse("")}.jpg"
     case false => "http://www.plurk.com/static/default_big.gif"
   }
 
@@ -86,7 +86,7 @@ object User {
     id = user.get("id"),
     nickname = user.get("nick_name"),
     fullName = user.get("full_name"),
-    displayName = user.get("display_name"),
+    displayName = user.getOption("display_name"),
     isVerifiedAccount = user.get("verified_account"),
     gender = Gender(user.get[Int]("gender").toByte),
     karma = user.get("karma"),

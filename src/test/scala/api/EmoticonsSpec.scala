@@ -7,7 +7,7 @@ import org.bone.soplurk.model._
 import org.bone.soplurk.constant.AlertType._
 
 import org.scalatest.FunSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import org.scalatest.PrivateMethodTester 
 
 import org.scribe.model.Verb
@@ -71,7 +71,7 @@ object EmoticonsAPIMock extends PlurkOAuth(null) with MockOAuth {
 
 }
 
-class EmoticonsSpec extends FunSpec with ShouldMatchers {
+class EmoticonsSpec extends FunSpec with Matchers {
 
   describe("A PlurkAPI with Emoticons trait") {
 
@@ -80,26 +80,26 @@ class EmoticonsSpec extends FunSpec with ShouldMatchers {
     it ("get icons list by /APP/Emoticons/get correctly") {
       val emoticons = plurkAPI.Emoticons.get.get
 
-      emoticons.custom should be === List(
+      emoticons.custom shouldBe List(
         CustomIcon("O_O","http://emos.plurk.com/1.gif"),
         CustomIcon("kininarimasu","http://emos.plurk.com/2.gif")
       )
 
-      emoticons.recruited.size should be === 1
-      emoticons.recruited(10).size should be === 3
-      emoticons.karma.size should be === 2
-      emoticons.karma(0).size should be === 2
-      emoticons.karma(25).size should be === 4
+      emoticons.recruited.size shouldBe 1
+      emoticons.recruited(10).size shouldBe 3
+      emoticons.karma.size shouldBe 2
+      emoticons.karma(0).size shouldBe 2
+      emoticons.karma(25).size shouldBe 4
     }
 
     it ("add custom icons by /APP/Emoticons/addFromURL correctly") {
       val isOK = plurkAPI.Emoticons.addFromURL("http://aa.bb/add.gif", "add").get
-      isOK should be === true
+      isOK shouldBe true
     }
 
     it ("remove custom icons by /APP/Emoticons/delete correctly") {
       val isOK = plurkAPI.Emoticons.delete("delete").get
-      isOK should be === true
+      isOK shouldBe true
     }
 
 

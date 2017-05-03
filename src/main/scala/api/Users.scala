@@ -45,14 +45,16 @@ trait Users {
                email: Option[String] = None,
                displayName: Option[String] = None,
                privacy: Option[TimelinePrivacy] = None,
-               birthday: Option[Date] = None): Try[Boolean] = {
+               birthday: Option[Date] = None,
+               about: Option[String] = None): Try[Boolean] = {
 
       val params = Map(
         "full_name" -> fullName, 
         "email" -> email,
         "display_name" -> displayName,
         "privacy" -> privacy.map(_.word),
-        "date_of_birth" -> birthday.map(toBirthdayString)
+        "date_of_birth" -> birthday.map(toBirthdayString),
+        "about" -> about
       ).filter(isValueDefined).mapValues(_.get).toSeq
 
       val jsonData = plurkOAuth.sendRequest("/APP/Users/update", Verb.POST, params:_*)
@@ -108,12 +110,28 @@ trait Users {
      *  According to Plurk API document, the picture will be scaled down to 3 versions: big, medium and small. 
      *  The optimal size of profile_image should be 195x195 pixels. 
      *
+     *  @param  file      The new image file of avatar.
+     *  @param  callback  The progress callback when uploading, (Long, Long) will be (total size, current uploaded)
+     */
+    def updatePicture(file: File, callback: (Long, Long) => Any): Try[User] = {
+      val response = plurkOAuth.uploadFile("/APP/Users/updatePicture", "profile_image", file, callback)
+      response.map { jsonData => User(jsonData) }
+    }
+
+    /**
+     *  Update User's avatar image.
+     *
+     *  According to Plurk API document, the picture will be scaled down to 3 versions: big, medium and small. 
+     *  The optimal size of profile_image should be 195x195 pixels. 
+     *
      *  @param  file    The new image file of avatar.
      */
     def updatePicture(file: File): Try[User] = {
-      val response = plurkOAuth.uploadFile("/APP/Users/updatePicture", "profile_image", file)
+      val dummyCallback = (total: Long, current: Long) => {}
+      val response = plurkOAuth.uploadFile("/APP/Users/updatePicture", "profile_image", file, dummyCallback)
       response.map { jsonData => User(jsonData) }
     }
+
   }
 
 }

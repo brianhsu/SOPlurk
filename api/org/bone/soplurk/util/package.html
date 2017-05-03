@@ -1,10 +1,9 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
-          <title>util - SOPlurk 0.1 API document - org.bone.soplurk.util</title>
-          <meta name="description" content="util - SOPlurk 0.1 API document - org.bone.soplurk.util" />
-          <meta name="keywords" content="util SOPlurk 0.1 API document org.bone.soplurk.util" />
+          <title>util - SOPlurk 0.2 API document - org.bone.soplurk.util</title>
+          <meta name="description" content="util - SOPlurk 0.2 API document - org.bone.soplurk.util" />
+          <meta name="keywords" content="util SOPlurk 0.2 API document org.bone.soplurk.util" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -31,7 +30,11 @@
       <div id="definition">
         <img src="../../../../lib/package_big.png" />
         <p id="owner"><a href="../../../package.html" class="extype" name="org">org</a>.<a href="../../package.html" class="extype" name="org.bone">bone</a>.<a href="../package.html" class="extype" name="org.bone.soplurk">soplurk</a></p>
-        <h1>util</h1>
+        <h1>util</h1> <span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.util.package" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -67,7 +70,7 @@
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="org.bone.soplurk.util.BombTry" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="org.bone.soplurk.util.BombTry" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="BombTry"></a>
       <a id="BombTry:BombTry"></a>
       <h4 class="signature">
@@ -78,9 +81,45 @@
       <span class="symbol">
         <a href="BombTry$.html"><span class="name">BombTry</span></a>
       </span>
-      </h4>
-      <p class="comment cmt"> This <code>implicit class BombTry</code> in this object is intend to enrich the
- built-in <code>scala.util.Try[T]</code>.</p>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.util.package@BombTry" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"> This <code>implicit class BombTry</code> in this object is intend to enrich the
+ built-in <code>scala.util.Try[T]</code>.</p><div class="fullcomment"><div class="comment cmt"><h4> BombTry </h4><p> This <code>implicit class BombTry</code> in this object is intend to enrich the
+ built-in <code>scala.util.Try[T]</code>.</p><p> <code>Try[T]</code> with for-comprehension is a very useful constrcut to chain
+ multiple functions that may go wrong.</p><p> For example, if we have two method that wrapped thier result in <code>Try[T]</code>,
+ we can use for-comprehension to make sure the body will only be executed
+ when both method are successed.</p><pre><span class="kw">import</span> scala.util._
+
+<span class="kw">def</span> operationA: Try[<span class="std">Int</span>] = Success(<span class="num">1</span>)
+<span class="kw">def</span> operationB: Try[<span class="std">Int</span>] = Failure(<span class="kw">new</span> Exception(<span class="lit">"error"</span>))
+
+<span class="kw">for</span> {
+  valueA <span class="kw">&lt;-</span> operationA
+  valueB <span class="kw">&lt;-</span> operationB
+} {
+  println(<span class="lit">"A:"</span> + valueA)
+  println(<span class="lit">"B:"</span> + valueB)
+}</pre><p> But here is a problem in the above code, nothing will happens if <code>operationA</code>
+ or <code>operationB</code> is a Failure. The exception simply be swallowed, no one will
+ notice there is an exception, this is not a good thing.</p><p> Sometimes we hope our program crash as soon as possible if there is any problem
+ that we are not expected, instead of just ignore that problem.</p><p> So here is our enriched <code>Try[T]</code>, it will throw the exception as soon as there
+ are <code>Failure</code> in the for-comprehension.</p><pre><span class="kw">import</span> scala.util._
+<span class="kw">import</span> org.bone.soplurk.util.BombTry._
+
+<span class="kw">def</span> operationA: Try[<span class="std">Int</span>] = Success(<span class="num">1</span>)
+<span class="kw">def</span> operationB: Try[<span class="std">Int</span>] = Failure(<span class="kw">new</span> Exception(<span class="lit">"error"</span>))
+
+<span class="kw">for</span> {
+  valueA <span class="kw">&lt;-</span> operationA.boomIfFailed
+  valueB <span class="kw">&lt;-</span> operationB.boomIfFailed
+} {
+  println(<span class="lit">"A:"</span> + valueA)
+  println(<span class="lit">"B:"</span> + valueB)
+}</pre><p> This syntax of this code is similar to the first one, but it will throw out
+ the exception once there are any Failure in the for-comprehension.</p></div></div>
     </li><li name="org.bone.soplurk.util.DateTimeUtils" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="DateTimeUtils"></a>
       <a id="DateTimeUtils:DateTimeUtils"></a>
@@ -92,7 +131,11 @@
       <span class="symbol">
         <a href="DateTimeUtils$.html"><span class="name">DateTimeUtils</span></a>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.bone.soplurk.util.package@DateTimeUtils" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li></ol>
             </div>

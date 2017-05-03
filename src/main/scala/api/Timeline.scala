@@ -12,6 +12,7 @@ import net.liftweb.json.JsonAST._
 import scala.util.Try
 
 import java.io.File
+import java.io.InputStream
 import java.util.Date
 
 trait Timeline {
@@ -142,7 +143,7 @@ trait Timeline {
       val params = List(
         "offset" -> offset.map(toPlurkOffset).getOrElse(""),
         "limit"  -> limit.toString,
-        "filter" -> filter.map(_.word).getOrElse(""),
+        "filter" -> filter.map(_.unreadWord).getOrElse(""),
         "favorers_detail"   -> favorersDetail.toString,
         "limited_detail"    -> limitedDetail.toString,
         "replurkers_detail" -> replurkersDetail.toString,
@@ -250,8 +251,8 @@ trait Timeline {
         "content" -> content,
         "qualifier" -> qualifier.name,
         "limited_to" -> formatLimitedTo,
-        "noComment" -> commentSetting.map(_.code.toString).getOrElse(""),
-        "language"  -> language.getOrElse("")
+        "no_comments" -> commentSetting.map(_.code.toString).getOrElse(""),
+        "lang"  -> language.getOrElse("")
       ).filterNot(_._2.isEmpty)
 
       val response = plurkOAuth.sendRequest(
@@ -467,8 +468,31 @@ trait Timeline {
       }
     }
 
-    def uploadPicture(file: File): Try[(String, String)] = {
-      val response = plurkOAuth.uploadFile("/APP/Timeline/uploadPicture", "image", file)
+    /**
+     *  Upload image file to Plurk
+     *
+     *  @param  file      The file being to be uploaded.
+     *  @param  callback  This callback will be called during uploading, first Long is total size in bytes of this image, 
+     *                    second Long is how much bytes is already transfered currently.
+     */
+    def uploadPicture(file: File, callback: (Long, Long) => Any): Try[(String, String)] = {
+      val response = plurkOAuth.uploadFile("/APP/Timeline/uploadPicture", "image", file, callback)
+      response.map { jsonData =>
+        (jsonData.get("full"), jsonData.get("thumbnail"))
+      }
+    }
+
+    /**
+     *  Upload image file to Plurk
+     *
+     *  @param  filename      The file name of current file
+     *  @param  inputStream   Data stream that will be uploaded.
+     *  @param  fileSize      How large is this file? In Bytes.
+     *  @param  callback      This callback will be called during uploading, first Long is total size in bytes of this image, 
+     *                        second Long is how much bytes is already transfered currently.
+     */
+    def uploadPicture(filename: String, inputStream: InputStream, fileSize: Long, callback: (Long, Long) => Any): Try[(String, String)] = {
+      val response = plurkOAuth.uploadFile("/APP/Timeline/uploadPicture", "image", filename, inputStream, fileSize, callback)
       response.map { jsonData =>
         (jsonData.get("full"), jsonData.get("thumbnail"))
       }
